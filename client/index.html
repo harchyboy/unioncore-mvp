@@ -8103,13 +8103,37 @@
 </section>
 <section class="mb-8" id="approval-analytics-section">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Card 1: Approval Timeline Trends -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-<h3 class="text-lg font-semibold text-gray-900 mb-4">Approval Timeline Trends</h3>
-<div class="h-80" id="approval-timeline-chart"></div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Approval Timeline Trends</h3>
+<div class="flex items-center space-x-2">
+<select class="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+<option>Last 7 days</option>
+<option selected>Last 30 days</option>
+<option>This Quarter</option>
+<option>Custom</option>
+</select>
 </div>
+</div>
+<div class="h-80" id="approval-timeline-chart"></div>
+<!-- Insights Section -->
+<div class="mt-6 grid grid-cols-3 gap-4"></div>
+</div>
+<!-- Card 2: Approval by Role Distribution -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-<h3 class="text-lg font-semibold text-gray-900 mb-4">Approval by Role Distribution</h3>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Approvals by Role Distribution</h3>
+<button class="text-sm text-blue-600 hover:text-blue-700 font-medium">
+View All Roles
+</button>
+</div>
 <div class="h-80" id="approval-role-chart"></div>
+<!-- Top Roles Section -->
+<div class="mt-6">
+<h4 class="text-sm font-semibold text-gray-700 mb-3">Top Performing Roles</h4>
+<div class="space-y-3"></div>
+</div>
 </div>
 </div>
 </section>
@@ -30864,5 +30888,8 @@ setTimeout(function() {
 
 <!-- APPROVAL REQUESTS PAGE DATA -->
 <script src="/approval-requests-data.js"></script>
+
+<!-- APPROVAL ANALYTICS CHARTS -->
+<script src="/approval-analytics.js"></script>
 
 </body></html>
