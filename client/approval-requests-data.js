@@ -510,7 +510,7 @@
                 : `<span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium">DUE ${formatDate(approval.dueDate).toUpperCase()}</span>`;
 
             html += `
-                <div class="p-5 bg-${bgColor}-50 border border-${bgColor}-200 rounded-lg">
+                <div class="p-5 bg-${bgColor}-50 border border-${bgColor}-200 rounded-lg" data-approval-card="${approval.id}">
                     <div class="flex items-start space-x-4">
                         <div class="bg-${bgColor}-100 p-2 rounded-full">
                             <i class="fa-solid ${approval.icon} text-${bgColor}-600"></i>
@@ -532,10 +532,10 @@
                                 </div>
                             </div>
                             <div class="flex space-x-2">
-                                <button class="px-3 py-1.5 bg-white border border-${bgColor}-300 text-${bgColor}-700 rounded text-sm hover:bg-${bgColor}-50">
+                                <button class="px-3 py-1.5 bg-white border border-${bgColor}-300 text-${bgColor}-700 rounded text-sm hover:bg-${bgColor}-50 btn-view-details" data-approval-id="${approval.id}">
                                     View Details
                                 </button>
-                                <button class="px-3 py-1.5 bg-${bgColor}-600 text-white rounded text-sm hover:bg-${bgColor}-700">
+                                <button class="px-3 py-1.5 bg-${bgColor}-600 text-white rounded text-sm hover:bg-${bgColor}-700 ${approval.status === 'overdue' ? 'btn-escalate-approval' : 'btn-approve-critical'}" data-approval-id="${approval.id}">
                                     ${approval.status === 'overdue' ? 'Escalate' : 'Approve'}
                                 </button>
                             </div>
@@ -546,6 +546,25 @@
         });
 
         section.innerHTML = html;
+        attachCriticalEventListeners();
+    }
+
+    // Attach event listeners to critical approval buttons
+    function attachCriticalEventListeners() {
+        // View Details buttons
+        document.querySelectorAll('.btn-view-details').forEach(btn => {
+            btn.addEventListener('click', handleViewDetails);
+        });
+
+        // Approve buttons in critical section
+        document.querySelectorAll('.btn-approve-critical').forEach(btn => {
+            btn.addEventListener('click', handleApproveApproval);
+        });
+
+        // Escalate buttons in critical section
+        document.querySelectorAll('#critical-approvals-section .btn-escalate-approval').forEach(btn => {
+            btn.addEventListener('click', handleEscalateApproval);
+        });
     }
 
     // Populate approvals table
@@ -564,7 +583,7 @@
             const slaColor = approval.slaProgress >= 90 ? 'red' : approval.slaProgress >= 70 ? 'yellow' : 'green';
 
             html += `
-                <tr class="hover:bg-gray-50 ${rowBgClass}">
+                <tr class="hover:bg-gray-50 ${rowBgClass}" data-approval-id="${approval.id}">
                     <td class="py-4 px-4">
                         <input class="rounded border-gray-300 focus:ring-blue-500" type="checkbox"/>
                     </td>
@@ -610,8 +629,8 @@
                     </td>
                     <td class="py-4 px-4">
                         <div class="flex space-x-2">
-                            <button class="text-blue-600 hover:text-blue-800 text-sm">Review</button>
-                            <button class="text-red-600 hover:text-red-800 text-sm">Escalate</button>
+                            <button class="text-blue-600 hover:text-blue-800 text-sm btn-review-approval" data-approval-id="${approval.id}">Review</button>
+                            <button class="text-red-600 hover:text-red-800 text-sm btn-escalate-approval" data-approval-id="${approval.id}">Escalate</button>
                         </div>
                     </td>
                 </tr>
@@ -619,6 +638,168 @@
         });
 
         tbody.innerHTML = html;
+        attachTableEventListeners();
+    }
+
+    // Attach event listeners to table buttons
+    function attachTableEventListeners() {
+        // Review buttons
+        document.querySelectorAll('.btn-review-approval').forEach(btn => {
+            btn.addEventListener('click', handleReviewApproval);
+        });
+
+        // Escalate buttons
+        document.querySelectorAll('.btn-escalate-approval').forEach(btn => {
+            btn.addEventListener('click', handleEscalateApproval);
+        });
+    }
+
+    // Event Handlers
+    function handleApproveApproval(e) {
+        e.preventDefault();
+        const approvalId = e.target.getAttribute('data-approval-id');
+        const approval = APPROVALS_DATA.find(a => a.id === approvalId);
+        
+        if (!approval) return;
+
+        // Show confirmation
+        if (confirm(`Approve ${approval.type} for ${approval.dealName}?\n\nValue: ${formatCurrency(approval.value)}\nApprover: ${approval.approver.name}`)) {
+            // Simulate approval process
+            console.log(`✅ Approved: ${approval.id} - ${approval.dealName}`);
+            
+            // Remove from data array
+            const index = APPROVALS_DATA.findIndex(a => a.id === approvalId);
+            if (index > -1) {
+                APPROVALS_DATA.splice(index, 1);
+            }
+
+            // Show success notification
+            showNotification('Approval Successful', `${approval.type} for ${approval.dealName} has been approved.`, 'success');
+
+            // Refresh the page sections
+            updateOverviewMetrics();
+            populateCriticalApprovals();
+            populateApprovalsTable();
+        }
+    }
+
+    function handleReviewApproval(e) {
+        e.preventDefault();
+        const approvalId = e.target.getAttribute('data-approval-id');
+        const approval = APPROVALS_DATA.find(a => a.id === approvalId);
+        
+        if (!approval) return;
+
+        // Show detailed review modal
+        alert(`REVIEW APPROVAL\n\n` +
+              `ID: ${approval.id}\n` +
+              `Type: ${approval.type}\n` +
+              `Deal: ${approval.dealName}\n` +
+              `Document: ${approval.documentRef}\n` +
+              `Value: ${formatCurrency(approval.value)}\n` +
+              `Priority: ${approval.priority}\n` +
+              `Approver: ${approval.approver.name} (${approval.approver.title})\n` +
+              `Role: ${approval.role}\n` +
+              `Due Date: ${formatDate(approval.dueDate)}\n` +
+              `Status: ${approval.status}\n` +
+              `SLA: ${approval.slaStatus} (${approval.slaProgress}%)\n\n` +
+              `Click OK to continue reviewing...`);
+        
+        console.log('📋 Reviewing approval:', approval);
+    }
+
+    function handleEscalateApproval(e) {
+        e.preventDefault();
+        const approvalId = e.target.getAttribute('data-approval-id');
+        const approval = APPROVALS_DATA.find(a => a.id === approvalId);
+        
+        if (!approval) return;
+
+        // Show escalation confirmation
+        if (confirm(`Escalate ${approval.type} for ${approval.dealName}?\n\nThis will notify management and flag as urgent.\n\nValue: ${formatCurrency(approval.value)}`)) {
+            // Simulate escalation
+            console.log(`🚨 Escalated: ${approval.id} - ${approval.dealName}`);
+            
+            // Update approval priority
+            approval.priority = 'Critical';
+            approval.slaStatus = 'Escalated';
+            
+            // Show success notification
+            showNotification('Approval Escalated', `${approval.type} for ${approval.dealName} has been escalated to management.`, 'warning');
+
+            // Refresh the page sections
+            populateCriticalApprovals();
+            populateApprovalsTable();
+        }
+    }
+
+    function handleViewDetails(e) {
+        e.preventDefault();
+        const approvalId = e.target.getAttribute('data-approval-id');
+        const approval = APPROVALS_DATA.find(a => a.id === approvalId);
+        
+        if (!approval) return;
+
+        // Show detailed view
+        alert(`APPROVAL DETAILS\n\n` +
+              `ID: ${approval.id}\n` +
+              `Type: ${approval.type}\n` +
+              `Deal: ${approval.dealName}\n` +
+              `Document: ${approval.documentRef}\n` +
+              `Value: ${formatCurrency(approval.value)}\n` +
+              `Priority: ${approval.priority}\n` +
+              `Approver: ${approval.approver.name}\n` +
+              `Title: ${approval.approver.title}\n` +
+              `Department: ${approval.role}\n` +
+              `Due Date: ${formatDate(approval.dueDate)}\n` +
+              `Status: ${approval.status.toUpperCase()}\n` +
+              `SLA Progress: ${approval.slaProgress}%\n` +
+              `SLA Status: ${approval.slaStatus}\n\n` +
+              (approval.status === 'overdue' ? `⚠️ OVERDUE BY ${approval.daysOverdue} DAYS\n\n` : '') +
+              `Would you like to approve this now?`);
+        
+        console.log('👁️ Viewing approval details:', approval);
+    }
+
+    // Notification helper
+    function showNotification(title, message, type = 'info') {
+        const colors = {
+            'success': { bg: 'bg-green-100', border: 'border-green-500', text: 'text-green-800', icon: 'fa-check-circle' },
+            'warning': { bg: 'bg-yellow-100', border: 'border-yellow-500', text: 'text-yellow-800', icon: 'fa-exclamation-triangle' },
+            'error': { bg: 'bg-red-100', border: 'border-red-500', text: 'text-red-800', icon: 'fa-times-circle' },
+            'info': { bg: 'bg-blue-100', border: 'border-blue-500', text: 'text-blue-800', icon: 'fa-info-circle' }
+        };
+        
+        const style = colors[type] || colors['info'];
+        
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 ${style.bg} border-l-4 ${style.border} ${style.text} p-4 rounded-lg shadow-lg z-50 max-w-md animate-slide-in`;
+        notification.innerHTML = `
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <i class="fa-solid ${style.icon} text-xl"></i>
+                </div>
+                <div class="ml-3 flex-1">
+                    <h3 class="text-sm font-bold">${title}</h3>
+                    <p class="text-sm mt-1">${message}</p>
+                </div>
+                <button class="ml-3 flex-shrink-0 inline-flex text-gray-400 hover:text-gray-600" onclick="this.parentElement.parentElement.remove()">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentElement) {
+                notification.remove();
+            }
+        }, 5000);
+        
+        console.log(`📢 Notification: ${title} - ${message}`);
     }
 
     // Initialize when page becomes visible
