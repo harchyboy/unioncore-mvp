@@ -35,7 +35,19 @@
             }
         }
     </script>
-    <style>::-webkit-scrollbar { display: none;}</style>
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        
+        /* Hide Manus watermark elements */
+        footer-watermark,
+        make-with-manus,
+        manus-content-root {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+    </style>
 </head>
 <body class="bg-stone font-haltung">
     <!-- COMPONENT: Top Navigation Header -->
