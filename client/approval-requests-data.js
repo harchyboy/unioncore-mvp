@@ -1,0 +1,690 @@
+// Approval Requests Page - Dummy Data Population
+// Populates the Pending Approvals page with realistic sample data
+
+(function() {
+    'use strict';
+    
+    console.log('🔧 Loading Approval Requests Data...');
+    
+    // Sample Approvals Data
+    const APPROVALS_DATA = [
+        {
+            id: 'APR-2024-001',
+            priority: 'Critical',
+            type: 'HoT Version',
+            icon: 'fa-file-contract',
+            iconColor: 'blue',
+            dealName: 'Canary Wharf Office',
+            documentRef: 'HoT_v3.2_Legal_Review',
+            role: 'Legal',
+            approver: {
+                name: 'Sarah Mitchell',
+                title: 'Legal Counsel',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg'
+            },
+            value: 2100000,
+            dueDate: new Date('2024-11-10'),
+            status: 'overdue',
+            daysOverdue: 3,
+            slaProgress: 100,
+            slaStatus: 'Breached'
+        },
+        {
+            id: 'APR-2024-002',
+            priority: 'High',
+            type: 'Contract',
+            icon: 'fa-file-signature',
+            iconColor: 'purple',
+            dealName: 'Shoreditch Retail Space',
+            documentRef: 'Lease_Agreement_v2.0',
+            role: 'Executive',
+            approver: {
+                name: 'Michael Chen',
+                title: 'Managing Director',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg'
+            },
+            value: 850000,
+            dueDate: new Date('2024-11-12'),
+            status: 'overdue',
+            daysOverdue: 1,
+            slaProgress: 100,
+            slaStatus: 'Breached'
+        },
+        {
+            id: 'APR-2024-003',
+            priority: 'High',
+            type: 'Budget Approval',
+            icon: 'fa-calculator',
+            iconColor: 'green',
+            dealName: 'Kings Cross Development',
+            documentRef: 'Budget_Q4_2024',
+            role: 'Finance',
+            approver: {
+                name: 'Emma Davis',
+                title: 'Finance Director',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg'
+            },
+            value: 4200000,
+            dueDate: new Date('2024-11-13'),
+            status: 'overdue',
+            daysOverdue: 0,
+            slaProgress: 95,
+            slaStatus: 'At Risk'
+        },
+        {
+            id: 'APR-2024-004',
+            priority: 'Critical',
+            type: 'Risk Assessment',
+            icon: 'fa-exclamation-triangle',
+            iconColor: 'yellow',
+            dealName: 'Westminster Office Space',
+            documentRef: 'Risk_Analysis_Report',
+            role: 'Risk',
+            approver: {
+                name: 'David Kim',
+                title: 'Risk Manager',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg'
+            },
+            value: 1350000,
+            dueDate: new Date('2024-11-13'),
+            status: 'due_today',
+            daysOverdue: 0,
+            slaProgress: 85,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-005',
+            priority: 'Medium',
+            type: 'Tenant Agreement',
+            icon: 'fa-handshake',
+            iconColor: 'yellow',
+            dealName: 'Southbank Office',
+            documentRef: 'Tenant_Terms_Modification',
+            role: 'Legal',
+            approver: {
+                name: 'Sarah Mitchell',
+                title: 'Legal Counsel',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg'
+            },
+            value: 1800000,
+            dueDate: new Date('2024-11-13'),
+            status: 'due_today',
+            daysOverdue: 0,
+            slaProgress: 70,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-006',
+            priority: 'High',
+            type: 'Pricing Exception',
+            icon: 'fa-tags',
+            iconColor: 'orange',
+            dealName: 'Mayfair Retail',
+            documentRef: 'Pricing_Exception_Request',
+            role: 'Executive',
+            approver: {
+                name: 'Michael Chen',
+                title: 'Managing Director',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg'
+            },
+            value: 950000,
+            dueDate: new Date('2024-11-14'),
+            status: 'due_soon',
+            daysOverdue: 0,
+            slaProgress: 60,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-007',
+            priority: 'Medium',
+            type: 'Legal Review',
+            icon: 'fa-gavel',
+            iconColor: 'blue',
+            dealName: 'City of London Tower',
+            documentRef: 'Legal_Due_Diligence',
+            role: 'Legal',
+            approver: {
+                name: 'Sarah Mitchell',
+                title: 'Legal Counsel',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg'
+            },
+            value: 3200000,
+            dueDate: new Date('2024-11-15'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 45,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-008',
+            priority: 'Low',
+            type: 'Document Sign-off',
+            icon: 'fa-pen',
+            iconColor: 'gray',
+            dealName: 'Greenwich Warehouse',
+            documentRef: 'Final_Documentation',
+            role: 'Operations',
+            approver: {
+                name: 'Tom Harrison',
+                title: 'Operations Manager',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-5.jpg'
+            },
+            value: 725000,
+            dueDate: new Date('2024-11-16'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 35,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-009',
+            priority: 'High',
+            type: 'Compliance Check',
+            icon: 'fa-shield-alt',
+            iconColor: 'purple',
+            dealName: 'Docklands Office Park',
+            documentRef: 'Compliance_Verification',
+            role: 'Compliance',
+            approver: {
+                name: 'Rachel Brown',
+                title: 'Compliance Officer',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg'
+            },
+            value: 2800000,
+            dueDate: new Date('2024-11-17'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 50,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-010',
+            priority: 'Medium',
+            type: 'Budget Adjustment',
+            icon: 'fa-coins',
+            iconColor: 'green',
+            dealName: 'Hammersmith Business Center',
+            documentRef: 'Budget_Revision_Q1_2025',
+            role: 'Finance',
+            approver: {
+                name: 'Emma Davis',
+                title: 'Finance Director',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg'
+            },
+            value: 1650000,
+            dueDate: new Date('2024-11-18'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 40,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-011',
+            priority: 'Low',
+            type: 'Vendor Approval',
+            icon: 'fa-users',
+            iconColor: 'blue',
+            dealName: 'Stratford Retail Hub',
+            documentRef: 'Vendor_Contract_Approval',
+            role: 'Procurement',
+            approver: {
+                name: 'James Wilson',
+                title: 'Procurement Lead',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-7.jpg'
+            },
+            value: 450000,
+            dueDate: new Date('2024-11-19'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 30,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-012',
+            priority: 'High',
+            type: 'Contract Extension',
+            icon: 'fa-file-contract',
+            iconColor: 'orange',
+            dealName: 'Camden Market Space',
+            documentRef: 'Extension_Agreement_v1.0',
+            role: 'Legal',
+            approver: {
+                name: 'Sarah Mitchell',
+                title: 'Legal Counsel',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg'
+            },
+            value: 1125000,
+            dueDate: new Date('2024-11-20'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 25,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-013',
+            priority: 'Medium',
+            type: 'Insurance Review',
+            icon: 'fa-umbrella',
+            iconColor: 'blue',
+            dealName: 'Kensington Office Suite',
+            documentRef: 'Insurance_Policy_Review',
+            role: 'Risk',
+            approver: {
+                name: 'David Kim',
+                title: 'Risk Manager',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg'
+            },
+            value: 1950000,
+            dueDate: new Date('2024-11-21'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 20,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-014',
+            priority: 'Low',
+            type: 'Marketing Approval',
+            icon: 'fa-bullhorn',
+            iconColor: 'pink',
+            dealName: 'Notting Hill Boutique',
+            documentRef: 'Marketing_Materials_Approval',
+            role: 'Marketing',
+            approver: {
+                name: 'Sophie Turner',
+                title: 'Marketing Director',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-8.jpg'
+            },
+            value: 325000,
+            dueDate: new Date('2024-11-22'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 15,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-015',
+            priority: 'High',
+            type: 'Final Sign-off',
+            icon: 'fa-check-circle',
+            iconColor: 'green',
+            dealName: 'Battersea Power Station',
+            documentRef: 'Final_Approval_Package',
+            role: 'Executive',
+            approver: {
+                name: 'Michael Chen',
+                title: 'Managing Director',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg'
+            },
+            value: 5200000,
+            dueDate: new Date('2024-11-23'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 10,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-016',
+            priority: 'Medium',
+            type: 'Environmental Check',
+            icon: 'fa-leaf',
+            iconColor: 'green',
+            dealName: 'Richmond Park Office',
+            documentRef: 'Environmental_Assessment',
+            role: 'Compliance',
+            approver: {
+                name: 'Rachel Brown',
+                title: 'Compliance Officer',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-6.jpg'
+            },
+            value: 875000,
+            dueDate: new Date('2024-11-24'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 5,
+            slaStatus: 'On Track'
+        },
+        {
+            id: 'APR-2024-017',
+            priority: 'Low',
+            type: 'IT Security Review',
+            icon: 'fa-lock',
+            iconColor: 'red',
+            dealName: 'Finsbury Square Tech Hub',
+            documentRef: 'Security_Audit_Report',
+            role: 'IT',
+            approver: {
+                name: 'Alex Chen',
+                title: 'IT Security Manager',
+                avatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-9.jpg'
+            },
+            value: 1425000,
+            dueDate: new Date('2024-11-25'),
+            status: 'pending',
+            daysOverdue: 0,
+            slaProgress: 0,
+            slaStatus: 'On Track'
+        }
+    ];
+
+    // Helper function to format currency
+    function formatCurrency(value) {
+        return '£' + (value / 1000000).toFixed(2) + 'M';
+    }
+
+    // Helper function to format date
+    function formatDate(date) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        return `${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}`;
+    }
+
+    // Helper function to get priority badge
+    function getPriorityBadge(priority) {
+        const badges = {
+            'Critical': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800"><i class="fa-solid fa-exclamation-triangle mr-1"></i>Critical</span>',
+            'High': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800"><i class="fa-solid fa-arrow-up mr-1"></i>High</span>',
+            'Medium': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800"><i class="fa-solid fa-minus mr-1"></i>Medium</span>',
+            'Low': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800"><i class="fa-solid fa-arrow-down mr-1"></i>Low</span>'
+        };
+        return badges[priority] || badges['Medium'];
+    }
+
+    // Helper function to get role badge
+    function getRoleBadge(role) {
+        const colors = {
+            'Legal': 'blue',
+            'Finance': 'green',
+            'Executive': 'purple',
+            'Risk': 'red',
+            'Operations': 'gray',
+            'Compliance': 'indigo',
+            'Procurement': 'teal',
+            'Marketing': 'pink',
+            'IT': 'cyan'
+        };
+        const color = colors[role] || 'gray';
+        return `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-${color}-100 text-${color}-800">${role}</span>`;
+    }
+
+    // Update overview metrics
+    function updateOverviewMetrics() {
+        const overdue = APPROVALS_DATA.filter(a => a.status === 'overdue').length;
+        const dueToday = APPROVALS_DATA.filter(a => a.status === 'due_today').length;
+        const thisWeek = APPROVALS_DATA.filter(a => {
+            const daysUntilDue = Math.ceil((a.dueDate - new Date()) / (1000 * 60 * 60 * 24));
+            return daysUntilDue <= 7 && daysUntilDue >= 0;
+        }).length;
+
+        const metricsHTML = `
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Total Pending</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">${APPROVALS_DATA.length}</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-blue-600 text-sm font-medium">+4</span>
+                            <span class="text-gray-500 text-sm ml-2">this week</span>
+                        </div>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-full">
+                        <i class="fa-solid fa-clock text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Overdue</p>
+                        <p class="text-3xl font-bold text-red-600 mt-2">${overdue}</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-red-600 text-sm font-medium">URGENT</span>
+                        </div>
+                    </div>
+                    <div class="bg-red-100 p-3 rounded-full">
+                        <i class="fa-solid fa-exclamation-triangle text-red-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Due Today</p>
+                        <p class="text-3xl font-bold text-yellow-600 mt-2">${dueToday}</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-yellow-600 text-sm font-medium">PRIORITY</span>
+                        </div>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-full">
+                        <i class="fa-solid fa-calendar-day text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">This Week</p>
+                        <p class="text-3xl font-bold text-blue-600 mt-2">${thisWeek}</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-blue-600 text-sm font-medium">UPCOMING</span>
+                        </div>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <i class="fa-solid fa-calendar-week text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-sm font-medium text-gray-600">Avg Response</p>
+                        <p class="text-3xl font-bold text-green-600 mt-2">2.3</p>
+                        <div class="flex items-center mt-2">
+                            <span class="text-gray-500 text-sm">days</span>
+                        </div>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <i class="fa-solid fa-chart-line text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const overviewSection = document.querySelector('#approval-overview-section .grid');
+        if (overviewSection) {
+            overviewSection.innerHTML = metricsHTML;
+        }
+    }
+
+    // Populate critical approvals section
+    function populateCriticalApprovals() {
+        const criticalApprovals = APPROVALS_DATA.filter(a => a.status === 'overdue' || a.priority === 'Critical');
+        const section = document.querySelector('#critical-approvals-section .space-y-4');
+        
+        if (!section) return;
+
+        let html = '';
+        criticalApprovals.slice(0, 5).forEach(approval => {
+            const bgColor = approval.status === 'overdue' ? 'red' : 'orange';
+            const dueText = approval.status === 'overdue' 
+                ? `<span class="text-xs bg-red-100 text-red-800 px-2 py-1 rounded-full font-medium">${approval.daysOverdue} DAYS OVERDUE</span>`
+                : `<span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-medium">DUE ${formatDate(approval.dueDate).toUpperCase()}</span>`;
+
+            html += `
+                <div class="p-5 bg-${bgColor}-50 border border-${bgColor}-200 rounded-lg">
+                    <div class="flex items-start space-x-4">
+                        <div class="bg-${bgColor}-100 p-2 rounded-full">
+                            <i class="fa-solid ${approval.icon} text-${bgColor}-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-semibold text-gray-900">${approval.type}</h4>
+                                ${dueText}
+                            </div>
+                            <p class="text-gray-700 mb-3">${approval.dealName} - ${approval.documentRef}</p>
+                            <div class="grid grid-cols-2 gap-3 text-sm mb-4">
+                                <div>
+                                    <span class="text-gray-500">Value:</span>
+                                    <span class="font-medium text-gray-900 ml-1">${formatCurrency(approval.value)}</span>
+                                </div>
+                                <div>
+                                    <span class="text-gray-500">Approver:</span>
+                                    <span class="font-medium text-gray-900 ml-1">${approval.approver.name}</span>
+                                </div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <button class="px-3 py-1.5 bg-white border border-${bgColor}-300 text-${bgColor}-700 rounded text-sm hover:bg-${bgColor}-50">
+                                    View Details
+                                </button>
+                                <button class="px-3 py-1.5 bg-${bgColor}-600 text-white rounded text-sm hover:bg-${bgColor}-700">
+                                    ${approval.status === 'overdue' ? 'Escalate' : 'Approve'}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        section.innerHTML = html;
+    }
+
+    // Populate approvals table
+    function populateApprovalsTable() {
+        const tbody = document.querySelector('#all-approvals-table-section tbody');
+        if (!tbody) return;
+
+        let html = '';
+        APPROVALS_DATA.forEach(approval => {
+            const rowBgClass = approval.status === 'overdue' ? 'bg-red-50' : '';
+            const dateColor = approval.status === 'overdue' ? 'text-red-600' : approval.status === 'due_today' ? 'text-yellow-600' : 'text-gray-900';
+            const dueText = approval.status === 'overdue' 
+                ? `<div class="text-xs text-red-600">${approval.daysOverdue} days overdue</div>`
+                : '';
+            
+            const slaColor = approval.slaProgress >= 90 ? 'red' : approval.slaProgress >= 70 ? 'yellow' : 'green';
+
+            html += `
+                <tr class="hover:bg-gray-50 ${rowBgClass}">
+                    <td class="py-4 px-4">
+                        <input class="rounded border-gray-300 focus:ring-blue-500" type="checkbox"/>
+                    </td>
+                    <td class="py-4 px-4">
+                        ${getPriorityBadge(approval.priority)}
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid ${approval.icon} text-${approval.iconColor}-600"></i>
+                            <span class="font-medium text-gray-900">${approval.type}</span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4">
+                        <div>
+                            <div class="font-medium text-gray-900">${approval.dealName}</div>
+                            <div class="text-sm text-gray-500">${approval.documentRef}</div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4">
+                        ${getRoleBadge(approval.role)}
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="flex items-center">
+                            <img alt="${approval.approver.name}" class="w-8 h-8 rounded-full mr-2" src="${approval.approver.avatar}"/>
+                            <div>
+                                <div class="text-sm font-medium text-gray-900">${approval.approver.name}</div>
+                                <div class="text-xs text-gray-500">${approval.approver.title}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4 font-medium text-gray-900">${formatCurrency(approval.value)}</td>
+                    <td class="py-4 px-4">
+                        <div class="${dateColor} font-medium">${formatDate(approval.dueDate)}</div>
+                        ${dueText}
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="flex items-center">
+                            <div class="w-16 bg-${slaColor}-200 rounded-full h-2 mr-2">
+                                <div class="bg-${slaColor}-500 h-2 rounded-full" style="width: ${approval.slaProgress}%"></div>
+                            </div>
+                            <span class="text-xs text-${slaColor}-600 font-medium">${approval.slaStatus}</span>
+                        </div>
+                    </td>
+                    <td class="py-4 px-4">
+                        <div class="flex space-x-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-sm">Review</button>
+                            <button class="text-red-600 hover:text-red-800 text-sm">Escalate</button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        tbody.innerHTML = html;
+    }
+
+    // Initialize when page becomes visible
+    function initializeApprovalsPage() {
+        const approvalsPage = document.getElementById('approval-requests-page');
+        if (!approvalsPage) {
+            setTimeout(initializeApprovalsPage, 500);
+            return;
+        }
+
+        // Check if page is visible
+        if (approvalsPage.classList.contains('hidden')) {
+            setTimeout(initializeApprovalsPage, 500);
+            return;
+        }
+
+        console.log('📊 Populating Approval Requests page...');
+        
+        updateOverviewMetrics();
+        populateCriticalApprovals();
+        populateApprovalsTable();
+
+        console.log('✅ Approval Requests page populated with dummy data');
+    }
+
+    // Watch for page visibility changes
+    function setupPageObserver() {
+        const targetPage = document.getElementById('approval-requests-page');
+        if (!targetPage) {
+            setTimeout(setupPageObserver, 1000);
+            return;
+        }
+
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                    const page = document.getElementById('approval-requests-page');
+                    if (page && !page.classList.contains('hidden')) {
+                        setTimeout(initializeApprovalsPage, 300);
+                    }
+                }
+            });
+        });
+
+        observer.observe(targetPage, { attributes: true });
+
+        // Also try immediate initialization if page is already visible
+        if (!targetPage.classList.contains('hidden')) {
+            setTimeout(initializeApprovalsPage, 300);
+        }
+    }
+
+    // Start when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupPageObserver);
+    } else {
+        setupPageObserver();
+    }
+
+    // Also listen for hash changes
+    window.addEventListener('hashchange', function() {
+        if (window.location.hash === '#/approval-requests') {
+            setTimeout(initializeApprovalsPage, 300);
+        }
+    });
+
+    console.log('✅ Approval Requests Data Script loaded and ready');
+
+})();
