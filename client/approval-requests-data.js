@@ -802,6 +802,150 @@
         console.log(`📢 Notification: ${title} - ${message}`);
     }
 
+    // Attach event listeners to existing static buttons in HTML
+    function attachStaticButtonListeners() {
+        console.log('🔌 Attaching event listeners to existing static buttons...');
+        
+        // Find all "Approve" buttons in the page
+        const approveButtons = document.querySelectorAll('#approval-requests-page button');
+        
+        approveButtons.forEach(button => {
+            const buttonText = button.textContent.trim();
+            
+            if (buttonText === 'Approve') {
+                // Add data attributes if they don't exist
+                if (!button.hasAttribute('data-has-listener')) {
+                    button.setAttribute('data-has-listener', 'true');
+                    button.addEventListener('click', handleStaticApprove);
+                    console.log('✅ Attached approve listener to button');
+                }
+            } else if (buttonText === 'View Details') {
+                if (!button.hasAttribute('data-has-listener')) {
+                    button.setAttribute('data-has-listener', 'true');
+                    button.addEventListener('click', handleStaticViewDetails);
+                    console.log('✅ Attached view details listener to button');
+                }
+            } else if (buttonText === 'Escalate') {
+                if (!button.hasAttribute('data-has-listener')) {
+                    button.setAttribute('data-has-listener', 'true');
+                    button.addEventListener('click', handleStaticEscalate);
+                    console.log('✅ Attached escalate listener to button');
+                }
+            } else if (buttonText === 'Review') {
+                if (!button.hasAttribute('data-has-listener')) {
+                    button.setAttribute('data-has-listener', 'true');
+                    button.addEventListener('click', handleStaticReview);
+                    console.log('✅ Attached review listener to button');
+                }
+            }
+        });
+        
+        console.log('✅ Static button listeners attached');
+    }
+
+    // Handler for static approve buttons
+    function handleStaticApprove(e) {
+        e.preventDefault();
+        
+        // Find the card containing this button
+        const card = e.target.closest('.p-5');
+        if (!card) return;
+        
+        // Extract information from the card
+        const titleElement = card.querySelector('h4');
+        const dealName = titleElement ? titleElement.textContent.trim() : 'Unknown Deal';
+        const descElement = card.querySelector('.text-gray-700');
+        const description = descElement ? descElement.textContent.trim() : '';
+        const valueElement = card.querySelector('.font-medium.text-gray-900.ml-1');
+        const value = valueElement ? valueElement.textContent.trim() : 'Unknown';
+        
+        // Show confirmation
+        if (confirm(`Approve: ${dealName}?\n\nDescription: ${description}\nValue: ${value}\n\nClick OK to approve.`)) {
+            console.log(`✅ Approved: ${dealName}`);
+            
+            // Show success notification
+            showNotification('Approval Successful', `${dealName} has been approved.`, 'success');
+            
+            // Remove the card with animation
+            card.style.transition = 'all 0.3s ease-out';
+            card.style.opacity = '0';
+            card.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                card.remove();
+                console.log('Card removed from DOM');
+            }, 300);
+        }
+    }
+
+    // Handler for static view details buttons
+    function handleStaticViewDetails(e) {
+        e.preventDefault();
+        
+        const card = e.target.closest('.p-5');
+        if (!card) return;
+        
+        const titleElement = card.querySelector('h4');
+        const dealName = titleElement ? titleElement.textContent.trim() : 'Unknown';
+        const descElement = card.querySelector('.text-gray-700');
+        const description = descElement ? descElement.textContent.trim() : '';
+        const valueElements = card.querySelectorAll('.font-medium.text-gray-900.ml-1');
+        const value = valueElements[0] ? valueElements[0].textContent.trim() : 'Unknown';
+        const approver = valueElements[1] ? valueElements[1].textContent.trim() : 'Unknown';
+        
+        alert(`APPROVAL DETAILS\n\n` +
+              `Deal: ${dealName}\n` +
+              `Description: ${description}\n` +
+              `Value: ${value}\n` +
+              `Approver: ${approver}\n\n` +
+              `Click OK to continue...`);
+        
+        console.log('👁️ Viewing details:', dealName);
+    }
+
+    // Handler for static escalate buttons
+    function handleStaticEscalate(e) {
+        e.preventDefault();
+        
+        const card = e.target.closest('.p-5');
+        if (!card) return;
+        
+        const titleElement = card.querySelector('h4');
+        const dealName = titleElement ? titleElement.textContent.trim() : 'Unknown';
+        const descElement = card.querySelector('.text-gray-700');
+        const description = descElement ? descElement.textContent.trim() : '';
+        
+        if (confirm(`Escalate: ${dealName}?\n\nDescription: ${description}\n\nThis will notify management and flag as urgent.\n\nClick OK to escalate.`)) {
+            console.log(`🚨 Escalated: ${dealName}`);
+            
+            // Show warning notification
+            showNotification('Approval Escalated', `${dealName} has been escalated to management.`, 'warning');
+            
+            // Change card styling to show it's escalated
+            card.classList.add('border-red-500', 'bg-red-50');
+            
+            // Update the button
+            e.target.textContent = 'Escalated';
+            e.target.disabled = true;
+            e.target.classList.add('opacity-50', 'cursor-not-allowed');
+        }
+    }
+
+    // Handler for static review buttons
+    function handleStaticReview(e) {
+        e.preventDefault();
+        
+        const row = e.target.closest('tr');
+        if (!row) return;
+        
+        const cells = row.querySelectorAll('td');
+        const dealName = cells[3] ? cells[3].textContent.trim() : 'Unknown';
+        
+        alert(`REVIEW APPROVAL\n\nDeal: ${dealName}\n\nClick OK to continue reviewing...`);
+        
+        console.log('📋 Reviewing:', dealName);
+    }
+
     // Initialize when page becomes visible
     function initializeApprovalsPage() {
         const approvalsPage = document.getElementById('approval-requests-page');
@@ -816,13 +960,17 @@
             return;
         }
 
-        console.log('📊 Populating Approval Requests page...');
+        console.log('📊 Initializing Approval Requests page...');
         
+        // First, attach listeners to existing static buttons
+        attachStaticButtonListeners();
+        
+        // Then populate dynamic content
         updateOverviewMetrics();
         populateCriticalApprovals();
         populateApprovalsTable();
 
-        console.log('✅ Approval Requests page populated with dummy data');
+        console.log('✅ Approval Requests page initialized with dummy data and event listeners');
     }
 
     // Watch for page visibility changes
@@ -854,17 +1002,54 @@
 
     // Start when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupPageObserver);
+        document.addEventListener('DOMContentLoaded', function() {
+            setupPageObserver();
+            // Try immediate initialization
+            setTimeout(function() {
+                const page = document.getElementById('approval-requests-page');
+                if (page && !page.classList.contains('hidden')) {
+                    attachStaticButtonListeners();
+                }
+            }, 1000);
+        });
     } else {
         setupPageObserver();
+        // Try immediate initialization
+        setTimeout(function() {
+            const page = document.getElementById('approval-requests-page');
+            if (page && !page.classList.contains('hidden')) {
+                attachStaticButtonListeners();
+            }
+        }, 1000);
     }
 
     // Also listen for hash changes
     window.addEventListener('hashchange', function() {
         if (window.location.hash === '#/approval-requests') {
-            setTimeout(initializeApprovalsPage, 300);
+            setTimeout(function() {
+                initializeApprovalsPage();
+                attachStaticButtonListeners();
+            }, 300);
         }
     });
+
+    // Try initialization every 2 seconds for the first 10 seconds (in case page loads slowly)
+    let attemptCount = 0;
+    const maxAttempts = 5;
+    const initInterval = setInterval(function() {
+        attemptCount++;
+        const page = document.getElementById('approval-requests-page');
+        if (page && !page.classList.contains('hidden')) {
+            if (!page.hasAttribute('data-buttons-attached')) {
+                page.setAttribute('data-buttons-attached', 'true');
+                attachStaticButtonListeners();
+                console.log('✅ Buttons attached via interval check');
+            }
+        }
+        if (attemptCount >= maxAttempts) {
+            clearInterval(initInterval);
+        }
+    }, 2000);
 
     console.log('✅ Approval Requests Data Script loaded and ready');
 
