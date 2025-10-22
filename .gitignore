@@ -38,6 +38,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+app.log
 
 # Runtime data
 pids
@@ -107,3 +108,11 @@ temp/
 
 # Zip files
 *.zip
+
+# Traefik
+traefik.yml
+traefik-dynamic.yml
+traefik.log
+
+# Cloudflare Tunnel
+cloudflared.log
