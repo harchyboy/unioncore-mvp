@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  unioncore-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: unioncore-mvp
+    restart: unless-stopped
+    ports:
+      - "5879:5879"
+    environment:
+      - NODE_ENV=production
+      - VITE_PORT=5879
+      - VITE_HOST=0.0.0.0
+    volumes:
+      - ./client:/app/client:ro
+    networks:
+      - unioncore-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5879"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "com.docker.compose.project=unioncore-mvp"
+      - "app.name=UNION Core Plus"
+      - "app.version=1.0.0"
+      - "app.description=Property Management Dashboard"
+
+networks:
+  unioncore-network:
+    driver: bridge
+    name: unioncore-network
