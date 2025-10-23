@@ -9,7 +9,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm ci --only=production
+# Note: Using npm install instead of npm ci because package-lock.json is not in the repo
+RUN npm install --production
 
 # Copy configuration files
 COPY vite.config.ts tsconfig.json tsconfig.node.json ./
