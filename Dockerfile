@@ -8,9 +8,9 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-# Note: Using npm install instead of npm ci because package-lock.json is not in the repo
-RUN npm install --production
+# Install ALL dependencies first (including dev deps needed for build)
+# Using --legacy-peer-deps to handle vite 7 peer dependency conflicts
+RUN npm install --legacy-peer-deps
 
 # Copy configuration files
 COPY vite.config.ts tsconfig.json tsconfig.node.json ./
