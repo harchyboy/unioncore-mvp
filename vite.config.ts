@@ -22,6 +22,7 @@ export default defineConfig({
     port: 5879,
     strictPort: true,
     host: "0.0.0.0",
+    allowedHosts: [".hartz.ai", "union.hartz.ai"],
     cors: true,
     fs: {
       strict: true,
