@@ -7,7 +7,7 @@ version: '3.8'
 services:
   unioncore:
     build:
-      context: .
+      xwcontext: .
       dockerfile: Dockerfile
     container_name: unioncore-mvp
     restart: unless-stopped

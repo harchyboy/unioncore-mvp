@@ -1,0 +1,91 @@
+version: '3.8'
+
+# UNION Core Plus MVP - Public GitHub Build
+# This builds directly from public GitHub repo
+# NO GitHub authentication needed in Dokploy!
+# Domain: union.hartz.ai
+
+services:
+  unioncore-app:
+    # Build from public GitHub repository
+    build:
+      context: https://github.com/harchyboy/unioncore-mvp.git#unzip-application
+      dockerfile: Dockerfile
+    
+    image: unioncore-mvp:latest
+    container_name: unioncore-mvp
+    restart: unless-stopped
+    
+    # Expose ports
+    ports:
+      - "5879:5879"  # Vite dev server
+      - "80:80"      # Nginx reverse proxy
+    
+    # Environment variables
+    environment:
+      - NODE_ENV=production
+      - PORT=5879
+      - VITE_PORT=5879
+      - VITE_HOST=0.0.0.0
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Networks for Traefik
+    networks:
+      - unioncore-network
+      - traefik-public
+    
+    # Volume mounts for logs
+    volumes:
+      - ./logs:/var/log/unioncore
+    
+    # Traefik labels for automatic routing and SSL
+    labels:
+      # Enable Traefik
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-public"
+      
+      # HTTP router (redirect to HTTPS)
+      - "traefik.http.routers.unioncore-http.rule=Host(`union.hartz.ai`)"
+      - "traefik.http.routers.unioncore-http.entrypoints=web"
+      - "traefik.http.routers.unioncore-http.middlewares=redirect-to-https"
+      
+      # HTTPS router with SSL
+      - "traefik.http.routers.unioncore-https.rule=Host(`union.hartz.ai`)"
+      - "traefik.http.routers.unioncore-https.entrypoints=websecure"
+      - "traefik.http.routers.unioncore-https.tls=true"
+      - "traefik.http.routers.unioncore-https.tls.certresolver=letsencrypt"
+      
+      # Service - forward to port 80 inside container
+      - "traefik.http.services.unioncore-service.loadbalancer.server.port=80"
+      
+      # HTTPS redirect middleware
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
+      
+      # Metadata
+      - "com.dokploy.project=unioncore"
+      - "com.dokploy.service=unioncore-mvp"
+
+# Networks
+networks:
+  unioncore-network:
+    driver: bridge
+    name: unioncore-network
+  
+  # Traefik network (if using Dokploy/Traefik)
+  # Will be created externally by Dokploy
+  traefik-public:
+    external: true
+    name: traefik-public
+
+# Volumes
+volumes:
+  logs:
+    driver: local
