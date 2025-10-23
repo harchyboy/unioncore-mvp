@@ -11,9 +11,13 @@ COPY package*.json ./
 # Install dependencies
 RUN npm ci --only=production
 
+# Copy configuration files
+COPY vite.config.ts tsconfig.json tsconfig.node.json ./
+COPY ecosystem.config.cjs ./
+COPY .prettierrc .prettierignore ./
+
 # Copy application files
 COPY client ./client
-COPY vite.config.js ./
 
 # Build the application (if needed in future)
 # RUN npm run build
