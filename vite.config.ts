@@ -1,6 +1,5 @@
 import { defineConfig } from "vite";
 import path from "path";
-
 export default defineConfig({
   plugins: [],
   resolve: {
@@ -23,7 +22,6 @@ export default defineConfig({
     port: 5879,
     strictPort: true,
     host: "0.0.0.0",
-    allowedHosts: "all",
     cors: true,
     fs: {
       strict: true,
@@ -31,4 +29,3 @@ export default defineConfig({
     },
   },
 });
-
