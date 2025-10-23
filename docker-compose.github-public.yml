@@ -19,8 +19,7 @@ services:
     # Expose ports internally only (no host binding for Dokploy)
     # Dokploy/Traefik will handle external routing
     expose:
-      - "80"         # Nginx serves on port 80 internally
-      - "5879"       # Vite also available internally
+      - "5879"       # Vite dev server runs on port 5879
     
     # Environment variables
     environment:
@@ -31,7 +30,7 @@ services:
     
     # Health check
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5879"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -64,8 +63,8 @@ services:
       - "traefik.http.routers.unioncore-secure.tls=true"
       - "traefik.http.routers.unioncore-secure.tls.certresolver=letsencrypt"
       
-      # Service - point to port 80 inside container
-      - "traefik.http.services.unioncore.loadbalancer.server.port=80"
+      # Service - point to port 5879 (Vite dev server) inside container
+      - "traefik.http.services.unioncore.loadbalancer.server.port=5879"
       
       # HTTP to HTTPS redirect
       - "traefik.http.middlewares.unioncore-redirect.redirectscheme.scheme=https"
