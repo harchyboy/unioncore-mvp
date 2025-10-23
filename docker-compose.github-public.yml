@@ -45,10 +45,32 @@ services:
     volumes:
       - ./logs:/var/log/unioncore
     
-    # Labels for Dokploy
+    # Labels for Dokploy and Traefik routing
     labels:
+      # Dokploy metadata
       - "com.dokploy.project=unioncore"
       - "com.dokploy.service=unioncore-mvp"
+      
+      # Enable Traefik
+      - "traefik.enable=true"
+      
+      # HTTP Router
+      - "traefik.http.routers.unioncore.rule=Host(`union.hartz.ai`)"
+      - "traefik.http.routers.unioncore.entrypoints=web"
+      
+      # HTTPS Router
+      - "traefik.http.routers.unioncore-secure.rule=Host(`union.hartz.ai`)"
+      - "traefik.http.routers.unioncore-secure.entrypoints=websecure"
+      - "traefik.http.routers.unioncore-secure.tls=true"
+      - "traefik.http.routers.unioncore-secure.tls.certresolver=letsencrypt"
+      
+      # Service - point to port 80 inside container
+      - "traefik.http.services.unioncore.loadbalancer.server.port=80"
+      
+      # HTTP to HTTPS redirect
+      - "traefik.http.middlewares.unioncore-redirect.redirectscheme.scheme=https"
+      - "traefik.http.middlewares.unioncore-redirect.redirectscheme.permanent=true"
+      - "traefik.http.routers.unioncore.middlewares=unioncore-redirect"
 
 # Networks
 networks:
