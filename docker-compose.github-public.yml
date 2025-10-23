@@ -36,40 +36,16 @@ services:
       retries: 3
       start_period: 40s
     
-    # Networks for Traefik
+    # Networks
     networks:
       - unioncore-network
-      - traefik-public
     
     # Volume mounts for logs
     volumes:
       - ./logs:/var/log/unioncore
     
-    # Traefik labels for automatic routing and SSL
+    # Labels for Dokploy
     labels:
-      # Enable Traefik
-      - "traefik.enable=true"
-      - "traefik.docker.network=traefik-public"
-      
-      # HTTP router (redirect to HTTPS)
-      - "traefik.http.routers.unioncore-http.rule=Host(`union.hartz.ai`)"
-      - "traefik.http.routers.unioncore-http.entrypoints=web"
-      - "traefik.http.routers.unioncore-http.middlewares=redirect-to-https"
-      
-      # HTTPS router with SSL
-      - "traefik.http.routers.unioncore-https.rule=Host(`union.hartz.ai`)"
-      - "traefik.http.routers.unioncore-https.entrypoints=websecure"
-      - "traefik.http.routers.unioncore-https.tls=true"
-      - "traefik.http.routers.unioncore-https.tls.certresolver=letsencrypt"
-      
-      # Service - forward to port 80 inside container
-      - "traefik.http.services.unioncore-service.loadbalancer.server.port=80"
-      
-      # HTTPS redirect middleware
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-      - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
-      
-      # Metadata
       - "com.dokploy.project=unioncore"
       - "com.dokploy.service=unioncore-mvp"
 
@@ -78,12 +54,6 @@ networks:
   unioncore-network:
     driver: bridge
     name: unioncore-network
-  
-  # Traefik network (if using Dokploy/Traefik)
-  # Will be created externally by Dokploy
-  traefik-public:
-    external: true
-    name: traefik-public
 
 # Volumes
 volumes:
