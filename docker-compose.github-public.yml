@@ -16,10 +16,11 @@ services:
     container_name: unioncore-mvp
     restart: unless-stopped
     
-    # Expose ports
-    ports:
-      - "5879:5879"  # Vite dev server
-      - "80:80"      # Nginx reverse proxy
+    # Expose ports internally only (no host binding for Dokploy)
+    # Dokploy/Traefik will handle external routing
+    expose:
+      - "80"         # Nginx serves on port 80 internally
+      - "5879"       # Vite also available internally
     
     # Environment variables
     environment:
