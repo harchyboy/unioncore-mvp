@@ -15,16 +15,19 @@ COPY .prettierrc .prettierignore ./
 COPY client ./client
 # Build the application (if needed in future)
 # RUN npm run build
+
 FROM node:20-alpine
 WORKDIR /app
-# Install vite globally
-RUN npm install -g vite@latest
-# Copy application from builder
+
+# Copy everything from builder including node_modules
 COPY --from=builder /app ./
+
 # Expose port 5879
 EXPOSE 5879
+
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD node -e "require('http').get('http://localhost:5879', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
-# Run the application with allowed hosts
-CMD ["vite", "--host", "0.0.0.0", "--port", "5879", "--strictPort", "client"]
+
+# Run the application using npm script to ensure vite.config.ts is read
+CMD ["npm", "run", "dev"]
