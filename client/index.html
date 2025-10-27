@@ -1611,16 +1611,177 @@
                     </div>
                 </section>
 
-                <!-- Active Deals Table -->
+                <!-- Kanban Board View -->
+                <section id="pipeline-kanban-view" class="mb-8 hidden">
+                    <div class="flex gap-4 overflow-x-auto pb-4" style="min-height: 600px;">
+                        <!-- Lead Stage -->
+                        <div class="flex-shrink-0 w-80">
+                            <div class="bg-white rounded-lg shadow-sm border border-stone h-full flex flex-col">
+                                <div class="p-4 border-b border-stone bg-stone bg-opacity-30">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-3 h-3 bg-info rounded-full"></div>
+                                            <h3 class="font-semibold text-slate">Lead</h3>
+                                        </div>
+                                        <span class="bg-info bg-opacity-20 text-info px-2 py-1 rounded-full text-xs font-medium">
+                                            <span class="kanban-count" data-stage="lead">42</span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-concrete mt-1">£8.2M total value</div>
+                                </div>
+                                <div class="flex-1 p-3 space-y-3 overflow-y-auto" id="kanban-stage-lead" data-stage="lead">
+                                    <!-- Deal cards will be added by JavaScript -->
+                                </div>
+                                <div class="p-3 border-t border-stone">
+                                    <button class="w-full text-sm text-info hover:text-slate transition-colors">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Deal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Viewing Stage -->
+                        <div class="flex-shrink-0 w-80">
+                            <div class="bg-white rounded-lg shadow-sm border border-stone h-full flex flex-col">
+                                <div class="p-4 border-b border-stone bg-stone bg-opacity-30">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-3 h-3 bg-warning rounded-full"></div>
+                                            <h3 class="font-semibold text-slate">Viewing</h3>
+                                        </div>
+                                        <span class="bg-warning bg-opacity-20 text-warning px-2 py-1 rounded-full text-xs font-medium">
+                                            <span class="kanban-count" data-stage="viewing">38</span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-concrete mt-1">£7.1M total value</div>
+                                </div>
+                                <div class="flex-1 p-3 space-y-3 overflow-y-auto" id="kanban-stage-viewing" data-stage="viewing">
+                                    <!-- Deal cards will be added by JavaScript -->
+                                </div>
+                                <div class="p-3 border-t border-stone">
+                                    <button class="w-full text-sm text-warning hover:text-slate transition-colors">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Deal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Proposal Stage -->
+                        <div class="flex-shrink-0 w-80">
+                            <div class="bg-white rounded-lg shadow-sm border border-stone h-full flex flex-col">
+                                <div class="p-4 border-b border-stone bg-stone bg-opacity-30">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-3 h-3 bg-slate rounded-full"></div>
+                                            <h3 class="font-semibold text-slate">Proposal</h3>
+                                        </div>
+                                        <span class="bg-slate bg-opacity-20 text-slate px-2 py-1 rounded-full text-xs font-medium">
+                                            <span class="kanban-count" data-stage="proposal">52</span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-concrete mt-1">£12.8M total value</div>
+                                </div>
+                                <div class="flex-1 p-3 space-y-3 overflow-y-auto" id="kanban-stage-proposal" data-stage="proposal">
+                                    <!-- Deal cards will be added by JavaScript -->
+                                </div>
+                                <div class="p-3 border-t border-stone">
+                                    <button class="w-full text-sm text-slate hover:opacity-70 transition-colors">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Deal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- HoT Stage -->
+                        <div class="flex-shrink-0 w-80">
+                            <div class="bg-white rounded-lg shadow-sm border border-stone h-full flex flex-col">
+                                <div class="p-4 border-b border-stone bg-stone bg-opacity-30">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-3 h-3 bg-info rounded-full"></div>
+                                            <h3 class="font-semibold text-slate">Heads of Terms</h3>
+                                        </div>
+                                        <span class="bg-info bg-opacity-20 text-info px-2 py-1 rounded-full text-xs font-medium">
+                                            <span class="kanban-count" data-stage="hot">46</span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-concrete mt-1">£11.2M total value</div>
+                                </div>
+                                <div class="flex-1 p-3 space-y-3 overflow-y-auto" id="kanban-stage-hot" data-stage="hot">
+                                    <!-- Deal cards will be added by JavaScript -->
+                                </div>
+                                <div class="p-3 border-t border-stone">
+                                    <button class="w-full text-sm text-info hover:text-slate transition-colors">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Deal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Signed Stage -->
+                        <div class="flex-shrink-0 w-80">
+                            <div class="bg-white rounded-lg shadow-sm border border-stone h-full flex flex-col">
+                                <div class="p-4 border-b border-stone bg-stone bg-opacity-30">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-3 h-3 bg-success rounded-full"></div>
+                                            <h3 class="font-semibold text-slate">Signed</h3>
+                                        </div>
+                                        <span class="bg-success bg-opacity-20 text-success px-2 py-1 rounded-full text-xs font-medium">
+                                            <span class="kanban-count" data-stage="signed">39</span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-concrete mt-1">£9.3M total value</div>
+                                </div>
+                                <div class="flex-1 p-3 space-y-3 overflow-y-auto" id="kanban-stage-signed" data-stage="signed">
+                                    <!-- Deal cards will be added by JavaScript -->
+                                </div>
+                                <div class="p-3 border-t border-stone">
+                                    <button class="w-full text-sm text-success hover:text-slate transition-colors">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Deal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Stage -->
+                        <div class="flex-shrink-0 w-80">
+                            <div class="bg-white rounded-lg shadow-sm border border-stone h-full flex flex-col">
+                                <div class="p-4 border-b border-stone bg-stone bg-opacity-30">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-2">
+                                            <div class="w-3 h-3 bg-success rounded-full"></div>
+                                            <h3 class="font-semibold text-slate">Live</h3>
+                                        </div>
+                                        <span class="bg-success bg-opacity-20 text-success px-2 py-1 rounded-full text-xs font-medium">
+                                            <span class="kanban-count" data-stage="live">30</span>
+                                        </span>
+                                    </div>
+                                    <div class="text-xs text-concrete mt-1">£5.2M annual value</div>
+                                </div>
+                                <div class="flex-1 p-3 space-y-3 overflow-y-auto" id="kanban-stage-live" data-stage="live">
+                                    <!-- Deal cards will be added by JavaScript -->
+                                </div>
+                                <div class="p-3 border-t border-stone">
+                                    <button class="w-full text-sm text-success hover:text-slate transition-colors">
+                                        <i class="fa-solid fa-plus mr-1"></i> Add Deal
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                                <!-- Active Deals Table -->
                 <section class="mb-8">
                     <div class="bg-white rounded-lg shadow-sm border border-stone">
                         <div class="p-6 border-b border-stone flex items-center justify-between">
                             <h2 class="text-lg font-semibold text-slate">Active Deals</h2>
                             <div class="flex items-center space-x-2">
-                                <button class="p-2 text-concrete hover:text-slate transition-colors" title="Table View">
+                                <button id="pipeline-view-table" class="p-2 text-slate bg-stone rounded transition-colors" title="Table View">
                                     <i class="fa-solid fa-table"></i>
                                 </button>
-                                <button class="p-2 text-concrete hover:text-slate transition-colors" title="Grid View">
+                                <button id="pipeline-view-kanban" class="p-2 text-concrete hover:text-slate transition-colors" title="Kanban View">
                                     <i class="fa-solid fa-th"></i>
                                 </button>
                             </div>
@@ -20136,6 +20297,7 @@ if (document.readyState === 'loading') {
             filteredDeals = [...allDeals];
             updatePipelineKPIs();
             renderPipelineTable();
+            // Table view is shown by default, Kanban is hidden initially
             renderStageDistributionChart();
             renderRecentActivity();
             renderBrokerPerformance();
@@ -20290,6 +20452,7 @@ if (document.readyState === 'loading') {
         function goToPipelinePage(page) {
             currentPipelinePage = page;
             renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
         }
 
         // Filter Pipeline Deals
@@ -20331,6 +20494,7 @@ if (document.readyState === 'loading') {
             currentPipelinePage = 1;
             updatePipelineKPIs();
             renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
             renderStageDistributionChart();
         }
 
@@ -20463,7 +20627,229 @@ if (document.readyState === 'loading') {
             }
         }
 
-        // Pipeline Event Listeners
+        // Pipeline View State
+        let currentPipelineView = 'table'; // 'kanban', 'table', or 'list'
+
+        // View Switching Functions
+        function switchPipelineView(view) {
+            currentPipelineView = view;
+            
+            // Update button styles
+            document.getElementById('pipeline-view-kanban')?.classList.remove('bg-stone', 'text-slate');
+            document.getElementById('pipeline-view-table')?.classList.remove('bg-stone', 'text-slate');
+            
+            document.getElementById('pipeline-view-kanban')?.classList.add('text-concrete');
+            document.getElementById('pipeline-view-table')?.classList.add('text-concrete');
+            
+            // Hide all views
+            document.getElementById('pipeline-kanban-view')?.classList.add('hidden');
+            document.querySelector('section.mb-8:has(#pipeline-table-body)')?.classList.add('hidden');
+            
+            // Show selected view and update button
+            if (view === 'kanban') {
+                document.getElementById('pipeline-kanban-view')?.classList.remove('hidden');
+                document.getElementById('pipeline-view-kanban')?.classList.add('bg-stone', 'text-slate');
+                document.getElementById('pipeline-view-kanban')?.classList.remove('text-concrete');
+                renderKanbanBoard();
+            } else if (view === 'table') {
+                document.querySelector('section.mb-8:has(#pipeline-table-body)')?.classList.remove('hidden');
+                document.getElementById('pipeline-view-table')?.classList.add('bg-stone', 'text-slate');
+                document.getElementById('pipeline-view-table')?.classList.remove('text-concrete');
+            }
+        }
+
+        // Create Deal Card for Kanban View
+        function createDealCard(deal) {
+            const daysInStage = Math.floor((new Date() - new Date(deal.lastTouch)) / (1000 * 60 * 60 * 24));
+            const isStalled = daysInStage > 10;
+            const isUrgent = daysInStage > 7;
+            
+            // Determine priority badge
+            let priorityBadge = '';
+            if (isStalled) {
+                priorityBadge = `<span class="text-xs bg-danger bg-opacity-20 text-danger px-2 py-0.5 rounded-full">Stalled</span>`;
+            } else if (isUrgent) {
+                priorityBadge = `<span class="text-xs bg-warning bg-opacity-20 text-warning px-2 py-0.5 rounded-full">Urgent</span>`;
+            }
+            
+            return `
+                <div class="bg-white border border-stone rounded-lg p-3 cursor-move hover:shadow-md transition-shadow deal-card" 
+                     data-deal-id="${deal.id}" 
+                     data-stage="${deal.stage}"
+                     draggable="true">
+                    <div class="flex items-start justify-between mb-2">
+                        <h4 class="font-medium text-slate text-sm leading-tight flex-1">${deal.property}</h4>
+                        ${priorityBadge}
+                    </div>
+                    <div class="text-xs text-concrete mb-2">${deal.address}</div>
+                    <div class="flex items-center justify-between text-xs mb-2">
+                        <span class="font-semibold text-slate">${deal.value}</span>
+                        <span class="text-concrete">${deal.size.toLocaleString()} sq ft</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-stone">
+                        <div class="flex items-center space-x-1">
+                            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-${Math.floor(Math.random() * 3) + 1}.jpg" 
+                                 alt="${deal.owner}" 
+                                 class="w-5 h-5 rounded-full"
+                                 title="${deal.owner}">
+                            <span class="text-xs text-concrete">${deal.owner.split(' ')[0]}</span>
+                        </div>
+                        <span class="text-xs text-concrete">${daysInStage}d</span>
+                    </div>
+                    ${deal.nextAction ? `
+                    <div class="mt-2 pt-2 border-t border-stone">
+                        <div class="text-xs text-concrete">
+                            <i class="fa-solid fa-tasks mr-1"></i>
+                            ${deal.nextAction}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        // Render Kanban Board
+        function renderKanbanBoard() {
+            const stages = ['lead', 'viewing', 'proposal', 'hot', 'signed', 'live'];
+            
+            stages.forEach(stage => {
+                const container = document.getElementById(`kanban-stage-${stage}`);
+                if (!container) return;
+                
+                const stageDeals = filteredDeals.filter(deal => deal.stage === stage);
+                const stageValue = stageDeals.reduce((sum, deal) => sum + parseFloat(deal.value.replace(/[£,M]/g, '')), 0);
+                
+                // Update count and value in header
+                const countSpan = document.querySelector(`[data-stage="${stage}"].kanban-count`);
+                if (countSpan) {
+                    countSpan.textContent = stageDeals.length;
+                }
+                
+                // Render deal cards
+                container.innerHTML = stageDeals.map(deal => createDealCard(deal)).join('');
+                
+                // Add drag and drop event listeners
+                container.querySelectorAll('.deal-card').forEach(card => {
+                    card.addEventListener('dragstart', handleDragStart);
+                    card.addEventListener('dragend', handleDragEnd);
+                    
+                    // Add click handler to show deal details
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.closest('.deal-card').classList.contains('dragging')) {
+                            const dealId = card.getAttribute('data-deal-id');
+                            showDealDetail(dealId);
+                        }
+                    });
+                });
+            });
+            
+            // Setup drop zones
+            stages.forEach(stage => {
+                const container = document.getElementById(`kanban-stage-${stage}`);
+                if (!container) return;
+                
+                container.addEventListener('dragover', handleDragOver);
+                container.addEventListener('drop', handleDrop);
+                container.addEventListener('dragenter', handleDragEnter);
+                container.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        // Drag and Drop Handlers
+        let draggedElement = null;
+
+        function handleDragStart(e) {
+            draggedElement = e.target;
+            e.target.classList.add('opacity-50', 'dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', e.target.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('opacity-50', 'dragging');
+        }
+
+        function handleDragOver(e) {
+            if (e.preventDefault) {
+                e.preventDefault();
+            }
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            if (e.target.classList.contains('overflow-y-auto') || e.target.id?.startsWith('kanban-stage-')) {
+                e.target.classList.add('bg-info', 'bg-opacity-5');
+            }
+        }
+
+        function handleDragLeave(e) {
+            if (e.target.classList.contains('overflow-y-auto') || e.target.id?.startsWith('kanban-stage-')) {
+                e.target.classList.remove('bg-info', 'bg-opacity-5');
+            }
+        }
+
+        function handleDrop(e) {
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+            
+            e.target.classList.remove('bg-info', 'bg-opacity-5');
+            
+            if (draggedElement) {
+                const dealId = draggedElement.getAttribute('data-deal-id');
+                const newStage = e.target.getAttribute('data-stage') || e.target.closest('[data-stage]')?.getAttribute('data-stage');
+                
+                if (newStage && dealId) {
+                    // Update deal stage in data
+                    const deal = allDeals.find(d => d.id === dealId);
+                    if (deal) {
+                        deal.stage = newStage;
+                        deal.lastTouch = new Date().toISOString();
+                        
+                        // Show success toast
+                        showToast(`Deal moved to ${newStage.toUpperCase()} stage`, 'success');
+                        
+                        // Re-render kanban board
+                        applyPipelineFilters();
+                        renderKanbanBoard();
+                    }
+                }
+            }
+            
+            return false;
+        }
+
+        // Show deal detail (placeholder - you can implement full detail view)
+        function showDealDetail(dealId) {
+            const deal = allDeals.find(d => d.id === dealId);
+            if (deal) {
+                showToast(`Opening ${deal.property} details...`, 'info');
+                // You can implement a modal or navigate to detail page here
+            }
+        }
+
+        // Toast notification function
+        function showToast(message, type = 'info') {
+            const bgColors = {
+                'success': 'bg-success',
+                'info': 'bg-info',
+                'warning': 'bg-warning',
+                'danger': 'bg-danger'
+            };
+            
+            const toast = document.createElement('div');
+            toast.className = `fixed bottom-6 right-6 ${bgColors[type] || 'bg-slate'} text-white px-6 py-3 rounded-lg shadow-lg z-50 transition-opacity`;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+                // Pipeline Event Listeners
         document.getElementById('filter-pipeline-stage')?.addEventListener('change', filterPipelineDeals);
         document.getElementById('filter-pipeline-broker')?.addEventListener('change', filterPipelineDeals);
         document.getElementById('filter-pipeline-sector')?.addEventListener('change', filterPipelineDeals);
@@ -20505,6 +20891,7 @@ if (document.readyState === 'loading') {
                     currentPipelinePage = 1;
                     updatePipelineKPIs();
                     renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
                     return;
                 } else if (filter === 'high-value') {
                     document.getElementById('filter-pipeline-price').value = 'high';
@@ -20513,6 +20900,7 @@ if (document.readyState === 'loading') {
                     currentPipelinePage = 1;
                     updatePipelineKPIs();
                     renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
                     return;
                 }
 
@@ -20525,6 +20913,7 @@ if (document.readyState === 'loading') {
             if (currentPipelinePage > 1) {
                 currentPipelinePage--;
                 renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
             }
         });
 
@@ -20533,6 +20922,7 @@ if (document.readyState === 'loading') {
             if (currentPipelinePage < totalPages) {
                 currentPipelinePage++;
                 renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
             }
         });
 
@@ -20540,6 +20930,7 @@ if (document.readyState === 'loading') {
             dealsPerPage = parseInt(this.value);
             currentPipelinePage = 1;
             renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
         });
 
         // Export Pipeline
@@ -20630,11 +21021,16 @@ if (document.readyState === 'loading') {
                 });
 
                 renderPipelineTable();
+                if (currentPipelineView === 'kanban') renderKanbanBoard();
             });
         });
 
         // Add nav handler for Pipeline
-        document.getElementById('nav-pipeline')?.addEventListener('click', () => navigateToPage('pipeline'));
+        // Pipeline View Switching
+        document.getElementById('pipeline-view-table')?.addEventListener('click', () => switchPipelineView('table'));
+        document.getElementById('pipeline-view-kanban')?.addEventListener('click', () => switchPipelineView('kanban'));
+
+                document.getElementById('nav-pipeline')?.addEventListener('click', () => navigateToPage('pipeline'));
         document.getElementById('nav-pipeline-collapsed')?.addEventListener('click', () => navigateToPage('pipeline'));
         document.getElementById('nav-pipeline-mobile')?.addEventListener('click', () => {
             navigateToPage('pipeline');
