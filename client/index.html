@@ -11101,7 +11101,7 @@ View All Roles
 </div>
 </div>
 <div class="flex flex-col space-y-1 ml-4">
-<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval">
+<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval" data-item-id="APPR-001" data-item-name="HoT Version 2.3 - Legal Review">
                                                 Approve
                                             </button>
 <button class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="reject" data-item-type="approval">
@@ -11142,7 +11142,7 @@ View All Roles
 </div>
 </div>
 <div class="flex flex-col space-y-1 ml-4">
-<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval">
+<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval" data-item-id="APPR-002" data-item-name="Budget Amendment - Executive Approval">
                                                 Approve
                                             </button>
 <button class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="reject" data-item-type="approval">
@@ -11183,7 +11183,7 @@ View All Roles
 </div>
 </div>
 <div class="flex flex-col space-y-1 ml-4">
-<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval">
+<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval" data-item-id="APPR-003" data-item-name="Contract Terms - Finance Review">
                                                 Approve
                                             </button>
 <button class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="reject" data-item-type="approval">
@@ -11226,7 +11226,7 @@ View All Roles
 </div>
 </div>
 <div class="flex flex-col space-y-1 ml-4">
-<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval">
+<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval" data-item-id="APPR-004" data-item-name="Delivery Schedule - Operations Approval">
                                                 Approve
                                             </button>
 <button class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="reject" data-item-type="approval">
@@ -11267,7 +11267,7 @@ View All Roles
 </div>
 </div>
 <div class="flex flex-col space-y-1 ml-4">
-<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval">
+<button class="bg-green-600 hover:bg-green-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="approve" data-item-type="approval" data-item-id="APPR-005" data-item-name="Risk Mitigation Plan - Executive Review">
                                                 Approve
                                             </button>
 <button class="bg-red-600 hover:bg-red-700 text-white text-xs px-3 py-1 rounded font-medium" data-action="reject" data-item-type="approval">
@@ -26033,17 +26033,21 @@ function initAdditionalPhase2Actions() {
 }
 
 function handleApprove(itemType, itemName, button) {
-  const originalText = button.innerHTML;
-  button.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Approving...';
-  button.disabled = true;
+  // Show confirmation modal before approving
+  showApproveConfirmation(button.getAttribute('data-item-id') || 'unknown', itemName, function() {
+    // On approval confirmed
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Approving...';
+    button.disabled = true;
 
-  setTimeout(() => {
-    button.innerHTML = '<i class="fa-solid fa-check mr-2"></i>Approved';
-    button.classList.remove('bg-green-600', 'hover:bg-green-700');
-    button.classList.add('bg-green-700', 'cursor-not-allowed');
-    
-    UnionCore.showToast(`${itemName} approved successfully`, 'success');
-  }, 800);
+    setTimeout(() => {
+      button.innerHTML = '<i class="fa-solid fa-check mr-2"></i>Approved';
+      button.classList.remove('bg-green-600', 'hover:bg-green-700');
+      button.classList.add('bg-green-700', 'cursor-not-allowed');
+      
+      UnionCore.showToast(`${itemName} approved successfully`, 'success');
+    }, 800);
+  });
 }
 
 function handleEscalate(itemName) {
@@ -28154,7 +28158,10 @@ function initApproveButtons() {
   });
 }
 
-function showApproveConfirmation(itemId, itemName) {
+// Store approval callback temporarily
+let approvalCallback = null;
+
+function showApproveConfirmation(itemId, itemName, onApproveCallback) {
   const content = `
     <div class="space-y-5">
       <div class="flex items-center justify-center mb-2">
@@ -28183,8 +28190,15 @@ function showApproveConfirmation(itemId, itemName) {
     </div>
   `;
   
+  // Store callback if provided
+  if (onApproveCallback) {
+    approvalCallback = onApproveCallback;
+  } else {
+    approvalCallback = null;
+  }
+  
   UnionCore.showModal('Confirm Approval', content, [
-    { label: 'Cancel', onclick: 'UnionCore.closeModal()' },
+    { label: 'Cancel', onclick: 'UnionCore.closeModal(); approvalCallback = null;' },
     { label: 'Approve', primary: true, onclick: `submitApproval('${itemId}', '${itemName}')` }
   ]);
 }
@@ -28194,6 +28208,15 @@ function submitApproval(itemId, itemName) {
   const notify = document.getElementById('notify-requester')?.checked;
   
   UnionCore.closeModal();
+  
+  // If callback exists, use it
+  if (approvalCallback && typeof approvalCallback === 'function') {
+    approvalCallback(itemId, itemName, comments, notify);
+    approvalCallback = null;
+    return;
+  }
+  
+  // Otherwise use default behavior
   UnionCore.showToast('Processing approval...', 'info');
   
   setTimeout(() => {
