@@ -1623,6 +1623,23 @@
                     </div>
                 </section>
 
+                <!-- Active Deals Section Header -->
+                <section class="mb-8">
+                    <div class="bg-white rounded-lg shadow-sm border border-stone p-6">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-lg font-semibold text-slate">Active Deals</h2>
+                            <div class="flex items-center space-x-2">
+                                <button id="pipeline-view-table" class="p-2 text-slate bg-stone rounded transition-colors" title="Grid View">
+                                    <i class="fa-solid fa-grip"></i>
+                                </button>
+                                <button id="pipeline-view-kanban" class="p-2 text-concrete hover:text-slate transition-colors" title="Board View">
+                                    <i class="fa-solid fa-columns"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Kanban Board View -->
                 <section id="pipeline-kanban-view" class="mb-8 hidden">
                     <div class="flex gap-4 overflow-x-auto pb-4" style="min-height: 600px;">
@@ -1784,20 +1801,9 @@
                     </div>
                 </section>
 
-                                <!-- Active Deals Table -->
-                <section class="mb-8">
+                <!-- Active Deals Table View -->
+                <section id="pipeline-table-section" class="mb-8">
                     <div class="bg-white rounded-lg shadow-sm border border-stone">
-                        <div class="p-6 border-b border-stone flex items-center justify-between">
-                            <h2 class="text-lg font-semibold text-slate">Active Deals</h2>
-                            <div class="flex items-center space-x-2">
-                                <button id="pipeline-view-table" class="p-2 text-slate bg-stone rounded transition-colors" title="Grid View">
-                                    <i class="fa-solid fa-grip"></i>
-                                </button>
-                                <button id="pipeline-view-kanban" class="p-2 text-concrete hover:text-slate transition-colors" title="Board View">
-                                    <i class="fa-solid fa-columns"></i>
-                                </button>
-                            </div>
-                        </div>
                         <div id="pipeline-table-container" class="overflow-x-auto">
                             <table class="w-full">
                                 <thead class="bg-stone bg-opacity-30">
@@ -21190,8 +21196,7 @@ if (document.readyState === 'loading') {
             
             // Hide all views
             document.getElementById('pipeline-kanban-view')?.classList.add('hidden');
-            document.getElementById('pipeline-table-container')?.classList.add('hidden');
-            document.getElementById('pipeline-table-pagination')?.classList.add('hidden');
+            document.getElementById('pipeline-table-section')?.classList.add('hidden');
             
             // Show selected view and update button
             if (view === 'kanban') {
@@ -21210,8 +21215,7 @@ if (document.readyState === 'loading') {
                 console.log('✅ Kanban board rendered');
             } else if (view === 'table') {
                 console.log('📊 Showing Table view');
-                document.getElementById('pipeline-table-container')?.classList.remove('hidden');
-                document.getElementById('pipeline-table-pagination')?.classList.remove('hidden');
+                document.getElementById('pipeline-table-section')?.classList.remove('hidden');
                 document.getElementById('pipeline-view-table')?.classList.add('bg-stone', 'text-slate');
                 document.getElementById('pipeline-view-table')?.classList.remove('text-concrete');
             }
