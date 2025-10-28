@@ -183,6 +183,11 @@
                 <div>
                     <h3 class="text-xs font-semibold text-concrete uppercase tracking-wide mb-3 px-4">Origination</h3>
                     <div class="space-y-1">
+                        <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-leads">
+                            <i class="fa-solid fa-users mr-3 w-5"></i>
+                            <span>Leads</span>
+                            <span class="ml-auto text-xs bg-info bg-opacity-20 text-info px-2 py-1 rounded-full">42</span>
+                        </span>
                         <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-pipeline">
                             <i class="fa-solid fa-building mr-3 w-5"></i>
                             <span>Pipeline</span>
@@ -954,6 +959,348 @@
             </section>
             </div>
             <!-- END DASHBOARD PAGE -->
+
+            <!-- LEADS PAGE -->
+            <div id="leads-page" class="page-content hidden">
+                <section class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h1 class="text-3xl font-semibold text-slate mb-2">Lead Management</h1>
+                            <p class="text-concrete">BANT-qualified leads with intelligent scoring</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="px-4 py-2 bg-white text-slate border border-stone rounded-lg hover:bg-stone transition-colors">
+                                <i class="fa-solid fa-filter mr-2"></i>
+                                Filter Leads
+                            </button>
+                            <button class="px-4 py-2 bg-slate text-white rounded-lg hover:bg-opacity-90 transition-colors" onclick="showAddLeadModal()">
+                                <i class="fa-solid fa-plus mr-2"></i>
+                                Add Lead
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Lead Stats Overview -->
+                <section class="mb-8">
+                    <div class="grid grid-cols-5 gap-6">
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-concrete">Total Leads</span>
+                                <i class="fa-solid fa-users text-info"></i>
+                            </div>
+                            <p class="text-3xl font-bold text-slate">42</p>
+                            <p class="text-xs text-success mt-2"><i class="fa-solid fa-arrow-up mr-1"></i>+8 this week</p>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-concrete">Grade A Leads</span>
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-success bg-opacity-20 text-success font-bold text-sm rounded">A</span>
+                            </div>
+                            <p class="text-3xl font-bold text-slate">12</p>
+                            <p class="text-xs text-concrete mt-2">85-100 BANT score</p>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-concrete">Grade B Leads</span>
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-info bg-opacity-20 text-info font-bold text-sm rounded">B</span>
+                            </div>
+                            <p class="text-3xl font-bold text-slate">18</p>
+                            <p class="text-xs text-concrete mt-2">70-84 BANT score</p>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-concrete">Grade C Leads</span>
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-warning bg-opacity-20 text-warning font-bold text-sm rounded">C</span>
+                            </div>
+                            <p class="text-3xl font-bold text-slate">9</p>
+                            <p class="text-xs text-concrete mt-2">50-69 BANT score</p>
+                        </div>
+
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm font-medium text-concrete">Grade D Leads</span>
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-danger bg-opacity-20 text-danger font-bold text-sm rounded">D</span>
+                            </div>
+                            <p class="text-3xl font-bold text-slate">3</p>
+                            <p class="text-xs text-concrete mt-2">25-49 BANT score</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Filter Tabs -->
+                <section class="mb-6">
+                    <div class="bg-white rounded-lg p-2 shadow-sm border border-stone inline-flex space-x-2">
+                        <button class="px-4 py-2 bg-slate text-white rounded-lg text-sm font-medium transition-colors" onclick="filterLeads('all')">
+                            All Leads (42)
+                        </button>
+                        <button class="px-4 py-2 text-slate hover:bg-stone rounded-lg text-sm font-medium transition-colors" onclick="filterLeads('A')">
+                            Grade A (12)
+                        </button>
+                        <button class="px-4 py-2 text-slate hover:bg-stone rounded-lg text-sm font-medium transition-colors" onclick="filterLeads('B')">
+                            Grade B (18)
+                        </button>
+                        <button class="px-4 py-2 text-slate hover:bg-stone rounded-lg text-sm font-medium transition-colors" onclick="filterLeads('C')">
+                            Grade C (9)
+                        </button>
+                        <button class="px-4 py-2 text-slate hover:bg-stone rounded-lg text-sm font-medium transition-colors" onclick="filterLeads('D')">
+                            Grade D (3)
+                        </button>
+                        <button class="px-4 py-2 text-slate hover:bg-stone rounded-lg text-sm font-medium transition-colors" onclick="filterLeads('unqualified')">
+                            Unqualified (2)
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Leads List -->
+                <section>
+                    <div class="space-y-4" id="leads-list">
+                        <!-- Grade A Lead -->
+                        <div class="bg-white rounded-lg p-6 shadow-sm border-l-4 border-success lead-card" data-grade="A" data-lead-id="LEAD-001">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <span class="inline-flex items-center justify-center w-10 h-10 bg-success bg-opacity-20 text-success font-bold text-lg rounded-lg">A</span>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-slate">TechVenture Ltd</h3>
+                                            <p class="text-sm text-concrete">Contact: Sarah Chen - CEO</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-success bg-opacity-10 text-success text-xs font-medium rounded-full">HOT LEAD</span>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-4 gap-4 mb-4">
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Budget</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-success h-2 rounded-full" style="width: 100%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">25/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">£150k annual</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Authority</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-success h-2 rounded-full" style="width: 100%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">25/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">C-Level</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Need</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-success h-2 rounded-full" style="width: 100%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">25/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">Critical</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Timeline</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-info h-2 rounded-full" style="width: 80%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">20/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">2-4 weeks</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center space-x-4 text-sm text-concrete">
+                                        <span><i class="fa-solid fa-building mr-1"></i> Tech Industry</span>
+                                        <span><i class="fa-solid fa-map-marker-alt mr-1"></i> Canary Wharf preferred</span>
+                                        <span><i class="fa-solid fa-users mr-1"></i> 50-75 desks</span>
+                                        <span><i class="fa-solid fa-clock mr-1"></i> Added 2 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end space-y-2">
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-success">95</p>
+                                        <p class="text-xs text-concrete">BANT Score</p>
+                                    </div>
+                                    <div class="flex space-x-2 mt-4">
+                                        <button class="px-4 py-2 bg-success text-white rounded-lg text-sm hover:bg-opacity-90 transition-colors" onclick="qualifyLead('LEAD-001')">
+                                            <i class="fa-solid fa-check mr-1"></i> Qualify
+                                        </button>
+                                        <button class="px-4 py-2 bg-white text-slate border border-stone rounded-lg text-sm hover:bg-stone transition-colors" onclick="showLeadDetail('LEAD-001')">
+                                            <i class="fa-solid fa-eye mr-1"></i> View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grade B Lead -->
+                        <div class="bg-white rounded-lg p-6 shadow-sm border-l-4 border-info lead-card" data-grade="B" data-lead-id="LEAD-002">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <span class="inline-flex items-center justify-center w-10 h-10 bg-info bg-opacity-20 text-info font-bold text-lg rounded-lg">B</span>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-slate">GreenSpace Solutions</h3>
+                                            <p class="text-sm text-concrete">Contact: Marcus Wong - Operations Director</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-info bg-opacity-10 text-info text-xs font-medium rounded-full">WARM LEAD</span>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-4 gap-4 mb-4">
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Budget</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-info h-2 rounded-full" style="width: 80%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">20/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">£75k annual</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Authority</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-info h-2 rounded-full" style="width: 80%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">20/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">VP/Director</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Need</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-info h-2 rounded-full" style="width: 80%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">20/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">High</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Timeline</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-warning h-2 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">15/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">1-3 months</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center space-x-4 text-sm text-concrete">
+                                        <span><i class="fa-solid fa-building mr-1"></i> Sustainability</span>
+                                        <span><i class="fa-solid fa-map-marker-alt mr-1"></i> Shoreditch area</span>
+                                        <span><i class="fa-solid fa-users mr-1"></i> 30-40 desks</span>
+                                        <span><i class="fa-solid fa-clock mr-1"></i> Added 5 days ago</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end space-y-2">
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-info">75</p>
+                                        <p class="text-xs text-concrete">BANT Score</p>
+                                    </div>
+                                    <div class="flex space-x-2 mt-4">
+                                        <button class="px-4 py-2 bg-info text-white rounded-lg text-sm hover:bg-opacity-90 transition-colors" onclick="qualifyLead('LEAD-002')">
+                                            <i class="fa-solid fa-check mr-1"></i> Qualify
+                                        </button>
+                                        <button class="px-4 py-2 bg-white text-slate border border-stone rounded-lg text-sm hover:bg-stone transition-colors" onclick="showLeadDetail('LEAD-002')">
+                                            <i class="fa-solid fa-eye mr-1"></i> View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Grade C Lead -->
+                        <div class="bg-white rounded-lg p-6 shadow-sm border-l-4 border-warning lead-card" data-grade="C" data-lead-id="LEAD-003">
+                            <div class="flex items-start justify-between">
+                                <div class="flex-1">
+                                    <div class="flex items-center space-x-3 mb-3">
+                                        <span class="inline-flex items-center justify-center w-10 h-10 bg-warning bg-opacity-20 text-warning font-bold text-lg rounded-lg">C</span>
+                                        <div>
+                                            <h3 class="text-lg font-semibold text-slate">MediaHub Agency</h3>
+                                            <p class="text-sm text-concrete">Contact: Lisa Martinez - Office Manager</p>
+                                        </div>
+                                        <span class="px-3 py-1 bg-warning bg-opacity-10 text-warning text-xs font-medium rounded-full">COOL LEAD</span>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-4 gap-4 mb-4">
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Budget</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-warning h-2 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">15/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">£35k annual</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Authority</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-warning h-2 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">15/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">Manager</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Need</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-warning h-2 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">15/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">Medium</p>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-concrete mb-1">Timeline</p>
+                                            <div class="flex items-center">
+                                                <div class="flex-1 bg-stone rounded-full h-2 mr-2">
+                                                    <div class="bg-warning h-2 rounded-full" style="width: 60%"></div>
+                                                </div>
+                                                <span class="text-sm font-semibold text-slate">15/25</span>
+                                            </div>
+                                            <p class="text-xs text-slate mt-1">1-3 months</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-center space-x-4 text-sm text-concrete">
+                                        <span><i class="fa-solid fa-building mr-1"></i> Media/Creative</span>
+                                        <span><i class="fa-solid fa-map-marker-alt mr-1"></i> Central London</span>
+                                        <span><i class="fa-solid fa-users mr-1"></i> 20-25 desks</span>
+                                        <span><i class="fa-solid fa-clock mr-1"></i> Added 1 week ago</span>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col items-end space-y-2">
+                                    <div class="text-right">
+                                        <p class="text-2xl font-bold text-warning">60</p>
+                                        <p class="text-xs text-concrete">BANT Score</p>
+                                    </div>
+                                    <div class="flex space-x-2 mt-4">
+                                        <button class="px-4 py-2 bg-warning text-white rounded-lg text-sm hover:bg-opacity-90 transition-colors" onclick="qualifyLead('LEAD-003')">
+                                            <i class="fa-solid fa-phone mr-1"></i> Follow Up
+                                        </button>
+                                        <button class="px-4 py-2 bg-white text-slate border border-stone rounded-lg text-sm hover:bg-stone transition-colors" onclick="showLeadDetail('LEAD-003')">
+                                            <i class="fa-solid fa-eye mr-1"></i> View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- END LEADS PAGE -->
 
             <!-- INTERVENTIONS PAGE -->
             <div id="interventions-page" class="page-content hidden">
@@ -17880,6 +18227,7 @@ if (document.readyState === 'loading') {
         // Navigation click handlers
         document.getElementById('nav-dashboard')?.addEventListener('click', () => navigateToPage('dashboard'));
         document.getElementById('nav-dashboard-collapsed')?.addEventListener('click', () => navigateToPage('dashboard'));
+        document.getElementById('nav-leads')?.addEventListener('click', () => navigateToPage('leads'));
         document.getElementById('nav-interventions')?.addEventListener('click', () => navigateToPage('interventions'));
         document.getElementById('nav-interventions-collapsed')?.addEventListener('click', () => navigateToPage('interventions'));
         document.getElementById('nav-notifications')?.addEventListener('click', () => navigateToPage('notifications'));
@@ -22500,6 +22848,8 @@ Highcharts.chart('performance-chart', {
         UnionRouter.register('/risk-assessment', 'risk-assessment-page');
         UnionRouter.register('/activity-log', 'activity-log-page');
         UnionRouter.register('/notifications', 'notifications-page');
+        UnionRouter.register('/leads', 'leads-page');
+        
         // Initialize router when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => UnionRouter.init());
@@ -22508,6 +22858,345 @@ Highcharts.chart('performance-chart', {
         }
 
         console.log('✅ UNION Router loaded');
+
+        // ========================================
+        // LEAD MANAGEMENT & BANT SCORING FUNCTIONS
+        // ========================================
+
+        // Lead filtering function
+        function filterLeads(grade) {
+            const allCards = document.querySelectorAll('.lead-card');
+            
+            allCards.forEach(card => {
+                if (grade === 'all') {
+                    card.style.display = 'block';
+                } else if (grade === 'unqualified') {
+                    // Show unqualified leads (would need to add those to HTML)
+                    card.style.display = 'none';
+                } else {
+                    if (card.getAttribute('data-grade') === grade) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Update active filter button
+            const filterButtons = document.querySelectorAll('[onclick^="filterLeads"]');
+            filterButtons.forEach(btn => {
+                btn.classList.remove('bg-slate', 'text-white');
+                btn.classList.add('text-slate', 'hover:bg-stone');
+            });
+            event.target.classList.remove('hover:bg-stone', 'text-slate');
+            event.target.classList.add('bg-slate', 'text-white');
+        }
+
+        // Show add lead modal with BANT qualification form
+        function showAddLeadModal() {
+            const modalHTML = `
+                <div id="add-lead-modal" class="fixed inset-0 bg-slate bg-opacity-50 flex items-center justify-center z-50 p-6" onclick="if(event.target.id === 'add-lead-modal') closeLeadModal()">
+                    <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+                        <!-- Modal Header -->
+                        <div class="flex items-center justify-between p-6 border-b border-stone">
+                            <div>
+                                <h2 class="text-2xl font-semibold text-slate">Add New Lead</h2>
+                                <p class="text-sm text-concrete mt-1">Complete BANT qualification for intelligent scoring</p>
+                            </div>
+                            <button onclick="closeLeadModal()" class="text-concrete hover:text-slate transition-colors">
+                                <i class="fa-solid fa-times text-xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="p-6">
+                            <form id="lead-qualification-form" onsubmit="submitLeadForm(event)">
+                                <!-- Company Information -->
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold text-slate mb-4 flex items-center">
+                                        <i class="fa-solid fa-building mr-2 text-info"></i>
+                                        Company Information
+                                    </h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Company Name *</label>
+                                            <input type="text" name="companyName" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="e.g., TechVenture Ltd">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Industry</label>
+                                            <input type="text" name="industry" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="e.g., Technology">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Contact Name *</label>
+                                            <input type="text" name="contactName" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="e.g., Sarah Chen">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Contact Email *</label>
+                                            <input type="email" name="contactEmail" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="sarah@techventure.com">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Contact Phone</label>
+                                            <input type="tel" name="contactPhone" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="+44 20 1234 5678">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Lead Source</label>
+                                            <select name="leadSource" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                                <option value="website">Website Direct</option>
+                                                <option value="broker">Broker Referral</option>
+                                                <option value="referral">Client Referral</option>
+                                                <option value="inbound">Inbound Call</option>
+                                                <option value="outbound">Cold Outreach</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BANT Qualification -->
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold text-slate mb-4 flex items-center">
+                                        <i class="fa-solid fa-chart-line mr-2 text-success"></i>
+                                        BANT Qualification
+                                    </h3>
+
+                                    <!-- Budget -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Budget (Annual) *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="budget" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateBANTScore()">
+                                            <option value="">Select budget range...</option>
+                                            <option value="25">£100k+ annual (25 pts) - A Grade</option>
+                                            <option value="20">£50k-£99k annual (20 pts) - B Grade</option>
+                                            <option value="15">£25k-£49k annual (15 pts) - C Grade</option>
+                                            <option value="10">£10k-£24k annual (10 pts) - D Grade</option>
+                                            <option value="5">Under £10k (5 pts) - D Grade</option>
+                                            <option value="0">Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Authority -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Authority Level *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="authority" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateBANTScore()">
+                                            <option value="">Select authority level...</option>
+                                            <option value="25">C-Level / Owner (25 pts) - A Grade</option>
+                                            <option value="20">VP / Director (20 pts) - B Grade</option>
+                                            <option value="15">Manager (15 pts) - C Grade</option>
+                                            <option value="10">Coordinator / Assistant (10 pts) - D Grade</option>
+                                            <option value="5">Individual Contributor (5 pts) - D Grade</option>
+                                            <option value="0">Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Need -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Need Urgency *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="need" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateBANTScore()">
+                                            <option value="">Select need urgency...</option>
+                                            <option value="25">Critical - Immediate (25 pts) - A Grade</option>
+                                            <option value="20">High - Within 1 month (20 pts) - B Grade</option>
+                                            <option value="15">Medium - 1-3 months (15 pts) - C Grade</option>
+                                            <option value="10">Low - 3-6 months (10 pts) - D Grade</option>
+                                            <option value="5">Exploring - 6+ months (5 pts) - D Grade</option>
+                                            <option value="0">Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Timeline -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Timeline *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="timeline" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateBANTScore()">
+                                            <option value="">Select timeline...</option>
+                                            <option value="25">Immediate (< 2 weeks) (25 pts) - A Grade</option>
+                                            <option value="20">Short-term (2-4 weeks) (20 pts) - B Grade</option>
+                                            <option value="15">Medium-term (1-3 months) (15 pts) - C Grade</option>
+                                            <option value="10">Long-term (3-6 months) (10 pts) - D Grade</option>
+                                            <option value="5">Future (6+ months) (5 pts) - D Grade</option>
+                                            <option value="0">Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- BANT Score Display -->
+                                <div class="mb-8 p-6 bg-stone rounded-lg">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="text-sm font-medium text-concrete mb-1">Calculated BANT Score</h4>
+                                            <p class="text-4xl font-bold text-slate" id="bant-score-display">0</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <h4 class="text-sm font-medium text-concrete mb-1">Lead Grade</h4>
+                                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-lg text-3xl font-bold" id="lead-grade-display">
+                                                <span class="text-concrete">-</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <h4 class="text-sm font-medium text-concrete mb-1">Priority Action</h4>
+                                            <p class="text-sm font-semibold text-slate" id="lead-action-display">Complete BANT</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Requirements -->
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold text-slate mb-4 flex items-center">
+                                        <i class="fa-solid fa-clipboard-list mr-2 text-warning"></i>
+                                        Requirements
+                                    </h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Preferred Location</label>
+                                            <input type="text" name="location" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="e.g., Canary Wharf">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Desk Count</label>
+                                            <input type="number" name="deskCount" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="e.g., 50">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label class="block text-sm font-medium text-slate mb-2">Additional Notes</label>
+                                            <textarea name="notes" rows="3" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info" placeholder="Any additional information about this lead..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="flex items-center justify-end space-x-4 pt-6 border-t border-stone">
+                                    <button type="button" onclick="closeLeadModal()" class="px-6 py-2 border border-stone text-slate rounded-lg hover:bg-stone transition-colors">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" class="px-6 py-2 bg-success text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                                        <i class="fa-solid fa-plus mr-2"></i>
+                                        Add Lead
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHTML);
+        }
+
+        // Calculate BANT score in real-time
+        function calculateBANTScore() {
+            const form = document.getElementById('lead-qualification-form');
+            if (!form) return;
+
+            const budget = parseInt(form.budget.value) || 0;
+            const authority = parseInt(form.authority.value) || 0;
+            const need = parseInt(form.need.value) || 0;
+            const timeline = parseInt(form.timeline.value) || 0;
+
+            const totalScore = budget + authority + need + timeline;
+
+            // Update score display
+            document.getElementById('bant-score-display').textContent = totalScore;
+
+            // Determine grade and styling
+            let grade, gradeClass, gradeColor, action;
+
+            if (totalScore >= 85) {
+                grade = 'A';
+                gradeClass = 'bg-success bg-opacity-20 text-success';
+                gradeColor = 'success';
+                action = 'Contact within 1 hour';
+            } else if (totalScore >= 70) {
+                grade = 'B';
+                gradeClass = 'bg-info bg-opacity-20 text-info';
+                gradeColor = 'info';
+                action = 'Contact within 24 hours';
+            } else if (totalScore >= 50) {
+                grade = 'C';
+                gradeClass = 'bg-warning bg-opacity-20 text-warning';
+                gradeColor = 'warning';
+                action = 'Contact within 3 days';
+            } else if (totalScore >= 25) {
+                grade = 'D';
+                gradeClass = 'bg-danger bg-opacity-20 text-danger';
+                gradeColor = 'danger';
+                action = 'Add to nurture campaign';
+            } else {
+                grade = 'U';
+                gradeClass = 'bg-concrete bg-opacity-20 text-concrete';
+                gradeColor = 'concrete';
+                action = 'Request more info';
+            }
+
+            // Update grade display
+            const gradeDisplay = document.getElementById('lead-grade-display');
+            gradeDisplay.innerHTML = `<span>${grade}</span>`;
+            gradeDisplay.className = `inline-flex items-center justify-center w-16 h-16 rounded-lg text-3xl font-bold ${gradeClass}`;
+
+            // Update action display
+            document.getElementById('lead-action-display').textContent = action;
+        }
+
+        // Close lead modal
+        function closeLeadModal() {
+            const modal = document.getElementById('add-lead-modal');
+            if (modal) {
+                modal.remove();
+            }
+            const detailModal = document.getElementById('lead-detail-modal');
+            if (detailModal) {
+                detailModal.remove();
+            }
+        }
+
+        // Submit lead form
+        function submitLeadForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Calculate final BANT score
+            const budget = parseInt(formData.get('budget')) || 0;
+            const authority = parseInt(formData.get('authority')) || 0;
+            const need = parseInt(formData.get('need')) || 0;
+            const timeline = parseInt(formData.get('timeline')) || 0;
+            const totalScore = budget + authority + need + timeline;
+
+            // Determine grade
+            let grade;
+            if (totalScore >= 85) grade = 'A';
+            else if (totalScore >= 70) grade = 'B';
+            else if (totalScore >= 50) grade = 'C';
+            else if (totalScore >= 25) grade = 'D';
+            else grade = 'U';
+
+            // Show success message
+            showToast(`Lead "${formData.get('companyName')}" added successfully! Grade: ${grade} (Score: ${totalScore})`, 'success');
+
+            // Close modal
+            closeLeadModal();
+
+            // In a real application, this would send data to the backend
+            console.log('Lead data:', Object.fromEntries(formData), 'Score:', totalScore, 'Grade:', grade);
+        }
+
+        // Qualify lead (convert to pipeline)
+        function qualifyLead(leadId) {
+            showToast(`Lead ${leadId} qualified and added to pipeline!`, 'success');
+            // In real application, this would convert lead to deal
+        }
+
+        // Show lead detail modal
+        function showLeadDetail(leadId) {
+            // This would fetch full lead details and show in a modal
+            showToast(`Viewing details for ${leadId}`, 'info');
+        }
+
     </script>
 <manus-content-root></manus-content-root><script>
 			var __manus_space_editor_info = {
