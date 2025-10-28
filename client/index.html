@@ -47,6 +47,29 @@
             opacity: 0 !important;
             pointer-events: none !important;
         }
+        
+        /* Modal Animation */
+        @keyframes modal-in {
+            from {
+                opacity: 0;
+                transform: scale(0.95) translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .animate-modal-in {
+            animation: modal-in 0.2s ease-out forwards;
+        }
+        
+        /* Backdrop blur support */
+        @supports (backdrop-filter: blur(8px)) {
+            .backdrop-blur-sm {
+                backdrop-filter: blur(8px);
+            }
+        }
     </style>
 </head>
 <body class="bg-stone font-haltung">
@@ -24923,36 +24946,74 @@ const UnionCore = {
   // Modal system
   showModal: function(title, content, actions = []) {
     const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+    modal.className = 'fixed inset-0 bg-slate bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-50 p-4';
     modal.id = 'union-modal';
     
-    const actionsHTML = actions.map(action => 
-      `<button class="px-4 py-2 rounded ${action.primary ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}" 
-              onclick="${action.onclick}">${action.label}</button>`
-    ).join('');
+    // Determine button styling based on action type
+    const actionsHTML = actions.map(action => {
+      let buttonClass = 'px-6 py-2.5 rounded-lg font-medium transition-all duration-200 ';
+      
+      if (action.primary) {
+        // Primary action - slate color with hover effect
+        buttonClass += 'bg-slate text-white hover:bg-opacity-90 hover:shadow-lg';
+      } else if (action.danger) {
+        // Danger action - for escalate/delete
+        buttonClass += 'bg-red-600 text-white hover:bg-red-700 hover:shadow-lg';
+      } else {
+        // Secondary action - light with border
+        buttonClass += 'bg-white text-slate border border-stone hover:bg-stone hover:bg-opacity-30';
+      }
+      
+      return `<button class="${buttonClass}" onclick="${action.onclick}">${action.label}</button>`;
+    }).join('');
     
     modal.innerHTML = `
-      <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-lg font-semibold">${title}</h3>
-          <button onclick="UnionCore.closeModal()" class="text-gray-400 hover:text-gray-600">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-          </button>
+      <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden transform transition-all animate-modal-in">
+        <!-- Header with gradient background -->
+        <div class="bg-gradient-to-r from-slate to-concrete p-6 border-b border-stone">
+          <div class="flex justify-between items-center">
+            <h3 class="text-xl font-semibold text-white">${title}</h3>
+            <button onclick="UnionCore.closeModal()" class="text-white hover:text-stone transition-colors">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-        <div class="mb-6">${content}</div>
-        <div class="flex gap-2 justify-end">${actionsHTML}</div>
+        
+        <!-- Content -->
+        <div class="p-6 text-slate">${content}</div>
+        
+        <!-- Actions -->
+        <div class="px-6 py-4 bg-stone bg-opacity-20 border-t border-stone flex gap-3 justify-end">
+          ${actionsHTML}
+        </div>
       </div>
     `;
     
     document.body.appendChild(modal);
+    
+    // Add modal animation
+    requestAnimationFrame(() => {
+      modal.classList.add('opacity-0');
+      requestAnimationFrame(() => {
+        modal.classList.remove('opacity-0');
+        modal.classList.add('transition-opacity', 'duration-200');
+      });
+    });
     
     // Close on ESC
     document.addEventListener('keydown', function escHandler(e) {
       if (e.key === 'Escape') {
         UnionCore.closeModal();
         document.removeEventListener('keydown', escHandler);
+      }
+    });
+    
+    // Close on backdrop click
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        UnionCore.closeModal();
       }
     });
   },
@@ -25987,10 +26048,20 @@ function handleApprove(itemType, itemName, button) {
 
 function handleEscalate(itemName) {
   const content = `
-    <div class="space-y-4">
+    <div class="space-y-5">
+      <div class="flex items-center justify-center mb-2">
+        <div class="w-16 h-16 rounded-full bg-warning bg-opacity-20 flex items-center justify-center">
+          <i class="fa-solid fa-exclamation-triangle text-3xl text-warning"></i>
+        </div>
+      </div>
+      
+      <p class="text-center text-slate text-base mb-4">
+        Escalate <strong class="text-slate font-semibold">${itemName}</strong> to senior leadership
+      </p>
+      
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Escalate to</label>
-        <select id="escalate-to" class="w-full border border-gray-300 rounded px-3 py-2">
+        <label class="block text-sm font-medium text-slate mb-2">Escalate to <span class="text-warning">*</span></label>
+        <select id="escalate-to" class="w-full border border-stone rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-warning focus:border-transparent transition-all text-slate bg-white">
           <option value="">Select recipient...</option>
           <option value="executive">Executive (Portfolio Navigator)</option>
           <option value="senior-management">Senior Management</option>
@@ -26000,25 +26071,33 @@ function handleEscalate(itemName) {
       </div>
       
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
-        <select id="escalate-priority" class="w-full border border-gray-300 rounded px-3 py-2">
-          <option value="high">High</option>
-          <option value="urgent" selected>Urgent</option>
-          <option value="critical">Critical</option>
+        <label class="block text-sm font-medium text-slate mb-2">Priority Level</label>
+        <select id="escalate-priority" class="w-full border border-stone rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-warning focus:border-transparent transition-all text-slate bg-white">
+          <option value="high">🟡 High Priority</option>
+          <option value="urgent" selected>🟠 Urgent</option>
+          <option value="critical">🔴 Critical</option>
         </select>
       </div>
       
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Reason for escalation *</label>
-        <textarea id="escalate-reason" class="w-full border border-gray-300 rounded px-3 py-2 min-h-[100px]" 
+        <label class="block text-sm font-medium text-slate mb-2">Reason for escalation <span class="text-warning">*</span></label>
+        <textarea id="escalate-reason" 
+                  class="w-full border border-stone rounded-lg px-4 py-3 min-h-[100px] focus:outline-none focus:ring-2 focus:ring-warning focus:border-transparent transition-all text-slate placeholder-concrete" 
                   placeholder="Explain why this needs to be escalated..."></textarea>
+      </div>
+      
+      <div class="bg-warning bg-opacity-10 border border-warning border-opacity-30 rounded-lg p-3">
+        <p class="text-xs text-slate">
+          <i class="fa-solid fa-info-circle mr-1 text-warning"></i>
+          Escalating will notify the selected team immediately and create a high-priority alert.
+        </p>
       </div>
     </div>
   `;
 
   UnionCore.showModal('Escalate Issue', content, [
     { label: 'Cancel', onclick: 'UnionCore.closeModal()' },
-    { label: 'Escalate', primary: true, onclick: `performEscalation('${itemName}')` }
+    { label: 'Escalate Now', danger: true, onclick: `performEscalation('${itemName}')` }
   ]);
 }
 
@@ -28077,27 +28156,28 @@ function initApproveButtons() {
 
 function showApproveConfirmation(itemId, itemName) {
   const content = `
-    <div class="space-y-4">
-      <div class="flex items-center justify-center mb-4">
-        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-          <i class="fa-solid fa-check text-3xl text-green-600"></i>
+    <div class="space-y-5">
+      <div class="flex items-center justify-center mb-2">
+        <div class="w-16 h-16 rounded-full bg-success bg-opacity-20 flex items-center justify-center">
+          <i class="fa-solid fa-check text-3xl text-success"></i>
         </div>
       </div>
       
-      <p class="text-center text-gray-900">
-        Are you sure you want to approve <strong>${itemName}</strong>?
+      <p class="text-center text-slate text-base">
+        Are you sure you want to approve <strong class="text-slate font-semibold">${itemName}</strong>?
       </p>
       
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Approval Comments (Optional)</label>
-        <textarea id="approve-comments" class="w-full border border-gray-300 rounded px-3 py-2 min-h-[80px]" 
+        <label class="block text-sm font-medium text-slate mb-2">Approval Comments (Optional)</label>
+        <textarea id="approve-comments" 
+                  class="w-full border border-stone rounded-lg px-4 py-3 min-h-[90px] focus:outline-none focus:ring-2 focus:ring-slate focus:border-transparent transition-all text-slate placeholder-concrete" 
                   placeholder="Add any comments or conditions..."></textarea>
       </div>
       
-      <div>
-        <label class="flex items-center">
-          <input type="checkbox" id="notify-requester" checked class="mr-2">
-          <span class="text-sm text-gray-700">Notify requester of approval</span>
+      <div class="bg-stone bg-opacity-20 rounded-lg p-3">
+        <label class="flex items-center cursor-pointer">
+          <input type="checkbox" id="notify-requester" checked class="w-4 h-4 text-slate bg-white border-stone rounded focus:ring-slate mr-3">
+          <span class="text-sm text-slate">Notify requester of approval</span>
         </label>
       </div>
     </div>
