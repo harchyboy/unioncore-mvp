@@ -23786,7 +23786,7 @@ Highcharts.chart('performance-chart', {
                                     <button onclick="closeLeadModal()" class="px-6 py-2 border border-stone text-slate rounded-lg hover:bg-stone hover:bg-opacity-30 transition-colors">
                                         Close
                                     </button>
-                                    <button class="px-6 py-2 bg-info text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                                    <button onclick="editLead('${lead.id}')" class="px-6 py-2 bg-info text-white rounded-lg hover:bg-opacity-90 transition-colors">
                                         <i class="fa-solid fa-edit mr-2"></i>
                                         Edit Lead
                                     </button>
@@ -23824,6 +23824,356 @@ Highcharts.chart('performance-chart', {
             const activeTab = document.querySelector(`.lead-tab[data-tab="${tabName}"]`);
             activeTab.classList.add('border-slate', 'bg-white', 'text-slate');
             activeTab.classList.remove('border-transparent', 'text-concrete');
+        }
+
+        // Edit lead function
+        function editLead(leadId) {
+            // Close the detail modal first
+            closeLeadModal();
+
+            // Sample lead data (in production, fetch from API)
+            const leadData = {
+                'LEAD-001': {
+                    id: 'LEAD-001',
+                    companyName: 'TechVenture Ltd',
+                    industry: 'Technology',
+                    contactName: 'Sarah Chen',
+                    contactEmail: 'sarah.chen@techventure.com',
+                    contactPhone: '+44 20 7123 4567',
+                    leadSource: 'website',
+                    budget: '25',
+                    authority: '25',
+                    need: '25',
+                    timeline: '20',
+                    location: 'Canary Wharf',
+                    deskCount: '65',
+                    notes: 'Fast-growing B2B SaaS company. Recently secured Series B funding. Current lease expiring in 6 weeks.'
+                },
+                'LEAD-002': {
+                    id: 'LEAD-002',
+                    companyName: 'GreenSpace Solutions',
+                    industry: 'Sustainability',
+                    contactName: 'Marcus Wong',
+                    contactEmail: 'marcus.wong@greenspace.com',
+                    contactPhone: '+44 20 7234 5678',
+                    leadSource: 'broker',
+                    budget: '20',
+                    authority: '20',
+                    need: '20',
+                    timeline: '15',
+                    location: 'Shoreditch',
+                    deskCount: '35',
+                    notes: 'Environmental consultancy expanding team.'
+                },
+                'LEAD-003': {
+                    id: 'LEAD-003',
+                    companyName: 'MediaHub Agency',
+                    industry: 'Media',
+                    contactName: 'Lisa Martinez',
+                    contactEmail: 'lisa.martinez@mediahub.com',
+                    contactPhone: '+44 20 7345 6789',
+                    leadSource: 'inbound',
+                    budget: '15',
+                    authority: '15',
+                    need: '15',
+                    timeline: '15',
+                    location: 'Central London',
+                    deskCount: '25',
+                    notes: 'Creative agency exploring upgrade options.'
+                }
+            };
+
+            const lead = leadData[leadId];
+            if (!lead) {
+                showToast('Lead not found', 'error');
+                return;
+            }
+
+            const editModalHTML = `
+                <div id="edit-lead-modal" class="fixed inset-0 bg-slate bg-opacity-50 flex items-center justify-center z-50 p-6" onclick="if(event.target.id === 'edit-lead-modal') closeEditLeadModal()">
+                    <div class="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" onclick="event.stopPropagation()">
+                        <!-- Modal Header -->
+                        <div class="flex items-center justify-between p-6 border-b border-stone bg-info bg-opacity-5">
+                            <div>
+                                <h2 class="text-2xl font-semibold text-slate">Edit Lead</h2>
+                                <p class="text-sm text-concrete mt-1">Update lead information and BANT qualification</p>
+                            </div>
+                            <button onclick="closeEditLeadModal()" class="text-concrete hover:text-slate transition-colors">
+                                <i class="fa-solid fa-times text-xl"></i>
+                            </button>
+                        </div>
+
+                        <!-- Modal Body -->
+                        <div class="p-6">
+                            <form id="edit-lead-form" onsubmit="submitEditLeadForm(event, '${lead.id}')">
+                                <!-- Company Information -->
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold text-slate mb-4 flex items-center">
+                                        <i class="fa-solid fa-building mr-2 text-info"></i>
+                                        Company Information
+                                    </h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Company Name *</label>
+                                            <input type="text" name="companyName" value="${lead.companyName}" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Industry</label>
+                                            <input type="text" name="industry" value="${lead.industry}" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Contact Name *</label>
+                                            <input type="text" name="contactName" value="${lead.contactName}" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Contact Email *</label>
+                                            <input type="email" name="contactEmail" value="${lead.contactEmail}" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Contact Phone</label>
+                                            <input type="tel" name="contactPhone" value="${lead.contactPhone}" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Lead Source</label>
+                                            <select name="leadSource" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                                <option value="website" ${lead.leadSource === 'website' ? 'selected' : ''}>Website Direct</option>
+                                                <option value="broker" ${lead.leadSource === 'broker' ? 'selected' : ''}>Broker Referral</option>
+                                                <option value="referral" ${lead.leadSource === 'referral' ? 'selected' : ''}>Client Referral</option>
+                                                <option value="inbound" ${lead.leadSource === 'inbound' ? 'selected' : ''}>Inbound Call</option>
+                                                <option value="outbound" ${lead.leadSource === 'outbound' ? 'selected' : ''}>Cold Outreach</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- BANT Qualification -->
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold text-slate mb-4 flex items-center">
+                                        <i class="fa-solid fa-chart-line mr-2 text-success"></i>
+                                        BANT Qualification
+                                    </h3>
+
+                                    <!-- Budget -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Budget (Annual) *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="budget" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateEditBANTScore()">
+                                            <option value="">Select budget range...</option>
+                                            <option value="25" ${lead.budget === '25' ? 'selected' : ''}>£100k+ annual (25 pts) - A Grade</option>
+                                            <option value="20" ${lead.budget === '20' ? 'selected' : ''}>£50k-£99k annual (20 pts) - B Grade</option>
+                                            <option value="15" ${lead.budget === '15' ? 'selected' : ''}>£25k-£49k annual (15 pts) - C Grade</option>
+                                            <option value="10" ${lead.budget === '10' ? 'selected' : ''}>£10k-£24k annual (10 pts) - D Grade</option>
+                                            <option value="5" ${lead.budget === '5' ? 'selected' : ''}>Under £10k (5 pts) - D Grade</option>
+                                            <option value="0" ${lead.budget === '0' ? 'selected' : ''}>Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Authority -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Authority Level *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="authority" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateEditBANTScore()">
+                                            <option value="">Select authority level...</option>
+                                            <option value="25" ${lead.authority === '25' ? 'selected' : ''}>C-Level / Owner (25 pts) - A Grade</option>
+                                            <option value="20" ${lead.authority === '20' ? 'selected' : ''}>VP / Director (20 pts) - B Grade</option>
+                                            <option value="15" ${lead.authority === '15' ? 'selected' : ''}>Manager (15 pts) - C Grade</option>
+                                            <option value="10" ${lead.authority === '10' ? 'selected' : ''}>Coordinator / Assistant (10 pts) - D Grade</option>
+                                            <option value="5" ${lead.authority === '5' ? 'selected' : ''}>Individual Contributor (5 pts) - D Grade</option>
+                                            <option value="0" ${lead.authority === '0' ? 'selected' : ''}>Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Need -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Need Urgency *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="need" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateEditBANTScore()">
+                                            <option value="">Select need urgency...</option>
+                                            <option value="25" ${lead.need === '25' ? 'selected' : ''}>Critical - Immediate (25 pts) - A Grade</option>
+                                            <option value="20" ${lead.need === '20' ? 'selected' : ''}>High - Within 1 month (20 pts) - B Grade</option>
+                                            <option value="15" ${lead.need === '15' ? 'selected' : ''}>Medium - 1-3 months (15 pts) - C Grade</option>
+                                            <option value="10" ${lead.need === '10' ? 'selected' : ''}>Low - 3-6 months (10 pts) - D Grade</option>
+                                            <option value="5" ${lead.need === '5' ? 'selected' : ''}>Exploring - 6+ months (5 pts) - D Grade</option>
+                                            <option value="0" ${lead.need === '0' ? 'selected' : ''}>Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+
+                                    <!-- Timeline -->
+                                    <div class="mb-6">
+                                        <label class="block text-sm font-medium text-slate mb-2">
+                                            Timeline *
+                                            <span class="text-xs text-concrete ml-2">(0-25 points)</span>
+                                        </label>
+                                        <select name="timeline" required class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-success focus:border-success" onchange="calculateEditBANTScore()">
+                                            <option value="">Select timeline...</option>
+                                            <option value="25" ${lead.timeline === '25' ? 'selected' : ''}>Immediate (< 2 weeks) (25 pts) - A Grade</option>
+                                            <option value="20" ${lead.timeline === '20' ? 'selected' : ''}>Short-term (2-4 weeks) (20 pts) - B Grade</option>
+                                            <option value="15" ${lead.timeline === '15' ? 'selected' : ''}>Medium-term (1-3 months) (15 pts) - C Grade</option>
+                                            <option value="10" ${lead.timeline === '10' ? 'selected' : ''}>Long-term (3-6 months) (10 pts) - D Grade</option>
+                                            <option value="5" ${lead.timeline === '5' ? 'selected' : ''}>Future (6+ months) (5 pts) - D Grade</option>
+                                            <option value="0" ${lead.timeline === '0' ? 'selected' : ''}>Unknown (0 pts) - Unqualified</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- BANT Score Display -->
+                                <div class="mb-8 p-6 bg-stone rounded-lg">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <h4 class="text-sm font-medium text-concrete mb-1">Calculated BANT Score</h4>
+                                            <p class="text-4xl font-bold text-slate" id="edit-bant-score-display">${parseInt(lead.budget) + parseInt(lead.authority) + parseInt(lead.need) + parseInt(lead.timeline)}</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <h4 class="text-sm font-medium text-concrete mb-1">Lead Grade</h4>
+                                            <div class="inline-flex items-center justify-center w-16 h-16 rounded-lg text-3xl font-bold" id="edit-lead-grade-display">
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <h4 class="text-sm font-medium text-concrete mb-1">Priority Action</h4>
+                                            <p class="text-sm font-semibold text-slate" id="edit-lead-action-display"></p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Requirements -->
+                                <div class="mb-8">
+                                    <h3 class="text-lg font-semibold text-slate mb-4 flex items-center">
+                                        <i class="fa-solid fa-clipboard-list mr-2 text-warning"></i>
+                                        Requirements
+                                    </h3>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Preferred Location</label>
+                                            <input type="text" name="location" value="${lead.location}" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-slate mb-2">Desk Count</label>
+                                            <input type="number" name="deskCount" value="${lead.deskCount}" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">
+                                        </div>
+                                        <div class="col-span-2">
+                                            <label class="block text-sm font-medium text-slate mb-2">Additional Notes</label>
+                                            <textarea name="notes" rows="3" class="w-full px-4 py-2 border border-stone rounded-lg focus:ring-2 focus:ring-info focus:border-info">${lead.notes}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Footer -->
+                                <div class="flex items-center justify-end space-x-4 pt-6 border-t border-stone">
+                                    <button type="button" onclick="closeEditLeadModal()" class="px-6 py-2 border border-stone text-slate rounded-lg hover:bg-stone transition-colors">
+                                        Cancel
+                                    </button>
+                                    <button type="submit" class="px-6 py-2 bg-info text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', editModalHTML);
+
+            // Calculate initial BANT score
+            calculateEditBANTScore();
+        }
+
+        // Calculate BANT score in edit modal
+        function calculateEditBANTScore() {
+            const form = document.getElementById('edit-lead-form');
+            if (!form) return;
+
+            const budget = parseInt(form.budget.value) || 0;
+            const authority = parseInt(form.authority.value) || 0;
+            const need = parseInt(form.need.value) || 0;
+            const timeline = parseInt(form.timeline.value) || 0;
+
+            const totalScore = budget + authority + need + timeline;
+
+            // Update score display
+            document.getElementById('edit-bant-score-display').textContent = totalScore;
+
+            // Determine grade and styling
+            let grade, gradeClass, action;
+
+            if (totalScore >= 85) {
+                grade = 'A';
+                gradeClass = 'bg-success bg-opacity-20 text-success';
+                action = 'Contact within 1 hour';
+            } else if (totalScore >= 70) {
+                grade = 'B';
+                gradeClass = 'bg-info bg-opacity-20 text-info';
+                action = 'Contact within 24 hours';
+            } else if (totalScore >= 50) {
+                grade = 'C';
+                gradeClass = 'bg-warning bg-opacity-20 text-warning';
+                action = 'Contact within 3 days';
+            } else if (totalScore >= 25) {
+                grade = 'D';
+                gradeClass = 'bg-danger bg-opacity-20 text-danger';
+                action = 'Add to nurture campaign';
+            } else {
+                grade = 'U';
+                gradeClass = 'bg-concrete bg-opacity-20 text-concrete';
+                action = 'Request more info';
+            }
+
+            // Update grade display
+            const gradeDisplay = document.getElementById('edit-lead-grade-display');
+            gradeDisplay.innerHTML = `<span>${grade}</span>`;
+            gradeDisplay.className = `inline-flex items-center justify-center w-16 h-16 rounded-lg text-3xl font-bold ${gradeClass}`;
+
+            // Update action display
+            document.getElementById('edit-lead-action-display').textContent = action;
+        }
+
+        // Close edit lead modal
+        function closeEditLeadModal() {
+            const modal = document.getElementById('edit-lead-modal');
+            if (modal) {
+                modal.remove();
+            }
+        }
+
+        // Submit edit lead form
+        function submitEditLeadForm(event, leadId) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+
+            // Calculate final BANT score
+            const budget = parseInt(formData.get('budget')) || 0;
+            const authority = parseInt(formData.get('authority')) || 0;
+            const need = parseInt(formData.get('need')) || 0;
+            const timeline = parseInt(formData.get('timeline')) || 0;
+            const totalScore = budget + authority + need + timeline;
+
+            // Determine grade
+            let grade;
+            if (totalScore >= 85) grade = 'A';
+            else if (totalScore >= 70) grade = 'B';
+            else if (totalScore >= 50) grade = 'C';
+            else if (totalScore >= 25) grade = 'D';
+            else grade = 'U';
+
+            // Show success message
+            showToast(`Lead "${formData.get('companyName')}" updated successfully! Grade: ${grade} (Score: ${totalScore})`, 'success');
+
+            // Close modal
+            closeEditLeadModal();
+
+            // In a real application, this would send data to the backend
+            console.log('Updated lead data:', Object.fromEntries(formData), 'Score:', totalScore, 'Grade:', grade);
+
+            // Optionally reload the lead detail view
+            // showLeadDetail(leadId);
         }
 
     </script>
