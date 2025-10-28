@@ -35,7 +35,19 @@
             }
         }
     </script>
-    <style>::-webkit-scrollbar { display: none;}</style>
+    <style>
+        ::-webkit-scrollbar { display: none; }
+        
+        /* Hide Manus watermark elements */
+        footer-watermark,
+        make-with-manus,
+        manus-content-root {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+    </style>
 </head>
 <body class="bg-stone font-haltung">
     <!-- COMPONENT: Top Navigation Header -->
@@ -1558,9 +1570,9 @@
                             <div>
                                 <select id="filter-pipeline-size" class="w-full bg-stone border-0 rounded-lg px-4 py-3 text-slate focus:outline-none focus:ring-2 focus:ring-slate">
                                     <option value="">All Sizes</option>
-                                    <option value="small">< 5,000 sq ft</option>
+                                    <option value="small">&lt; 5,000 sq ft</option>
                                     <option value="medium">5,000 - 20,000 sq ft</option>
-                                    <option value="large">> 20,000 sq ft</option>
+                                    <option value="large">&gt; 20,000 sq ft</option>
                                 </select>
                             </div>
 
@@ -1568,9 +1580,9 @@
                             <div>
                                 <select id="filter-pipeline-price" class="w-full bg-stone border-0 rounded-lg px-4 py-3 text-slate focus:outline-none focus:ring-2 focus:ring-slate">
                                     <option value="">All Prices</option>
-                                    <option value="low">< £1M</option>
+                                    <option value="low">&lt; £1M</option>
                                     <option value="medium">£1M - £5M</option>
-                                    <option value="high">> £5M</option>
+                                    <option value="high">&gt; £5M</option>
                                 </select>
                             </div>
                         </div>
@@ -8535,13 +8547,37 @@
 </section>
 <section class="mb-8" id="approval-analytics-section">
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Card 1: Approval Timeline Trends -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-<h3 class="text-lg font-semibold text-gray-900 mb-4">Approval Timeline Trends</h3>
-<div class="h-80" id="approval-timeline-chart"></div>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Approval Timeline Trends</h3>
+<div class="flex items-center space-x-2">
+<select class="text-sm border border-gray-300 rounded-lg px-3 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500">
+<option>Last 7 days</option>
+<option selected>Last 30 days</option>
+<option>This Quarter</option>
+<option>Custom</option>
+</select>
 </div>
+</div>
+<div class="h-80" id="approval-timeline-chart"></div>
+<!-- Insights Section -->
+<div class="mt-6 grid grid-cols-3 gap-4"></div>
+</div>
+<!-- Card 2: Approval by Role Distribution -->
 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-<h3 class="text-lg font-semibold text-gray-900 mb-4">Approval by Role Distribution</h3>
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-semibold text-gray-900">Approvals by Role Distribution</h3>
+<button class="text-sm text-blue-600 hover:text-blue-700 font-medium">
+View All Roles
+</button>
+</div>
 <div class="h-80" id="approval-role-chart"></div>
+<!-- Top Roles Section -->
+<div class="mt-6">
+<h4 class="text-sm font-semibold text-gray-700 mb-3">Top Performing Roles</h4>
+<div class="space-y-3"></div>
+</div>
 </div>
 </div>
 </section>
@@ -8860,13 +8896,14 @@
 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Approved
                                 </span>
-</div>
-</div>
-<div class="flex items-start space-x-4">
-<div class="flex-shrink-0">
-                                &lt;div class="bg-yellow-100 p</div></div></div></div></section></main>
-</div>
-<!-- END APPROVAL REQUESTS PAGE -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <!-- END APPROVAL REQUESTS PAGE -->
 
             <!-- RISK ASSESSMENT PAGE -->
 <div id="risk-assessment-page" class="page-content hidden">
@@ -17988,7 +18025,7 @@ if (document.readyState === 'loading') {
         // Quick action buttons in header
         document.querySelectorAll('button[title="Add Property"]').forEach(btn => {
             btn.addEventListener('click', function() {
-                navigateToPage('add-property');
+                window.location.hash = '#/property/add';
                 emitEvent('quick_action_clicked', { type: 'add_property' });
             });
         });
@@ -22022,7 +22059,7 @@ if (document.readyState === 'loading') {
         // Update Add Property button handlers
         document.querySelectorAll('button[title="Add Property"]').forEach(btn => {
             btn.addEventListener('click', () => {
-                navigateToPage('add-property');
+                window.location.hash = '#/property/add';
                 emitEvent('add_property_clicked', {
                     user_id: 'executive_001',
                     timestamp: new Date().toISOString()
@@ -31731,509 +31768,17 @@ setTimeout(function() {
     console.log('✅ All flow alignment systems initialized');
 }, 2000);
 </script>
-// ============================================================================
-// ============================================================================
-// DEALS OVERVIEW PAGE ENHANCEMENTS - FIXED VERSION WITH MUTATIONOBSERVER
-// ============================================================================
 
-// Wait for DOM to be ready
-(function() {
-    'use strict';
-    
-    console.log('🔄 Deals Overview Enhancements loading...');
+<!-- DEALS OVERVIEW PAGE ENHANCEMENTS - NOW USING EXTERNAL FILE -->
+<!-- See client/deals-overview-fixes.js for implementation -->
 
-    // Sample data and configuration (same as before)
-    const SAMPLE_LANDLORDS = ['Canary Wharf Group', 'British Land', 'Land Securities', 'Derwent London', 'Great Portland Estates'];
-    const SAMPLE_TENANTS = ['Tech Corp Ltd', 'Financial Services Inc', 'Retail Solutions', 'Creative Agency', 'Professional Services'];
-    const DEAL_STAGES = ['Lead', 'Viewing', 'Proposal', 'HoTs', 'Contract', 'Onboarding', 'Live'];
-    const PROPERTY_TYPES = ['Office', 'Retail', 'Industrial', 'Mixed Use'];
-    const RISK_LEVELS = ['Low', 'Medium', 'High'];
+<!-- CRITICAL FIXES FOR DEALS OVERVIEW -->
+<script src="/deals-overview-fixes.js"></script>
 
-    const ENHANCED_DEALS = [
-        {
-            id: 'DL_CW_2024_001', name: 'Canary Wharf Office', property: '25 Canada Square', propertyType: 'Office', sqft: '15,000',
-            stage: 'HoTs', value: 2100000, probability: 85, risk: 'Medium', nextMilestone: 'Contract Review', dueDate: 'Nov 15',
-            owner: 'Sarah Chen', ownerAvatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg',
-            landlord: 'Canary Wharf Group', tenant: 'Tech Corp Ltd', daysInStage: 12, lastActivity: '2 hours ago',
-            status: 'active', velocity: 'normal'
-        },
-        {
-            id: 'DL_SH_2024_002', name: 'Shoreditch Retail Space', property: '156 Brick Lane', propertyType: 'Retail', sqft: '3,500',
-            stage: 'Contract', value: 850000, probability: 92, risk: 'Low', nextMilestone: 'Final Signatures', dueDate: 'Nov 20',
-            owner: 'James Wilson', ownerAvatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-2.jpg',
-            landlord: 'British Land', tenant: 'Retail Solutions', daysInStage: 5, lastActivity: '1 day ago',
-            status: 'active', velocity: 'fast'
-        },
-        {
-            id: 'DL_KC_2024_003', name: 'Kings Cross Development', property: 'Kings Boulevard', propertyType: 'Office', sqft: '25,000',
-            stage: 'Proposal', value: 3200000, probability: 65, risk: 'High', nextMilestone: 'Proposal Review', dueDate: 'Nov 25',
-            owner: 'Emma Davis', ownerAvatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-3.jpg',
-            landlord: 'Land Securities', tenant: 'Financial Services Inc', daysInStage: 28, lastActivity: '5 days ago',
-            status: 'active', velocity: 'stuck'
-        },
-        {
-            id: 'DL_SB_2024_004', name: 'Southbank Office', property: 'Belvedere Road', propertyType: 'Office', sqft: '12,000',
-            stage: 'Live', value: 1800000, probability: 100, risk: 'Low', nextMilestone: 'Quarterly Review', dueDate: 'Dec 15',
-            owner: 'Michael Brown', ownerAvatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-4.jpg',
-            landlord: 'Derwent London', tenant: 'Creative Agency', daysInStage: 45, lastActivity: '3 days ago',
-            status: 'closed-won', velocity: 'normal'
-        },
-        {
-            id: 'DL_MF_2024_005', name: 'Mayfair Retail', property: 'Bond Street', propertyType: 'Retail', sqft: '2,000',
-            stage: 'Proposal', value: 950000, probability: 40, risk: 'High', nextMilestone: 'N/A', dueDate: 'N/A',
-            owner: 'Sarah Chen', ownerAvatar: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/avatars/avatar-1.jpg',
-            landlord: 'Great Portland Estates', tenant: 'Professional Services', daysInStage: 35, lastActivity: '2 weeks ago',
-            status: 'closed-lost', velocity: 'stuck'
-        }
-    ];
+<!-- APPROVAL REQUESTS PAGE DATA -->
+<script src="/approval-requests-data.js"></script>
 
-    let currentFilters = {
-        status: 'active',
-        landlords: [],
-        tenants: [],
-        stages: [],
-        propertyTypes: [],
-        riskLevels: [],
-        valueRange: '',
-        searchQuery: ''
-    };
+<!-- APPROVAL ANALYTICS CHARTS -->
+<script src="/approval-analytics.js"></script>
 
-    let isInitialized = false;
-
-    // Main initialization function
-    function initDealsOverviewEnhancements() {
-        if (isInitialized) {
-            console.log('⏭️  Deals Overview already initialized, skipping');
-            return;
-        }
-
-        const dealsOverviewPage = document.getElementById('deals-overview-page');
-        if (!dealsOverviewPage) {
-            console.log('⚠️ Deals Overview page element not found');
-            return;
-        }
-
-        console.log('🚀 Initializing Deals Overview enhancements...');
-
-        try {
-            // Initialize all features
-            initHistoricalDealsView();
-            initDealsOverviewFilters();
-            updateTableHeaders();
-            filterDealsTable();
-
-            isInitialized = true;
-            console.log('✅ Deals Overview enhancements initialized successfully!');
-        } catch (error) {
-            console.error('❌ Error initializing Deals Overview enhancements:', error);
-        }
-    }
-
-    // Feature 1: Historical Deals View (Tabs)
-    function initHistoricalDealsView() {
-        if (document.getElementById('deal-status-tabs')) {
-            console.log('⏭️  Tabs already exist');
-            return;
-        }
-
-        const tabsContainer = document.createElement('div');
-        tabsContainer.id = 'deal-status-tabs';
-        tabsContainer.className = 'mb-6';
-        tabsContainer.innerHTML = `
-            <div class="border-b border-gray-200">
-                <nav class="flex space-x-8">
-                    <button onclick="window.switchDealStatus('active')" class="deal-status-tab active py-4 px-1 border-b-2 border-blue-600 font-medium text-sm text-blue-600">
-                        Active Deals
-                        <span class="ml-2 bg-blue-100 text-blue-600 py-0.5 px-2 rounded-full text-xs">${ENHANCED_DEALS.filter(d => d.status === 'active').length}</span>
-                    </button>
-                    <button onclick="window.switchDealStatus('closed-won')" class="deal-status-tab py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                        Closed/Won
-                        <span class="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">${ENHANCED_DEALS.filter(d => d.status === 'closed-won').length}</span>
-                    </button>
-                    <button onclick="window.switchDealStatus('closed-lost')" class="deal-status-tab py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                        Closed/Lost
-                        <span class="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">${ENHANCED_DEALS.filter(d => d.status === 'closed-lost').length}</span>
-                    </button>
-                    <button onclick="window.switchDealStatus('all')" class="deal-status-tab py-4 px-1 border-b-2 border-transparent font-medium text-sm text-gray-500 hover:text-gray-700 hover:border-gray-300">
-                        All Deals
-                        <span class="ml-2 bg-gray-100 text-gray-600 py-0.5 px-2 rounded-full text-xs">${ENHANCED_DEALS.length}</span>
-                    </button>
-                </nav>
-            </div>
-        `;
-
-        const activeDealsSection = document.getElementById('active-deals-section');
-        if (activeDealsSection) {
-            activeDealsSection.parentElement.insertBefore(tabsContainer, activeDealsSection);
-            console.log('✅ Historical deals tabs created');
-        }
-    }
-
-    // Feature 2: Filter Panel
-    function initDealsOverviewFilters() {
-        const filterButton = document.querySelector('[data-filter-toggle="filter-panel"]');
-        if (!filterButton) {
-            console.log('⚠️ Filter button not found');
-            return;
-        }
-
-        if (document.getElementById('deals-filter-panel')) {
-            console.log('⏭️  Filter panel already exists');
-            return;
-        }
-
-        const filterPanel = document.createElement('div');
-        filterPanel.id = 'deals-filter-panel';
-        filterPanel.className = 'hidden bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-lg';
-        filterPanel.innerHTML = `
-            <div class="flex items-center justify-between mb-4">
-                <h3 class="text-lg font-semibold text-gray-900">Filter Deals</h3>
-                <button onclick="window.closeFilterPanel()" class="text-gray-400 hover:text-gray-600">
-                    <i class="fa-solid fa-times"></i>
-                </button>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Landlord</label>
-                    <select id="filter-landlord" multiple class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        ${SAMPLE_LANDLORDS.map(l => `<option value="${l}">${l}</option>`).join('')}
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Tenant</label>
-                    <select id="filter-tenant" multiple class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        ${SAMPLE_TENANTS.map(t => `<option value="${t}">${t}</option>`).join('')}
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Deal Stage</label>
-                    <select id="filter-stage" multiple class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        ${DEAL_STAGES.map(s => `<option value="${s}">${s}</option>`).join('')}
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Property Type</label>
-                    <select id="filter-property-type" multiple class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        ${PROPERTY_TYPES.map(p => `<option value="${p}">${p}</option>`).join('')}
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Risk Level</label>
-                    <select id="filter-risk" multiple class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        ${RISK_LEVELS.map(r => `<option value="${r}">${r}</option>`).join('')}
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Value Range</label>
-                    <select id="filter-value-range" class="w-full border border-gray-300 rounded-lg p-2 text-sm">
-                        <option value="">All Values</option>
-                        <option value="0-500000">£0 - £500K</option>
-                        <option value="500000-1000000">£500K - £1M</option>
-                        <option value="1000000-5000000">£1M - £5M</option>
-                        <option value="5000000-999999999">£5M+</option>
-                    </select>
-                </div>
-            </div>
-            <div class="flex items-center justify-end space-x-3">
-                <button onclick="window.clearAllFilters()" class="px-4 py-2 border border-gray-300 rounded-lg text-sm hover:bg-gray-50">
-                    Clear All
-                </button>
-                <button onclick="window.applyDealsFilters()" class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">
-                    Apply Filters
-                </button>
-            </div>
-        `;
-
-        const activeDealsSection = document.getElementById('active-deals-section');
-        if (activeDealsSection) {
-            const filterContainer = activeDealsSection.querySelector('.flex.items-center.justify-between');
-            if (filterContainer) {
-                filterContainer.parentElement.insertBefore(filterPanel, filterContainer.nextSibling);
-            }
-        }
-
-        filterButton.addEventListener('click', function() {
-            const panel = document.getElementById('deals-filter-panel');
-            if (panel) {
-                panel.classList.toggle('hidden');
-            }
-        });
-
-        console.log('✅ Filter panel created');
-    }
-
-    // Feature 3: Update Table Headers
-    function updateTableHeaders() {
-        const thead = document.querySelector('#active-deals-section thead tr');
-        if (!thead) return;
-
-        thead.innerHTML = `
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Deal Name</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Property</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Stage</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Value</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Probability</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Risk</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Next Milestone</th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">
-                Days in Stage
-                <div class="text-xs font-normal text-gray-500">Last Activity</div>
-            </th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">
-                Landlord
-                <div class="text-xs font-normal text-gray-500">Tenant</div>
-            </th>
-            <th class="text-left py-3 px-4 font-medium text-gray-600">Owner</th>
-        `;
-
-        console.log('✅ Table headers updated');
-    }
-
-    // Filter and update table
-    function filterDealsTable() {
-        let filteredDeals = ENHANCED_DEALS.filter(deal => {
-            if (currentFilters.status !== 'all' && deal.status !== currentFilters.status) return false;
-            if (currentFilters.landlords.length > 0 && !currentFilters.landlords.includes(deal.landlord)) return false;
-            if (currentFilters.tenants.length > 0 && !currentFilters.tenants.includes(deal.tenant)) return false;
-            if (currentFilters.stages.length > 0 && !currentFilters.stages.includes(deal.stage)) return false;
-            if (currentFilters.propertyTypes.length > 0 && !currentFilters.propertyTypes.includes(deal.propertyType)) return false;
-            if (currentFilters.riskLevels.length > 0 && !currentFilters.riskLevels.includes(deal.risk)) return false;
-            
-            if (currentFilters.valueRange) {
-                const [min, max] = currentFilters.valueRange.split('-').map(Number);
-                if (deal.value < min || deal.value > max) return false;
-            }
-            
-            return true;
-        });
-
-        updateDealsTable(filteredDeals);
-        updateFilteredCount(filteredDeals.length, ENHANCED_DEALS.length);
-    }
-
-    function updateDealsTable(deals) {
-        const tbody = document.querySelector('#active-deals-section tbody');
-        if (!tbody) return;
-
-        tbody.innerHTML = '';
-
-        if (deals.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="10" class="py-8 text-center text-gray-500">No deals found matching your filters.</td></tr>';
-            return;
-        }
-
-        deals.forEach(deal => {
-            const tr = document.createElement('tr');
-            tr.className = 'hover:bg-gray-50';
-
-            let velocityIcon = deal.velocity === 'fast' ? '🟢' : deal.velocity === 'stuck' ? '🔴' : '🟡';
-            let velocityColor = deal.velocity === 'fast' ? 'text-green-600' : deal.velocity === 'stuck' ? 'text-red-600' : 'text-yellow-600';
-
-            tr.innerHTML = `
-                <td class="py-4 px-4">
-                    <div class="flex items-center">
-                        <span class="mr-2" title="${deal.velocity === 'fast' ? 'Moving quickly' : deal.velocity === 'stuck' ? 'Stuck - needs attention' : 'Normal pace'}">${velocityIcon}</span>
-                        <div>
-                            <div class="font-medium text-gray-900 cursor-pointer hover:text-blue-600" onclick="window.location.hash = '/deal-room'">${deal.name}</div>
-                            <div class="text-sm text-gray-500">${deal.id}</div>
-                        </div>
-                    </div>
-                </td>
-                <td class="py-4 px-4">
-                    <div class="text-gray-900">${deal.property}</div>
-                    <div class="text-sm text-gray-500">${deal.propertyType} • ${deal.sqft} sq ft</div>
-                </td>
-                <td class="py-4 px-4">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStageColor(deal.stage)}">
-                        ${deal.stage}
-                    </span>
-                </td>
-                <td class="py-4 px-4 font-medium text-gray-900">£${deal.value.toLocaleString()}</td>
-                <td class="py-4 px-4">
-                    <div class="flex items-center">
-                        <span class="text-gray-900">${deal.probability}%</span>
-                        <div class="ml-2 w-16 bg-gray-200 rounded-full h-2">
-                            <div class="bg-green-500 h-2 rounded-full" style="width: ${deal.probability}%"></div>
-                        </div>
-                    </div>
-                </td>
-                <td class="py-4 px-4">
-                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getRiskColor(deal.risk)}">
-                        ${deal.risk}
-                    </span>
-                </td>
-                <td class="py-4 px-4">
-                    <div class="text-gray-900">${deal.nextMilestone}</div>
-                    <div class="text-sm text-gray-500">Due: ${deal.dueDate}</div>
-                </td>
-                <td class="py-4 px-4">
-                    <div class="text-gray-900 font-medium ${velocityColor}">${deal.daysInStage}d</div>
-                    <div class="text-sm text-gray-500">${deal.lastActivity}</div>
-                </td>
-                <td class="py-4 px-4">
-                    <div class="text-sm text-gray-700">${deal.landlord}</div>
-                    <div class="text-xs text-gray-500">${deal.tenant}</div>
-                </td>
-                <td class="py-4 px-4">
-                    <div class="flex items-center">
-                        <img src="${deal.ownerAvatar}" alt="Owner" class="w-8 h-8 rounded-full mr-2">
-                        <div>
-                            <div class="text-sm font-medium text-gray-900">${deal.owner}</div>
-                        </div>
-                    </div>
-                </td>
-            `;
-
-            tbody.appendChild(tr);
-        });
-    }
-
-    function getStageColor(stage) {
-        const colors = {
-            'Lead': 'bg-blue-100 text-blue-800', 'Viewing': 'bg-indigo-100 text-indigo-800',
-            'Proposal': 'bg-purple-100 text-purple-800', 'HoTs': 'bg-pink-100 text-pink-800',
-            'Contract': 'bg-red-100 text-red-800', 'Onboarding': 'bg-orange-100 text-orange-800',
-            'Live': 'bg-green-100 text-green-800'
-        };
-        return colors[stage] || 'bg-gray-100 text-gray-800';
-    }
-
-    function getRiskColor(risk) {
-        const colors = {
-            'Low': 'bg-green-100 text-green-800',
-            'Medium': 'bg-yellow-100 text-yellow-800',
-            'High': 'bg-red-100 text-red-800'
-        };
-        return colors[risk] || 'bg-gray-100 text-gray-800';
-    }
-
-    function updateFilteredCount(filtered, total) {
-        const tableHeader = document.querySelector('#active-deals-section h3');
-        if (tableHeader) {
-            const statusLabel = currentFilters.status === 'active' ? 'Active Deals' :
-                               currentFilters.status === 'closed-won' ? 'Closed/Won Deals' :
-                               currentFilters.status === 'closed-lost' ? 'Closed/Lost Deals' : 'All Deals';
-            tableHeader.textContent = filtered === total ? `${statusLabel} (${total})` : `${statusLabel} (${filtered} of ${total})`;
-        }
-    }
-
-    // Global functions
-    window.switchDealStatus = function(status) {
-        currentFilters.status = status;
-        
-        document.querySelectorAll('.deal-status-tab').forEach(tab => {
-            tab.classList.remove('active', 'border-blue-600', 'text-blue-600');
-            tab.classList.add('border-transparent', 'text-gray-500');
-        });
-
-        const activeTab = event.target.closest('.deal-status-tab');
-        if (activeTab) {
-            activeTab.classList.add('active', 'border-blue-600', 'text-blue-600');
-            activeTab.classList.remove('border-transparent', 'text-gray-500');
-        }
-
-        filterDealsTable();
-    };
-
-    window.closeFilterPanel = function() {
-        const panel = document.getElementById('deals-filter-panel');
-        if (panel) panel.classList.add('hidden');
-    };
-
-    window.applyDealsFilters = function() {
-        currentFilters.landlords = Array.from(document.getElementById('filter-landlord').selectedOptions).map(o => o.value);
-        currentFilters.tenants = Array.from(document.getElementById('filter-tenant').selectedOptions).map(o => o.value);
-        currentFilters.stages = Array.from(document.getElementById('filter-stage').selectedOptions).map(o => o.value);
-        currentFilters.propertyTypes = Array.from(document.getElementById('filter-property-type').selectedOptions).map(o => o.value);
-        currentFilters.riskLevels = Array.from(document.getElementById('filter-risk').selectedOptions).map(o => o.value);
-        currentFilters.valueRange = document.getElementById('filter-value-range').value;
-
-        filterDealsTable();
-        window.closeFilterPanel();
-        
-        if (typeof showToast === 'function') {
-            showToast('Filters applied successfully', 'success');
-        }
-    };
-
-    window.clearAllFilters = function() {
-        document.getElementById('filter-landlord').selectedIndex = -1;
-        document.getElementById('filter-tenant').selectedIndex = -1;
-        document.getElementById('filter-stage').selectedIndex = -1;
-        document.getElementById('filter-property-type').selectedIndex = -1;
-        document.getElementById('filter-risk').selectedIndex = -1;
-        document.getElementById('filter-value-range').selectedIndex = 0;
-
-        currentFilters = {
-            status: currentFilters.status,
-            landlords: [],
-            tenants: [],
-            stages: [],
-            propertyTypes: [],
-            riskLevels: [],
-            valueRange: '',
-            searchQuery: ''
-        };
-
-        filterDealsTable();
-        
-        if (typeof showToast === 'function') {
-            showToast('All filters cleared', 'info');
-        }
-    };
-
-    // ============================================================================
-    // MUTATIONOBSERVER - WATCH FOR PAGE TO BECOME VISIBLE
-    // ============================================================================
-
-    function setupPageObserver() {
-        const targetPage = document.getElementById('deals-overview-page');
-        if (!targetPage) {
-            console.log('⚠️ Deals Overview page not found, will retry...');
-            setTimeout(setupPageObserver, 1000);
-            return;
-        }
-
-        console.log('👀 Setting up MutationObserver for Deals Overview page...');
-
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-                    const page = document.getElementById('deals-overview-page');
-                    if (page && !page.classList.contains('hidden') && !isInitialized) {
-                        console.log('✨ Page became visible, initializing enhancements...');
-                        setTimeout(initDealsOverviewEnhancements, 100);
-                    }
-                }
-            });
-        });
-
-        observer.observe(targetPage, { attributes: true });
-        console.log('✅ MutationObserver active');
-
-        // Also try immediate initialization if page is already visible
-        if (!targetPage.classList.contains('hidden')) {
-            console.log('📍 Page already visible, initializing now...');
-            setTimeout(initDealsOverviewEnhancements, 100);
-        }
-    }
-
-    // Start observing when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupPageObserver);
-    } else {
-        setupPageObserver();
-    }
-
-    // Also listen for hash changes
-    window.addEventListener('hashchange', function() {
-        if (window.location.hash === '#/deals-overview' && !isInitialized) {
-            setTimeout(initDealsOverviewEnhancements, 300);
-        }
-    });
-
-    console.log('✅ Deals Overview Enhancements (Fixed) loaded');
-
-})();
-
-</script></body></html>
+</body></html>

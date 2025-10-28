@@ -1,0 +1,96 @@
+# Dockerfile that clones from public GitHub
+# Use this with docker-compose.simple.yml
+# NO GitHub authentication needed!
+
+FROM node:20-alpine AS builder
+
+# Install git
+RUN apk add --no-cache git
+
+# Clone the repository
+WORKDIR /tmp
+RUN git clone --branch unzip-application --single-branch https://github.com/harchyboy/unioncore-mvp.git
+
+# Move to app directory
+WORKDIR /tmp/unioncore-mvp
+
+# Install dependencies
+RUN npm install
+
+# Build application (if needed)
+# RUN npm run build
+
+# Production stage
+FROM node:20-alpine
+
+# Install required packages
+RUN apk add --no-cache \
+    nginx \
+    curl \
+    bash \
+    && npm install -g pm2
+
+# Copy application from builder
+WORKDIR /app
+COPY --from=builder /tmp/unioncore-mvp /app
+
+# Copy nginx configuration
+RUN mkdir -p /etc/nginx/sites-available /etc/nginx/sites-enabled /var/log/unioncore
+
+# Create nginx config for the app
+RUN echo 'server { \n\
+    listen 80; \n\
+    server_name _; \n\
+    \n\
+    location / { \n\
+        proxy_pass http://127.0.0.1:5879; \n\
+        proxy_http_version 1.1; \n\
+        proxy_set_header Upgrade $http_upgrade; \n\
+        proxy_set_header Connection "upgrade"; \n\
+        proxy_set_header Host $host; \n\
+        proxy_set_header X-Real-IP $remote_addr; \n\
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; \n\
+        proxy_set_header X-Forwarded-Proto $scheme; \n\
+        proxy_buffering off; \n\
+        client_max_body_size 100M; \n\
+    } \n\
+}' > /etc/nginx/http.d/default.conf
+
+# Ensure PM2 config exists or create a simple one
+RUN if [ ! -f /app/ecosystem.config.cjs ]; then \
+    echo "module.exports = { \n\
+        apps: [{ \n\
+            name: 'unioncore-mvp', \n\
+            script: 'npm', \n\
+            args: 'run dev', \n\
+            cwd: '/app/client', \n\
+            instances: 1, \n\
+            autorestart: true, \n\
+            watch: false, \n\
+            max_memory_restart: '1G', \n\
+            env: { \n\
+                NODE_ENV: 'production', \n\
+                PORT: 5879, \n\
+                HOST: '0.0.0.0' \n\
+            } \n\
+        }] \n\
+    }" > /app/ecosystem.config.cjs; \
+fi
+
+# Make start script if it doesn't exist
+RUN if [ ! -f /app/start-unioncore.sh ]; then \
+    echo '#!/bin/bash' > /app/start-unioncore.sh && \
+    echo 'nginx' >> /app/start-unioncore.sh && \
+    echo 'cd /app && pm2-runtime start ecosystem.config.cjs' >> /app/start-unioncore.sh && \
+    chmod +x /app/start-unioncore.sh; \
+fi
+
+# Expose ports
+EXPOSE 80 5879
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD curl -f http://localhost:80 || exit 1
+
+# Start application
+CMD ["/app/start-unioncore.sh"]
