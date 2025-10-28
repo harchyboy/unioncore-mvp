@@ -20831,6 +20831,13 @@ if (document.readyState === 'loading') {
             renderStageDistributionChart();
             renderRecentActivity();
             renderBrokerPerformance();
+            
+            // Setup view switching if not already done
+            if (!window.pipelineViewListenersAdded) {
+                document.getElementById('pipeline-view-table')?.addEventListener('click', () => switchPipelineView('table'));
+                document.getElementById('pipeline-view-kanban')?.addEventListener('click', () => switchPipelineView('kanban'));
+                window.pipelineViewListenersAdded = true;
+            }
         }
 
         // Update Pipeline KPIs
@@ -21162,12 +21169,16 @@ if (document.readyState === 'loading') {
 
         // View Switching Functions
         function switchPipelineView(view) {
+            console.log('🔄 Switching pipeline view to:', view);
             currentPipelineView = view;
             
             // Initialize data if not already done
             if (allDeals.length === 0) {
+                console.log('📊 Initializing pipeline data...');
                 initializePipelineData();
             }
+            
+            console.log('📋 Total deals available:', filteredDeals.length);
             
             // Update button styles
             document.getElementById('pipeline-view-kanban')?.classList.remove('bg-stone', 'text-slate');
@@ -21183,11 +21194,21 @@ if (document.readyState === 'loading') {
             
             // Show selected view and update button
             if (view === 'kanban') {
-                document.getElementById('pipeline-kanban-view')?.classList.remove('hidden');
+                console.log('🎯 Showing Kanban view');
+                const kanbanView = document.getElementById('pipeline-kanban-view');
+                if (kanbanView) {
+                    kanbanView.classList.remove('hidden');
+                    console.log('✅ Kanban view unhidden');
+                } else {
+                    console.error('❌ Kanban view element not found!');
+                }
                 document.getElementById('pipeline-view-kanban')?.classList.add('bg-stone', 'text-slate');
                 document.getElementById('pipeline-view-kanban')?.classList.remove('text-concrete');
+                console.log('🎨 Rendering Kanban board...');
                 renderKanbanBoard();
+                console.log('✅ Kanban board rendered');
             } else if (view === 'table') {
+                console.log('📊 Showing Table view');
                 document.getElementById('pipeline-table-container')?.classList.remove('hidden');
                 document.getElementById('pipeline-table-pagination')?.classList.remove('hidden');
                 document.getElementById('pipeline-view-table')?.classList.add('bg-stone', 'text-slate');
@@ -21563,10 +21584,6 @@ if (document.readyState === 'loading') {
         });
 
         // Add nav handler for Pipeline
-        // Pipeline View Switching
-        document.getElementById('pipeline-view-table')?.addEventListener('click', () => switchPipelineView('table'));
-        document.getElementById('pipeline-view-kanban')?.addEventListener('click', () => switchPipelineView('kanban'));
-
                 document.getElementById('nav-pipeline')?.addEventListener('click', () => navigateToPage('pipeline'));
         document.getElementById('nav-pipeline-collapsed')?.addEventListener('click', () => navigateToPage('pipeline'));
         document.getElementById('nav-pipeline-mobile')?.addEventListener('click', () => {
