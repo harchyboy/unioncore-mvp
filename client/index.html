@@ -1790,11 +1790,11 @@
                         <div class="p-6 border-b border-stone flex items-center justify-between">
                             <h2 class="text-lg font-semibold text-slate">Active Deals</h2>
                             <div class="flex items-center space-x-2">
-                                <button id="pipeline-view-table" class="p-2 text-slate bg-stone rounded transition-colors" title="Table View">
-                                    <i class="fa-solid fa-table"></i>
+                                <button id="pipeline-view-table" class="p-2 text-slate bg-stone rounded transition-colors" title="Grid View">
+                                    <i class="fa-solid fa-grip"></i>
                                 </button>
-                                <button id="pipeline-view-kanban" class="p-2 text-concrete hover:text-slate transition-colors" title="Kanban View">
-                                    <i class="fa-solid fa-th"></i>
+                                <button id="pipeline-view-kanban" class="p-2 text-concrete hover:text-slate transition-colors" title="Board View">
+                                    <i class="fa-solid fa-columns"></i>
                                 </button>
                             </div>
                         </div>
@@ -2040,10 +2040,10 @@
                                 </div>
                                 <div class="flex items-center space-x-3">
                                     <span class="text-sm text-concrete">View:</span>
-                                    <button id="view-grid-btn" class="p-2 bg-slate text-white rounded-lg">
-                                        <i class="fa-solid fa-grid-2"></i>
+                                    <button id="view-grid-btn" class="p-2 bg-slate text-white rounded-lg" title="Grid View">
+                                        <i class="fa-solid fa-th"></i>
                                     </button>
-                                    <button id="view-table-btn" class="p-2 text-concrete hover:bg-stone rounded-lg">
+                                    <button id="view-table-btn" class="p-2 text-concrete hover:bg-stone rounded-lg" title="List View">
                                         <i class="fa-solid fa-list"></i>
                                     </button>
                                 </div>
@@ -2314,8 +2314,16 @@
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-6">
                     <div>
-                        <h1 class="text-2xl font-semibold text-slate mb-1" id="property-detail-name">Loading...</h1>
-                        <p class="text-sm text-concrete" id="property-detail-address">Loading address...</p>
+                        <div class="flex items-center gap-3 mb-1">
+                            <h1 class="text-2xl font-semibold text-slate" id="property-detail-name">Loading...</h1>
+                            <span class="px-3 py-1 rounded-full text-xs font-medium" id="property-detail-status-badge">Available</span>
+                        </div>
+                        <p class="text-sm text-concrete mb-2" id="property-detail-address">Loading address...</p>
+                        <div class="flex items-center gap-4 text-sm">
+                            <span class="text-concrete"><i class="fa-solid fa-building mr-1"></i><span id="property-detail-sector">Office</span></span>
+                            <span class="text-concrete"><i class="fa-solid fa-expand mr-1"></i><span id="property-detail-size">0</span> sq ft</span>
+                            <span class="text-concrete"><i class="fa-solid fa-sterling-sign mr-1"></i><span id="property-detail-rent">0</span>/sq ft/year</span>
+                        </div>
                     </div>
                     <div class="flex items-center space-x-3">
                         <button id="edit-property-btn" class="px-4 py-2 border border-stone text-concrete rounded-lg hover:bg-stone transition-colors">
@@ -2327,8 +2335,8 @@
                     </div>
                 </div>
 
-                <!-- Property Info Cards -->
-                <div class="grid grid-cols-3 gap-6 mb-6">
+                <!-- Property Metrics Cards -->
+                <div class="grid grid-cols-4 gap-6 mb-6">
                     <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-sm text-concrete">Property ID</span>
@@ -2339,108 +2347,383 @@
                     
                     <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                         <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Occupancy</span>
+                            <i class="fa-solid fa-chart-line text-concrete"></i>
+                        </div>
+                        <p class="text-xl font-semibold text-slate"><span id="property-detail-occupancy">85</span>%</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Annual Revenue</span>
+                            <i class="fa-solid fa-sterling-sign text-concrete"></i>
+                        </div>
+                        <p class="text-xl font-semibold text-slate">£<span id="property-detail-revenue">0</span>k</p>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
                             <span class="text-sm text-concrete">Total Units</span>
                             <i class="fa-solid fa-door-open text-concrete"></i>
                         </div>
                         <p class="text-xl font-semibold text-slate" id="property-detail-units-count">0</p>
                     </div>
-                    
-                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-sm text-concrete">Created</span>
-                            <i class="fa-solid fa-calendar text-concrete"></i>
-                        </div>
-                        <p class="text-xl font-semibold text-slate" id="property-detail-created">-</p>
-                    </div>
                 </div>
 
-                <!-- Property Details Section -->
-                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone mb-6">
-                    <h2 class="text-lg font-semibold text-slate mb-4">Property Information</h2>
-                    <div class="grid grid-cols-2 gap-6">
-                        <div>
-                            <label class="text-sm text-concrete">Postcode</label>
-                            <p class="text-slate font-medium" id="property-detail-postcode">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">EPC Rating</label>
-                            <p class="text-slate font-medium" id="property-detail-epc">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">Valve Visibility</label>
-                            <p class="text-slate font-medium" id="property-detail-visibility">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">Availability Date</label>
-                            <p class="text-slate font-medium" id="property-detail-availability">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">Landlord</label>
-                            <p class="text-slate font-medium" id="property-detail-landlord">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">Disposal Agent</label>
-                            <p class="text-slate font-medium" id="property-detail-disposal">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">HVAC Servicing</label>
-                            <p class="text-slate font-medium" id="property-detail-hvac">-</p>
-                        </div>
-                        <div>
-                            <label class="text-sm text-concrete">Location</label>
-                            <p class="text-slate font-medium" id="property-detail-location">-</p>
-                        </div>
-                        <div class="col-span-2">
-                            <label class="text-sm text-concrete">Notes</label>
-                            <p class="text-slate" id="property-detail-notes">-</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Units Section -->
-                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-semibold text-slate">Units</h2>
-                        <button class="text-sm text-slate hover:underline" onclick="document.getElementById('add-unit-btn').click()">
-                            <i class="fa-solid fa-plus mr-1"></i>Add Unit
-                        </button>
-                    </div>
-                    
-                    <!-- Units List -->
-                    <div id="property-units-list">
-                        <!-- Empty state -->
-                        <div id="units-empty-state" class="text-center py-12">
-                            <i class="fa-solid fa-door-open text-5xl text-concrete mb-4"></i>
-                            <p class="text-slate font-medium mb-2">No units added yet</p>
-                            <p class="text-sm text-concrete mb-4">Add units to this property to start managing lettable spaces</p>
-                            <button onclick="document.getElementById('add-unit-btn').click()" class="px-4 py-2 bg-slate text-white rounded-lg hover:bg-opacity-90 transition-colors">
-                                <i class="fa-solid fa-plus mr-2"></i>Add First Unit
+                <!-- Tabs -->
+                <div class="mb-6">
+                    <div class="border-b border-stone">
+                        <nav class="flex space-x-8">
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-slate text-slate" data-tab="overview">
+                                <i class="fa-solid fa-info-circle mr-2"></i>Overview
                             </button>
-                        </div>
-                        
-                        <!-- Units table (hidden by default) -->
-                        <div id="units-table-container" class="hidden">
-                            <table class="w-full">
-                                <thead>
-                                    <tr class="border-b border-stone">
-                                        <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Unit Name</th>
-                                        <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Floor</th>
-                                        <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Area (sq ft)</th>
-                                        <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Desks</th>
-                                        <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Status</th>
-                                        <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Visibility</th>
-                                        <th class="text-right py-3 px-4 text-sm font-medium text-concrete">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="units-table-body">
-                                    <!-- Units will be inserted here -->
-                                </tbody>
-                            </table>
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="units">
+                                <i class="fa-solid fa-door-open mr-2"></i>Units
+                            </button>
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="gallery">
+                                <i class="fa-solid fa-images mr-2"></i>Gallery
+                            </button>
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="performance">
+                                <i class="fa-solid fa-chart-bar mr-2"></i>Performance
+                            </button>
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="documents">
+                                <i class="fa-solid fa-file-alt mr-2"></i>Documents
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="property-tab-content">
+                    
+                    <!-- Overview Tab -->
+                    <div class="property-tab-panel" data-tab-panel="overview">
+                        <div class="grid grid-cols-3 gap-6">
+                            <!-- Left Column - Details & Amenities -->
+                            <div class="col-span-2 space-y-6">
+                                <!-- Description -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Description</h2>
+                                    <p class="text-concrete leading-relaxed" id="property-detail-description">
+                                        A premium office space in the heart of the business district, offering modern amenities and excellent transport links.
+                                    </p>
+                                </div>
+
+                                <!-- Specifications -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Specifications</h2>
+                                    <div class="grid grid-cols-2 gap-6">
+                                        <div>
+                                            <label class="text-sm text-concrete">Floor Area</label>
+                                            <p class="text-slate font-medium"><span id="property-spec-size">0</span> sq ft</p>
+                                        </div>
+                                        <div>
+                                            <label class="text-sm text-concrete">EPC Rating</label>
+                                            <p class="text-slate font-medium" id="property-detail-epc">-</p>
+                                        </div>
+                                        <div>
+                                            <label class="text-sm text-concrete">Broker</label>
+                                            <p class="text-slate font-medium" id="property-detail-broker">-</p>
+                                        </div>
+                                        <div>
+                                            <label class="text-sm text-concrete">Broker Contact</label>
+                                            <p class="text-slate font-medium" id="property-detail-broker-contact">-</p>
+                                        </div>
+                                        <div>
+                                            <label class="text-sm text-concrete">Availability</label>
+                                            <p class="text-slate font-medium" id="property-detail-availability">-</p>
+                                        </div>
+                                        <div>
+                                            <label class="text-sm text-concrete">HVAC Servicing</label>
+                                            <p class="text-slate font-medium" id="property-detail-hvac">Landlord Provided</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Amenities -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Amenities</h2>
+                                    <div class="grid grid-cols-3 gap-4" id="property-amenities-list">
+                                        <div class="flex items-center text-sm text-concrete">
+                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>24/7 Access
+                                        </div>
+                                        <div class="flex items-center text-sm text-concrete">
+                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Air Conditioning
+                                        </div>
+                                        <div class="flex items-center text-sm text-concrete">
+                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Lift
+                                        </div>
+                                        <div class="flex items-center text-sm text-concrete">
+                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Meeting Rooms
+                                        </div>
+                                        <div class="flex items-center text-sm text-concrete">
+                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Wi-Fi
+                                        </div>
+                                        <div class="flex items-center text-sm text-concrete">
+                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Car Parking
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right Column - Map -->
+                            <div class="space-y-6">
+                                <!-- Location Map -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Location</h2>
+                                    <div id="property-map" class="w-full h-64 bg-stone rounded-lg flex items-center justify-center">
+                                        <div class="text-center">
+                                            <i class="fa-solid fa-map-marker-alt text-4xl text-concrete mb-2"></i>
+                                            <p class="text-sm text-concrete" id="property-map-address">Loading map...</p>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="text-sm text-concrete mb-1">Full Address</p>
+                                        <p class="text-slate font-medium" id="property-full-address">-</p>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Contact</h2>
+                                    <div class="space-y-3">
+                                        <div>
+                                            <label class="text-sm text-concrete">Broker</label>
+                                            <p class="text-slate font-medium" id="property-contact-broker">-</p>
+                                        </div>
+                                        <div>
+                                            <label class="text-sm text-concrete">Contact Person</label>
+                                            <p class="text-slate font-medium" id="property-contact-person">-</p>
+                                        </div>
+                                        <button class="w-full px-4 py-2 border border-stone text-concrete rounded-lg hover:bg-stone transition-colors text-sm">
+                                            <i class="fa-solid fa-envelope mr-2"></i>Contact Broker
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Units Tab -->
+                    <div class="property-tab-panel hidden" data-tab-panel="units">
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-lg font-semibold text-slate">Property Units</h2>
+                                <button class="text-sm text-slate hover:underline" onclick="document.getElementById('add-unit-btn').click()">
+                                    <i class="fa-solid fa-plus mr-1"></i>Add Unit
+                                </button>
+                            </div>
+                            
+                            <!-- Units List -->
+                            <div id="property-units-list">
+                                <!-- Empty state -->
+                                <div id="units-empty-state" class="text-center py-12">
+                                    <i class="fa-solid fa-door-open text-5xl text-concrete mb-4"></i>
+                                    <p class="text-slate font-medium mb-2">No units added yet</p>
+                                    <p class="text-sm text-concrete mb-4">Add units to this property to start managing lettable spaces</p>
+                                    <button onclick="document.getElementById('add-unit-btn').click()" class="px-4 py-2 bg-slate text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                                        <i class="fa-solid fa-plus mr-2"></i>Add First Unit
+                                    </button>
+                                </div>
+                                
+                                <!-- Units table (hidden by default) -->
+                                <div id="units-table-container" class="hidden">
+                                    <table class="w-full">
+                                        <thead>
+                                            <tr class="border-b border-stone">
+                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Unit Name</th>
+                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Floor</th>
+                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Area (sq ft)</th>
+                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Desks</th>
+                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Status</th>
+                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Rent</th>
+                                                <th class="text-right py-3 px-4 text-sm font-medium text-concrete">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="units-table-body">
+                                            <!-- Units will be inserted here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gallery Tab -->
+                    <div class="property-tab-panel hidden" data-tab-panel="gallery">
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-lg font-semibold text-slate">Photo Gallery</h2>
+                                <button class="text-sm text-slate hover:underline">
+                                    <i class="fa-solid fa-upload mr-1"></i>Upload Photos
+                                </button>
+                            </div>
+                            
+                            <!-- Photo Grid -->
+                            <div id="property-gallery-grid" class="grid grid-cols-4 gap-4">
+                                <!-- Photos will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Tab -->
+                    <div class="property-tab-panel hidden" data-tab-panel="performance">
+                        <!-- Performance Metrics -->
+                        <div class="grid grid-cols-4 gap-6 mb-6">
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-concrete">Occupancy Rate</span>
+                                    <i class="fa-solid fa-chart-pie text-concrete"></i>
+                                </div>
+                                <p class="text-2xl font-semibold text-slate mb-1"><span id="perf-occupancy">85</span>%</p>
+                                <p class="text-xs text-green-600"><i class="fa-solid fa-arrow-up mr-1"></i>+5% vs last month</p>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-concrete">Annual Revenue</span>
+                                    <i class="fa-solid fa-sterling-sign text-concrete"></i>
+                                </div>
+                                <p class="text-2xl font-semibold text-slate mb-1">£<span id="perf-revenue">2.4</span>M</p>
+                                <p class="text-xs text-green-600"><i class="fa-solid fa-arrow-up mr-1"></i>+12% YoY</p>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-concrete">Net Operating Income</span>
+                                    <i class="fa-solid fa-chart-line text-concrete"></i>
+                                </div>
+                                <p class="text-2xl font-semibold text-slate mb-1">£<span id="perf-noi">1.8</span>M</p>
+                                <p class="text-xs text-green-600"><i class="fa-solid fa-arrow-up mr-1"></i>+8% YoY</p>
+                            </div>
+                            
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-concrete">Avg Rent (£/sq ft)</span>
+                                    <i class="fa-solid fa-tag text-concrete"></i>
+                                </div>
+                                <p class="text-2xl font-semibold text-slate mb-1">£<span id="perf-avg-rent">65</span></p>
+                                <p class="text-xs text-concrete">Market average: £62</p>
+                            </div>
+                        </div>
+
+                        <!-- Charts -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <!-- Revenue Chart -->
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <h3 class="text-lg font-semibold text-slate mb-4">Revenue Trend</h3>
+                                <div id="revenue-chart" class="h-64">
+                                    <canvas id="revenue-chart-canvas"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Occupancy Chart -->
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <h3 class="text-lg font-semibold text-slate mb-4">Occupancy Trend</h3>
+                                <div id="occupancy-chart" class="h-64">
+                                    <canvas id="occupancy-chart-canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Financial Breakdown -->
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone mt-6">
+                            <h3 class="text-lg font-semibold text-slate mb-4">Financial Breakdown</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between pb-3 border-b border-stone">
+                                    <span class="text-concrete">Gross Rental Income</span>
+                                    <span class="text-slate font-medium">£2,400,000</span>
+                                </div>
+                                <div class="flex items-center justify-between pb-3 border-b border-stone">
+                                    <span class="text-concrete">Operating Expenses</span>
+                                    <span class="text-slate font-medium">-£600,000</span>
+                                </div>
+                                <div class="flex items-center justify-between pb-3 border-b border-stone">
+                                    <span class="text-concrete">Property Management Fees</span>
+                                    <span class="text-slate font-medium">-£120,000</span>
+                                </div>
+                                <div class="flex items-center justify-between pt-2">
+                                    <span class="text-slate font-semibold">Net Operating Income</span>
+                                    <span class="text-slate font-semibold text-xl">£1,680,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents Tab -->
+                    <div class="property-tab-panel hidden" data-tab-panel="documents">
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-lg font-semibold text-slate">Property Documents</h2>
+                                <button class="text-sm text-slate hover:underline">
+                                    <i class="fa-solid fa-upload mr-1"></i>Upload Document
+                                </button>
+                            </div>
+                            
+                            <!-- Documents List -->
+                            <div class="space-y-3" id="property-documents-list">
+                                <div class="flex items-center justify-between p-4 border border-stone rounded-lg hover:bg-stone transition-colors cursor-pointer">
+                                    <div class="flex items-center">
+                                        <i class="fa-solid fa-file-pdf text-red-600 text-2xl mr-4"></i>
+                                        <div>
+                                            <p class="text-slate font-medium">Lease Agreement.pdf</p>
+                                            <p class="text-sm text-concrete">2.4 MB • Uploaded 2 days ago</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-concrete hover:text-slate">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 border border-stone rounded-lg hover:bg-stone transition-colors cursor-pointer">
+                                    <div class="flex items-center">
+                                        <i class="fa-solid fa-file-pdf text-red-600 text-2xl mr-4"></i>
+                                        <div>
+                                            <p class="text-slate font-medium">Floor Plans.pdf</p>
+                                            <p class="text-sm text-concrete">5.1 MB • Uploaded 5 days ago</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-concrete hover:text-slate">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-4 border border-stone rounded-lg hover:bg-stone transition-colors cursor-pointer">
+                                    <div class="flex items-center">
+                                        <i class="fa-solid fa-file-pdf text-red-600 text-2xl mr-4"></i>
+                                        <div>
+                                            <p class="text-slate font-medium">EPC Certificate.pdf</p>
+                                            <p class="text-sm text-concrete">1.2 MB • Uploaded 1 week ago</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-concrete hover:text-slate">
+                                        <i class="fa-solid fa-download"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <!-- END PROPERTY DETAIL PAGE -->
+
+            <!-- Photo Lightbox Modal -->
+            <div id="photo-lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
+                <button id="lightbox-close" class="absolute top-4 right-4 text-white text-3xl z-10 hover:text-gray-300">
+                    <i class="fa-solid fa-times"></i>
+                </button>
+                <button id="lightbox-prev" class="absolute left-4 text-white text-3xl z-10 hover:text-gray-300">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <button id="lightbox-next" class="absolute right-4 text-white text-3xl z-10 hover:text-gray-300">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="max-w-6xl max-h-screen p-8">
+                    <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full object-contain">
+                    <p id="lightbox-caption" class="text-white text-center mt-4"></p>
+                </div>
+            </div>
 
 
             <!-- NEGOTIATION DASHBOARD PAGE -->
@@ -18054,7 +18337,7 @@ if (document.readyState === 'loading') {
             const pageProperties = filteredProperties.slice(start, end);
             
             grid.innerHTML = pageProperties.map(prop => `
-                <div class="bg-white border border-stone rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                <div class="bg-white border border-stone rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onclick="viewPropertyDetail('${prop.id}')">
                     <img src="${prop.image}" alt="${prop.name}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-slate mb-1">${prop.name}</h3>
@@ -18067,7 +18350,7 @@ if (document.readyState === 'loading') {
                             <span class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded">${prop.availability}</span>
                             <span class="text-xs text-concrete">${prop.broker}</span>
                         </div>
-                        <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-2" onclick="event.stopPropagation()">
                             <button class="flex-1 px-3 py-2 bg-slate text-white text-xs rounded hover:bg-opacity-90">
                                 <i class="fa-solid fa-plus mr-1"></i>Add to Pipeline
                             </button>
@@ -18089,7 +18372,7 @@ if (document.readyState === 'loading') {
             const pageProperties = filteredProperties.slice(start, end);
             
             tbody.innerHTML = pageProperties.map(prop => `
-                <tr class="border-t border-stone hover:bg-stone">
+                <tr class="border-t border-stone hover:bg-stone cursor-pointer" onclick="viewPropertyDetail('${prop.id}')">
                     <td class="px-4 py-3">
                         <div class="font-medium text-slate">${prop.name}</div>
                         <div class="text-xs text-concrete">${prop.address}</div>
@@ -18102,7 +18385,7 @@ if (document.readyState === 'loading') {
                         <span class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded">${prop.availability}</span>
                     </td>
                     <td class="px-4 py-3 text-sm text-slate">${prop.broker}</td>
-                    <td class="px-4 py-3">
+                    <td class="px-4 py-3" onclick="event.stopPropagation()">
                         <button class="px-3 py-1 bg-slate text-white text-xs rounded hover:bg-opacity-90">
                             Add to Pipeline
                         </button>
@@ -18238,6 +18521,216 @@ if (document.readyState === 'loading') {
                 document.getElementById('mobile-nav-drawer')?.classList.add('translate-x-full');
             });
         }
+
+        // ========================================
+        // PROPERTY DETAIL PAGE FUNCTIONALITY
+        // ========================================
+
+        let currentProperty = null;
+        let currentPropertyTab = 'overview';
+
+        function viewPropertyDetail(propertyId) {
+            const property = properties.find(p => p.id === propertyId);
+            if (!property) return;
+            
+            currentProperty = property;
+            populatePropertyDetail(property);
+            navigateToPage('property-detail');
+        }
+
+        function populatePropertyDetail(property) {
+            // Header Section
+            document.getElementById('property-detail-name').textContent = property.name;
+            document.getElementById('property-detail-address').textContent = property.address;
+            document.getElementById('property-detail-breadcrumb').textContent = property.name;
+            document.getElementById('property-detail-sector').textContent = property.sector;
+            document.getElementById('property-detail-size').textContent = property.size.toLocaleString();
+            document.getElementById('property-detail-rent').textContent = property.rent;
+            
+            // Status Badge
+            const badge = document.getElementById('property-detail-status-badge');
+            badge.textContent = property.availability;
+            badge.className = 'px-3 py-1 rounded-full text-xs font-medium';
+            if (property.availability === 'Available') {
+                badge.className += ' bg-green-100 text-green-700';
+            } else if (property.availability === 'Under Offer') {
+                badge.className += ' bg-yellow-100 text-yellow-700';
+            } else {
+                badge.className += ' bg-gray-100 text-gray-700';
+            }
+            
+            // Metrics Cards
+            document.getElementById('property-detail-id').textContent = property.id;
+            document.getElementById('property-detail-occupancy').textContent = Math.floor(Math.random() * 20) + 75;
+            document.getElementById('property-detail-revenue').textContent = Math.floor((property.size * property.rent) / 1000);
+            document.getElementById('property-detail-units-count').textContent = Math.floor(property.size / 5000) + 1;
+            
+            // Overview Tab - Specifications
+            document.getElementById('property-spec-size').textContent = property.size.toLocaleString();
+            document.getElementById('property-detail-epc').textContent = ['A', 'B', 'C'][Math.floor(Math.random() * 3)];
+            document.getElementById('property-detail-broker').textContent = property.broker;
+            document.getElementById('property-detail-broker-contact').textContent = property.brokerContact;
+            document.getElementById('property-detail-availability').textContent = property.availability;
+            
+            // Map and Address
+            document.getElementById('property-map-address').textContent = property.address;
+            document.getElementById('property-full-address').textContent = `${property.address}, ${property.location}`;
+            
+            // Contact Info
+            document.getElementById('property-contact-broker').textContent = property.broker;
+            document.getElementById('property-contact-person').textContent = property.brokerContact;
+            
+            // Gallery
+            renderPropertyGallery(property);
+            
+            // Performance Metrics
+            populatePerformanceMetrics(property);
+            
+            // Initialize tabs
+            initPropertyDetailTabs();
+        }
+
+        function renderPropertyGallery(property) {
+            const gallery = document.getElementById('property-gallery-grid');
+            if (!gallery) return;
+            
+            // Generate multiple photos for the property
+            const photoUrls = [
+                property.image,
+                property.image.replace('w=400', 'w=401'), // Slight variation
+                property.image.replace('h=300', 'h=301'),
+                property.image.replace('fit=crop', 'fit=cover'),
+                property.image.replace('photo-1486406146926', 'photo-1497366754035'),
+                property.image.replace('photo-1486406146926', 'photo-1524758631624'),
+                property.image.replace('photo-1486406146926', 'photo-1560518883'),
+                property.image.replace('photo-1486406146926', 'photo-1577495508048')
+            ];
+            
+            gallery.innerHTML = photoUrls.map((url, index) => `
+                <div class="relative aspect-square bg-stone rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity" onclick="openLightbox(${index})">
+                    <img src="${url}" alt="Property photo ${index + 1}" class="w-full h-full object-cover">
+                </div>
+            `).join('');
+            
+            // Store photos for lightbox
+            window.currentGalleryPhotos = photoUrls;
+        }
+
+        let currentLightboxIndex = 0;
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('photo-lightbox');
+            const img = document.getElementById('lightbox-image');
+            const caption = document.getElementById('lightbox-caption');
+            
+            if (window.currentGalleryPhotos && window.currentGalleryPhotos[index]) {
+                img.src = window.currentGalleryPhotos[index];
+                caption.textContent = `Photo ${index + 1} of ${window.currentGalleryPhotos.length}`;
+                lightbox.classList.remove('hidden');
+                lightbox.classList.add('flex');
+            }
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('photo-lightbox');
+            lightbox.classList.add('hidden');
+            lightbox.classList.remove('flex');
+        }
+
+        function nextPhoto() {
+            if (window.currentGalleryPhotos) {
+                currentLightboxIndex = (currentLightboxIndex + 1) % window.currentGalleryPhotos.length;
+                openLightbox(currentLightboxIndex);
+            }
+        }
+
+        function prevPhoto() {
+            if (window.currentGalleryPhotos) {
+                currentLightboxIndex = (currentLightboxIndex - 1 + window.currentGalleryPhotos.length) % window.currentGalleryPhotos.length;
+                openLightbox(currentLightboxIndex);
+            }
+        }
+
+        function populatePerformanceMetrics(property) {
+            const revenue = (property.size * property.rent) / 1000;
+            const occupancy = Math.floor(Math.random() * 20) + 75;
+            const noi = revenue * 0.7;
+            
+            document.getElementById('perf-occupancy').textContent = occupancy;
+            document.getElementById('perf-revenue').textContent = (revenue / 1000).toFixed(1);
+            document.getElementById('perf-noi').textContent = (noi / 1000).toFixed(1);
+            document.getElementById('perf-avg-rent').textContent = property.rent;
+            
+            // Render simple charts (placeholder)
+            renderPerformanceCharts(property);
+        }
+
+        function renderPerformanceCharts(property) {
+            // Simple placeholder charts - in production would use Chart.js or similar
+            const revenueCanvas = document.getElementById('revenue-chart-canvas');
+            const occupancyCanvas = document.getElementById('occupancy-chart-canvas');
+            
+            if (revenueCanvas && revenueCanvas.getContext) {
+                const ctx = revenueCanvas.getContext('2d');
+                ctx.font = '16px Arial';
+                ctx.fillStyle = '#64748b';
+                ctx.textAlign = 'center';
+                ctx.fillText('Revenue trend chart placeholder', revenueCanvas.width / 2, revenueCanvas.height / 2);
+            }
+            
+            if (occupancyCanvas && occupancyCanvas.getContext) {
+                const ctx = occupancyCanvas.getContext('2d');
+                ctx.font = '16px Arial';
+                ctx.fillStyle = '#64748b';
+                ctx.textAlign = 'center';
+                ctx.fillText('Occupancy trend chart placeholder', occupancyCanvas.width / 2, occupancyCanvas.height / 2);
+            }
+        }
+
+        function initPropertyDetailTabs() {
+            const tabs = document.querySelectorAll('.property-detail-tab');
+            const panels = document.querySelectorAll('.property-tab-panel');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    
+                    // Update tab styles
+                    tabs.forEach(t => {
+                        t.classList.remove('border-slate', 'text-slate');
+                        t.classList.add('border-transparent', 'text-concrete');
+                    });
+                    this.classList.remove('border-transparent', 'text-concrete');
+                    this.classList.add('border-slate', 'text-slate');
+                    
+                    // Update panel visibility
+                    panels.forEach(panel => {
+                        if (panel.getAttribute('data-tab-panel') === tabName) {
+                            panel.classList.remove('hidden');
+                        } else {
+                            panel.classList.add('hidden');
+                        }
+                    });
+                    
+                    currentPropertyTab = tabName;
+                });
+            });
+        }
+
+        // Initialize lightbox controls
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+            document.getElementById('lightbox-prev')?.addEventListener('click', prevPhoto);
+            document.getElementById('lightbox-next')?.addEventListener('click', nextPhoto);
+            
+            // Close lightbox on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevPhoto();
+                if (e.key === 'ArrowRight') nextPhoto();
+            });
+        });
 
         // ========================================
         // INITIALIZATION
