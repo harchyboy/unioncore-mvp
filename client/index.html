@@ -20757,9 +20757,9 @@ if (document.readyState === 'loading') {
                 { name: 'Cushman & Wakefield', contact: 'Robert Brown', slug: 'cushman' }
             ];
 
-            const stages = ['lead', 'viewing', 'proposal', 'hot', 'signed'];
-            const stageNames = { lead: 'Lead', viewing: 'Viewing', proposal: 'Proposal', hot: 'HoT', signed: 'Contract Signed' };
-            const stageColors = { lead: 'concrete', viewing: 'slate', proposal: 'warning', hot: 'info', signed: 'success' };
+            const stages = ['lead', 'viewing', 'proposal', 'hot', 'signed', 'live'];
+            const stageNames = { lead: 'Lead', viewing: 'Viewing', proposal: 'Proposal', hot: 'HoT', signed: 'Contract Signed', live: 'Live' };
+            const stageColors = { lead: 'concrete', viewing: 'slate', proposal: 'warning', hot: 'info', signed: 'success', live: 'success' };
             
             const owners = ['Tom', 'Max', 'Dani'];
             const avatars = {
@@ -20811,7 +20811,8 @@ if (document.readyState === 'loading') {
                                stage === 'viewing' ? 'Schedule client viewing' :
                                stage === 'proposal' ? 'Send pricing proposal' :
                                stage === 'hot' ? 'Legal approval pending' :
-                               'Final documentation',
+                               stage === 'signed' ? 'Final documentation' :
+                               'Ongoing management',
                     nextActionDue: Math.floor(Math.random() * 7) - 2,
                     lastActivity: hoursAgo < 24 ? `${hoursAgo} hours ago` : `${Math.floor(hoursAgo / 24)} days ago`,
                     lastActivityType: ['Client call', 'Site visit', 'Email sent', 'Document review', 'HoT submitted'][Math.floor(Math.random() * 5)]
@@ -21268,14 +21269,26 @@ if (document.readyState === 'loading') {
 
         // Render Kanban Board
         function renderKanbanBoard() {
+            console.log('🎨 renderKanbanBoard called');
+            console.log('📊 filteredDeals:', filteredDeals.length);
+            
             const stages = ['lead', 'viewing', 'proposal', 'hot', 'signed', 'live'];
             
             stages.forEach(stage => {
                 const container = document.getElementById(`kanban-stage-${stage}`);
-                if (!container) return;
+                if (!container) {
+                    console.error(`❌ Container not found for stage: ${stage}`);
+                    return;
+                }
                 
                 const stageDeals = filteredDeals.filter(deal => deal.stage === stage);
-                const stageValue = stageDeals.reduce((sum, deal) => sum + parseFloat(deal.value.replace(/[£,M]/g, '')), 0);
+                console.log(`📋 Stage "${stage}": ${stageDeals.length} deals`);
+                
+                // Calculate stage value - deal.value is already a number
+                const stageValue = stageDeals.reduce((sum, deal) => {
+                    const value = typeof deal.value === 'number' ? deal.value : parseFloat(deal.valueFormatted?.replace(/[£,M]/g, '') || 0);
+                    return sum + value;
+                }, 0);
                 
                 // Update count and value in header
                 const countSpan = document.querySelector(`[data-stage="${stage}"].kanban-count`);
@@ -21284,7 +21297,9 @@ if (document.readyState === 'loading') {
                 }
                 
                 // Render deal cards
-                container.innerHTML = stageDeals.map(deal => createDealCard(deal)).join('');
+                const cardsHTML = stageDeals.map(deal => createDealCard(deal)).join('');
+                console.log(`🎴 Rendering ${stageDeals.length} cards for stage "${stage}"`);
+                container.innerHTML = cardsHTML;
                 
                 // Add drag and drop event listeners
                 container.querySelectorAll('.deal-card').forEach(card => {
