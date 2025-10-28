@@ -1798,7 +1798,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="overflow-x-auto">
+                        <div id="pipeline-table-container" class="overflow-x-auto">
                             <table class="w-full">
                                 <thead class="bg-stone bg-opacity-30">
                                     <tr>
@@ -1841,7 +1841,7 @@
                         </div>
 
                         <!-- Pagination -->
-                        <div class="p-6 border-t border-stone flex items-center justify-between">
+                        <div id="pipeline-table-pagination" class="p-6 border-t border-stone flex items-center justify-between">
                             <div class="text-sm text-concrete">
                                 Showing <span id="pipeline-page-start">1</span> to <span id="pipeline-page-end">25</span> of <span id="pipeline-page-total">247</span> deals
                             </div>
@@ -21164,6 +21164,11 @@ if (document.readyState === 'loading') {
         function switchPipelineView(view) {
             currentPipelineView = view;
             
+            // Initialize data if not already done
+            if (allDeals.length === 0) {
+                initializePipelineData();
+            }
+            
             // Update button styles
             document.getElementById('pipeline-view-kanban')?.classList.remove('bg-stone', 'text-slate');
             document.getElementById('pipeline-view-table')?.classList.remove('bg-stone', 'text-slate');
@@ -21173,7 +21178,8 @@ if (document.readyState === 'loading') {
             
             // Hide all views
             document.getElementById('pipeline-kanban-view')?.classList.add('hidden');
-            document.querySelector('section.mb-8:has(#pipeline-table-body)')?.classList.add('hidden');
+            document.getElementById('pipeline-table-container')?.classList.add('hidden');
+            document.getElementById('pipeline-table-pagination')?.classList.add('hidden');
             
             // Show selected view and update button
             if (view === 'kanban') {
@@ -21182,7 +21188,8 @@ if (document.readyState === 'loading') {
                 document.getElementById('pipeline-view-kanban')?.classList.remove('text-concrete');
                 renderKanbanBoard();
             } else if (view === 'table') {
-                document.querySelector('section.mb-8:has(#pipeline-table-body)')?.classList.remove('hidden');
+                document.getElementById('pipeline-table-container')?.classList.remove('hidden');
+                document.getElementById('pipeline-table-pagination')?.classList.remove('hidden');
                 document.getElementById('pipeline-view-table')?.classList.add('bg-stone', 'text-slate');
                 document.getElementById('pipeline-view-table')?.classList.remove('text-concrete');
             }
