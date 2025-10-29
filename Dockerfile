@@ -13,21 +13,24 @@ COPY ecosystem.config.cjs ./
 COPY .prettierrc .prettierignore ./
 # Copy application files
 COPY client ./client
-# Build the application (if needed in future)
-# RUN npm run build
+# Build the React application for production
+RUN npm run build
 
 FROM node:20-alpine
 WORKDIR /app
 
-# Copy everything from builder including node_modules
-COPY --from=builder /app ./
+# Install serve or use a simple static server
+RUN npm install -g serve
 
-# Expose port 5879
-EXPOSE 5879
+# Copy only the built files from builder
+COPY --from=builder /app/dist/public ./public
+
+# Expose port 80 (standard HTTP port)
+EXPOSE 80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:5879', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+  CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
 
-# Run the application using npm script to ensure vite.config.ts is read
-CMD ["npm", "run", "dev"]
+# Serve the static files
+CMD ["serve", "-s", "public", "-l", "80"]
