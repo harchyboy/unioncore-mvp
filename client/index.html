@@ -119,13 +119,55 @@
                     </button>
                 </div>
 
-                <!-- User Profile -->
-                <div class="flex items-center space-x-3">
-                    <div class="text-right">
-                        <p class="text-sm font-medium text-slate">Executive View</p>
-                        <p class="text-xs text-concrete">Portfolio Navigator</p>
+                <!-- User Profile Dropdown -->
+                <div class="relative">
+                    <div class="flex items-center space-x-3 cursor-pointer hover:bg-stone hover:bg-opacity-30 rounded-lg px-3 py-2 transition-colors" onclick="toggleUserDropdown()">
+                        <div class="text-right">
+                            <p class="text-sm font-medium text-slate" id="current-user-name">Dani</p>
+                            <p class="text-xs text-concrete">Portfolio Navigator</p>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face" alt="User" class="w-10 h-10 rounded-full object-cover" id="current-user-avatar">
+                        <i class="fa-solid fa-chevron-down text-concrete text-xs ml-1"></i>
                     </div>
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face" alt="User" class="w-10 h-10 rounded-full object-cover">
+                    
+                    <!-- User Dropdown Menu -->
+                    <div id="user-dropdown-menu" class="hidden absolute top-full right-0 mt-2 w-64 bg-white border border-stone rounded-lg shadow-xl z-50">
+                        <div class="p-2">
+                            <div class="px-3 py-2 border-b border-stone mb-2">
+                                <p class="text-xs font-semibold text-concrete uppercase">Switch Portfolio Manager</p>
+                            </div>
+                            
+                            <!-- Dani -->
+                            <div class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-stone hover:bg-opacity-30 cursor-pointer transition-colors" onclick="switchUser('dani')">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face" alt="Dani" class="w-10 h-10 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-slate">Dani</p>
+                                    <p class="text-xs text-concrete">Portfolio Navigator</p>
+                                </div>
+                                <i class="fa-solid fa-check text-success" id="check-dani"></i>
+                            </div>
+                            
+                            <!-- Max -->
+                            <div class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-stone hover:bg-opacity-30 cursor-pointer transition-colors" onclick="switchUser('max')">
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" alt="Max" class="w-10 h-10 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-slate">Max</p>
+                                    <p class="text-xs text-concrete">Portfolio Navigator</p>
+                                </div>
+                                <i class="fa-solid fa-check text-success hidden" id="check-max"></i>
+                            </div>
+                            
+                            <!-- Tom -->
+                            <div class="flex items-center space-x-3 px-3 py-2 rounded-lg hover:bg-stone hover:bg-opacity-30 cursor-pointer transition-colors" onclick="switchUser('tom')">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face" alt="Tom" class="w-10 h-10 rounded-full object-cover">
+                                <div class="flex-1">
+                                    <p class="text-sm font-semibold text-slate">Tom</p>
+                                    <p class="text-xs text-concrete">Portfolio Navigator</p>
+                                </div>
+                                <i class="fa-solid fa-check text-success hidden" id="check-tom"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -142,9 +184,9 @@
                 <!-- Role Context -->
                 <div class="bg-stone rounded-lg p-4">
                     <div class="flex items-center space-x-3">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face" alt="Executive" class="w-8 h-8 rounded-full object-cover">
-                        <div>
-                            <p class="text-sm font-semibold text-slate">Executive</p>
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face" alt="Executive" class="w-8 h-8 rounded-full object-cover" id="sidebar-user-avatar">
+                        <div class="flex-1">
+                            <p class="text-sm font-semibold text-slate" id="sidebar-user-name">Dani</p>
                             <p class="text-xs text-concrete">Portfolio Navigator</p>
                         </div>
                     </div>
@@ -24174,6 +24216,89 @@ Highcharts.chart('performance-chart', {
 
             // Optionally reload the lead detail view
             // showLeadDetail(leadId);
+        }
+
+        // User switching functionality
+        const users = {
+            'dani': {
+                name: 'Dani',
+                avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face'
+            },
+            'max': {
+                name: 'Max',
+                avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face'
+            },
+            'tom': {
+                name: 'Tom',
+                avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face'
+            }
+        };
+
+        // Get current user from localStorage or default to 'dani'
+        let currentUser = localStorage.getItem('currentUser') || 'dani';
+
+        // Initialize user on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCurrentUser(currentUser);
+        });
+
+        // Toggle user dropdown
+        function toggleUserDropdown() {
+            const dropdown = document.getElementById('user-dropdown-menu');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('user-dropdown-menu');
+            const trigger = event.target.closest('[onclick="toggleUserDropdown()"]');
+            
+            if (!dropdown?.contains(event.target) && !trigger) {
+                dropdown?.classList.add('hidden');
+            }
+        });
+
+        // Switch user
+        function switchUser(userId) {
+            currentUser = userId;
+            localStorage.setItem('currentUser', userId);
+            updateCurrentUser(userId);
+            
+            // Close dropdown
+            document.getElementById('user-dropdown-menu').classList.add('hidden');
+            
+            // Show toast notification
+            showToast(`Switched to ${users[userId].name}'s dashboard`, 'success');
+            
+            // In a real application, this would reload dashboard data for the selected user
+            console.log('Switched to user:', userId);
+            
+            // Optionally reload the page to show user-specific data
+            // setTimeout(() => location.reload(), 500);
+        }
+
+        // Update UI to reflect current user
+        function updateCurrentUser(userId) {
+            const user = users[userId];
+            
+            // Update header
+            document.getElementById('current-user-name').textContent = user.name;
+            document.getElementById('current-user-avatar').src = user.avatar;
+            
+            // Update sidebar
+            const sidebarName = document.getElementById('sidebar-user-name');
+            const sidebarAvatar = document.getElementById('sidebar-user-avatar');
+            if (sidebarName) sidebarName.textContent = user.name;
+            if (sidebarAvatar) sidebarAvatar.src = user.avatar;
+            
+            // Update checkmarks
+            document.querySelectorAll('[id^="check-"]').forEach(check => {
+                check.classList.add('hidden');
+            });
+            const currentCheck = document.getElementById(`check-${userId}`);
+            if (currentCheck) {
+                currentCheck.classList.remove('hidden');
+            }
         }
 
     </script>
