@@ -19,7 +19,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5879,
+    port: 51666,
     strictPort: true,
     host: "0.0.0.0",
     allowedHosts: [".hartz.ai", "union.hartz.ai"],
