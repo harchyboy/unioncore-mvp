@@ -4,10 +4,10 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "PORT=5879 tsx server/index.ts",
+    "dev": "cross-env PORT=5879 tsx server/index.ts",
     "build": "vite build && tsc server/index.ts --outDir dist --module es2022 --target es2022 --moduleResolution bundler --esModuleInterop --skipLibCheck",
-    "start": "PORT=5879 NODE_ENV=production node dist/index.js",
-    "preview": "PORT=5879 node dist/index.js",
+    "start": "cross-env PORT=5879 NODE_ENV=production node dist/index.js",
+    "preview": "cross-env PORT=5879 node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write ."
   },
@@ -75,6 +75,7 @@
     "@vitejs/plugin-react": "^5.0.4",
     "add": "^2.0.6",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "esbuild": "^0.25.0",
     "pnpm": "^10.15.1",
     "postcss": "^8.4.47",
