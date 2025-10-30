@@ -34,16 +34,16 @@ RUN npm install --production --legacy-peer-deps
 # Copy built files from builder
 COPY --from=builder /app/dist ./dist
 
-# Expose port 80
-EXPOSE 5879
+# Expose port 80 (required by Dokploy reverse proxy)
+EXPOSE 80
 
 # Set production environment
 ENV NODE_ENV=production
-ENV PORT=5879
+ENV PORT=80
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD wget --no-verbose --tries=1 --spider http://localhost:5879/ || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
 
 # Start the Express server
 CMD ["node", "dist/index.js"]
