@@ -1,7 +1,8 @@
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import path from "path";
 export default defineConfig({
-  plugins: [],
+  plugins: [react()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -20,13 +21,12 @@ export default defineConfig({
   },
   server: {
     port: 51666,
-    strictPort: true,
+    strictPort: false,
     host: "0.0.0.0",
-    allowedHosts: [".hartz.ai", "union.hartz.ai"],
     cors: true,
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "X-Frame-Options": "ALLOWALL",
     },
   },
 });
