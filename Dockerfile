@@ -14,7 +14,6 @@ RUN npm install --legacy-peer-deps
 COPY vite.config.ts tsconfig.json tsconfig.node.json ./
 COPY tailwind.config.js postcss.config.js ./
 COPY ecosystem.config.cjs ./
-COPY .prettierrc .prettierignore ./
 
 # Copy application files
 COPY client ./client
