@@ -4,10 +4,10 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "dev": "vite --host",
+    "dev": "PORT=5879 tsx server/index.ts",
     "build": "vite build && tsc server/index.ts --outDir dist --module es2022 --target es2022 --moduleResolution bundler --esModuleInterop --skipLibCheck",
-    "start": "NODE_ENV=production node dist/index.js",
-    "preview": "vite preview --host",
+    "start": "PORT=5879 NODE_ENV=production node dist/index.js",
+    "preview": "PORT=5879 node dist/index.js",
     "check": "tsc --noEmit",
     "format": "prettier --write ."
   },

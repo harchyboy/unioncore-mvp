@@ -10,11 +10,19 @@ async function startServer() {
   const app = express();
   const server = createServer(app);
 
-  // Serve static files from dist/public in production
+  // Always use port 5879
+  const port = parseInt(process.env.PORT || "5879", 10);
+
+  // Serve static files from dist/public
+  // In production: dist/public (Docker build)
+  // In development: ../dist/public (after npm run build)
   const staticPath =
     process.env.NODE_ENV === "production"
       ? path.resolve(__dirname, "public")
       : path.resolve(__dirname, "..", "dist", "public");
+
+  console.log(`Serving static files from: ${staticPath}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
 
   app.use(express.static(staticPath));
 
@@ -23,11 +31,14 @@ async function startServer() {
     res.sendFile(path.join(staticPath, "index.html"));
   });
 
-  const port = parseInt(process.env.PORT || "5879", 10);
-
   server.listen(port, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${port}/`);
+    console.log(`\n🚀 Server running on http://localhost:${port}/`);
+    console.log(`📂 Static files: ${staticPath}`);
+    console.log(`🌍 Press Ctrl+C to stop\n`);
   });
 }
 
-startServer().catch(console.error);
+startServer().catch((error) => {
+  console.error("❌ Failed to start server:", error);
+  process.exit(1);
+});
