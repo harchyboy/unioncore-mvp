@@ -1,24 +1,22 @@
 version: '3.8'
 
 services:
-  unioncore-frontend:
+  unioncore:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: unioncore-mvp
     restart: unless-stopped
     ports:
-      - "5879:5879"
+      - "5879:5879"  # Change left port for custom external port (e.g., "80:5879" for port 80)
     environment:
       - NODE_ENV=production
-      - VITE_PORT=5879
-      - VITE_HOST=0.0.0.0
-    volumes:
-      - ./client:/app/client:ro
+      - PORT=5879
+      - HOST=0.0.0.0
     networks:
       - unioncore-network
     healthcheck:
-      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5879"]
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:5879/"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -26,8 +24,8 @@ services:
     labels:
       - "com.docker.compose.project=unioncore-mvp"
       - "app.name=UNION Core Plus"
-      - "app.version=1.0.0"
-      - "app.description=Property Management Dashboard"
+      - "app.version=2.0.0"
+      - "app.description=Property Management Dashboard - Fixed CSS with Tailwind v3"
 
 networks:
   unioncore-network:

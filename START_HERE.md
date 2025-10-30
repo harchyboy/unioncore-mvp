@@ -44,11 +44,14 @@ That's it! The application will open at http://localhost:5879
 
 | Issue | Status |
 |-------|--------|
-| Blank screen | ✅ FIXED |
+| Blank screen (CSS not loading) | ✅ FIXED (Downgraded Tailwind v4→v3) |
 | Not working on Windows | ✅ FIXED |
 | Not working on Linux | ✅ FIXED |
 | Complicated to run | ✅ FIXED |
 | No documentation | ✅ FIXED |
+
+### Technical Details:
+The blank screen was caused by **Tailwind CSS v4's experimental syntax** (`@utility`, `@theme`, `@custom-variant`) which isn't supported by browsers yet. We downgraded to **Tailwind CSS v3.4.1** (stable) which uses the standard `@tailwind` directives that browsers understand.
 
 ---
 
