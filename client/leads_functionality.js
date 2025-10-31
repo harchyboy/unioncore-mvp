@@ -175,3 +175,22 @@ document.addEventListener('keydown', function(event) {
 });
 
 console.log('Lead management functions loaded successfully');
+
+
+// Disqualify lead
+function disqualifyLead() {
+    if (confirm('Are you sure you want to disqualify this lead?')) {
+        // Show success toast
+        const toast = document.getElementById('successToast');
+        toast.querySelector('span').textContent = 'Lead disqualified successfully!';
+        toast.classList.remove('hidden');
+        
+        // Close modal
+        closeLeadDetailModal();
+        
+        // Hide toast after 3 seconds
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
+}
