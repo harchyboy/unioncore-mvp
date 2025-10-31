@@ -244,6 +244,11 @@
                             <i class="fa-solid fa-database mr-3 w-5"></i>
                             <span>Property Index</span>
                         </span>
+                        <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-space-allocation">
+                            <i class="fa-solid fa-chart-area mr-3 w-5"></i>
+                            <span>Space Allocation</span>
+                            <span class="ml-auto text-xs bg-success bg-opacity-20 text-success px-2 py-1 rounded-full object-cover">NEW</span>
+                        </span>
                         <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-viewing-scheduler">
                             <i class="fa-solid fa-calendar-alt mr-3 w-5"></i>
                             <span>Viewing Scheduler</span>
@@ -5353,6 +5358,243 @@
                 </div>
             </div>
             <!-- END PROPERTY DETAIL PAGE -->
+            <!-- SPACE ALLOCATION DASHBOARD PAGE -->
+            <div id="space-allocation-page" class="page-content hidden">
+                <!-- Breadcrumb -->
+                <div class="mb-6">
+                    <div class="flex items-center text-sm text-concrete">
+                        <span class="cursor-pointer hover:text-slate" onclick="navigateToPage('dashboard')">Origination</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="cursor-pointer hover:text-slate" onclick="navigateToPage('property-index')">Properties</span>
+                        <i class="fa-solid fa-chevron-right mx-2 text-xs"></i>
+                        <span class="text-slate font-medium">Space Allocation Dashboard</span>
+                    </div>
+                </div>
+
+                <!-- Header -->
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h1 class="text-2xl font-semibold text-slate mb-1">Space Allocation Dashboard</h1>
+                        <p class="text-sm text-concrete">Portfolio-wide space utilization and capacity planning</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="px-4 py-2 border border-stone text-concrete rounded-lg hover:bg-stone transition-colors">
+                            <i class="fa-solid fa-download mr-2"></i>Export Report
+                        </button>
+                        <button class="px-4 py-2 bg-slate text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                            <i class="fa-solid fa-calendar-plus mr-2"></i>Book Space
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Portfolio Overview KPIs -->
+                <div class="grid grid-cols-5 gap-6 mb-6">
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Total Space</span>
+                            <i class="fa-solid fa-building text-info"></i>
+                        </div>
+                        <p class="text-2xl font-semibold text-slate"><span id="total-space">0</span> sqft</p>
+                        <p class="text-xs text-concrete mt-1">Across <span id="total-properties">0</span> properties</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Occupied Space</span>
+                            <i class="fa-solid fa-users text-success"></i>
+                        </div>
+                        <p class="text-2xl font-semibold text-slate"><span id="occupied-space">0</span> sqft</p>
+                        <p class="text-xs text-success mt-1"><span id="occupancy-percentage">0</span>% occupancy</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Available Space</span>
+                            <i class="fa-solid fa-door-open text-warning"></i>
+                        </div>
+                        <p class="text-2xl font-semibold text-slate"><span id="available-space">0</span> sqft</p>
+                        <p class="text-xs text-warning mt-1"><span id="available-units">0</span> units available</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Total Tenants</span>
+                            <i class="fa-solid fa-briefcase text-info"></i>
+                        </div>
+                        <p class="text-2xl font-semibold text-slate" id="total-tenants">0</p>
+                        <p class="text-xs text-concrete mt-1">Active leases</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-sm text-concrete">Utilization Rate</span>
+                            <i class="fa-solid fa-chart-pie text-success"></i>
+                        </div>
+                        <p class="text-2xl font-semibold text-slate"><span id="utilization-rate">0</span>%</p>
+                        <p class="text-xs text-success mt-1">Optimal range: 85-95%</p>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-3 gap-6 mb-6">
+                    <!-- Building Visualization -->
+                    <div class="col-span-2">
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <div class="flex items-center justify-between mb-4">
+                                <h2 class="text-lg font-semibold text-slate">Building Visualization</h2>
+                                <select id="building-selector" class="text-sm border border-stone rounded-lg px-3 py-2 text-slate">
+                                    <option value="all">All Properties</option>
+                                </select>
+                            </div>
+                            
+                            <!-- Floor-by-Floor Breakdown -->
+                            <div id="building-floors" class="space-y-3">
+                                <!-- Floors will be generated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Capacity Alerts -->
+                    <div>
+                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <h2 class="text-lg font-semibold text-slate mb-4">Capacity Alerts</h2>
+                            <div class="space-y-3" id="capacity-alerts">
+                                <!-- Alerts will be generated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <!-- Capacity Utilization Chart -->
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <h2 class="text-lg font-semibold text-slate mb-4">Capacity Utilization by Property</h2>
+                        <div id="capacity-chart" class="space-y-3">
+                            <!-- Chart will be generated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Space Allocation by Tenant Type -->
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <h2 class="text-lg font-semibold text-slate mb-4">Space Allocation by Tenant Type</h2>
+                        <div class="flex items-center justify-center h-64">
+                            <div class="w-full">
+                                <div id="tenant-type-chart" class="space-y-3">
+                                    <!-- Pie chart representation will be generated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shared Space Booking & Future Planning -->
+                <div class="grid grid-cols-2 gap-6 mb-6">
+                    <!-- Shared Space Booking Calendar -->
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <div class="flex items-center justify-between mb-4">
+                            <h2 class="text-lg font-semibold text-slate">Shared Space Booking</h2>
+                            <button class="text-sm text-slate hover:underline">
+                                <i class="fa-solid fa-calendar-plus mr-1"></i>New Booking
+                            </button>
+                        </div>
+                        
+                        <!-- Calendar -->
+                        <div class="mb-4">
+                            <div class="flex items-center justify-between mb-3">
+                                <button id="shared-calendar-prev" class="p-2 hover:bg-stone rounded-lg">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                                <span class="text-sm font-medium text-slate" id="shared-calendar-month">January 2024</span>
+                                <button id="shared-calendar-next" class="p-2 hover:bg-stone rounded-lg">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Mini Calendar -->
+                            <div class="grid grid-cols-7 gap-1 text-center text-xs">
+                                <div class="text-concrete py-1">S</div>
+                                <div class="text-concrete py-1">M</div>
+                                <div class="text-concrete py-1">T</div>
+                                <div class="text-concrete py-1">W</div>
+                                <div class="text-concrete py-1">T</div>
+                                <div class="text-concrete py-1">F</div>
+                                <div class="text-concrete py-1">S</div>
+                                <div id="shared-calendar-grid"></div>
+                            </div>
+                        </div>
+
+                        <!-- Upcoming Bookings -->
+                        <div class="pt-4 border-t border-stone">
+                            <p class="text-sm font-medium text-slate mb-3">Upcoming Bookings</p>
+                            <div class="space-y-2" id="upcoming-bookings">
+                                <!-- Bookings will be generated dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Future Capacity Planning -->
+                    <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                        <h2 class="text-lg font-semibold text-slate mb-4">Future Capacity Planning</h2>
+                        
+                        <!-- Pipeline Impact -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-concrete">Pipeline Deals Impact</span>
+                                <span class="text-sm font-medium text-slate"><span id="pipeline-space-needed">0</span> sqft needed</span>
+                            </div>
+                            <div class="w-full bg-stone rounded-full h-2">
+                                <div id="pipeline-capacity-bar" class="bg-warning h-2 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p class="text-xs text-concrete mt-1">Based on <span id="pipeline-deals-count">0</span> deals in pipeline</p>
+                        </div>
+
+                        <!-- Capacity Forecast -->
+                        <div class="mb-6">
+                            <p class="text-sm font-medium text-slate mb-3">6-Month Capacity Forecast</p>
+                            <div class="space-y-2" id="capacity-forecast">
+                                <!-- Forecast will be generated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Recommendations -->
+                        <div class="p-4 bg-stone rounded-lg">
+                            <p class="text-sm font-medium text-slate mb-2">
+                                <i class="fa-solid fa-lightbulb text-warning mr-2"></i>Recommendations
+                            </p>
+                            <ul class="text-xs text-concrete space-y-1" id="capacity-recommendations">
+                                <!-- Recommendations will be generated dynamically -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Space Breakdown Table -->
+                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                    <h2 class="text-lg font-semibold text-slate mb-4">Detailed Space Breakdown by Property</h2>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-stone">
+                                <tr>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Property</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Location</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Total Space</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Occupied</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Available</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Occupancy</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Tenants</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-slate">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="space-breakdown-table" class="divide-y divide-stone">
+                                <!-- Table rows will be generated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <!-- END SPACE ALLOCATION DASHBOARD PAGE -->
 
             <!-- Photo Lightbox Modal -->
             <div id="photo-lightbox" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden flex items-center justify-center">
@@ -21162,6 +21404,7 @@ if (document.readyState === 'loading') {
         // Setup Property Index Navigation
         function setupPropertyIndexNavigation() {
             document.getElementById('nav-property-index')?.addEventListener('click', () => navigateToPage('property-index'));
+            document.getElementById('nav-space-allocation')?.addEventListener('click', () => navigateToPage('space-allocation'));
             document.getElementById('nav-property-index-collapsed')?.addEventListener('click', () => navigateToPage('property-index'));
             document.getElementById('nav-property-index-mobile')?.addEventListener('click', () => {
                 navigateToPage('property-index');
@@ -36572,4 +36815,5 @@ setTimeout(function() {
     <script src="/properties_data.js"></script>
     <script src="/property_index.js"></script>
     <script src="/property_detail.js"></script>
+    <script src="/space_allocation.js"></script>
 </body></html>
