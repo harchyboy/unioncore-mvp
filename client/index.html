@@ -4046,11 +4046,15 @@
                                 
                                 <select id="filter-location" class="px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate">
                                     <option value="">All Locations</option>
-                                    <option value="London">London</option>
-                                    <option value="Manchester">Manchester</option>
-                                    <option value="Birmingham">Birmingham</option>
-                                    <option value="Edinburgh">Edinburgh</option>
-                                    <option value="Glasgow">Glasgow</option>
+                                    <option value="Canary Wharf">Canary Wharf</option>
+                                    <option value="Shoreditch">Shoreditch</option>
+                                    <option value="King's Cross">King's Cross</option>
+                                    <option value="London Bridge">London Bridge</option>
+                                    <option value="Holborn">Holborn</option>
+                                    <option value="Paddington">Paddington</option>
+                                    <option value="Clerkenwell">Clerkenwell</option>
+                                    <option value="Greenwich">Greenwich</option>
+                                    <option value="Stratford">Stratford</option>
                                 </select>
                                 
                                 <select id="filter-size" class="px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate">
@@ -4062,16 +4066,15 @@
                                 
                                 <select id="filter-availability" class="px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate">
                                     <option value="">All Availability</option>
-                                    <option value="Available">Available</option>
-                                    <option value="Under Offer">Under Offer</option>
-                                    <option value="Let">Let</option>
+                                    <option value="Fully Let">Fully Let</option>
+                                    <option value="Partially Occupied">Partially Occupied</option>
                                 </select>
                                 
                                 <select id="filter-sector" class="px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate">
-                                    <option value="">All Sectors</option>
-                                    <option value="Office">Office</option>
-                                    <option value="Retail">Retail</option>
-                                    <option value="Industrial">Industrial</option>
+                                    <option value="">All Types</option>
+                                    <option value="Office Building">Office Building</option>
+                                    <option value="Flex Space">Flex Space</option>
+                                    <option value="Business Park">Business Park</option>
                                     <option value="Mixed Use">Mixed Use</option>
                                 </select>
                             </div>
@@ -4083,7 +4086,17 @@
                                     <button class="px-3 py-1.5 bg-gray-100 text-concrete rounded-lg text-xs hover:bg-gray-200 transition-colors">My Deals</button>
                                 </div>
                                 <div class="flex items-center space-x-3">
-                                    <span class="text-sm text-concrete">View:</span>
+                                    <span class="text-sm text-concrete">Sort by:</span>
+                                    <select id="property-sort" class="px-3 py-1.5 border border-stone rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-slate">
+                                        <option value="name-asc">Name (A-Z)</option>
+                                        <option value="name-desc">Name (Z-A)</option>
+                                        <option value="occupancy-desc">Occupancy (High-Low)</option>
+                                        <option value="occupancy-asc">Occupancy (Low-High)</option>
+                                        <option value="revenue-desc">Revenue (High-Low)</option>
+                                        <option value="revenue-asc">Revenue (Low-High)</option>
+                                        <option value="recent">Recently Added</option>
+                                    </select>
+                                    <span class="text-sm text-concrete ml-3">View:</span>
                                     <button id="view-grid-btn" class="p-2 bg-slate text-white rounded-lg" title="Grid View">
                                         <i class="fa-solid fa-th"></i>
                                     </button>
@@ -36471,4 +36484,6 @@ setTimeout(function() {
     <i class="fa-solid fa-check-circle"></i>
     <span>Lead added successfully!</span>
 </div>
+    <script src="/properties_data.js"></script>
+    <script src="/property_index.js"></script>
 </body></html>
