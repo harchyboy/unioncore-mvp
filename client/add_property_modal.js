@@ -1,7 +1,8 @@
 // Add/Edit Property Modal JavaScript
 
 let editingPropertyId = null;
-let uploadedImages = [];
+let uploadedImages = []; // Array of {url, filename} objects
+let isUploading = false;
 
 // Open modal for adding new property
 function openAddPropertyModal() {
@@ -49,20 +50,13 @@ function editProperty(propertyId) {
         cb.checked = property.amenities && property.amenities.includes(cb.value);
     });
     
-    // Show existing images (placeholder)
+    // Show existing images
     if (property.images && property.images.length > 0) {
-        const previewContainer = document.getElementById('image-preview-container');
-        previewContainer.classList.remove('hidden');
-        previewContainer.innerHTML = property.images.slice(0, 5).map((img, index) => `
-            <div class="relative group">
-                <img src="${img}" alt="Property image ${index + 1}" class="w-full h-24 object-cover rounded-lg">
-                <div class="absolute inset-0 bg-slate bg-opacity-0 group-hover:bg-opacity-50 transition-all rounded-lg flex items-center justify-center">
-                    <button class="text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-times"></i>
-                    </button>
-                </div>
-            </div>
-        `).join('');
+        uploadedImages = property.images.map(url => ({
+            url: url,
+            filename: url.split('/').pop() || ''
+        }));
+        renderImagePreviews();
     }
     
     document.getElementById('add-property-modal').classList.remove('hidden');
@@ -99,8 +93,15 @@ function saveProperty() {
         occupiedUnits: parseInt(document.getElementById('property-occupied-units').value),
         pricePerSqFt: parseFloat(document.getElementById('property-price-sqft').value),
         description: document.getElementById('property-description').value,
-        amenities: Array.from(document.querySelectorAll('.amenity-checkbox:checked')).map(cb => cb.value)
+        amenities: Array.from(document.querySelectorAll('.amenity-checkbox:checked')).map(cb => cb.value),
+        images: uploadedImages.map(img => img.url)
     };
+    
+    // Check if images are still uploading
+    if (isUploading) {
+        showErrorToast('Please wait for images to finish uploading');
+        return;
+    }
     
     // Calculate derived values
     propertyData.occupancyRate = Math.round((propertyData.occupiedUnits / propertyData.totalUnits) * 100);
@@ -119,9 +120,6 @@ function saveProperty() {
         const newProperty = {
             id: newId,
             ...propertyData,
-            images: uploadedImages.length > 0 ? uploadedImages : [
-                'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop'
-            ],
             units: [],
             documents: []
         };
@@ -181,54 +179,136 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Handle image files
-function handleImageFiles(files) {
-    const previewContainer = document.getElementById('image-preview-container');
-    
+// Handle image files with real upload
+async function handleImageFiles(files) {
     if (files.length === 0) return;
     
-    // Show preview container
-    previewContainer.classList.remove('hidden');
-    
-    // Process each file
-    files.forEach(file => {
-        // Check file size (max 5MB)
+    // Check file sizes
+    for (const file of files) {
         if (file.size > 5 * 1024 * 1024) {
-            showErrorToast('Image too large: ' + file.name + ' (max 5MB)');
+            showErrorToast(`Image too large: ${file.name} (max 5MB)`);
             return;
         }
-        
-        // Create file reader
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const imageUrl = e.target.result;
-            uploadedImages.push(imageUrl);
+    }
+    
+    // Show loading state
+    isUploading = true;
+    showLoadingSpinner();
+    
+    try {
+        // Upload each file
+        for (const file of files) {
+            const formData = new FormData();
+            formData.append('image', file);
             
-            // Add preview
-            const previewDiv = document.createElement('div');
-            previewDiv.className = 'relative group';
-            previewDiv.innerHTML = `
-                <img src="${imageUrl}" alt="Preview" class="w-full h-24 object-cover rounded-lg">
-                <div class="absolute inset-0 bg-slate bg-opacity-0 group-hover:bg-opacity-50 transition-all rounded-lg flex items-center justify-center">
-                    <button onclick="removeImage(${uploadedImages.length - 1})" class="text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-times"></i>
-                    </button>
-                </div>
-            `;
-            previewContainer.appendChild(previewDiv);
-        };
-        reader.readAsDataURL(file);
-    });
+            const response = await fetch('/api/properties/upload-image', {
+                method: 'POST',
+                body: formData
+            });
+            
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Upload failed');
+            }
+            
+            const data = await response.json();
+            
+            // Add to uploaded images array
+            uploadedImages.push({
+                url: data.imageUrl,
+                filename: data.filename
+            });
+        }
+        
+        // Render previews
+        renderImagePreviews();
+        showSuccessToast(`${files.length} image(s) uploaded successfully`);
+        
+    } catch (error) {
+        console.error('Upload error:', error);
+        showErrorToast(error.message || 'Failed to upload images');
+    } finally {
+        isUploading = false;
+        hideLoadingSpinner();
+    }
 }
 
-// Remove image
-function removeImage(index) {
-    uploadedImages.splice(index, 1);
+// Render image previews
+function renderImagePreviews() {
     const previewContainer = document.getElementById('image-preview-container');
-    previewContainer.children[index].remove();
     
     if (uploadedImages.length === 0) {
         previewContainer.classList.add('hidden');
+        previewContainer.innerHTML = '';
+        return;
+    }
+    
+    previewContainer.classList.remove('hidden');
+    previewContainer.innerHTML = uploadedImages.map((img, index) => `
+        <div class="relative group">
+            <img src="${img.url}" alt="Property image ${index + 1}" class="w-full h-24 object-cover rounded-lg">
+            <div class="absolute inset-0 bg-slate bg-opacity-0 group-hover:bg-opacity-50 transition-all rounded-lg flex items-center justify-center">
+                <button type="button" onclick="removeImage(${index})" class="text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Remove image with backend deletion
+async function removeImage(index) {
+    const image = uploadedImages[index];
+    
+    // Only delete from backend if it's an uploaded file (not a placeholder URL)
+    if (image.url.startsWith('/uploads/')) {
+        try {
+            const response = await fetch(`/api/properties/delete-image/${image.filename}`, {
+                method: 'DELETE'
+            });
+            
+            if (!response.ok) {
+                const error = await response.json();
+                throw new Error(error.error || 'Delete failed');
+            }
+            
+            showSuccessToast('Image deleted successfully');
+        } catch (error) {
+            console.error('Delete error:', error);
+            showErrorToast(error.message || 'Failed to delete image');
+            return; // Don't remove from array if backend deletion failed
+        }
+    }
+    
+    // Remove from array
+    uploadedImages.splice(index, 1);
+    renderImagePreviews();
+}
+
+// Show loading spinner
+function showLoadingSpinner() {
+    const uploadArea = document.getElementById('image-upload-area');
+    if (!uploadArea) return;
+    
+    const spinner = document.createElement('div');
+    spinner.id = 'upload-spinner';
+    spinner.className = 'absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center rounded-lg';
+    spinner.innerHTML = `
+        <div class="text-center">
+            <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-slate"></div>
+            <p class="text-sm text-slate mt-2">Uploading...</p>
+        </div>
+    `;
+    
+    uploadArea.style.position = 'relative';
+    uploadArea.appendChild(spinner);
+}
+
+// Hide loading spinner
+function hideLoadingSpinner() {
+    const spinner = document.getElementById('upload-spinner');
+    if (spinner) {
+        spinner.remove();
     }
 }
 
@@ -302,4 +382,4 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-console.log('Add/Edit Property Modal JavaScript loaded');
+console.log('Add/Edit Property Modal JavaScript with Real Image Upload loaded');
