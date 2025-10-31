@@ -4941,8 +4941,8 @@
                             <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="units">
                                 <i class="fa-solid fa-door-open mr-2"></i>Units
                             </button>
-                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="gallery">
-                                <i class="fa-solid fa-images mr-2"></i>Gallery
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="availability">
+                                <i class="fa-solid fa-calendar mr-2"></i>Availability Calendar
                             </button>
                             <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="performance">
                                 <i class="fa-solid fa-chart-bar mr-2"></i>Performance
@@ -4950,115 +4950,89 @@
                             <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="documents">
                                 <i class="fa-solid fa-file-alt mr-2"></i>Documents
                             </button>
+                            <button class="property-detail-tab py-3 px-1 text-sm font-medium border-b-2 border-transparent text-concrete hover:text-slate hover:border-stone transition-colors" data-tab="marketing">
+                                <i class="fa-solid fa-bullhorn mr-2"></i>Marketing
+                            </button>
                         </nav>
                     </div>
                 </div>
 
+                <!-- Tab Content -->
                 <!-- Tab Content -->
                 <div id="property-tab-content">
                     
                     <!-- Overview Tab -->
                     <div class="property-tab-panel" data-tab-panel="overview">
                         <div class="grid grid-cols-3 gap-6">
-                            <!-- Left Column - Details & Amenities -->
+                            <!-- Left Column - Gallery & Description -->
                             <div class="col-span-2 space-y-6">
+                                <!-- Image Gallery -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Property Images</h2>
+                                    <div class="grid grid-cols-3 gap-4" id="property-image-gallery">
+                                        <!-- Images will be loaded dynamically -->
+                                    </div>
+                                </div>
+
                                 <!-- Description -->
                                 <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                                     <h2 class="text-lg font-semibold text-slate mb-4">Description</h2>
                                     <p class="text-concrete leading-relaxed" id="property-detail-description">
-                                        A premium office space in the heart of the business district, offering modern amenities and excellent transport links.
+                                        Loading property description...
                                     </p>
                                 </div>
 
-                                <!-- Specifications -->
+                                <!-- Specifications Table -->
                                 <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                    <h2 class="text-lg font-semibold text-slate mb-4">Specifications</h2>
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Property Specifications</h2>
                                     <div class="grid grid-cols-2 gap-6">
                                         <div>
-                                            <label class="text-sm text-concrete">Floor Area</label>
-                                            <p class="text-slate font-medium"><span id="property-spec-size">0</span> sq ft</p>
+                                            <label class="text-sm text-concrete">Address</label>
+                                            <p class="text-slate font-medium" id="property-spec-address">-</p>
                                         </div>
                                         <div>
-                                            <label class="text-sm text-concrete">EPC Rating</label>
-                                            <p class="text-slate font-medium" id="property-detail-epc">-</p>
+                                            <label class="text-sm text-concrete">Property Type</label>
+                                            <p class="text-slate font-medium" id="property-spec-type">-</p>
                                         </div>
                                         <div>
-                                            <label class="text-sm text-concrete">Broker</label>
-                                            <p class="text-slate font-medium" id="property-detail-broker">-</p>
+                                            <label class="text-sm text-concrete">Total Area</label>
+                                            <p class="text-slate font-medium" id="property-spec-area">-</p>
                                         </div>
                                         <div>
-                                            <label class="text-sm text-concrete">Broker Contact</label>
-                                            <p class="text-slate font-medium" id="property-detail-broker-contact">-</p>
+                                            <label class="text-sm text-concrete">Number of Floors</label>
+                                            <p class="text-slate font-medium" id="property-spec-floors">-</p>
                                         </div>
                                         <div>
-                                            <label class="text-sm text-concrete">Availability</label>
-                                            <p class="text-slate font-medium" id="property-detail-availability">-</p>
+                                            <label class="text-sm text-concrete">Built Year</label>
+                                            <p class="text-slate font-medium" id="property-spec-built">-</p>
                                         </div>
                                         <div>
-                                            <label class="text-sm text-concrete">HVAC Servicing</label>
-                                            <p class="text-slate font-medium" id="property-detail-hvac">Landlord Provided</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Amenities -->
-                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                    <h2 class="text-lg font-semibold text-slate mb-4">Amenities</h2>
-                                    <div class="grid grid-cols-3 gap-4" id="property-amenities-list">
-                                        <div class="flex items-center text-sm text-concrete">
-                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>24/7 Access
-                                        </div>
-                                        <div class="flex items-center text-sm text-concrete">
-                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Air Conditioning
-                                        </div>
-                                        <div class="flex items-center text-sm text-concrete">
-                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Lift
-                                        </div>
-                                        <div class="flex items-center text-sm text-concrete">
-                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Meeting Rooms
-                                        </div>
-                                        <div class="flex items-center text-sm text-concrete">
-                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Wi-Fi
-                                        </div>
-                                        <div class="flex items-center text-sm text-concrete">
-                                            <i class="fa-solid fa-check text-green-600 mr-2"></i>Car Parking
+                                            <label class="text-sm text-concrete">Location</label>
+                                            <p class="text-slate font-medium" id="property-spec-location">-</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Right Column - Map -->
+                            <!-- Right Column - Amenities -->
                             <div class="space-y-6">
-                                <!-- Location Map -->
+                                <!-- Amenities -->
                                 <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                    <h2 class="text-lg font-semibold text-slate mb-4">Location</h2>
-                                    <div id="property-map" class="w-full h-64 bg-stone rounded-lg flex items-center justify-center">
-                                        <div class="text-center">
-                                            <i class="fa-solid fa-map-marker-alt text-4xl text-concrete mb-2"></i>
-                                            <p class="text-sm text-concrete" id="property-map-address">Loading map...</p>
-                                        </div>
-                                    </div>
-                                    <div class="mt-4">
-                                        <p class="text-sm text-concrete mb-1">Full Address</p>
-                                        <p class="text-slate font-medium" id="property-full-address">-</p>
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Amenities</h2>
+                                    <div class="space-y-3" id="property-amenities-list">
+                                        <!-- Amenities will be loaded dynamically -->
                                     </div>
                                 </div>
 
-                                <!-- Contact Info -->
+                                <!-- Location Map Placeholder -->
                                 <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                    <h2 class="text-lg font-semibold text-slate mb-4">Contact</h2>
-                                    <div class="space-y-3">
-                                        <div>
-                                            <label class="text-sm text-concrete">Broker</label>
-                                            <p class="text-slate font-medium" id="property-contact-broker">-</p>
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Location</h2>
+                                    <div class="bg-stone rounded-lg h-64 flex items-center justify-center">
+                                        <div class="text-center">
+                                            <i class="fa-solid fa-map-marker-alt text-4xl text-concrete mb-2"></i>
+                                            <p class="text-sm text-concrete">Map View</p>
+                                            <p class="text-xs text-concrete mt-1" id="property-map-address">Loading...</p>
                                         </div>
-                                        <div>
-                                            <label class="text-sm text-concrete">Contact Person</label>
-                                            <p class="text-slate font-medium" id="property-contact-person">-</p>
-                                        </div>
-                                        <button class="w-full px-4 py-2 border border-stone text-concrete rounded-lg hover:bg-stone transition-colors text-sm">
-                                            <i class="fa-solid fa-envelope mr-2"></i>Contact Broker
-                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -5068,144 +5042,195 @@
                     <!-- Units Tab -->
                     <div class="property-tab-panel hidden" data-tab-panel="units">
                         <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold text-slate">Property Units</h2>
-                                <button class="text-sm text-slate hover:underline" onclick="document.getElementById('add-unit-btn').click()">
-                                    <i class="fa-solid fa-plus mr-1"></i>Add Unit
-                                </button>
+                            <!-- Occupancy Summary -->
+                            <div class="mb-6 p-4 bg-stone rounded-lg">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-sm text-concrete mb-1">Occupancy Status</p>
+                                        <p class="text-2xl font-semibold text-slate">
+                                            <span id="units-occupied-count">0</span> of <span id="units-total-count">0</span> units occupied
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="text-sm text-concrete mb-1">Occupancy Rate</p>
+                                        <p class="text-2xl font-semibold text-success"><span id="units-occupancy-rate">0</span>%</p>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <!-- Units List -->
-                            <div id="property-units-list">
-                                <!-- Empty state -->
-                                <div id="units-empty-state" class="text-center py-12">
-                                    <i class="fa-solid fa-door-open text-5xl text-concrete mb-4"></i>
-                                    <p class="text-slate font-medium mb-2">No units added yet</p>
-                                    <p class="text-sm text-concrete mb-4">Add units to this property to start managing lettable spaces</p>
-                                    <button onclick="document.getElementById('add-unit-btn').click()" class="px-4 py-2 bg-slate text-white rounded-lg hover:bg-opacity-90 transition-colors">
-                                        <i class="fa-solid fa-plus mr-2"></i>Add First Unit
-                                    </button>
-                                </div>
-                                
-                                <!-- Units table (hidden by default) -->
-                                <div id="units-table-container" class="hidden">
-                                    <table class="w-full">
-                                        <thead>
-                                            <tr class="border-b border-stone">
-                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Unit Name</th>
-                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Floor</th>
-                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Area (sq ft)</th>
-                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Desks</th>
-                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Status</th>
-                                                <th class="text-left py-3 px-4 text-sm font-medium text-concrete">Rent</th>
-                                                <th class="text-right py-3 px-4 text-sm font-medium text-concrete">Actions</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="units-table-body">
-                                            <!-- Units will be inserted here -->
-                                        </tbody>
-                                    </table>
-                                </div>
+
+                            <!-- Units Table -->
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-stone">
+                                        <tr>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Unit ID</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Floor</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Size (sqft)</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Status</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Tenant</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Annual Rent</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Lease End</th>
+                                            <th class="px-4 py-3 text-left text-xs font-medium text-slate">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="units-table-body" class="divide-y divide-stone">
+                                        <!-- Units will be loaded dynamically -->
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Gallery Tab -->
-                    <div class="property-tab-panel hidden" data-tab-panel="gallery">
-                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                            <div class="flex items-center justify-between mb-4">
-                                <h2 class="text-lg font-semibold text-slate">Photo Gallery</h2>
-                                <button class="text-sm text-slate hover:underline">
-                                    <i class="fa-solid fa-upload mr-1"></i>Upload Photos
-                                </button>
+                    <!-- Availability Calendar Tab -->
+                    <div class="property-tab-panel hidden" data-tab-panel="availability">
+                        <div class="grid grid-cols-3 gap-6">
+                            <!-- Calendar -->
+                            <div class="col-span-2">
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <div class="flex items-center justify-between mb-6">
+                                        <h2 class="text-lg font-semibold text-slate">Availability Calendar</h2>
+                                        <div class="flex items-center space-x-2">
+                                            <button id="calendar-prev-month" class="p-2 hover:bg-stone rounded-lg">
+                                                <i class="fa-solid fa-chevron-left"></i>
+                                            </button>
+                                            <span class="text-sm font-medium text-slate px-4" id="calendar-month-year">January 2024</span>
+                                            <button id="calendar-next-month" class="p-2 hover:bg-stone rounded-lg">
+                                                <i class="fa-solid fa-chevron-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Calendar Grid -->
+                                    <div class="grid grid-cols-7 gap-2">
+                                        <!-- Day headers -->
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Sun</div>
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Mon</div>
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Tue</div>
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Wed</div>
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Thu</div>
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Fri</div>
+                                        <div class="text-center text-xs font-medium text-concrete py-2">Sat</div>
+                                        
+                                        <!-- Calendar days will be generated dynamically -->
+                                        <div id="calendar-days-grid"></div>
+                                    </div>
+
+                                    <!-- Legend -->
+                                    <div class="mt-6 pt-6 border-t border-stone">
+                                        <p class="text-sm font-medium text-slate mb-3">Legend</p>
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div class="flex items-center">
+                                                <div class="w-4 h-4 bg-success rounded mr-2"></div>
+                                                <span class="text-xs text-concrete">Available</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-4 h-4 bg-info rounded mr-2"></div>
+                                                <span class="text-xs text-concrete">Occupied</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-4 h-4 bg-warning rounded mr-2"></div>
+                                                <span class="text-xs text-concrete">Notice Period</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-4 h-4 bg-danger rounded mr-2"></div>
+                                                <span class="text-xs text-concrete">Maintenance</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <!-- Photo Grid -->
-                            <div id="property-gallery-grid" class="grid grid-cols-4 gap-4">
-                                <!-- Photos will be inserted here -->
+
+                            <!-- Upcoming Availability -->
+                            <div>
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Upcoming Availability</h2>
+                                    <div class="space-y-4" id="upcoming-availability-list">
+                                        <!-- Upcoming availability will be loaded dynamically -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Performance Tab -->
                     <div class="property-tab-panel hidden" data-tab-panel="performance">
-                        <!-- Performance Metrics -->
+                        <!-- KPI Cards -->
                         <div class="grid grid-cols-4 gap-6 mb-6">
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                                 <div class="flex items-center justify-between mb-2">
+                                    <span class="text-sm text-concrete">Total Revenue</span>
+                                    <i class="fa-solid fa-sterling-sign text-success"></i>
+                                </div>
+                                <p class="text-2xl font-semibold text-slate">£<span id="perf-total-revenue">0</span>k</p>
+                                <p class="text-xs text-success mt-1">Annual</p>
+                            </div>
+
+                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                <div class="flex items-center justify-between mb-2">
                                     <span class="text-sm text-concrete">Occupancy Rate</span>
-                                    <i class="fa-solid fa-chart-pie text-concrete"></i>
+                                    <i class="fa-solid fa-chart-line text-info"></i>
                                 </div>
-                                <p class="text-2xl font-semibold text-slate mb-1"><span id="perf-occupancy">85</span>%</p>
-                                <p class="text-xs text-green-600"><i class="fa-solid fa-arrow-up mr-1"></i>+5% vs last month</p>
+                                <p class="text-2xl font-semibold text-slate"><span id="perf-occupancy-rate">0</span>%</p>
+                                <p class="text-xs text-info mt-1">Current</p>
                             </div>
-                            
+
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                                 <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm text-concrete">Annual Revenue</span>
-                                    <i class="fa-solid fa-sterling-sign text-concrete"></i>
+                                    <span class="text-sm text-concrete">Avg Rent/sqft</span>
+                                    <i class="fa-solid fa-calculator text-warning"></i>
                                 </div>
-                                <p class="text-2xl font-semibold text-slate mb-1">£<span id="perf-revenue">2.4</span>M</p>
-                                <p class="text-xs text-green-600"><i class="fa-solid fa-arrow-up mr-1"></i>+12% YoY</p>
+                                <p class="text-2xl font-semibold text-slate">£<span id="perf-avg-rent">0</span></p>
+                                <p class="text-xs text-warning mt-1">Per sqft/year</p>
                             </div>
-                            
+
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                                 <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm text-concrete">Net Operating Income</span>
-                                    <i class="fa-solid fa-chart-line text-concrete"></i>
+                                    <span class="text-sm text-concrete">Tenant Satisfaction</span>
+                                    <i class="fa-solid fa-star text-warning"></i>
                                 </div>
-                                <p class="text-2xl font-semibold text-slate mb-1">£<span id="perf-noi">1.8</span>M</p>
-                                <p class="text-xs text-green-600"><i class="fa-solid fa-arrow-up mr-1"></i>+8% YoY</p>
-                            </div>
-                            
-                            <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                <div class="flex items-center justify-between mb-2">
-                                    <span class="text-sm text-concrete">Avg Rent (£/sq ft)</span>
-                                    <i class="fa-solid fa-tag text-concrete"></i>
-                                </div>
-                                <p class="text-2xl font-semibold text-slate mb-1">£<span id="perf-avg-rent">65</span></p>
-                                <p class="text-xs text-concrete">Market average: £62</p>
+                                <p class="text-2xl font-semibold text-slate"><span id="perf-satisfaction">4.5</span>/5</p>
+                                <p class="text-xs text-concrete mt-1">Average rating</p>
                             </div>
                         </div>
 
                         <!-- Charts -->
                         <div class="grid grid-cols-2 gap-6">
-                            <!-- Revenue Chart -->
+                            <!-- Revenue Trend -->
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                <h3 class="text-lg font-semibold text-slate mb-4">Revenue Trend</h3>
-                                <div id="revenue-chart" class="h-64">
-                                    <canvas id="revenue-chart-canvas"></canvas>
+                                <h2 class="text-lg font-semibold text-slate mb-4">Revenue Trend (Last 12 Months)</h2>
+                                <div class="h-64 flex items-center justify-center bg-stone rounded-lg">
+                                    <div class="text-center">
+                                        <i class="fa-solid fa-chart-line text-4xl text-concrete mb-2"></i>
+                                        <p class="text-sm text-concrete">Revenue Chart</p>
+                                        <p class="text-xs text-concrete mt-1">Placeholder for chart visualization</p>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Occupancy Chart -->
+                            <!-- Occupancy Trend -->
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                                <h3 class="text-lg font-semibold text-slate mb-4">Occupancy Trend</h3>
-                                <div id="occupancy-chart" class="h-64">
-                                    <canvas id="occupancy-chart-canvas"></canvas>
+                                <h2 class="text-lg font-semibold text-slate mb-4">Occupancy Trend (Last 12 Months)</h2>
+                                <div class="h-64 flex items-center justify-center bg-stone rounded-lg">
+                                    <div class="text-center">
+                                        <i class="fa-solid fa-chart-area text-4xl text-concrete mb-2"></i>
+                                        <p class="text-sm text-concrete">Occupancy Chart</p>
+                                        <p class="text-xs text-concrete mt-1">Placeholder for chart visualization</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Financial Breakdown -->
-                        <div class="bg-white rounded-lg p-6 shadow-sm border border-stone mt-6">
-                            <h3 class="text-lg font-semibold text-slate mb-4">Financial Breakdown</h3>
-                            <div class="space-y-4">
-                                <div class="flex items-center justify-between pb-3 border-b border-stone">
-                                    <span class="text-concrete">Gross Rental Income</span>
-                                    <span class="text-slate font-medium">£2,400,000</span>
+                        <!-- Tenant Retention -->
+                        <div class="mt-6 bg-white rounded-lg p-6 shadow-sm border border-stone">
+                            <h2 class="text-lg font-semibold text-slate mb-4">Tenant Retention Rate</h2>
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-4xl font-semibold text-success">87%</p>
+                                    <p class="text-sm text-concrete mt-1">Tenants renewed their lease in the last year</p>
                                 </div>
-                                <div class="flex items-center justify-between pb-3 border-b border-stone">
-                                    <span class="text-concrete">Operating Expenses</span>
-                                    <span class="text-slate font-medium">-£600,000</span>
-                                </div>
-                                <div class="flex items-center justify-between pb-3 border-b border-stone">
-                                    <span class="text-concrete">Property Management Fees</span>
-                                    <span class="text-slate font-medium">-£120,000</span>
-                                </div>
-                                <div class="flex items-center justify-between pt-2">
-                                    <span class="text-slate font-semibold">Net Operating Income</span>
-                                    <span class="text-slate font-semibold text-xl">£1,680,000</span>
+                                <div class="text-right">
+                                    <p class="text-lg font-semibold text-slate">Average Lease Duration</p>
+                                    <p class="text-3xl font-semibold text-info mt-1">3.2 years</p>
                                 </div>
                             </div>
                         </div>
@@ -5214,55 +5239,115 @@
                     <!-- Documents Tab -->
                     <div class="property-tab-panel hidden" data-tab-panel="documents">
                         <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
-                            <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center justify-between mb-6">
                                 <h2 class="text-lg font-semibold text-slate">Property Documents</h2>
-                                <button class="text-sm text-slate hover:underline">
-                                    <i class="fa-solid fa-upload mr-1"></i>Upload Document
+                                <button class="px-4 py-2 bg-slate text-white rounded-lg text-sm hover:bg-opacity-90">
+                                    <i class="fa-solid fa-upload mr-2"></i>Upload Document
                                 </button>
                             </div>
                             
                             <!-- Documents List -->
                             <div class="space-y-3" id="property-documents-list">
-                                <div class="flex items-center justify-between p-4 border border-stone rounded-lg hover:bg-stone transition-colors cursor-pointer">
-                                    <div class="flex items-center">
-                                        <i class="fa-solid fa-file-pdf text-red-600 text-2xl mr-4"></i>
-                                        <div>
-                                            <p class="text-slate font-medium">Lease Agreement.pdf</p>
-                                            <p class="text-sm text-concrete">2.4 MB • Uploaded 2 days ago</p>
-                                        </div>
+                                <!-- Documents will be loaded dynamically -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Marketing Tab -->
+                    <div class="property-tab-panel hidden" data-tab-panel="marketing">
+                        <div class="grid grid-cols-3 gap-6">
+                            <!-- Marketing Status & Platforms -->
+                            <div class="col-span-2 space-y-6">
+                                <!-- Marketing Status -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h2 class="text-lg font-semibold text-slate">Marketing Status</h2>
+                                        <label class="flex items-center cursor-pointer">
+                                            <input type="checkbox" id="marketing-active-toggle" class="sr-only peer">
+                                            <div class="relative w-11 h-6 bg-stone rounded-full peer peer-checked:bg-success transition-colors">
+                                                <div class="absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full transition-transform peer-checked:translate-x-5"></div>
+                                            </div>
+                                            <span class="ml-3 text-sm font-medium text-slate" id="marketing-status-text">Inactive</span>
+                                        </label>
                                     </div>
-                                    <button class="text-concrete hover:text-slate">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
+                                    <p class="text-sm text-concrete">Toggle to activate or deactivate marketing for this property across all platforms.</p>
                                 </div>
-                                
-                                <div class="flex items-center justify-between p-4 border border-stone rounded-lg hover:bg-stone transition-colors cursor-pointer">
-                                    <div class="flex items-center">
-                                        <i class="fa-solid fa-file-pdf text-red-600 text-2xl mr-4"></i>
-                                        <div>
-                                            <p class="text-slate font-medium">Floor Plans.pdf</p>
-                                            <p class="text-sm text-concrete">5.1 MB • Uploaded 5 days ago</p>
-                                        </div>
+
+                                <!-- Listed Platforms -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Listed Platforms</h2>
+                                    <div class="space-y-3" id="marketing-platforms-list">
+                                        <!-- Platforms will be loaded dynamically -->
                                     </div>
-                                    <button class="text-concrete hover:text-slate">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
                                 </div>
-                                
-                                <div class="flex items-center justify-between p-4 border border-stone rounded-lg hover:bg-stone transition-colors cursor-pointer">
-                                    <div class="flex items-center">
-                                        <i class="fa-solid fa-file-pdf text-red-600 text-2xl mr-4"></i>
-                                        <div>
-                                            <p class="text-slate font-medium">EPC Certificate.pdf</p>
-                                            <p class="text-sm text-concrete">1.2 MB • Uploaded 1 week ago</p>
+
+                                <!-- Property Listing Preview -->
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Property Listing Preview</h2>
+                                    <div class="border border-stone rounded-lg p-4">
+                                        <div class="flex items-start gap-4">
+                                            <img id="marketing-preview-image" src="" alt="Property" class="w-32 h-32 object-cover rounded-lg">
+                                            <div class="flex-1">
+                                                <h3 class="text-lg font-semibold text-slate mb-1" id="marketing-preview-name">Property Name</h3>
+                                                <p class="text-sm text-concrete mb-2" id="marketing-preview-address">Address</p>
+                                                <p class="text-sm text-slate mb-2" id="marketing-preview-description">Description preview...</p>
+                                                <div class="flex items-center gap-4 text-sm">
+                                                    <span class="text-concrete"><i class="fa-solid fa-expand mr-1"></i><span id="marketing-preview-size">0</span> sqft</span>
+                                                    <span class="text-concrete"><i class="fa-solid fa-sterling-sign mr-1"></i><span id="marketing-preview-price">0</span>/sqft/yr</span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <button class="text-concrete hover:text-slate">
-                                        <i class="fa-solid fa-download"></i>
-                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Marketing Performance -->
+                            <div>
+                                <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
+                                    <h2 class="text-lg font-semibold text-slate mb-4">Marketing Performance</h2>
+                                    
+                                    <div class="space-y-4">
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-sm text-concrete">Total Views</span>
+                                                <span class="text-lg font-semibold text-slate" id="marketing-views">0</span>
+                                            </div>
+                                            <div class="w-full bg-stone rounded-full h-2">
+                                                <div class="bg-info h-2 rounded-full" style="width: 75%"></div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-sm text-concrete">Enquiries</span>
+                                                <span class="text-lg font-semibold text-slate" id="marketing-enquiries">0</span>
+                                            </div>
+                                            <div class="w-full bg-stone rounded-full h-2">
+                                                <div class="bg-success h-2 rounded-full" style="width: 60%"></div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="flex items-center justify-between mb-1">
+                                                <span class="text-sm text-concrete">Conversion Rate</span>
+                                                <span class="text-lg font-semibold text-slate" id="marketing-conversion">0%</span>
+                                            </div>
+                                            <div class="w-full bg-stone rounded-full h-2">
+                                                <div class="bg-warning h-2 rounded-full" style="width: 45%"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-6 pt-6 border-t border-stone">
+                                        <p class="text-xs text-concrete mb-2">Last updated</p>
+                                        <p class="text-sm font-medium text-slate">2 hours ago</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                </div>
                     </div>
 
                 </div>
@@ -36486,4 +36571,5 @@ setTimeout(function() {
 </div>
     <script src="/properties_data.js"></script>
     <script src="/property_index.js"></script>
+    <script src="/property_detail.js"></script>
 </body></html>
