@@ -338,7 +338,7 @@
                             <i class="fa-solid fa-list-alt mr-3 w-5"></i>
                             <span>Service Catalogue</span>
                         </span>
-                        <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-ticket-desk">
+                        <span onclick="navigateToPage('issue-tracking')" class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-ticket-desk">
                             <i class="fa-solid fa-ticket-alt mr-3 w-5"></i>
                             <span>Ticket Desk</span>
                             <span class="ml-auto text-xs bg-danger bg-opacity-20 text-danger px-2 py-1 rounded-full object-cover">8</span>
@@ -35745,6 +35745,238 @@ function addFlowDiagramToDashboard() {
                 </div>
             </div>
         </section>
+<!-- Issue Tracking Page -->
+<div id="issue-tracking" class="page hidden">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between mb-8">
+        <div>
+            <h1 class="text-4xl font-bold text-slate mb-2">Issue Tracking</h1>
+            <p class="text-concrete">Manage and resolve tenant issues and maintenance requests</p>
+        </div>
+        <div class="flex gap-3">
+            <button onclick="exportTickets()" class="px-4 py-2 bg-white border border-stone text-slate rounded-lg hover:bg-stone transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-download"></i>
+                Export CSV
+            </button>
+            <button onclick="openCreateTicketModal()" class="px-6 py-2 bg-slate text-white rounded-lg hover:bg-slate/90 transition-colors flex items-center gap-2">
+                <i class="fa-solid fa-plus"></i>
+                Create Ticket
+            </button>
+        </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <!-- Total Tickets -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">Total Tickets</p>
+                <i class="fa-solid fa-ticket-alt text-slate text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate" id="kpi-total-tickets">47</p>
+            <p class="text-xs text-concrete mt-1">All statuses</p>
+        </div>
+
+        <!-- Open Tickets -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">Open</p>
+                <i class="fa-solid fa-exclamation-circle text-red-500 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-red-500" id="kpi-open-tickets">12</p>
+            <p class="text-xs text-concrete mt-1">Awaiting action</p>
+        </div>
+
+        <!-- In Progress Tickets -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">In Progress</p>
+                <i class="fa-solid fa-spinner text-blue-500 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-blue-500" id="kpi-progress-tickets">18</p>
+            <p class="text-xs text-concrete mt-1">Being resolved</p>
+        </div>
+
+        <!-- Resolved Tickets -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">Resolved</p>
+                <i class="fa-solid fa-check-circle text-green-500 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-green-500" id="kpi-resolved-tickets">17</p>
+            <p class="text-xs text-concrete mt-1">Successfully closed</p>
+        </div>
+    </div>
+
+    <!-- Metrics Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Avg Resolution Time -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">Avg Resolution Time</p>
+                <i class="fa-solid fa-clock text-slate text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate">2.3 <span class="text-lg">days</span></p>
+            <div class="mt-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Target: 3 days</span>
+                    <span class="text-green-500">✓ On track</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLA Compliance -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">SLA Compliance</p>
+                <i class="fa-solid fa-chart-line text-slate text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate">94<span class="text-lg">%</span></p>
+            <div class="mt-3">
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-green-500 h-2 rounded-full" style="width: 94%"></div>
+                </div>
+                <p class="text-xs text-concrete mt-1">Target: 90%</p>
+            </div>
+        </div>
+
+        <!-- Satisfaction Score -->
+        <div class="bg-white rounded-xl p-6 border border-stone">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm text-concrete">Satisfaction Score</p>
+                <i class="fa-solid fa-star text-yellow-500 text-xl"></i>
+            </div>
+            <p class="text-3xl font-bold text-slate">4.6<span class="text-lg">/5.0</span></p>
+            <div class="mt-3 flex gap-1">
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star text-yellow-500"></i>
+                <i class="fa-solid fa-star-half-alt text-yellow-500"></i>
+            </div>
+        </div>
+    </div>
+
+    <!-- Filters & Search Bar -->
+    <div class="bg-white rounded-xl p-6 border border-stone mb-6">
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+            <!-- Search Bar -->
+            <div class="md:col-span-2">
+                <label class="block text-sm font-medium text-slate mb-2">Search</label>
+                <div class="relative">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-concrete"></i>
+                    <input type="text" id="ticket-search" placeholder="Search by ID, tenant, or description..." 
+                           class="w-full pl-10 pr-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                           oninput="filterTickets()">
+                </div>
+            </div>
+
+            <!-- Status Filter -->
+            <div>
+                <label class="block text-sm font-medium text-slate mb-2">Status</label>
+                <select id="filter-status" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                        onchange="filterTickets()">
+                    <option value="all">All</option>
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Closed">Closed</option>
+                </select>
+            </div>
+
+            <!-- Priority Filter -->
+            <div>
+                <label class="block text-sm font-medium text-slate mb-2">Priority</label>
+                <select id="filter-priority" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                        onchange="filterTickets()">
+                    <option value="all">All</option>
+                    <option value="Critical">Critical</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+            </div>
+
+            <!-- Category Filter -->
+            <div>
+                <label class="block text-sm font-medium text-slate mb-2">Category</label>
+                <select id="filter-category" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                        onchange="filterTickets()">
+                    <option value="all">All</option>
+                    <option value="Maintenance">Maintenance</option>
+                    <option value="Access">Access</option>
+                    <option value="Services">Services</option>
+                    <option value="Billing">Billing</option>
+                    <option value="Technical">Technical</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Assigned To Filter -->
+            <div>
+                <label class="block text-sm font-medium text-slate mb-2">Assigned To</label>
+                <select id="filter-assigned" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                        onchange="filterTickets()">
+                    <option value="all">All</option>
+                    <option value="Tom">Tom</option>
+                    <option value="Max">Max</option>
+                    <option value="Dani">Dani</option>
+                    <option value="Unassigned">Unassigned</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div class="mt-4 flex items-center gap-4">
+            <label class="text-sm font-medium text-slate">Date Range:</label>
+            <div class="flex gap-2">
+                <button onclick="filterByDateRange('7')" class="px-3 py-1 text-sm border border-stone rounded-lg hover:bg-stone transition-colors date-range-btn" data-range="7">Last 7 days</button>
+                <button onclick="filterByDateRange('30')" class="px-3 py-1 text-sm border border-stone rounded-lg hover:bg-stone transition-colors date-range-btn active" data-range="30">Last 30 days</button>
+                <button onclick="filterByDateRange('90')" class="px-3 py-1 text-sm border border-stone rounded-lg hover:bg-stone transition-colors date-range-btn" data-range="90">Last 90 days</button>
+                <button onclick="filterByDateRange('all')" class="px-3 py-1 text-sm border border-stone rounded-lg hover:bg-stone transition-colors date-range-btn" data-range="all">All time</button>
+            </div>
+            <button onclick="resetFilters()" class="ml-auto px-4 py-1 text-sm text-slate hover:text-slate/70 transition-colors">
+                <i class="fa-solid fa-redo mr-1"></i>
+                Reset Filters
+            </button>
+        </div>
+    </div>
+
+    <!-- Tickets Table -->
+    <div class="bg-white rounded-xl border border-stone overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead class="bg-stone">
+                    <tr>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Ticket ID</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Priority</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Category</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Subject</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Tenant</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Property</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Assigned To</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Created</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tickets-table-body" class="divide-y divide-stone">
+                    <!-- Tickets will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Empty State -->
+        <div id="tickets-empty-state" class="hidden text-center py-16">
+            <i class="fa-solid fa-ticket-alt text-6xl text-concrete mb-4"></i>
+            <p class="text-xl font-semibold text-slate mb-2">No tickets found</p>
+            <p class="text-concrete mb-6">Try adjusting your filters or search criteria</p>
+            <button onclick="resetFilters()" class="px-6 py-2 bg-slate text-white rounded-lg hover:bg-slate/90 transition-colors">
+                Reset Filters
+            </button>
+        </div>
+    </div>
+</div>
     `;
     
     // Insert after interventions widget
@@ -37006,4 +37238,439 @@ setTimeout(function() {
     <script src="/property_detail.js"></script>
     <script src="/space_allocation.js"></script>
     <script src="/add_property_modal.js"></script>
+    <script src="/tickets_data.js"></script>
+    <script src="/ticket_management.js"></script>
+<!-- Issue Tracking Modals -->
 </body></html>
+<!-- Ticket Detail Modal -->
+<!-- Create Ticket Modal -->
+<div id="createTicketModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl max-w-3xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+        <!-- Modal Header -->
+        <div class="px-8 py-6 border-b border-stone flex items-center justify-between">
+            <h2 class="text-2xl font-bold text-slate">Create New Ticket</h2>
+            <button onclick="closeCreateTicketModal()" class="text-concrete hover:text-slate transition-colors">
+                <i class="fa-solid fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+            <form id="createTicketForm" class="space-y-6">
+                <!-- Reporter Information -->
+                <div>
+                    <h3 class="text-lg font-semibold text-slate mb-4">Reporter Information</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Reporter Name *</label>
+                            <input type="text" id="newTicketReporterName" required
+                                   class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                   placeholder="John Smith">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Company *</label>
+                            <input type="text" id="newTicketCompany" required
+                                   class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                   placeholder="Company Name Ltd">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Email *</label>
+                            <input type="email" id="newTicketEmail" required
+                                   class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                   placeholder="john.smith@company.co.uk">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Phone</label>
+                            <input type="tel" id="newTicketPhone"
+                                   class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                   placeholder="+44 20 7946 0000">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ticket Details -->
+                <div>
+                    <h3 class="text-lg font-semibold text-slate mb-4">Ticket Details</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Property *</label>
+                            <select id="newTicketProperty" required
+                                    class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                    onchange="updateUnitsDropdown()">
+                                <option value="">Select property...</option>
+                                <option value="Canary Wharf Tower">Canary Wharf Tower</option>
+                                <option value="Shoreditch Tech Hub">Shoreditch Tech Hub</option>
+                                <option value="King's Cross Business Park">King's Cross Business Park</option>
+                                <option value="London Bridge Plaza">London Bridge Plaza</option>
+                                <option value="Holborn House">Holborn House</option>
+                                <option value="Paddington Central">Paddington Central</option>
+                                <option value="Clerkenwell Studios">Clerkenwell Studios</option>
+                                <option value="Greenwich Business Centre">Greenwich Business Centre</option>
+                                <option value="Stratford Office Park">Stratford Office Park</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Unit *</label>
+                            <input type="text" id="newTicketUnit" required
+                                   class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                   placeholder="Unit 3A">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Category *</label>
+                            <select id="newTicketCategory" required
+                                    class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20">
+                                <option value="">Select category...</option>
+                                <option value="Maintenance">Maintenance</option>
+                                <option value="Access">Access</option>
+                                <option value="Services">Services</option>
+                                <option value="Billing">Billing</option>
+                                <option value="Technical">Technical</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Priority *</label>
+                            <select id="newTicketPriority" required
+                                    class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20">
+                                <option value="">Select priority...</option>
+                                <option value="Critical">Critical - Urgent attention required</option>
+                                <option value="High">High - Important issue</option>
+                                <option value="Medium">Medium - Standard issue</option>
+                                <option value="Low">Low - Minor issue</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Issue Description -->
+                <div>
+                    <h3 class="text-lg font-semibold text-slate mb-4">Issue Description</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Subject *</label>
+                            <input type="text" id="newTicketSubject" required
+                                   class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20"
+                                   placeholder="Brief description of the issue">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Description *</label>
+                            <textarea id="newTicketDescription" required rows="5"
+                                      class="w-full px-4 py-3 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20 resize-none"
+                                      placeholder="Provide detailed information about the issue..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Assignment -->
+                <div>
+                    <h3 class="text-lg font-semibold text-slate mb-4">Assignment</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Assign To</label>
+                            <select id="newTicketAssignedTo"
+                                    class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20">
+                                <option value="Unassigned">Unassigned</option>
+                                <option value="Tom">Tom</option>
+                                <option value="Max">Max</option>
+                                <option value="Dani">Dani</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate mb-2">Initial Status</label>
+                            <select id="newTicketStatus"
+                                    class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20">
+                                <option value="Open">Open</option>
+                                <option value="In Progress">In Progress</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Attachments -->
+                <div>
+                    <h3 class="text-lg font-semibold text-slate mb-4">Attachments (Optional)</h3>
+                    <div class="border-2 border-dashed border-stone rounded-lg p-8 text-center">
+                        <i class="fa-solid fa-cloud-upload-alt text-4xl text-concrete mb-3"></i>
+                        <p class="text-sm text-concrete mb-2">Drag and drop files here, or click to browse</p>
+                        <p class="text-xs text-concrete">Supported formats: JPG, PNG, PDF (Max 5MB)</p>
+                        <input type="file" id="newTicketAttachments" multiple accept=".jpg,.jpeg,.png,.pdf" class="hidden">
+                        <button type="button" onclick="document.getElementById('newTicketAttachments').click()" 
+                                class="mt-4 px-4 py-2 bg-white border border-stone text-slate rounded-lg hover:bg-stone transition-colors">
+                            Choose Files
+                        </button>
+                    </div>
+                    <div id="attachmentsList" class="mt-3 space-y-2 hidden">
+                        <!-- Selected files will be listed here -->
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="px-8 py-6 border-t border-stone flex items-center justify-end gap-3">
+            <button onclick="closeCreateTicketModal()" class="px-6 py-2 bg-white border border-stone text-slate rounded-lg hover:bg-stone transition-colors">
+                Cancel
+            </button>
+            <button onclick="submitNewTicket()" class="px-6 py-2 bg-slate text-white rounded-lg hover:bg-slate/90 transition-colors">
+                <i class="fa-solid fa-check mr-2"></i>
+                Create Ticket
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Success Toast -->
+<div id="ticketSuccessToast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-4 rounded-lg shadow-lg hidden items-center gap-3 z-50">
+    <i class="fa-solid fa-check-circle text-2xl"></i>
+    <div>
+        <p class="font-semibold">Success!</p>
+        <p class="text-sm" id="toastMessage">Ticket created successfully</p>
+    </div>
+</div>
+<div id="ticketDetailModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-xl max-w-5xl w-full max-h-[90vh] overflow-hidden flex flex-col">
+        <!-- Modal Header -->
+        <div class="px-8 py-6 border-b border-stone flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <h2 class="text-2xl font-bold text-slate" id="ticketDetailId">TICK-001</h2>
+                <span id="ticketDetailStatusBadge" class="px-3 py-1 rounded-full text-sm font-semibold"></span>
+                <span id="ticketDetailPriorityBadge" class="px-3 py-1 rounded-full text-sm font-semibold"></span>
+            </div>
+            <button onclick="closeTicketDetailModal()" class="text-concrete hover:text-slate transition-colors">
+                <i class="fa-solid fa-times text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Modal Tabs -->
+        <div class="px-8 pt-4 border-b border-stone">
+            <div class="flex gap-6">
+                <button onclick="switchTicketTab('overview')" class="ticket-tab pb-4 border-b-2 border-slate text-slate font-semibold" data-tab="overview">
+                    Overview
+                </button>
+                <button onclick="switchTicketTab('timeline')" class="ticket-tab pb-4 border-b-2 border-transparent text-concrete hover:text-slate transition-colors" data-tab="timeline">
+                    Timeline
+                </button>
+                <button onclick="switchTicketTab('communications')" class="ticket-tab pb-4 border-b-2 border-transparent text-concrete hover:text-slate transition-colors" data-tab="communications">
+                    Communications
+                </button>
+                <button onclick="switchTicketTab('resolution')" class="ticket-tab pb-4 border-b-2 border-transparent text-concrete hover:text-slate transition-colors" data-tab="resolution">
+                    Resolution
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Content -->
+        <div class="flex-1 overflow-y-auto p-8">
+            <!-- Overview Tab -->
+            <div id="ticket-tab-overview" class="ticket-tab-content">
+                <div class="space-y-6">
+                    <!-- Subject -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-slate mb-2" id="ticketDetailSubject"></h3>
+                        <span id="ticketDetailCategory" class="inline-block px-3 py-1 bg-stone text-slate rounded-lg text-sm font-medium"></span>
+                    </div>
+
+                    <!-- Description -->
+                    <div>
+                        <h4 class="text-sm font-semibold text-slate mb-2">Description</h4>
+                        <p class="text-concrete leading-relaxed" id="ticketDetailDescription"></p>
+                    </div>
+
+                    <!-- Two Column Layout -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <!-- Reporter Information -->
+                        <div class="bg-stone/30 rounded-lg p-4">
+                            <h4 class="text-sm font-semibold text-slate mb-3">Reporter Information</h4>
+                            <div class="space-y-2">
+                                <div>
+                                    <p class="text-xs text-concrete">Name</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailReporterName"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Company</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailReporterCompany"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Email</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailReporterEmail"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Phone</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailReporterPhone"></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Details -->
+                        <div class="bg-stone/30 rounded-lg p-4">
+                            <h4 class="text-sm font-semibold text-slate mb-3">Ticket Details</h4>
+                            <div class="space-y-2">
+                                <div>
+                                    <p class="text-xs text-concrete">Property</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailProperty"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Unit</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailUnit"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Assigned To</p>
+                                    <div class="flex items-center gap-2 mt-1">
+                                        <div class="w-6 h-6 rounded-full bg-slate flex items-center justify-center text-white text-xs font-semibold" id="ticketDetailAssignedAvatar"></div>
+                                        <p class="text-sm font-medium text-slate" id="ticketDetailAssigned"></p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Created</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailCreated"></p>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-concrete">Last Updated</p>
+                                    <p class="text-sm font-medium text-slate" id="ticketDetailUpdated"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLA Deadline -->
+                    <div id="ticketDetailSLASection" class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-yellow-600"></i>
+                            <p class="text-sm font-semibold text-yellow-800">SLA Deadline: <span id="ticketDetailSLA"></span></p>
+                        </div>
+                    </div>
+
+                    <!-- Attachments -->
+                    <div id="ticketDetailAttachmentsSection">
+                        <h4 class="text-sm font-semibold text-slate mb-3">Attachments</h4>
+                        <div id="ticketDetailAttachments" class="space-y-2">
+                            <!-- Attachments will be populated here -->
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="flex gap-3 pt-4 border-t border-stone">
+                        <button onclick="updateTicketStatus('In Progress')" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                            <i class="fa-solid fa-play mr-2"></i>Start Progress
+                        </button>
+                        <button onclick="updateTicketStatus('Resolved')" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            <i class="fa-solid fa-check mr-2"></i>Mark Resolved
+                        </button>
+                        <button onclick="reassignTicket()" class="px-4 py-2 bg-white border border-stone text-slate rounded-lg hover:bg-stone transition-colors">
+                            <i class="fa-solid fa-user mr-2"></i>Reassign
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Tab -->
+            <div id="ticket-tab-timeline" class="ticket-tab-content hidden">
+                <div class="space-y-4" id="ticketDetailTimeline">
+                    <!-- Timeline entries will be populated here -->
+                </div>
+            </div>
+
+            <!-- Communications Tab -->
+            <div id="ticket-tab-communications" class="ticket-tab-content hidden">
+                <div class="space-y-6">
+                    <!-- Communications Thread -->
+                    <div class="space-y-4" id="ticketDetailCommunications">
+                        <!-- Communications will be populated here -->
+                    </div>
+
+                    <!-- Add Comment Form -->
+                    <div class="border-t border-stone pt-6">
+                        <h4 class="text-sm font-semibold text-slate mb-3">Add Comment</h4>
+                        <textarea id="newCommentText" rows="4" 
+                                  class="w-full px-4 py-3 border border-stone rounded-lg focus:outline-none focus:ring-2 focus:ring-slate/20 resize-none"
+                                  placeholder="Type your message..."></textarea>
+                        <div class="flex items-center justify-between mt-3">
+                            <label class="flex items-center gap-2 text-sm text-concrete">
+                                <input type="checkbox" id="internalNoteCheckbox" class="rounded">
+                                <span>Internal note (not visible to tenant)</span>
+                            </label>
+                            <div class="flex gap-2">
+                                <button onclick="addTicketComment()" class="px-6 py-2 bg-slate text-white rounded-lg hover:bg-slate/90 transition-colors">
+                                    <i class="fa-solid fa-paper-plane mr-2"></i>Send
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resolution Tab -->
+            <div id="ticket-tab-resolution" class="ticket-tab-content hidden">
+                <div class="space-y-6" id="ticketDetailResolution">
+                    <!-- Resolution content will be populated here -->
+                    <div id="ticketNotResolved" class="text-center py-12">
+                        <i class="fa-solid fa-hourglass-half text-6xl text-concrete mb-4"></i>
+                        <p class="text-lg font-semibold text-slate mb-2">Ticket Not Yet Resolved</p>
+                        <p class="text-concrete mb-6">This ticket is still being worked on</p>
+                        <button onclick="switchTicketTab('overview')" class="px-6 py-2 bg-slate text-white rounded-lg hover:bg-slate/90 transition-colors">
+                            Go to Overview
+                        </button>
+                    </div>
+
+                    <!-- Resolution Form (for resolved tickets) -->
+                    <div id="ticketResolved" class="hidden">
+                        <div class="grid grid-cols-2 gap-6 mb-6">
+                            <div class="bg-stone/30 rounded-lg p-4">
+                                <h4 class="text-sm font-semibold text-slate mb-3">Resolution Details</h4>
+                                <div class="space-y-2">
+                                    <div>
+                                        <p class="text-xs text-concrete">Resolved Date</p>
+                                        <p class="text-sm font-medium text-slate" id="ticketResolvedDate"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-concrete">Resolved By</p>
+                                        <p class="text-sm font-medium text-slate" id="ticketResolvedBy"></p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-concrete">Time to Resolution</p>
+                                        <p class="text-sm font-medium text-slate" id="ticketResolutionTime"></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-stone/30 rounded-lg p-4">
+                                <h4 class="text-sm font-semibold text-slate mb-3">Satisfaction</h4>
+                                <div class="space-y-2">
+                                    <div>
+                                        <p class="text-xs text-concrete">Rating</p>
+                                        <div class="flex gap-1 mt-1" id="ticketSatisfactionRating">
+                                            <!-- Stars will be populated here -->
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-concrete">Tenant Feedback</p>
+                                        <p class="text-sm font-medium text-slate mt-1" id="ticketTenantFeedback"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate mb-2">Resolution Notes</h4>
+                                <p class="text-concrete leading-relaxed" id="ticketResolutionNotes"></p>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate mb-2">Root Cause</h4>
+                                <span class="inline-block px-3 py-1 bg-stone text-slate rounded-lg text-sm" id="ticketRootCause"></span>
+                            </div>
+
+                            <div>
+                                <h4 class="text-sm font-semibold text-slate mb-2">Actions Taken</h4>
+                                <ul class="space-y-2" id="ticketActionsTaken">
+                                    <!-- Actions will be populated here -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
