@@ -76,6 +76,9 @@
             }
         }
     </style>
+    
+    <!-- Chart.js for Performance Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-stone font-haltung">
     <!-- COMPONENT: Top Navigation Header -->
@@ -5203,24 +5206,16 @@
                             <!-- Revenue Trend -->
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                                 <h2 class="text-lg font-semibold text-slate mb-4">Revenue Trend (Last 12 Months)</h2>
-                                <div class="h-64 flex items-center justify-center bg-stone rounded-lg">
-                                    <div class="text-center">
-                                        <i class="fa-solid fa-chart-line text-4xl text-concrete mb-2"></i>
-                                        <p class="text-sm text-concrete">Revenue Chart</p>
-                                        <p class="text-xs text-concrete mt-1">Placeholder for chart visualization</p>
-                                    </div>
+                                <div class="h-64">
+                                    <canvas id="revenue-trend-chart"></canvas>
                                 </div>
                             </div>
 
                             <!-- Occupancy Trend -->
                             <div class="bg-white rounded-lg p-6 shadow-sm border border-stone">
                                 <h2 class="text-lg font-semibold text-slate mb-4">Occupancy Trend (Last 12 Months)</h2>
-                                <div class="h-64 flex items-center justify-center bg-stone rounded-lg">
-                                    <div class="text-center">
-                                        <i class="fa-solid fa-chart-area text-4xl text-concrete mb-2"></i>
-                                        <p class="text-sm text-concrete">Occupancy Chart</p>
-                                        <p class="text-xs text-concrete mt-1">Placeholder for chart visualization</p>
-                                    </div>
+                                <div class="h-64">
+                                    <canvas id="occupancy-trend-chart"></canvas>
                                 </div>
                             </div>
                         </div>

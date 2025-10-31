@@ -252,6 +252,10 @@ function populatePerformanceTab() {
     
     // Tenant satisfaction (placeholder)
     document.getElementById('perf-satisfaction').textContent = '4.5';
+    
+    // Generate charts
+    createRevenueTrendChart();
+    createOccupancyTrendChart();
 }
 
 function populateDocumentsTab() {
@@ -408,3 +412,287 @@ window.initializePropertyDetail = initializePropertyDetail;
 window.switchTab = switchTab;
 
 console.log('Property Detail JavaScript loaded');
+
+// Chart.js instances (for cleanup)
+let revenueChart = null;
+let occupancyChart = null;
+
+// Generate monthly revenue data with realistic variations
+function generateRevenueData(annualRevenue) {
+    const monthlyBase = annualRevenue / 12;
+    const labels = [];
+    const data = [];
+    
+    // Get last 12 months
+    const now = new Date();
+    for (let i = 11; i >= 0; i--) {
+        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        labels.push(date.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' }));
+        
+        // Add ±5-10% variation for realism
+        const variation = (Math.random() * 0.15 - 0.05); // -5% to +10%
+        const monthlyRevenue = monthlyBase * (1 + variation);
+        data.push(Math.round(monthlyRevenue / 1000)); // Convert to thousands
+    }
+    
+    return { labels, data };
+}
+
+// Generate monthly occupancy data with realistic variations
+function generateOccupancyData(currentOccupancy) {
+    const labels = [];
+    const data = [];
+    
+    // Get last 12 months
+    const now = new Date();
+    for (let i = 11; i >= 0; i--) {
+        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        labels.push(date.toLocaleDateString('en-GB', { month: 'short', year: '2-digit' }));
+        
+        // Add ±2-5% variation for realism
+        const variation = (Math.random() * 0.07 - 0.02); // -2% to +5%
+        let occupancy = currentOccupancy + variation;
+        
+        // Keep within realistic bounds (70-100%)
+        occupancy = Math.max(70, Math.min(100, occupancy));
+        data.push(Math.round(occupancy * 10) / 10); // Round to 1 decimal
+    }
+    
+    return { labels, data };
+}
+
+// Create Revenue Trend Chart
+function createRevenueTrendChart() {
+    if (!currentProperty) return;
+    
+    // Destroy existing chart if it exists
+    if (revenueChart) {
+        revenueChart.destroy();
+    }
+    
+    const ctx = document.getElementById('revenue-trend-chart');
+    if (!ctx) return;
+    
+    const { labels, data } = generateRevenueData(currentProperty.annualRevenue);
+    
+    revenueChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Revenue (£k)',
+                data: data,
+                borderColor: '#10b981', // Green (success color)
+                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#10b981',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: {
+                            family: 'Haltung, sans-serif',
+                            size: 12
+                        },
+                        color: '#475569', // slate color
+                        usePointStyle: true,
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)', // slate-900
+                    titleFont: {
+                        family: 'Haltung, sans-serif',
+                        size: 13,
+                        weight: 'bold'
+                    },
+                    bodyFont: {
+                        family: 'Haltung, sans-serif',
+                        size: 12
+                    },
+                    padding: 12,
+                    cornerRadius: 8,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Revenue: £' + context.parsed.y.toLocaleString() + 'k';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Haltung, sans-serif',
+                            size: 11
+                        },
+                        color: '#94a3b8' // concrete color
+                    },
+                    border: {
+                        color: '#e2e8f0' // stone color
+                    }
+                },
+                y: {
+                    beginAtZero: false,
+                    grid: {
+                        color: '#f1f5f9', // stone-100
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Haltung, sans-serif',
+                            size: 11
+                        },
+                        color: '#94a3b8', // concrete color
+                        callback: function(value) {
+                            return '£' + value + 'k';
+                        }
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+    });
+}
+
+// Create Occupancy Trend Chart
+function createOccupancyTrendChart() {
+    if (!currentProperty) return;
+    
+    // Destroy existing chart if it exists
+    if (occupancyChart) {
+        occupancyChart.destroy();
+    }
+    
+    const ctx = document.getElementById('occupancy-trend-chart');
+    if (!ctx) return;
+    
+    const { labels, data } = generateOccupancyData(currentProperty.occupancyRate);
+    
+    occupancyChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Occupancy Rate (%)',
+                data: data,
+                borderColor: '#3b82f6', // Blue (info color)
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 2,
+                tension: 0.4,
+                fill: true,
+                pointRadius: 4,
+                pointHoverRadius: 6,
+                pointBackgroundColor: '#3b82f6',
+                pointBorderColor: '#fff',
+                pointBorderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        font: {
+                            family: 'Haltung, sans-serif',
+                            size: 12
+                        },
+                        color: '#475569', // slate color
+                        usePointStyle: true,
+                        padding: 15
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(15, 23, 42, 0.9)', // slate-900
+                    titleFont: {
+                        family: 'Haltung, sans-serif',
+                        size: 13,
+                        weight: 'bold'
+                    },
+                    bodyFont: {
+                        family: 'Haltung, sans-serif',
+                        size: 12
+                    },
+                    padding: 12,
+                    cornerRadius: 8,
+                    displayColors: false,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Occupancy: ' + context.parsed.y.toFixed(1) + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    grid: {
+                        display: false
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Haltung, sans-serif',
+                            size: 11
+                        },
+                        color: '#94a3b8' // concrete color
+                    },
+                    border: {
+                        color: '#e2e8f0' // stone color
+                    }
+                },
+                y: {
+                    min: 70,
+                    max: 100,
+                    grid: {
+                        color: '#f1f5f9', // stone-100
+                        drawBorder: false
+                    },
+                    ticks: {
+                        font: {
+                            family: 'Haltung, sans-serif',
+                            size: 11
+                        },
+                        color: '#94a3b8', // concrete color
+                        callback: function(value) {
+                            return value + '%';
+                        },
+                        stepSize: 5
+                    },
+                    border: {
+                        display: false
+                    }
+                }
+            },
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            }
+        }
+    });
+}
+
+console.log('Property Detail JavaScript with Chart.js loaded');
