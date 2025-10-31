@@ -4095,9 +4095,513 @@
                         </div>
 
                         <!-- Properties Grid -->
-                        <div id="properties-grid" class="grid grid-cols-3 gap-6">
-                            <!-- Properties will be rendered here -->
-                        </div>
+<!-- Property Grid View -->
+<div id="properties-grid" class="grid grid-cols-3 gap-6">
+    <!-- Property 1: Canary Wharf Tower -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-001" data-location="Canary Wharf" data-type="Office Building" data-status="Partially Occupied" data-occupancy="92">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Canary Wharf Tower" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-info bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Canary Wharf Tower</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                1 Canada Square, Canary Wharf
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>45,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>24 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£65/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£2,850k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">92%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-success h-2 rounded-full" style="width: 92%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-001')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 2: Shoreditch Tech Hub -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-002" data-location="Shoreditch" data-type="Flex Space" data-status="Fully Let" data-occupancy="100">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800" alt="Shoreditch Tech Hub" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-success bg-opacity-90 text-white text-xs font-medium rounded-full">Fully Let</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Shoreditch Tech Hub</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                85 Great Eastern Street, Shoreditch
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>28,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>18 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£58/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£1,624k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">100%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-success h-2 rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-002')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 3: King's Cross Central -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-003" data-location="King's Cross" data-type="Office Building" data-status="Partially Occupied" data-occupancy="80">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="King's Cross Central" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-warning bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">King's Cross Central</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                5 Pancras Square, King's Cross
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>38,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>20 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£62/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£2,356k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">80%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-warning h-2 rounded-full" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-003')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 4: The Shard Business Centre -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-004" data-location="London Bridge" data-type="Office Building" data-status="Partially Occupied" data-occupancy="86">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="The Shard Business Centre" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-info bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">The Shard Business Centre</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                32 London Bridge Street, Southwark
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>52,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>28 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£72/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£3,744k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">86%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-success h-2 rounded-full" style="width: 86%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-004')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 5: Holborn Gate -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-005" data-location="Holborn" data-type="Office Building" data-status="Partially Occupied" data-occupancy="88">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Holborn Gate" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-info bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Holborn Gate</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                26 Southampton Buildings, Holborn
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>32,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>16 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£68/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£2,176k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">88%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-success h-2 rounded-full" style="width: 88%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-005')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 6: Paddington Basin -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-006" data-location="Paddington" data-type="Office Building" data-status="Partially Occupied" data-occupancy="82">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Paddington Basin" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-warning bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Paddington Basin</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                3 Sheldon Square, Paddington
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>41,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>22 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£60/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£2,460k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">82%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-warning h-2 rounded-full" style="width: 82%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-006')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 7: Clerkenwell Workshops -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-007" data-location="Clerkenwell" data-type="Mixed Use" data-status="Partially Occupied" data-occupancy="80">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1497366412874-3415097a27e7?w=800" alt="Clerkenwell Workshops" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-warning bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Clerkenwell Workshops</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                45 Clerkenwell Road, Clerkenwell
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>25,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>15 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£55/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£1,375k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">80%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-warning h-2 rounded-full" style="width: 80%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-007')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 8: Greenwich Peninsula -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-008" data-location="Greenwich" data-type="Business Park" data-status="Partially Occupied" data-occupancy="75">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Greenwich Peninsula" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-warning bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Greenwich Peninsula</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                15 Millennium Way, Greenwich
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>35,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>20 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£48/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£1,680k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">75%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-warning h-2 rounded-full" style="width: 75%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-008')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 9: Stratford Olympic Park -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-009" data-location="Stratford" data-type="Office Building" data-status="Partially Occupied" data-occupancy="81">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Stratford Olympic Park" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-warning bg-opacity-90 text-white text-xs font-medium rounded-full">Partially Occupied</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Stratford Olympic Park</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                8 International Way, Stratford
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>48,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>26 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£52/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£2,496k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">81%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-warning h-2 rounded-full" style="width: 81%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-009')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property 10: Docklands Business Centre -->
+    <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" data-property-id="PROP-010" data-location="Canary Wharf" data-type="Office Building" data-status="Fully Let" data-occupancy="100">
+        <div class="relative h-48">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800" alt="Docklands Business Centre" class="w-full h-full object-cover">
+            <span class="absolute top-3 right-3 px-3 py-1 bg-success bg-opacity-90 text-white text-xs font-medium rounded-full">Fully Let</span>
+        </div>
+        <div class="p-5">
+            <h3 class="text-lg font-semibold text-slate mb-1">Docklands Business Centre</h3>
+            <p class="text-sm text-concrete mb-3 flex items-center">
+                <i class="fa-solid fa-location-dot mr-1"></i>
+                Marsh Wall, Canary Wharf
+            </p>
+            <div class="grid grid-cols-2 gap-2 mb-3 text-sm">
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-expand mr-1.5"></i>
+                    <span>36,000 sqft</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-door-open mr-1.5"></i>
+                    <span>19 units</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-sterling-sign mr-1.5"></i>
+                    <span>£63/sqft/yr</span>
+                </div>
+                <div class="flex items-center text-concrete">
+                    <i class="fa-solid fa-chart-line mr-1.5"></i>
+                    <span>£2,268k/yr</span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="flex items-center justify-between text-xs text-concrete mb-1">
+                    <span>Occupancy</span>
+                    <span class="font-semibold">100%</span>
+                </div>
+                <div class="w-full bg-stone rounded-full h-2">
+                    <div class="bg-success h-2 rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button onclick="viewPropertyDetail('PROP-010')" class="flex-1 px-3 py-2 bg-slate text-white rounded-lg text-xs hover:bg-opacity-90 transition-colors">
+                    <i class="fa-solid fa-eye mr-1"></i> View Details
+                </button>
+                <button class="px-3 py-2 border border-stone text-slate rounded-lg text-xs hover:bg-stone transition-colors">
+                    <i class="fa-solid fa-edit"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Property List View (initially hidden) -->
+<div id="properties-list" class="hidden space-y-4">
+    <!-- List view will be populated by JavaScript -->
+</div>
 
                         <!-- Properties Table -->
                         <div id="properties-table" class="hidden bg-white border border-stone rounded-lg overflow-hidden">
