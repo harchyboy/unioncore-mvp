@@ -4029,7 +4029,7 @@
                             <p class="text-sm text-concrete">Browse and manage available properties</p>
                         </div>
                         <div class="flex items-center space-x-3">
-                            <button id="property-index-add-btn" class="px-4 py-2 border border-stone rounded-lg text-sm text-slate hover:bg-stone transition-colors" data-action="add-property">
+                            <button id="property-index-add-btn" onclick="openAddPropertyModal()" class="px-4 py-2 border border-stone rounded-lg text-sm text-slate hover:bg-stone transition-colors" data-action="add-property">
                                 <i class="fa-solid fa-plus mr-2"></i>Add Property
                             </button>
                             <button class="px-4 py-2 border border-stone rounded-lg text-sm text-slate hover:bg-stone transition-colors">
@@ -36148,6 +36148,200 @@ console.log('✅ Page Navigation System loaded');
 console.log('💡 Tip: Use Alt + Arrow keys to navigate between pages');
 
 </script></body></html>
+        <!-- ADD/EDIT PROPERTY MODAL -->
+        <div id="add-property-modal" class="fixed inset-0 bg-slate bg-opacity-50 z-50 hidden flex items-center justify-center">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden">
+                <!-- Modal Header -->
+                <div class="flex items-center justify-between p-6 border-b border-stone">
+                    <h2 class="text-xl font-semibold text-slate" id="property-modal-title">Add New Property</h2>
+                    <button onclick="closeAddPropertyModal()" class="text-concrete hover:text-slate transition-colors">
+                        <i class="fa-solid fa-times text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-6 overflow-y-auto max-h-[calc(90vh-140px)]">
+                    <form id="add-property-form">
+                        <!-- Basic Information -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-slate mb-4">Basic Information</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Property Name *</label>
+                                    <input type="text" id="property-name" required class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., Canary Wharf Tower">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Property Type *</label>
+                                    <select id="property-type" required class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate">
+                                        <option value="">Select type</option>
+                                        <option value="Office Building">Office Building</option>
+                                        <option value="Flex Space">Flex Space</option>
+                                        <option value="Business Park">Business Park</option>
+                                        <option value="Mixed Use">Mixed Use</option>
+                                        <option value="Co-working">Co-working</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-sm font-medium text-slate mb-2">Address *</label>
+                                    <input type="text" id="property-address" required class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="Full address">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Location/Area *</label>
+                                    <select id="property-location" required class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate">
+                                        <option value="">Select location</option>
+                                        <option value="Canary Wharf">Canary Wharf</option>
+                                        <option value="Shoreditch">Shoreditch</option>
+                                        <option value="King's Cross">King's Cross</option>
+                                        <option value="London Bridge">London Bridge</option>
+                                        <option value="Holborn">Holborn</option>
+                                        <option value="Paddington">Paddington</option>
+                                        <option value="Clerkenwell">Clerkenwell</option>
+                                        <option value="Greenwich">Greenwich</option>
+                                        <option value="Stratford">Stratford</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Status *</label>
+                                    <select id="property-status" required class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate">
+                                        <option value="Available">Available</option>
+                                        <option value="Partially Occupied">Partially Occupied</option>
+                                        <option value="Fully Let">Fully Let</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Property Specifications -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-slate mb-4">Property Specifications</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Total Area (sqft) *</label>
+                                    <input type="number" id="property-area" required min="0" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., 45000">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Number of Floors *</label>
+                                    <input type="number" id="property-floors" required min="1" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., 8">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Built Year</label>
+                                    <input type="number" id="property-built-year" min="1800" max="2024" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., 2018">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Total Units *</label>
+                                    <input type="number" id="property-total-units" required min="1" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., 24">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Occupied Units *</label>
+                                    <input type="number" id="property-occupied-units" required min="0" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., 22">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-slate mb-2">Price per sqft (£) *</label>
+                                    <input type="number" id="property-price-sqft" required min="0" step="0.01" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="e.g., 45.50">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Property Description -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-slate mb-4">Description</h3>
+                            <textarea id="property-description" rows="4" class="w-full px-4 py-2 border border-stone rounded-lg focus:outline-none focus:border-slate" placeholder="Describe the property, its features, and unique selling points..."></textarea>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-slate mb-4">Property Images</h3>
+                            <div id="image-upload-area" class="border-2 border-dashed border-stone rounded-lg p-8 text-center hover:border-slate transition-colors cursor-pointer">
+                                <i class="fa-solid fa-cloud-upload text-4xl text-concrete mb-3"></i>
+                                <p class="text-sm text-slate mb-1">Drag and drop images here, or click to browse</p>
+                                <p class="text-xs text-concrete">Supports: JPG, PNG, WebP (Max 5MB per image)</p>
+                                <input type="file" id="property-images" multiple accept="image/*" class="hidden">
+                            </div>
+                            <div id="image-preview-container" class="grid grid-cols-5 gap-3 mt-4 hidden">
+                                <!-- Image previews will be added here -->
+                            </div>
+                        </div>
+
+                        <!-- Amenities -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-medium text-slate mb-4">Amenities</h3>
+                            <div class="grid grid-cols-3 gap-3">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="24/7 Access" class="w-4 h-4">
+                                    <span class="text-sm text-slate">24/7 Access</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Parking" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Parking</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Security" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Security</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Reception" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Reception</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Meeting Rooms" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Meeting Rooms</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Kitchen" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Kitchen</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Bike Storage" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Bike Storage</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Showers" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Showers</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Lift" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Lift</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Air Conditioning" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Air Conditioning</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="High-Speed Internet" class="w-4 h-4">
+                                    <span class="text-sm text-slate">High-Speed Internet</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Accessible" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Accessible</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Terrace" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Terrace</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Gym" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Gym</span>
+                                </label>
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="amenity-checkbox" value="Café" class="w-4 h-4">
+                                    <span class="text-sm text-slate">Café</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="flex items-center justify-end space-x-3 p-6 border-t border-stone bg-stone bg-opacity-30">
+                    <button onclick="closeAddPropertyModal()" class="px-6 py-2 border border-stone text-concrete rounded-lg hover:bg-stone transition-colors">
+                        Cancel
+                    </button>
+                    <button onclick="saveProperty()" class="px-6 py-2 bg-slate text-white rounded-lg hover:bg-opacity-90 transition-colors">
+                        <i class="fa-solid fa-save mr-2"></i>Save Property
+                    </button>
+                </div>
+            </div>
+        </div>
 
 <script>
 // Force initialization after page load
@@ -36816,4 +37010,5 @@ setTimeout(function() {
     <script src="/property_index.js"></script>
     <script src="/property_detail.js"></script>
     <script src="/space_allocation.js"></script>
+    <script src="/add_property_modal.js"></script>
 </body></html>

@@ -102,7 +102,7 @@ function populateBuildingVisualization() {
             const availablePercentage = 100 - occupiedPercentage;
             
             return `
-                <div class="border border-stone rounded-lg p-4">
+                <div class="border border-stone rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow" onclick="viewPropertyDetail('${prop.id}')">
                     <div class="flex items-center justify-between mb-3">
                         <div>
                             <p class="font-medium text-slate">${prop.name}</p>
@@ -474,7 +474,7 @@ function populateSpaceBreakdownTable() {
                            'bg-warning bg-opacity-10 text-warning';
         
         return `
-            <tr class="hover:bg-stone transition-colors">
+            <tr class="hover:bg-stone transition-colors cursor-pointer" onclick="viewPropertyDetail('${prop.id}')">
                 <td class="px-4 py-3 text-sm font-medium text-slate">${prop.name}</td>
                 <td class="px-4 py-3 text-sm text-concrete">${prop.location}</td>
                 <td class="px-4 py-3 text-sm text-concrete">${prop.totalArea.toLocaleString()} sqft</td>
