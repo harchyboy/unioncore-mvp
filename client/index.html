@@ -343,9 +343,9 @@
                             <span>Ticket Desk</span>
                             <span class="ml-auto text-xs bg-danger bg-opacity-20 text-danger px-2 py-1 rounded-full object-cover">8</span>
                         </span>
-                        <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-vendors">
-                            <i class="fa-solid fa-truck mr-3 w-5"></i>
-                            <span>Vendors</span>
+                        <span onclick="navigateToPage('contacts-crm')" class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-contacts">
+                            <i class="fa-solid fa-address-book mr-3 w-5"></i>
+                            <span>Contacts & CRM</span>
                         </span>
                         <span class="flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer" id="nav-servicing">
                             <i class="fa-solid fa-cogs mr-3 w-5"></i>
@@ -36683,6 +36683,211 @@ setTimeout(function() {
                             <span class="text-sm font-medium text-slate">Need</span>
                             <span id="leadDetailNeedScore" class="text-lg font-bold text-success">25/25</span>
                         </div>
+<!-- Contacts/CRM Page -->
+<div id="contacts-crm" class="page hidden">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-3xl font-bold text-stone-900">Contacts & CRM</h1>
+        <p class="text-stone-600 mt-1">Manage relationships with tenants, prospects, brokers, and vendors</p>
+      </div>
+      <div class="flex gap-3">
+        <button onclick="exportContactsCSV()" class="px-4 py-2 bg-white border border-stone-300 text-stone-700 rounded-lg hover:bg-stone-50 flex items-center gap-2">
+          <i class="fas fa-download"></i>
+          Export CSV
+        </button>
+        <button onclick="openAddCompanyModal()" class="px-4 py-2 bg-white border border-stone-300 text-stone-700 rounded-lg hover:bg-stone-50 flex items-center gap-2">
+          <i class="fas fa-building"></i>
+          Add Company
+        </button>
+        <button onclick="openAddContactModal()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
+          <i class="fas fa-user-plus"></i>
+          Add Contact
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-4 gap-6 mb-6">
+      <div class="bg-white rounded-xl shadow-sm p-6 border border-stone-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-stone-600 text-sm font-medium">Total Contacts</p>
+            <p class="text-3xl font-bold text-stone-900 mt-2" id="totalContactsKPI">28</p>
+          </div>
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-users text-blue-600 text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-sm p-6 border border-stone-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-stone-600 text-sm font-medium">Active Tenants</p>
+            <p class="text-3xl font-bold text-green-600 mt-2" id="activeTenantsKPI">18</p>
+          </div>
+          <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-check-circle text-green-600 text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-sm p-6 border border-stone-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-stone-600 text-sm font-medium">Prospects</p>
+            <p class="text-3xl font-bold text-blue-600 mt-2" id="prospectsKPI">7</p>
+          </div>
+          <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-user-clock text-blue-600 text-xl"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow-sm p-6 border border-stone-200">
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-stone-600 text-sm font-medium">Companies</p>
+            <p class="text-3xl font-bold text-stone-900 mt-2" id="companiesKPI">15</p>
+          </div>
+          <div class="w-12 h-12 bg-stone-100 rounded-lg flex items-center justify-center">
+            <i class="fas fa-building text-stone-600 text-xl"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filters & Search -->
+    <div class="bg-white rounded-xl shadow-sm p-6 border border-stone-200 mb-6">
+      <div class="grid grid-cols-12 gap-4">
+        <!-- Search -->
+        <div class="col-span-3">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Search</label>
+          <div class="relative">
+            <input
+              type="text"
+              id="contactSearch"
+              placeholder="Name, company, email, phone..."
+              class="w-full pl-10 pr-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              oninput="filterContacts()"
+            />
+            <i class="fas fa-search absolute left-3 top-3 text-stone-400"></i>
+          </div>
+        </div>
+
+        <!-- Type Filter -->
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Type</label>
+          <select id="contactTypeFilter" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterContacts()">
+            <option value="all">All Types</option>
+            <option value="Tenant">Tenant</option>
+            <option value="Prospect">Prospect</option>
+            <option value="Broker">Broker</option>
+            <option value="Vendor">Vendor</option>
+          </select>
+        </div>
+
+        <!-- Company Filter -->
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Company</label>
+          <select id="contactCompanyFilter" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterContacts()">
+            <option value="all">All Companies</option>
+            <!-- Populated by JavaScript -->
+          </select>
+        </div>
+
+        <!-- Tags Filter -->
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Tags</label>
+          <select id="contactTagsFilter" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="filterContacts()">
+            <option value="all">All Tags</option>
+            <option value="VIP">VIP</option>
+            <option value="Key Decision Maker">Key Decision Maker</option>
+            <option value="Budget Holder">Budget Holder</option>
+            <option value="High Value">High Value</option>
+            <option value="Influencer">Influencer</option>
+            <option value="Technical Contact">Technical Contact</option>
+            <option value="Finance Contact">Finance Contact</option>
+          </select>
+        </div>
+
+        <!-- Sort -->
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Sort By</label>
+          <select id="contactSortBy" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" onchange="sortContacts()">
+            <option value="nameAsc">Name (A-Z)</option>
+            <option value="nameDesc">Name (Z-A)</option>
+            <option value="company">Company</option>
+            <option value="lastContact">Last Contact</option>
+            <option value="dateAdded">Date Added</option>
+          </select>
+        </div>
+
+        <!-- View Toggle -->
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-stone-700 mb-2">View</label>
+          <div class="flex gap-1 bg-stone-100 rounded-lg p-1">
+            <button onclick="switchContactView('grid')" id="gridViewBtn" class="flex-1 px-3 py-1.5 rounded bg-white shadow-sm text-stone-700">
+              <i class="fas fa-th"></i>
+            </button>
+            <button onclick="switchContactView('list')" id="listViewBtn" class="flex-1 px-3 py-1.5 rounded text-stone-600 hover:bg-white">
+              <i class="fas fa-list"></i>
+            </button>
+            <button onclick="switchContactView('table')" id="tableViewBtn" class="flex-1 px-3 py-1.5 rounded text-stone-600 hover:bg-white">
+              <i class="fas fa-table"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid View -->
+    <div id="contactsGridView" class="grid grid-cols-3 gap-6">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- List View -->
+    <div id="contactsListView" class="hidden space-y-4">
+      <!-- Populated by JavaScript -->
+    </div>
+
+    <!-- Table View -->
+    <div id="contactsTableView" class="hidden bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-stone-50 border-b border-stone-200">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Contact</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Company</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Email</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Phone</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Last Contact</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="contactsTableBody" class="bg-white divide-y divide-stone-200">
+            <!-- Populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="contactsEmptyState" class="hidden text-center py-12">
+      <div class="inline-flex items-center justify-center w-16 h-16 bg-stone-100 rounded-full mb-4">
+        <i class="fas fa-users text-stone-400 text-2xl"></i>
+      </div>
+      <h3 class="text-lg font-semibold text-stone-900 mb-2">No contacts found</h3>
+      <p class="text-stone-600 mb-4">Try adjusting your filters or search criteria</p>
+      <button onclick="resetContactFilters()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+        Reset Filters
+      </button>
+    </div>
+  </div>
+</div>
                         <div class="w-full bg-stone rounded-full h-2 mb-2">
                             <div id="leadDetailNeedBar" class="bg-success h-2 rounded-full" style="width: 100%"></div>
                         </div>
@@ -37240,8 +37445,536 @@ setTimeout(function() {
     <script src="/add_property_modal.js"></script>
     <script src="/tickets_data.js"></script>
     <script src="/ticket_management.js"></script>
+    <script src="contacts_data.js"></script>
+    <script src="contacts_crm.js"></script>
 <!-- Issue Tracking Modals -->
 </body></html>
+<!-- Contact Detail Modal -->
+<div id="contactDetailModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="if(event.target === this) closeContactDetailModal()">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden" onclick="event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div id="contactDetailAvatar" class="w-16 h-16 rounded-full bg-white text-blue-600 flex items-center justify-center text-2xl font-bold">
+          <!-- Initials -->
+        </div>
+        <div class="text-white">
+          <h2 id="contactDetailName" class="text-2xl font-bold"></h2>
+          <p id="contactDetailTitle" class="text-blue-100"></p>
+        </div>
+      </div>
+      <button onclick="closeContactDetailModal()" class="text-white hover:bg-white hover:bg-opacity-20 rounded-lg p-2">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="border-b border-stone-200 px-6">
+      <div class="flex gap-6">
+        <button onclick="switchContactDetailTab('overview')" class="contact-detail-tab py-3 px-1 border-b-2 border-blue-600 text-blue-600 font-medium">
+          Overview
+        </button>
+        <button onclick="switchContactDetailTab('timeline')" class="contact-detail-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Timeline
+        </button>
+        <button onclick="switchContactDetailTab('communications')" class="contact-detail-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Communications
+        </button>
+        <button onclick="switchContactDetailTab('properties')" class="contact-detail-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Properties
+        </button>
+        <button onclick="switchContactDetailTab('documents')" class="contact-detail-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Documents
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="p-6 overflow-y-auto" style="max-height: calc(90vh - 200px);">
+      <!-- Overview Tab -->
+      <div id="contactDetailOverview" class="contact-detail-tab-content">
+        <div class="grid grid-cols-2 gap-6">
+          <!-- Contact Information -->
+          <div>
+            <h3 class="text-lg font-semibold text-stone-900 mb-4">Contact Information</h3>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-envelope text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Email</p>
+                  <p id="contactDetailEmail" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-phone text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Phone</p>
+                  <p id="contactDetailPhone" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-mobile-alt text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Mobile</p>
+                  <p id="contactDetailMobile" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fab fa-linkedin text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">LinkedIn</p>
+                  <a id="contactDetailLinkedin" href="#" target="_blank" class="text-blue-600 hover:underline"></a>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-map-marker-alt text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Address</p>
+                  <p id="contactDetailAddress" class="text-stone-900"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company & Details -->
+          <div>
+            <h3 class="text-lg font-semibold text-stone-900 mb-4">Company & Details</h3>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-building text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Company</p>
+                  <p id="contactDetailCompany" class="text-blue-600 hover:underline cursor-pointer"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-briefcase text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Department</p>
+                  <p id="contactDetailDepartment" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-tag text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Type</p>
+                  <span id="contactDetailType" class="px-2 py-1 rounded text-xs font-medium"></span>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-tags text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Tags</p>
+                  <div id="contactDetailTags" class="flex flex-wrap gap-1 mt-1"></div>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-comments text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Preferred Contact</p>
+                  <p id="contactDetailPreferred" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-calendar text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Last Contact</p>
+                  <p id="contactDetailLastContact" class="text-stone-900"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-stone-900 mb-3">Notes</h3>
+          <div class="bg-stone-50 rounded-lg p-4">
+            <p id="contactDetailNotes" class="text-stone-700"></p>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mt-6 flex gap-3">
+          <button class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center gap-2">
+            <i class="fas fa-envelope"></i>
+            Send Email
+          </button>
+          <button class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 flex items-center justify-center gap-2">
+            <i class="fas fa-phone"></i>
+            Call
+          </button>
+          <button class="flex-1 px-4 py-2 bg-stone-600 text-white rounded-lg hover:bg-stone-700 flex items-center justify-center gap-2">
+            <i class="fas fa-calendar"></i>
+            Schedule Meeting
+          </button>
+        </div>
+      </div>
+
+      <!-- Timeline Tab -->
+      <div id="contactDetailTimeline" class="contact-detail-tab-content hidden">
+        <div id="contactTimelineContent" class="space-y-4">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Communications Tab -->
+      <div id="contactDetailCommunications" class="contact-detail-tab-content hidden">
+        <div class="mb-4">
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
+            <i class="fas fa-plus"></i>
+            Log Communication
+          </button>
+        </div>
+        <div id="contactCommunicationsContent" class="space-y-4">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Properties Tab -->
+      <div id="contactDetailProperties" class="contact-detail-tab-content hidden">
+        <div id="contactPropertiesContent" class="space-y-4">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Documents Tab -->
+      <div id="contactDetailDocuments" class="contact-detail-tab-content hidden">
+        <div class="mb-4">
+          <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center gap-2">
+            <i class="fas fa-upload"></i>
+            Upload Document
+          </button>
+        </div>
+        <div id="contactDocumentsContent" class="space-y-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Company Profile Modal -->
+<div id="companyProfileModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="if(event.target === this) closeCompanyProfileModal()">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-5xl max-h-[90vh] overflow-hidden" onclick="event.stopPropagation()">
+    <!-- Modal Header -->
+    <div class="bg-gradient-to-r from-stone-700 to-stone-800 px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <div class="w-16 h-16 rounded-lg bg-white flex items-center justify-center">
+          <i class="fas fa-building text-stone-700 text-2xl"></i>
+        </div>
+        <div class="text-white">
+          <h2 id="companyProfileName" class="text-2xl font-bold"></h2>
+          <p id="companyProfileIndustry" class="text-stone-300"></p>
+        </div>
+      </div>
+      <button onclick="closeCompanyProfileModal()" class="text-white hover:bg-white hover:bg-opacity-20 rounded-lg p-2">
+        <i class="fas fa-times text-xl"></i>
+      </button>
+    </div>
+
+    <!-- Tabs -->
+    <div class="border-b border-stone-200 px-6">
+      <div class="flex gap-6">
+        <button onclick="switchCompanyTab('overview')" class="company-tab py-3 px-1 border-b-2 border-stone-700 text-stone-700 font-medium">
+          Overview
+        </button>
+        <button onclick="switchCompanyTab('contacts')" class="company-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Contacts
+        </button>
+        <button onclick="switchCompanyTab('properties')" class="company-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Properties
+        </button>
+        <button onclick="switchCompanyTab('metrics')" class="company-tab py-3 px-1 border-b-2 border-transparent text-stone-600 hover:text-stone-900">
+          Metrics
+        </button>
+      </div>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="p-6 overflow-y-auto" style="max-height: calc(90vh - 200px);">
+      <!-- Overview Tab -->
+      <div id="companyOverview" class="company-tab-content">
+        <div class="grid grid-cols-2 gap-6">
+          <!-- Company Information -->
+          <div>
+            <h3 class="text-lg font-semibold text-stone-900 mb-4">Company Information</h3>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-building text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Legal Name</p>
+                  <p id="companyLegalName" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-hashtag text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Registration Number</p>
+                  <p id="companyRegNumber" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-file-invoice text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">VAT Number</p>
+                  <p id="companyVatNumber" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-industry text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Industry</p>
+                  <p id="companyIndustryDetail" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-users text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Company Size</p>
+                  <p id="companySize" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-calendar text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Founded</p>
+                  <p id="companyFounded" class="text-stone-900"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contact Details -->
+          <div>
+            <h3 class="text-lg font-semibold text-stone-900 mb-4">Contact Details</h3>
+            <div class="space-y-3">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-map-marker-alt text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Address</p>
+                  <p id="companyAddress" class="text-stone-900"></p>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fas fa-globe text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">Website</p>
+                  <a id="companyWebsite" href="#" target="_blank" class="text-blue-600 hover:underline"></a>
+                </div>
+              </div>
+              <div class="flex items-start gap-3">
+                <i class="fab fa-linkedin text-stone-400 mt-1"></i>
+                <div>
+                  <p class="text-sm text-stone-600">LinkedIn</p>
+                  <a id="companyLinkedin" href="#" target="_blank" class="text-blue-600 hover:underline"></a>
+                </div>
+              </div>
+              <div class="mt-6">
+                <h4 class="text-sm font-medium text-stone-700 mb-2">Primary Contact</h4>
+                <div class="bg-stone-50 rounded-lg p-3">
+                  <p id="companyPrimaryContact" class="font-medium text-stone-900"></p>
+                  <p id="companyPrimaryEmail" class="text-sm text-stone-600"></p>
+                  <p id="companyPrimaryPhone" class="text-sm text-stone-600"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contacts Tab -->
+      <div id="companyContacts" class="company-tab-content hidden">
+        <div id="companyContactsList" class="space-y-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Properties Tab -->
+      <div id="companyProperties" class="company-tab-content hidden">
+        <div id="companyPropertiesList" class="space-y-3">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- Metrics Tab -->
+      <div id="companyMetrics" class="company-tab-content hidden">
+        <div class="grid grid-cols-2 gap-6">
+          <div class="bg-blue-50 rounded-lg p-6">
+            <p class="text-sm text-blue-600 font-medium mb-1">Properties Occupied</p>
+            <p id="companyPropertiesCount" class="text-3xl font-bold text-blue-900"></p>
+          </div>
+          <div class="bg-green-50 rounded-lg p-6">
+            <p class="text-sm text-green-600 font-medium mb-1">Total Units</p>
+            <p id="companyUnitsCount" class="text-3xl font-bold text-green-900"></p>
+          </div>
+          <div class="bg-purple-50 rounded-lg p-6">
+            <p class="text-sm text-purple-600 font-medium mb-1">Annual Rent</p>
+            <p id="companyAnnualRent" class="text-3xl font-bold text-purple-900"></p>
+          </div>
+          <div class="bg-orange-50 rounded-lg p-6">
+            <p class="text-sm text-orange-600 font-medium mb-1">Contract Value</p>
+            <p id="companyContractValue" class="text-3xl font-bold text-orange-900"></p>
+          </div>
+        </div>
+        <div class="mt-6">
+          <h3 class="text-lg font-semibold text-stone-900 mb-3">Tenant Since</h3>
+          <p id="companyTenantSince" class="text-stone-700"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Contact Modal -->
+<div id="addContactModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="if(event.target === this) closeAddContactModal()">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden" onclick="event.stopPropagation()">
+    <div class="bg-blue-600 px-6 py-4 flex items-center justify-between">
+      <h2 class="text-xl font-bold text-white">Add New Contact</h2>
+      <button onclick="closeAddContactModal()" class="text-white hover:bg-white hover:bg-opacity-20 rounded-lg p-2">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <form id="addContactForm" class="p-6 overflow-y-auto" style="max-height: calc(90vh - 150px);">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">First Name *</label>
+          <input type="text" name="firstName" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Last Name *</label>
+          <input type="text" name="lastName" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Job Title *</label>
+          <input type="text" name="jobTitle" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Department</label>
+          <input type="text" name="department" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Email *</label>
+          <input type="email" name="email" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Phone *</label>
+          <input type="tel" name="phone" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Mobile</label>
+          <input type="tel" name="mobile" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">LinkedIn</label>
+          <input type="text" name="linkedin" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Company *</label>
+          <select name="companyId" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="">Select Company</option>
+            <!-- Populated by JavaScript -->
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Type *</label>
+          <select name="type" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="Tenant">Tenant</option>
+            <option value="Prospect">Prospect</option>
+            <option value="Broker">Broker</option>
+            <option value="Vendor">Vendor</option>
+          </select>
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Address</label>
+          <input type="text" name="address" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Notes</label>
+          <textarea name="notes" rows="3" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500"></textarea>
+        </div>
+      </div>
+      
+      <div class="flex gap-3 mt-6">
+        <button type="button" onclick="closeAddContactModal()" class="flex-1 px-6 py-2 bg-stone-200 text-stone-700 rounded-lg hover:bg-stone-300">
+          Cancel
+        </button>
+        <button type="submit" class="flex-1 px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+          Add Contact
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Company Modal -->
+<div id="addCompanyModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50" onclick="if(event.target === this) closeAddCompanyModal()">
+  <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden" onclick="event.stopPropagation()">
+    <div class="bg-stone-700 px-6 py-4 flex items-center justify-between">
+      <h2 class="text-xl font-bold text-white">Add New Company</h2>
+      <button onclick="closeAddCompanyModal()" class="text-white hover:bg-white hover:bg-opacity-20 rounded-lg p-2">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <form id="addCompanyForm" class="p-6 overflow-y-auto" style="max-height: calc(90vh - 150px);">
+      <div class="grid grid-cols-2 gap-4">
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Company Name *</label>
+          <input type="text" name="name" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Legal Name</label>
+          <input type="text" name="legalName" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Registration Number</label>
+          <input type="text" name="registrationNumber" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">VAT Number</label>
+          <input type="text" name="vatNumber" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Industry *</label>
+          <input type="text" name="industry" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Company Size</label>
+          <select name="size" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+            <option value="1-10">1-10</option>
+            <option value="11-50">11-50</option>
+            <option value="51-200">51-200</option>
+            <option value="201-500">201-500</option>
+            <option value="500+">500+</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Website</label>
+          <input type="url" name="website" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-stone-700 mb-2">Founded</label>
+          <input type="number" name="founded" min="1800" max="2025" class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div class="col-span-2">
+          <label class="block text-sm font-medium text-stone-700 mb-2">Address *</label>
+          <input type="text" name="address" required class="w-full px-4 py-2 border border-stone-300 rounded-lg focus:ring-2 focus:ring-blue-500" />
+        </div>
+      </div>
+      
+      <div class="flex gap-3 mt-6">
+        <button type="button" onclick="closeAddCompanyModal()" class="flex-1 px-6 py-2 bg-stone-200 text-stone-700 rounded-lg hover:bg-stone-300">
+          Cancel
+        </button>
+        <button type="submit" class="flex-1 px-6 py-2 bg-stone-700 text-white rounded-lg hover:bg-stone-800">
+          Add Company
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
 <!-- Ticket Detail Modal -->
 <!-- Create Ticket Modal -->
 <div id="createTicketModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 p-4">
