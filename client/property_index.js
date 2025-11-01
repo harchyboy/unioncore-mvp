@@ -12,7 +12,6 @@ let currentFilters = {
 };
 let currentSort = 'name-asc';
 let filteredProperties = [];
-let isInitialized = false; // Track if event listeners are already attached
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
@@ -27,39 +26,23 @@ function initializePropertyIndex() {
     // Set initial filtered properties
     filteredProperties = [...propertiesData];
     
-    // Add event listeners only once
-    if (!isInitialized) {
-        setupEventListeners();
-        isInitialized = true;
-    }
+    // Add event listeners
+    setupEventListeners();
     
     // Initial render
     renderProperties();
 }
 
 function setupEventListeners() {
-    console.log('Setting up event listeners...');
-    
     // View toggle buttons
     const gridBtn = document.getElementById('view-grid-btn');
     const tableBtn = document.getElementById('view-table-btn');
     
-    console.log('Grid button found:', !!gridBtn);
-    console.log('Table button found:', !!tableBtn);
-    
     if (gridBtn) {
-        gridBtn.addEventListener('click', () => {
-            console.log('Grid button clicked');
-            switchView('grid');
-        });
-        console.log('Grid button listener attached');
+        gridBtn.addEventListener('click', () => switchView('grid'));
     }
     if (tableBtn) {
-        tableBtn.addEventListener('click', () => {
-            console.log('Table button clicked');
-            switchView('list');
-        });
-        console.log('Table button listener attached');
+        tableBtn.addEventListener('click', () => switchView('list'));
     }
     
     // Search input
