@@ -4153,10 +4153,10 @@
                                         <option value="recent">Recently Added</option>
                                     </select>
                                     <span class="text-sm text-concrete ml-3">View:</span>
-                                    <button id="view-grid-btn" class="p-2 bg-slate text-white rounded-lg" title="Grid View">
+                                    <button id="view-grid-btn" class="p-2 bg-slate text-white rounded-lg" title="Grid View" onclick="if(typeof switchView==='function'){switchView('grid')}else{document.getElementById('properties-grid').classList.remove('hidden');document.getElementById('properties-list').classList.add('hidden');this.classList.add('bg-slate','text-white');this.classList.remove('text-concrete');document.getElementById('view-table-btn').classList.remove('bg-slate','text-white');document.getElementById('view-table-btn').classList.add('text-concrete')}">
                                         <i class="fa-solid fa-th"></i>
                                     </button>
-                                    <button id="view-table-btn" class="p-2 text-concrete hover:bg-stone rounded-lg" title="List View">
+                                    <button id="view-table-btn" class="p-2 text-concrete hover:bg-stone rounded-lg" title="List View" onclick="if(typeof switchView==='function'){switchView('list')}else{document.getElementById('properties-grid').classList.add('hidden');document.getElementById('properties-list').classList.remove('hidden');this.classList.add('bg-slate','text-white');this.classList.remove('text-concrete');document.getElementById('view-grid-btn').classList.remove('bg-slate','text-white');document.getElementById('view-grid-btn').classList.add('text-concrete');if(typeof renderListView==='function'){renderListView()}}">
                                         <i class="fa-solid fa-list"></i>
                                     </button>
                                 </div>
