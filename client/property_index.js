@@ -268,9 +268,11 @@ function renderGridView() {
     }
     
     gridContainer.innerHTML = filteredProperties.map(property => {
-        const statusColor = property.status === 'Fully Let' ? 'success' : 
-                           property.occupancyRate >= 85 ? 'info' : 'warning';
-        const occupancyColor = property.occupancyRate >= 85 ? 'success' : 'warning';
+        // Use actual color values instead of dynamic class names for Tailwind
+        const statusBgColor = property.status === 'Fully Let' ? 'bg-green-500' : 
+                             property.occupancyRate >= 85 ? 'bg-blue-500' : 'bg-yellow-500';
+        const occupancyBgColor = property.occupancyRate >= 85 ? 'bg-green-500' : 'bg-yellow-500';
+        const statusLabel = property.status;
         
         return `
             <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" 
@@ -281,7 +283,7 @@ function renderGridView() {
                  data-occupancy="${property.occupancyRate}">
                 <div class="relative h-48">
                     <img src="${property.images[0]}" alt="${property.name}" class="w-full h-full object-cover">
-                    <span class="absolute top-3 right-3 px-3 py-1 bg-${statusColor} bg-opacity-90 text-white text-xs font-medium rounded-full">${property.status}</span>
+                    <span class="absolute top-3 right-3 px-3 py-1 ${statusBgColor} bg-opacity-90 text-white text-xs font-medium rounded-full">${statusLabel}</span>
                 </div>
                 <div class="p-5">
                     <h3 class="text-lg font-semibold text-slate mb-1">${property.name}</h3>
@@ -313,7 +315,7 @@ function renderGridView() {
                             <span class="font-semibold">${property.occupancyRate}%</span>
                         </div>
                         <div class="w-full bg-stone rounded-full h-2">
-                            <div class="bg-${occupancyColor} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
+                            <div class="${occupancyBgColor} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -352,9 +354,13 @@ function renderListView() {
     }
     
     listContainer.innerHTML = filteredProperties.map(property => {
-        const statusColor = property.status === 'Fully Let' ? 'success' : 
-                           property.occupancyRate >= 85 ? 'info' : 'warning';
-        const occupancyColor = property.occupancyRate >= 85 ? 'success' : 'warning';
+        // Use actual color values instead of dynamic class names for Tailwind
+        const statusBgColor = property.status === 'Fully Let' ? 'bg-green-500' : 
+                             property.occupancyRate >= 85 ? 'bg-blue-500' : 'bg-yellow-500';
+        const statusTextColor = property.status === 'Fully Let' ? 'text-green-700' : 
+                               property.occupancyRate >= 85 ? 'text-blue-700' : 'text-yellow-700';
+        const occupancyBgColor = property.occupancyRate >= 85 ? 'bg-green-500' : 'bg-yellow-500';
+        const statusLabel = property.status;
         
         return `
             <div class="bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow">
@@ -371,7 +377,7 @@ function renderListView() {
                                     ${property.address}
                                 </p>
                             </div>
-                            <span class="px-3 py-1 bg-${statusColor} bg-opacity-10 text-${statusColor} text-xs font-medium rounded-full">${property.status}</span>
+                            <span class="px-3 py-1 ${statusBgColor} bg-opacity-10 ${statusTextColor} text-xs font-medium rounded-full">${statusLabel}</span>
                         </div>
                         
                         <div class="grid grid-cols-4 gap-4 mb-4">
@@ -398,8 +404,7 @@ function renderListView() {
                                 <span>Occupancy Rate</span>
                                 <span class="font-semibold">${property.occupancyRate}%</span>
                             </div>
-                            <div class="w-full bg-stone rounded-full h-2">
-                                <div class="bg-${occupancyColor} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
+                            <div class="w-full bg-stone rounded-full h-2">                                <div class="${occupancyBgColor} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
                             </div>
                         </div>
                         
