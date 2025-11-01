@@ -4098,7 +4098,19 @@
                         <!-- Filters -->
                         <div class="bg-white border border-stone rounded-lg p-6">
                             <div class="grid grid-cols-4 gap-4 mb-4">
-                                <input type="text" id="property-search" placeholder="Search properties..." class="col-span-4 px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate" data-search-target="[data-searchable]" data-search-fields="text">
+                                <input type="text" id="property-search" placeholder="Search properties..." class="col-span-3 px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate" data-search-target="[data-searchable]" data-search-fields="text">
+                                
+                                <select id="property-sort" class="px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate">
+                                    <option value="">Sort by...</option>
+                                    <option value="name-asc">Name (A-Z)</option>
+                                    <option value="name-desc">Name (Z-A)</option>
+                                    <option value="rent-low">Rent (Low-High)</option>
+                                    <option value="rent-high">Rent (High-Low)</option>
+                                    <option value="size-low">Size (Low-High)</option>
+                                    <option value="size-high">Size (High-Low)</option>
+                                    <option value="occupancy-low">Occupancy (Low-High)</option>
+                                    <option value="occupancy-high">Occupancy (High-Low)</option>
+                                </select>
                                 
                                 <select id="filter-location" class="px-4 py-2 border border-stone rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate">
                                     <option value="">All Locations</option>
@@ -21239,7 +21251,8 @@ if (document.readyState === 'loading') {
                     sector: sector,
                     location: location,
                     broker: broker,
-                    brokerContact: ['James Mitchell', 'Sarah Thompson', 'David Chen', 'Emma Wilson', 'Michael Brown'][i % 5]
+                    brokerContact: ['James Mitchell', 'Sarah Thompson', 'David Chen', 'Emma Wilson', 'Michael Brown'][i % 5],
+                    occupancy: Math.floor(Math.random() * 30) + 70 // 70-100% occupancy
                 });
             }
             
@@ -21355,8 +21368,38 @@ if (document.readyState === 'loading') {
                 return matchesSearch && matchesLocation && matchesSize && matchesAvailability && matchesSector;
             });
             
+            sortProperties();
             currentPropertyPage = 1;
             updatePropertyDisplay();
+        }
+        
+        function sortProperties() {
+            const sortValue = document.getElementById('property-sort')?.value || '';
+            
+            if (!sortValue) return;
+            
+            filteredProperties.sort((a, b) => {
+                switch (sortValue) {
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'rent-low':
+                        return a.rent - b.rent;
+                    case 'rent-high':
+                        return b.rent - a.rent;
+                    case 'size-low':
+                        return a.size - b.size;
+                    case 'size-high':
+                        return b.size - a.size;
+                    case 'occupancy-low':
+                        return a.occupancy - b.occupancy;
+                    case 'occupancy-high':
+                        return b.occupancy - a.occupancy;
+                    default:
+                        return 0;
+                }
+            });
         }
         
         function exportPropertiesCSV() {
@@ -21388,6 +21431,9 @@ if (document.readyState === 'loading') {
         function setupPropertyIndexEventListeners() {
             // Search
             document.getElementById('property-search')?.addEventListener('input', filterProperties);
+            
+            // Sort
+            document.getElementById('property-sort')?.addEventListener('change', filterProperties);
             
             // Filters
             document.getElementById('filter-location')?.addEventListener('change', filterProperties);
