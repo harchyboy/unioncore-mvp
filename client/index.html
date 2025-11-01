@@ -21429,19 +21429,32 @@ if (document.readyState === 'loading') {
         }
         
         function setupPropertyIndexEventListeners() {
-            // Search
+            // Search, Sort, and Filter event listeners
             document.getElementById('property-search')?.addEventListener('input', filterProperties);
-            
-            // Sort
             document.getElementById('property-sort')?.addEventListener('change', filterProperties);
-            
-            // Filters
             document.getElementById('filter-location')?.addEventListener('change', filterProperties);
             document.getElementById('filter-size')?.addEventListener('change', filterProperties);
             document.getElementById('filter-availability')?.addEventListener('change', filterProperties);
             document.getElementById('filter-sector')?.addEventListener('change', filterProperties);
             
-            // View toggle - handled by property_index.js
+            // View toggle
+            document.getElementById('view-grid-btn')?.addEventListener('click', function() {
+                currentPropertyView = 'grid';
+                this.classList.add('bg-slate', 'text-white');
+                this.classList.remove('text-concrete');
+                document.getElementById('view-table-btn')?.classList.remove('bg-slate', 'text-white');
+                document.getElementById('view-table-btn')?.classList.add('text-concrete');
+                updatePropertyDisplay();
+            });
+            
+            document.getElementById('view-table-btn')?.addEventListener('click', function() {
+                currentPropertyView = 'table';
+                this.classList.add('bg-slate', 'text-white');
+                this.classList.remove('text-concrete');
+                document.getElementById('view-grid-btn')?.classList.remove('bg-slate', 'text-white');
+                document.getElementById('view-grid-btn')?.classList.add('text-concrete');
+                updatePropertyDisplay();
+            });
             
             // Pagination
             document.getElementById('properties-prev-page')?.addEventListener('click', function() {
