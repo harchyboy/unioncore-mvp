@@ -25,6 +25,7 @@ function initializePropertyIndex() {
     
     if (typeof propertiesData === 'undefined' || !propertiesData) {
         console.error('propertiesData is not defined! Cannot initialize Property Index.');
+        console.log('Available global variables:', Object.keys(window).filter(k => k.toLowerCase().includes('prop')));
         return;
     }
     
@@ -227,12 +228,31 @@ function renderProperties() {
     } else {
         renderListView();
     }
+    updatePropertyCount();
+}
+
+// Update property count display
+function updatePropertyCount() {
+    const showingElement = document.getElementById('properties-showing');
+    const totalElement = document.getElementById('properties-total');
+    
+    if (showingElement) {
+        showingElement.textContent = filteredProperties.length;
+    }
+    if (totalElement) {
+        totalElement.textContent = propertiesData.length;
+    }
 }
 
 // Render grid view
 function renderGridView() {
     const gridContainer = document.getElementById('properties-grid');
-    if (!gridContainer) return;
+    if (!gridContainer) {
+        console.error('Grid container not found!');
+        return;
+    }
+    
+    console.log('Rendering grid view with', filteredProperties.length, 'properties');
     
     if (filteredProperties.length === 0) {
         gridContainer.innerHTML = `
