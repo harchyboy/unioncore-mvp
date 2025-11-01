@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initializePropertyIndex() {
+    console.log('initializePropertyIndex called');
+    
+    if (typeof propertiesData === 'undefined' || !propertiesData) {
+        console.error('propertiesData is not defined! Cannot initialize Property Index.');
+        return;
+    }
+    
     console.log('Initializing Property Index with', propertiesData.length, 'properties');
     
     // Set initial filtered properties
@@ -31,6 +38,9 @@ function initializePropertyIndex() {
     
     // Initial render
     renderProperties();
+    
+    // Attach click handlers to all property cards (static and dynamic)
+    setTimeout(() => attachPropertyCardClickHandlers(), 100);
 }
 
 function setupEventListeners() {
@@ -298,6 +308,9 @@ function renderGridView() {
             </div>
         `;
     }).join('');
+    
+    // Attach click handlers to property cards
+    attachPropertyCardClickHandlers();
 }
 
 // Render list view
@@ -443,10 +456,37 @@ function resetFilters() {
     applyFiltersAndSort();
 }
 
+// Attach click handlers to property cards
+function attachPropertyCardClickHandlers() {
+    const propertyCards = document.querySelectorAll('.property-card');
+    propertyCards.forEach(card => {
+        // Remove existing click handler to avoid duplicates
+        card.replaceWith(card.cloneNode(true));
+    });
+    
+    // Re-select cards after cloning
+    const freshCards = document.querySelectorAll('.property-card');
+    freshCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Don't trigger if clicking on a button
+            if (e.target.tagName === 'BUTTON' || e.target.closest('button')) {
+                return;
+            }
+            
+            const propertyId = this.dataset.propertyId;
+            if (propertyId && typeof viewPropertyDetail === 'function') {
+                viewPropertyDetail(propertyId);
+            }
+        });
+    });
+}
+
 // Export functions for global access
+window.initializePropertyIndex = initializePropertyIndex;
 window.viewPropertyDetail = viewPropertyDetail;
 window.editProperty = editProperty;
 window.resetFilters = resetFilters;
 window.switchView = switchView;
+window.attachPropertyCardClickHandlers = attachPropertyCardClickHandlers;
 
 console.log('Property Index JavaScript loaded');

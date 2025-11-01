@@ -19164,9 +19164,10 @@ function initPropertyDetailPage() {
 function viewPropertyDetail(propertyId) {
     currentPropertyId = propertyId;
     
-    // Load property data
-    const properties = JSON.parse(localStorage.getItem('properties') || '[]');
-    const property = properties.find(p => p.property_id === propertyId);
+    // Load property data from propertiesData array (from properties_data.js)
+    // Fallback to localStorage if propertiesData is not available
+    const properties = (typeof propertiesData !== 'undefined' && propertiesData) || JSON.parse(localStorage.getItem('properties') || '[]');
+    const property = properties.find(p => p.id === propertyId || p.property_id === propertyId);
     
     if (!property) {
         showToast('Property not found', 'error');
