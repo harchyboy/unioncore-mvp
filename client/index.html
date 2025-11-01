@@ -3500,10 +3500,10 @@
                             <div class="flex items-center space-x-4 text-sm text-concrete">
                                 <span id="notifications-count">Showing 0 of 0 notifications</span>
                                 <div class="flex items-center space-x-2">
-                                    <button id="view-list-btn" class="p-2 text-slate bg-stone rounded">
+                                    <button id="notifications-view-list-btn" class="p-2 text-slate bg-stone rounded">
                                         <i class="fa-solid fa-list"></i>
                                     </button>
-                                    <button id="view-grid-btn" class="p-2 text-concrete hover:text-slate">
+                                    <button id="notifications-view-grid-btn" class="p-2 text-concrete hover:text-slate">
                                         <i class="fa-solid fa-grid"></i>
                                     </button>
                                 </div>
@@ -20740,11 +20740,9 @@ if (document.readyState === 'loading') {
                 }
                 
                 if (pageName === 'property-index') {
-                    if (typeof properties !== 'undefined' && properties.length === 0) {
-                        generatePropertyData();
-                    }
-                    if (typeof updatePropertyDisplay === 'function') {
-                        updatePropertyDisplay();
+                    // Initialize property index from property_index.js
+                    if (typeof initializePropertyIndex === 'function') {
+                        initializePropertyIndex();
                     }
                 }
                 
@@ -21396,24 +21394,7 @@ if (document.readyState === 'loading') {
             document.getElementById('filter-availability')?.addEventListener('change', filterProperties);
             document.getElementById('filter-sector')?.addEventListener('change', filterProperties);
             
-            // View toggle
-            document.getElementById('view-grid-btn')?.addEventListener('click', function() {
-                currentPropertyView = 'grid';
-                this.classList.add('bg-slate', 'text-white');
-                this.classList.remove('text-concrete');
-                document.getElementById('view-table-btn').classList.remove('bg-slate', 'text-white');
-                document.getElementById('view-table-btn').classList.add('text-concrete');
-                updatePropertyDisplay();
-            });
-            
-            document.getElementById('view-table-btn')?.addEventListener('click', function() {
-                currentPropertyView = 'table';
-                this.classList.add('bg-slate', 'text-white');
-                this.classList.remove('text-concrete');
-                document.getElementById('view-grid-btn').classList.remove('bg-slate', 'text-white');
-                document.getElementById('view-grid-btn').classList.add('text-concrete');
-                updatePropertyDisplay();
-            });
+            // View toggle - handled by property_index.js
             
             // Pagination
             document.getElementById('properties-prev-page')?.addEventListener('click', function() {
