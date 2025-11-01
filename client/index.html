@@ -21195,8 +21195,8 @@ if (document.readyState === 'loading') {
         // PROPERTY INDEX FUNCTIONALITY
         // ========================================
         
-        let properties = [];
-        let filteredProperties = [];
+        let properties = typeof propertiesData !== 'undefined' ? propertiesData : [];
+        let filteredProperties = [...properties];
         let currentPropertyView = 'grid';
         let currentPropertyPage = 1;
         const propertiesPerPage = 12;
@@ -21282,17 +21282,17 @@ if (document.readyState === 'loading') {
             
             grid.innerHTML = pageProperties.map(prop => `
                 <div class="bg-white border border-stone rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer" onclick="viewPropertyDetail('${prop.id}')">
-                    <img src="${prop.image}" alt="${prop.name}" class="w-full h-48 object-cover">
+                    <img src="${prop.images ? prop.images[0] : (prop.image || '')}" alt="${prop.name}" class="w-full h-48 object-cover">
                     <div class="p-4">
                         <h3 class="font-semibold text-slate mb-1">${prop.name}</h3>
-                        <p class="text-sm text-concrete mb-3">${prop.address}</p>
+                        <p class="text-sm text-concrete mb-3">${prop.location || prop.address || ''}</p>
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs text-concrete">${prop.size.toLocaleString()} sq ft</span>
-                            <span class="text-xs font-medium text-slate">£${prop.rent} psf</span>
+                            <span class="text-xs text-concrete">${(prop.totalArea || prop.size || 0).toLocaleString()} sq ft</span>
+                            <span class="text-xs font-medium text-slate">£${prop.pricePerSqFt || prop.rent || 0} psf</span>
                         </div>
                         <div class="flex items-center justify-between mb-3">
-                            <span class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded">${prop.availability}</span>
-                            <span class="text-xs text-concrete">${prop.broker}</span>
+                            <span class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded">${prop.status || prop.availability || 'Available'}</span>
+                            <span class="text-xs text-concrete">${prop.sector || prop.broker || ''}</span>
                         </div>
                         <div class="flex items-center space-x-2" onclick="event.stopPropagation()">
                             <button class="flex-1 px-3 py-2 bg-slate text-white text-xs rounded hover:bg-opacity-90">
@@ -21319,16 +21319,16 @@ if (document.readyState === 'loading') {
                 <tr class="border-t border-stone hover:bg-stone cursor-pointer" onclick="viewPropertyDetail('${prop.id}')">
                     <td class="px-4 py-3">
                         <div class="font-medium text-slate">${prop.name}</div>
-                        <div class="text-xs text-concrete">${prop.address}</div>
+                        <div class="text-xs text-concrete">${prop.location || prop.address || ''}</div>
                     </td>
-                    <td class="px-4 py-3 text-sm text-slate">${prop.location}</td>
-                    <td class="px-4 py-3 text-sm text-slate">${prop.size.toLocaleString()} sq ft</td>
-                    <td class="px-4 py-3 text-sm text-slate">£${prop.rent} psf</td>
-                    <td class="px-4 py-3 text-sm text-slate">${prop.sector}</td>
+                    <td class="px-4 py-3 text-sm text-slate">${prop.location || ''}</td>
+                    <td class="px-4 py-3 text-sm text-slate">${(prop.totalArea || prop.size || 0).toLocaleString()} sq ft</td>
+                    <td class="px-4 py-3 text-sm text-slate">£${prop.pricePerSqFt || prop.rent || 0} psf</td>
+                    <td class="px-4 py-3 text-sm text-slate">${prop.sector || ''}</td>
                     <td class="px-4 py-3">
-                        <span class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded">${prop.availability}</span>
+                        <span class="px-2 py-1 bg-success bg-opacity-10 text-success text-xs rounded">${prop.status || prop.availability || 'Available'}</span>
                     </td>
-                    <td class="px-4 py-3 text-sm text-slate">${prop.broker}</td>
+                    <td class="px-4 py-3 text-sm text-slate">${prop.sector || prop.broker || ''}</td>
                     <td class="px-4 py-3" onclick="event.stopPropagation()">
                         <button class="px-3 py-1 bg-slate text-white text-xs rounded hover:bg-opacity-90">
                             Add to Pipeline
@@ -21353,17 +21353,19 @@ if (document.readyState === 'loading') {
             filteredProperties = properties.filter(prop => {
                 const matchesSearch = !searchQuery || 
                     prop.name.toLowerCase().includes(searchQuery) ||
-                    prop.address.toLowerCase().includes(searchQuery) ||
-                    prop.broker.toLowerCase().includes(searchQuery);
+                    (prop.location && prop.location.toLowerCase().includes(searchQuery)) ||
+                    (prop.address && prop.address.toLowerCase().includes(searchQuery)) ||
+                    (prop.sector && prop.sector.toLowerCase().includes(searchQuery));
                     
                 const matchesLocation = !locationFilter || prop.location === locationFilter;
-                const matchesAvailability = !availabilityFilter || prop.availability === availabilityFilter;
+                const matchesAvailability = !availabilityFilter || (prop.status === availabilityFilter || prop.availability === availabilityFilter);
                 const matchesSector = !sectorFilter || prop.sector === sectorFilter;
                 
                 let matchesSize = true;
-                if (sizeFilter === 'small') matchesSize = prop.size < 5000;
-                else if (sizeFilter === 'medium') matchesSize = prop.size >= 5000 && prop.size <= 20000;
-                else if (sizeFilter === 'large') matchesSize = prop.size > 20000;
+                const propSize = prop.totalArea || prop.size || 0;
+                if (sizeFilter === 'small') matchesSize = propSize < 5000;
+                else if (sizeFilter === 'medium') matchesSize = propSize >= 5000 && propSize <= 20000;
+                else if (sizeFilter === 'large') matchesSize = propSize > 20000;
                 
                 return matchesSearch && matchesLocation && matchesSize && matchesAvailability && matchesSector;
             });
@@ -21385,17 +21387,17 @@ if (document.readyState === 'loading') {
                     case 'name-desc':
                         return b.name.localeCompare(a.name);
                     case 'rent-low':
-                        return a.rent - b.rent;
+                        return (a.pricePerSqFt || a.rent || 0) - (b.pricePerSqFt || b.rent || 0);
                     case 'rent-high':
-                        return b.rent - a.rent;
+                        return (b.pricePerSqFt || b.rent || 0) - (a.pricePerSqFt || a.rent || 0);
                     case 'size-low':
-                        return a.size - b.size;
+                        return (a.totalArea || a.size || 0) - (b.totalArea || b.size || 0);
                     case 'size-high':
-                        return b.size - a.size;
+                        return (b.totalArea || b.size || 0) - (a.totalArea || a.size || 0);
                     case 'occupancy-low':
-                        return a.occupancy - b.occupancy;
+                        return (a.occupancyRate || a.occupancy || 0) - (b.occupancyRate || b.occupancy || 0);
                     case 'occupancy-high':
-                        return b.occupancy - a.occupancy;
+                        return (b.occupancyRate || b.occupancy || 0) - (a.occupancyRate || a.occupancy || 0);
                     default:
                         return 0;
                 }
