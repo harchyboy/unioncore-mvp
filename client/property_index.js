@@ -12,6 +12,7 @@ let currentFilters = {
 };
 let currentSort = 'name-asc';
 let filteredProperties = [];
+let isInitialized = false;
 
 // Initialize when DOM is loaded OR when page becomes visible
 document.addEventListener('DOMContentLoaded', function() {
@@ -74,9 +75,29 @@ if (document.readyState === 'loading') {
 function initializePropertyIndex() {
     console.log('initializePropertyIndex called');
     
+    // Check if page is visible
+    const propertyIndexPage = document.getElementById('property-index-page');
+    if (!propertyIndexPage || propertyIndexPage.classList.contains('hidden')) {
+        console.log('Property Index page is not visible, skipping initialization');
+        return;
+    }
+    
     if (typeof propertiesData === 'undefined' || !propertiesData) {
         console.error('propertiesData is not defined! Cannot initialize Property Index.');
         console.log('Available global variables:', Object.keys(window).filter(k => k.toLowerCase().includes('prop')));
+        // Retry after a short delay in case data is still loading
+        setTimeout(() => {
+            if (typeof propertiesData !== 'undefined' && propertiesData) {
+                console.log('Retrying initialization after data loaded...');
+                initializePropertyIndex();
+            }
+        }, 100);
+        return;
+    }
+    
+    // Prevent double initialization
+    if (isInitialized) {
+        console.log('Property Index already initialized, skipping...');
         return;
     }
     
@@ -93,6 +114,10 @@ function initializePropertyIndex() {
     
     // Attach click handlers to all property cards (static and dynamic)
     setTimeout(() => attachPropertyCardClickHandlers(), 100);
+    
+    // Mark as initialized
+    isInitialized = true;
+    console.log('Property Index initialization complete');
 }
 
 function setupEventListeners() {
@@ -587,8 +612,16 @@ function attachPropertyCardClickHandlers() {
     });
 }
 
+// Function to reset initialization state (called when navigating away)
+function resetPropertyIndex() {
+    isInitialized = false;
+    filteredProperties = [];
+    console.log('Property Index reset');
+}
+
 // Export functions for global access
 window.initializePropertyIndex = initializePropertyIndex;
+window.resetPropertyIndex = resetPropertyIndex;
 window.viewPropertyDetail = viewPropertyDetail;
 window.editProperty = editProperty;
 window.resetFilters = resetFilters;
