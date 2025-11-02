@@ -103,21 +103,34 @@ function initializePropertyIndex() {
     
     console.log('Initializing Property Index with', propertiesData.length, 'properties');
     
-    // Set initial filtered properties
-    filteredProperties = [...propertiesData];
-    
-    // Add event listeners
-    setupEventListeners();
-    
-    // Initial render
-    renderProperties();
-    
-    // Attach click handlers to all property cards (static and dynamic)
-    setTimeout(() => attachPropertyCardClickHandlers(), 100);
-    
-    // Mark as initialized
-    isInitialized = true;
-    console.log('Property Index initialization complete');
+    try {
+        // Set initial filtered properties
+        filteredProperties = [...propertiesData];
+        console.log('Filtered properties set:', filteredProperties.length);
+        
+        // Add event listeners
+        setupEventListeners();
+        console.log('Event listeners setup complete');
+        
+        // Initial render
+        renderProperties();
+        console.log('Initial render complete');
+        
+        // Attach click handlers to all property cards (static and dynamic)
+        setTimeout(() => {
+            attachPropertyCardClickHandlers();
+            console.log('Property card click handlers attached');
+        }, 100);
+        
+        // Mark as initialized
+        isInitialized = true;
+        console.log('Property Index initialization complete');
+        
+    } catch (error) {
+        console.error('Error during Property Index initialization:', error);
+        console.error('Error stack:', error.stack);
+        isInitialized = false;
+    }
 }
 
 function setupEventListeners() {
@@ -619,9 +632,42 @@ function resetPropertyIndex() {
     console.log('Property Index reset');
 }
 
+// Debug function to manually trigger initialization with detailed logging
+function debugInitialization() {
+    console.log('=== DEBUG INITIALIZATION START ===');
+    console.log('Current page visible:', !document.getElementById('property-index-page')?.classList.contains('hidden'));
+    console.log('propertiesData available:', typeof propertiesData !== 'undefined');
+    console.log('propertiesData length:', typeof propertiesData !== 'undefined' ? propertiesData.length : 'N/A');
+    console.log('isInitialized:', isInitialized);
+    console.log('filteredProperties length:', filteredProperties.length);
+    
+    // Check key DOM elements
+    const gridContainer = document.getElementById('properties-grid');
+    const searchInput = document.getElementById('property-search');
+    const resetBtn = document.getElementById('reset-filters-btn');
+    
+    console.log('Grid container found:', !!gridContainer);
+    console.log('Search input found:', !!searchInput);
+    console.log('Reset button found:', !!resetBtn);
+    
+    // Force reset and re-initialize
+    isInitialized = false;
+    filteredProperties = [];
+    
+    try {
+        initializePropertyIndex();
+        console.log('Manual initialization completed');
+    } catch (error) {
+        console.error('Manual initialization failed:', error);
+    }
+    
+    console.log('=== DEBUG INITIALIZATION END ===');
+}
+
 // Export functions for global access
 window.initializePropertyIndex = initializePropertyIndex;
 window.resetPropertyIndex = resetPropertyIndex;
+window.debugInitialization = debugInitialization;
 window.viewPropertyDetail = viewPropertyDetail;
 window.editProperty = editProperty;
 window.resetFilters = resetFilters;
