@@ -13,12 +13,63 @@ let currentFilters = {
 let currentSort = 'name-asc';
 let filteredProperties = [];
 
-// Initialize when DOM is loaded
+// Initialize when DOM is loaded OR when page becomes visible
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof propertiesData !== 'undefined') {
-        initializePropertyIndex();
+        // Check if property index page is already visible
+        const propertyIndexPage = document.getElementById('property-index-page');
+        if (propertyIndexPage && !propertyIndexPage.classList.contains('hidden')) {
+            initializePropertyIndex();
+        }
     }
 });
+
+// Also try to initialize after a short delay (for router navigation)
+setTimeout(function() {
+    if (typeof propertiesData !== 'undefined') {
+        const propertyIndexPage = document.getElementById('property-index-page');
+        if (propertyIndexPage && !propertyIndexPage.classList.contains('hidden')) {
+            console.log('Initializing property index from timeout');
+            initializePropertyIndex();
+        }
+    }
+}, 100);
+
+// Global function to manually initialize (for debugging)
+window.initPropertyIndex = function() {
+    console.log('Manual initialization called');
+    if (typeof propertiesData !== 'undefined') {
+        initializePropertyIndex();
+    } else {
+        console.error('propertiesData is not defined');
+    }
+};
+
+// Also initialize when the property index page becomes visible (for router navigation)
+const propertyIndexObserver = new MutationObserver(function(mutations) {
+    const propertyIndexPage = document.getElementById('property-index-page');
+    if (propertyIndexPage && !propertyIndexPage.classList.contains('hidden')) {
+        // Page is now visible, initialize if not already initialized
+        if (filteredProperties.length === 0 && typeof propertiesData !== 'undefined') {
+            initializePropertyIndex();
+        }
+    }
+});
+
+// Start observing after DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        const propertyIndexPage = document.getElementById('property-index-page');
+        if (propertyIndexPage) {
+            propertyIndexObserver.observe(propertyIndexPage, { attributes: true, attributeFilter: ['class'] });
+        }
+    });
+} else {
+    const propertyIndexPage = document.getElementById('property-index-page');
+    if (propertyIndexPage) {
+        propertyIndexObserver.observe(propertyIndexPage, { attributes: true, attributeFilter: ['class'] });
+    }
+}
 
 function initializePropertyIndex() {
     console.log('initializePropertyIndex called');
@@ -235,12 +286,20 @@ function renderProperties() {
 function updatePropertyCount() {
     const showingElement = document.getElementById('properties-showing');
     const totalElement = document.getElementById('properties-total');
+    const showingBottomElement = document.getElementById('properties-showing-bottom');
+    const totalBottomElement = document.getElementById('properties-total-bottom');
     
     if (showingElement) {
         showingElement.textContent = filteredProperties.length;
     }
     if (totalElement) {
         totalElement.textContent = propertiesData.length;
+    }
+    if (showingBottomElement) {
+        showingBottomElement.textContent = filteredProperties.length;
+    }
+    if (totalBottomElement) {
+        totalBottomElement.textContent = propertiesData.length;
     }
 }
 
@@ -268,9 +327,21 @@ function renderGridView() {
     }
     
     gridContainer.innerHTML = filteredProperties.map(property => {
-        const statusColor = property.status === 'Fully Let' ? 'success' : 
-                           property.occupancyRate >= 85 ? 'info' : 'warning';
-        const occupancyColor = property.occupancyRate >= 85 ? 'success' : 'warning';
+        // Map status to Tailwind color classes
+        let statusBgClass, statusTextClass, occupancyBgClass;
+        
+        if (property.status === 'Fully Let') {
+            statusBgClass = 'bg-green-500';
+            statusTextClass = 'text-green-600';
+        } else if (property.occupancyRate >= 85) {
+            statusBgClass = 'bg-blue-500';
+            statusTextClass = 'text-blue-600';
+        } else {
+            statusBgClass = 'bg-amber-500';
+            statusTextClass = 'text-amber-600';
+        }
+        
+        occupancyBgClass = property.occupancyRate >= 85 ? 'bg-green-500' : 'bg-amber-500';
         
         return `
             <div class="property-card bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow cursor-pointer" 
@@ -281,7 +352,7 @@ function renderGridView() {
                  data-occupancy="${property.occupancyRate}">
                 <div class="relative h-48">
                     <img src="${property.images[0]}" alt="${property.name}" class="w-full h-full object-cover">
-                    <span class="absolute top-3 right-3 px-3 py-1 bg-${statusColor} bg-opacity-90 text-white text-xs font-medium rounded-full">${property.status}</span>
+                    <span class="absolute top-3 right-3 px-3 py-1 ${statusBgClass} bg-opacity-90 text-white text-xs font-medium rounded-full">${property.status}</span>
                 </div>
                 <div class="p-5">
                     <h3 class="text-lg font-semibold text-slate mb-1">${property.name}</h3>
@@ -313,7 +384,7 @@ function renderGridView() {
                             <span class="font-semibold">${property.occupancyRate}%</span>
                         </div>
                         <div class="w-full bg-stone rounded-full h-2">
-                            <div class="bg-${occupancyColor} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
+                            <div class="${occupancyBgClass} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
                         </div>
                     </div>
                     <div class="flex items-center space-x-2">
@@ -352,9 +423,21 @@ function renderListView() {
     }
     
     listContainer.innerHTML = filteredProperties.map(property => {
-        const statusColor = property.status === 'Fully Let' ? 'success' : 
-                           property.occupancyRate >= 85 ? 'info' : 'warning';
-        const occupancyColor = property.occupancyRate >= 85 ? 'success' : 'warning';
+        // Map status to Tailwind color classes
+        let statusBgClass, statusTextClass, occupancyBgClass;
+        
+        if (property.status === 'Fully Let') {
+            statusBgClass = 'bg-green-100';
+            statusTextClass = 'text-green-600';
+        } else if (property.occupancyRate >= 85) {
+            statusBgClass = 'bg-blue-100';
+            statusTextClass = 'text-blue-600';
+        } else {
+            statusBgClass = 'bg-amber-100';
+            statusTextClass = 'text-amber-600';
+        }
+        
+        occupancyBgClass = property.occupancyRate >= 85 ? 'bg-green-500' : 'bg-amber-500';
         
         return `
             <div class="bg-white rounded-lg shadow-sm border border-stone overflow-hidden hover:shadow-md transition-shadow">
@@ -371,7 +454,7 @@ function renderListView() {
                                     ${property.address}
                                 </p>
                             </div>
-                            <span class="px-3 py-1 bg-${statusColor} bg-opacity-10 text-${statusColor} text-xs font-medium rounded-full">${property.status}</span>
+                            <span class="px-3 py-1 ${statusBgClass} ${statusTextClass} text-xs font-medium rounded-full">${property.status}</span>
                         </div>
                         
                         <div class="grid grid-cols-4 gap-4 mb-4">
@@ -399,7 +482,7 @@ function renderListView() {
                                 <span class="font-semibold">${property.occupancyRate}%</span>
                             </div>
                             <div class="w-full bg-stone rounded-full h-2">
-                                <div class="bg-${occupancyColor} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
+                                <div class="${occupancyBgClass} h-2 rounded-full" style="width: ${property.occupancyRate}%"></div>
                             </div>
                         </div>
                         
@@ -423,6 +506,9 @@ function renderListView() {
             </div>
         `;
     }).join('');
+    
+    // Attach click handlers to property cards
+    attachPropertyCardClickHandlers();
 }
 
 // Navigate to property detail page
