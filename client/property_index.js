@@ -1,18 +1,27 @@
 // Property Index JavaScript - Comprehensive Functionality
 // Handles view switching, filtering, sorting, search, and navigation
 
-// Global state
-let currentView = 'grid'; // 'grid' or 'list'
-let currentFilters = {
-    search: '',
-    location: '',
-    type: '',
-    availability: '',
-    size: ''
+// Global state - using window object to avoid redeclaration errors
+window.propertyIndexState = window.propertyIndexState || {
+    currentView: 'grid', // 'grid' or 'list'
+    currentFilters: {
+        search: '',
+        location: '',
+        type: '',
+        availability: '',
+        size: ''
+    },
+    currentSort: 'name-asc',
+    filteredProperties: [],
+    isInitialized: false
 };
-let currentSort = 'name-asc';
-let filteredProperties = [];
-let isInitialized = false;
+
+// Shorthand references for easier access
+let currentView = window.propertyIndexState.currentView;
+let currentFilters = window.propertyIndexState.currentFilters;
+let currentSort = window.propertyIndexState.currentSort;
+let filteredProperties = window.propertyIndexState.filteredProperties;
+let isInitialized = window.propertyIndexState.isInitialized;
 
 // Initialize when DOM is loaded OR when page becomes visible
 document.addEventListener('DOMContentLoaded', function() {
@@ -627,6 +636,8 @@ function attachPropertyCardClickHandlers() {
 
 // Function to reset initialization state (called when navigating away)
 function resetPropertyIndex() {
+    window.propertyIndexState.isInitialized = false;
+    window.propertyIndexState.filteredProperties = [];
     isInitialized = false;
     filteredProperties = [];
     console.log('Property Index reset');

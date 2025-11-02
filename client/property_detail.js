@@ -1,8 +1,15 @@
 // Property Detail JavaScript - Comprehensive Functionality
 // Handles tab switching, data loading, and dynamic content population
 
-let currentProperty = null;
-let currentCalendarDate = new Date();
+// Global state - using window object to avoid redeclaration errors
+window.propertyDetailState = window.propertyDetailState || {
+    currentProperty: null,
+    currentCalendarDate: new Date()
+};
+
+// Shorthand references for easier access
+let currentProperty = window.propertyDetailState.currentProperty;
+let currentCalendarDate = window.propertyDetailState.currentCalendarDate;
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
