@@ -26,7 +26,7 @@ const Header: React.FC = () => {
             </div>
             <div>
               <h1 className="text-xl font-semibold text-slate tracking-tight">
-                UNION Core Plus
+                UNICORN
               </h1>
               <p className="text-xs text-concrete">Built for the Best</p>
             </div>
