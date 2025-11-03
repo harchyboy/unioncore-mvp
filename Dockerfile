@@ -11,7 +11,7 @@ COPY package*.json ./
 RUN npm install --legacy-peer-deps
 
 # Copy configuration files
-COPY vite.config.ts tsconfig.json tsconfig.node.json ./
+COPY vite.config.ts tsconfig.json tsconfig.node.json tsconfig.server.json ./
 COPY tailwind.config.js postcss.config.js ./
 COPY ecosystem.config.cjs ./
 
