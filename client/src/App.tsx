@@ -54,6 +54,24 @@ function Router() {
         </Layout>
       </Route>
 
+      {/* Legacy route redirects */}
+      <Route path="/deals-overview">
+        <Layout>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-64">
+                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-slate"></div>
+              </div>
+            }
+          >
+            {(() => {
+              const DealsOverview = negotiationRoutes.find(r => r.path === ROUTES.DEALS_OVERVIEW)?.component;
+              return DealsOverview ? <DealsOverview /> : <div>Route not found</div>;
+            })()}
+          </Suspense>
+        </Layout>
+      </Route>
+
       {/* Negotiation routes */}
       {negotiationRoutes.map(route => (
         <Route key={route.path} path={route.path}>
