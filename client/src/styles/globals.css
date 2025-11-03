@@ -1,0 +1,117 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  --stone: #f0f0f0;
+  --slate: #252525;
+  --concrete: #8e8e8e;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--stone);
+  color: var(--slate);
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide Manus watermark elements */
+footer-watermark,
+make-with-manus,
+manus-content-root {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Custom Tailwind Components */
+@layer components {
+  .btn-primary {
+    @apply bg-slate text-white px-4 py-2 rounded-lg font-medium hover:bg-opacity-90 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply bg-stone text-slate px-4 py-2 rounded-lg font-medium hover:bg-opacity-80 transition-colors;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-stone border-0 rounded-lg text-slate placeholder-concrete focus:outline-none focus:ring-2 focus:ring-slate;
+  }
+
+  .nav-item {
+    @apply flex items-center px-4 py-3 text-concrete hover:text-slate hover:bg-stone rounded-lg transition-colors cursor-pointer;
+  }
+
+  .nav-item-active {
+    @apply flex items-center px-4 py-3 text-slate bg-stone rounded-lg font-medium cursor-pointer;
+  }
+
+  .card {
+    @apply bg-white rounded-lg border border-stone p-6;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+  }
+
+  .modal-content {
+    @apply bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-90vh overflow-hidden;
+  }
+}
+
+/* Animations */
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-modal-in {
+  animation: modal-in 0.2s ease-out forwards;
+}
+
+/* Backdrop blur support */
+@supports (backdrop-filter: blur(8px)) {
+  .backdrop-blur-sm {
+    backdrop-filter: blur(8px);
+  }
+}
+
+/* Responsive utilities */
+@media (max-width: 1024px) {
+  .responsive-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .mobile-stack {
+    flex-direction: column;
+  }
+
+  .mobile-full {
+    width: 100%;
+  }
+}

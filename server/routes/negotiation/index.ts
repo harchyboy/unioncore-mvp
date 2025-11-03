@@ -1,7 +1,7 @@
 import { Router } from "express";
-import commercialsRouter from "./commercials";
-import approvalsRouter from "./approvalsPending";
-import tasksRouter from "./tasks";
+import commercialsRouter from "./commercials.js";
+import approvalsRouter from "./approvalsPending.js";
+import tasksRouter from "./tasks.js";
 
 const router = Router();
 

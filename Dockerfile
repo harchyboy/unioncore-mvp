@@ -47,4 +47,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
   CMD wget --no-verbose --tries=1 --spider http://localhost:5879/ || exit 1
 
 # Start the Express server with explicit environment variables
-CMD ["sh", "-c", "PORT=5879 NODE_ENV=production node dist/index.js"]
+CMD ["sh", "-c", "PORT=5879 NODE_ENV=production node dist/server/index.js"]

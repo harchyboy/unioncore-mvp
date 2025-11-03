@@ -2,9 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Inter font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
+
+  /* Custom UnionCore colors */
+  --stone: #f0f0f0;
+  --slate: #252525;
+  --concrete: #8e8e8e;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #3b82f6;
   --card: 0 0% 100%;
   --card-foreground: 222.2 84% 4.9%;
   --popover: 0 0% 100%;
@@ -129,4 +141,65 @@
       max-width: 1280px; /* Standard content width */
     }
   }
+}
+
+/* UnionCore Custom Styles */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.font-haltung {
+  font-family: "Inter", sans-serif;
+}
+
+/* Custom color utilities */
+.text-stone {
+  color: var(--stone);
+}
+
+.text-slate {
+  color: var(--slate);
+}
+
+.text-concrete {
+  color: var(--concrete);
+}
+
+.bg-stone {
+  background-color: var(--stone);
+}
+
+.bg-slate {
+  background-color: var(--slate);
+}
+
+.bg-concrete {
+  background-color: var(--concrete);
+}
+
+.border-stone {
+  border-color: var(--stone);
+}
+
+.border-slate {
+  border-color: var(--slate);
+}
+
+.border-concrete {
+  border-color: var(--concrete);
+}
+
+/* Hide scrollbars */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide Manus watermark elements */
+footer-watermark,
+make-with-manus,
+manus-content-root {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }

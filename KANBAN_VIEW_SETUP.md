@@ -14,6 +14,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 2. **Grid Icon** 📱 - Shows the Kanban board view
 
 ### Default Behavior
+
 - **Table view** loads first (current behavior maintained)
 - Click the **Grid icon** to switch to **Kanban view**
 - Click **Table icon** to switch back
@@ -23,6 +24,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 ## 🎨 Kanban Board Features
 
 ### Six Pipeline Stages (Left to Right)
+
 1. **Lead** (Blue) - 42 deals, £8.2M
 2. **Viewing** (Orange) - 38 deals, £7.1M
 3. **Proposal** (Grey) - 52 deals, £12.8M
@@ -31,6 +33,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 6. **Live** (Green) - 30 deals, £5.2M
 
 ### Deal Cards Show
+
 - ✅ Property name and address
 - ✅ Deal value and size (sq ft)
 - ✅ Owner avatar and name
@@ -39,6 +42,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 - ✅ Next action (when applicable)
 
 ### Drag-and-Drop
+
 - ✅ Drag any card to move it between stages
 - ✅ Visual feedback (opacity change, drop zone highlighting)
 - ✅ Automatic data updates
@@ -50,10 +54,12 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 ## 🔧 Technical Details
 
 ### Files Modified
+
 - `client/index.html` - Added Kanban HTML + JavaScript
 - `dist/public/index.html` - Deployed version (synced)
 
 ### Integration
+
 - ✅ Works with all existing filters
 - ✅ Works with search functionality
 - ✅ Works with quick filters
@@ -76,6 +82,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 ## ✨ Key Features
 
 ### Visual Design
+
 - Matches UNION design system perfectly
 - Horizontal scrolling for all 6 stages
 - Clean card design with consistent spacing
@@ -83,6 +90,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 - Professional status indicators
 
 ### Functionality
+
 - Native HTML5 drag-and-drop
 - Real-time count and value updates
 - Filter integration (all existing filters work)
@@ -105,7 +113,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 ✅ **Filters affect Kanban cards**  
 ✅ **Search filters cards in real-time**  
 ✅ **Horizontal scroll works**  
-✅ **Active button is highlighted**  
+✅ **Active button is highlighted**
 
 ---
 
@@ -168,6 +176,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 ## 💡 Benefits
 
 ### For Users
+
 - **Quick visual overview** of entire pipeline
 - **Identify bottlenecks** at a glance
 - **Fast deal updates** via drag-and-drop
@@ -175,6 +184,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 - **Easy stage comparison** - see where deals are concentrated
 
 ### For Management
+
 - **Pipeline health visibility**
 - **Team performance tracking** (owner on each card)
 - **Value distribution** across stages
@@ -196,6 +206,7 @@ A fully functional **Kanban Board view** for the Pipeline page with drag-and-dro
 ## 🔮 Future Enhancements (Optional)
 
 If you want to add later:
+
 - Bulk move (select multiple cards)
 - Swimlanes (group by owner/type)
 - Card color coding
@@ -211,9 +222,10 @@ If you want to add later:
 **Implementation:** ✅ Complete  
 **Testing:** ✅ Ready  
 **Deployment:** ✅ Live  
-**Documentation:** ✅ Complete  
+**Documentation:** ✅ Complete
 
 **Next Steps:**
+
 1. Test on https://union.hartz.ai/
 2. Navigate to Pipeline page
 3. Click Grid icon to see Kanban view

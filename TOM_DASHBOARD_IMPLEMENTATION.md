@@ -16,13 +16,16 @@ Tom's personal dashboard has been fully implemented according to the UNION Knowl
 ## 📊 Dashboard Features
 
 ### Header Section
+
 - **Search Bar** - Global search across properties, leads, and brokers
 - **Notifications** - Badge showing 8 unread notifications
 - **Settings Access** - Quick access to configuration
 - **Profile Menu** - User profile with logout option
 
 ### Quick Actions Bar
+
 Always-visible action buttons for Tom's most common tasks:
+
 - ✅ **Add Lead** - Quick lead capture
 - ✅ **Update Property** - Fast property status updates
 - ✅ **Schedule Viewing** - Calendar integration
@@ -35,7 +38,9 @@ Always-visible action buttons for Tom's most common tasks:
 ### LEFT COLUMN: Property Portfolio (3/12 width)
 
 #### 1. Portfolio Summary Card
+
 **Displays:**
+
 - Total Properties: 42
 - Occupied Units: 38 (with count)
 - Available Units: 4 (with count)
@@ -44,12 +49,15 @@ Always-visible action buttons for Tom's most common tasks:
 - Visual progress bar for occupancy
 
 **Features:**
+
 - Color-coded metrics (green for good, blue for neutral)
 - Trend arrows showing performance direction
 - Revenue change badge
 
 #### 2. Top Performing Properties Card
+
 **Displays:**
+
 - Top 5 properties ranked by revenue
 - Each showing:
   - Performance badge (🔥 Hot, ⭐ Star, 📈 Rising)
@@ -59,17 +67,21 @@ Always-visible action buttons for Tom's most common tasks:
   - Ranking number
 
 **Features:**
+
 - Scrollable list
 - Hover effects for interaction
 - Click to view full property details
 
 #### 3. Property Alerts Card
+
 **Alert Types:**
+
 - 🔴 High severity (red) - Low occupancy warnings
 - 🟡 Medium severity (amber) - Lease expirations
 - 🔵 Low severity (blue) - Opportunities
 
 **Features:**
+
 - Color-coded alert boxes
 - Property name and alert message
 - Appropriate icons for each severity level
@@ -79,7 +91,9 @@ Always-visible action buttons for Tom's most common tasks:
 ### CENTER COLUMN: Lead Management (6/12 width)
 
 #### 1. Lead Pipeline Funnel Card
+
 **Displays:**
+
 - Visual funnel showing:
   - 100 New Leads
   - 78 Qualified (78% conversion)
@@ -88,12 +102,15 @@ Always-visible action buttons for Tom's most common tasks:
   - 18 Proposal (56% conversion)
 
 **Features:**
+
 - Graduated color scheme (blue to green)
 - Conversion percentages between stages
 - Visual width proportional to volume
 
 #### 2. Recent Lead Activity Card
+
 **Displays:**
+
 - Recent leads with:
   - Company name and contact person
   - Source badge (Website, Broker, Direct)
@@ -103,6 +120,7 @@ Always-visible action buttons for Tom's most common tasks:
   - Time since last activity
 
 **Features:**
+
 - Scrollable list (400px height)
 - Interactive lead cards with hover effects
 - Action buttons:
@@ -113,12 +131,15 @@ Always-visible action buttons for Tom's most common tasks:
 - Filter button for customization
 
 **Grade Color Coding:**
+
 - Grade A: Green (high priority)
 - Grade B: Blue (medium priority)
 - Grade C+: Gray (lower priority)
 
 #### 3. Lead Source Performance Card
+
 **Displays:**
+
 - Performance by source:
   - Website: 52 leads (52%) - 42% conversion
   - Brokers: 28 leads (28%) - 58% conversion
@@ -126,6 +147,7 @@ Always-visible action buttons for Tom's most common tasks:
   - Events: 5 leads (5%) - 28% conversion
 
 **Features:**
+
 - Progress bars showing proportion
 - Lead count and conversion rate
 - Sortable visualization
@@ -135,18 +157,23 @@ Always-visible action buttons for Tom's most common tasks:
 ### RIGHT COLUMN: Broker Management (3/12 width)
 
 #### 1. Broker Network Summary Card
+
 **Displays:**
+
 - Total Partners: 24
 - Active This Month: 18
 - Referrals This Month: 12
 - Conversion Rate: 58%
 
 **Features:**
+
 - Grid layout for key metrics
 - Color coding (green for active, blue for activity)
 
 #### 2. Top Performers Card
+
 **Displays:**
+
 - Top 3 brokers ranked:
   - 🥇 David Brown (Score: 95)
     - 3 referrals this week
@@ -162,13 +189,16 @@ Always-visible action buttons for Tom's most common tasks:
     - £198K revenue
 
 **Features:**
+
 - Medal emojis for top 3
 - Performance score badge
 - Contact and View Profile buttons
 - Hover effects
 
 #### 3. Commission Alerts Card
+
 **Displays:**
+
 - Total Pending: £45,250 (highlighted in amber)
 - Individual pending commissions:
   - David Brown - Canary Wharf - £18,500
@@ -176,6 +206,7 @@ Always-visible action buttons for Tom's most common tasks:
   - Mike Rodriguez - King's Cross - £14,000
 
 **Features:**
+
 - Scrollable list
 - "Pending" status badges
 - Review and Approve buttons
@@ -186,6 +217,7 @@ Always-visible action buttons for Tom's most common tasks:
 ## 🎨 Design Elements
 
 ### Color Scheme
+
 - **Primary Blue:** #2563EB (Blue-600) - Main actions and positive metrics
 - **Success Green:** #16A34A (Green-600) - Occupied, high performance
 - **Warning Amber:** #D97706 (Amber-600) - Alerts, pending items
@@ -193,12 +225,14 @@ Always-visible action buttons for Tom's most common tasks:
 - **Gray Scale:** For text hierarchy and backgrounds
 
 ### Typography
+
 - **Headings:** Bold, clear hierarchy
 - **Metrics:** Large, prominent numbers
 - **Labels:** Small, gray for context
 - **Badges:** Consistent sizing and spacing
 
 ### Spacing & Layout
+
 - **Consistent gaps:** 6 units (1.5rem) between columns
 - **Card padding:** Proper whitespace inside cards
 - **Scrollable areas:** Max heights with smooth scrolling
@@ -209,33 +243,49 @@ Always-visible action buttons for Tom's most common tasks:
 ## 🔧 Technical Implementation
 
 ### Components Used
+
 ```typescript
 // UI Components from shadcn/ui
-- Card, CardHeader, CardTitle, CardContent
-- Button
-- Badge
-- Progress
-- ScrollArea
-- DropdownMenu
-- Input
-- Tabs
-
-// Lucide Icons
-- Building2, Users, TrendingUp/Down
-- Plus, Calendar, Phone, Mail
-- AlertCircle, CheckCircle2, Clock
-- Star, Flame, Award, MessageSquare
-- Search, Filter, MoreVertical, Bell, Settings
+(-Card,
+  CardHeader,
+  CardTitle,
+  CardContent -
+    Button -
+    Badge -
+    Progress -
+    ScrollArea -
+    DropdownMenu -
+    Input -
+    Tabs -
+    // Lucide Icons
+    Building2,
+  Users,
+  TrendingUp / Down - Plus,
+  Calendar,
+  Phone,
+  Mail - AlertCircle,
+  CheckCircle2,
+  Clock - Star,
+  Flame,
+  Award,
+  MessageSquare - Search,
+  Filter,
+  MoreVertical,
+  Bell,
+  Settings);
 ```
 
 ### State Management
+
 ```typescript
 const [selectedView, setSelectedView] = useState("overview");
 // Ready for expansion with additional views
 ```
 
 ### Data Structure
+
 All data is currently dummy data stored in constants:
+
 - `portfolioData` - Portfolio metrics
 - `topProperties` - Top 5 properties
 - `propertyAlerts` - Alert items
@@ -250,13 +300,16 @@ All data is currently dummy data stored in constants:
 ## 📱 Responsive Design
 
 ### Desktop (Current Implementation)
+
 - Three-column layout (3-6-3 grid)
 - Full data visibility
 - All features accessible
 - Optimal for 1920x1080+ screens
 
 ### Future Mobile Considerations
+
 The layout is ready to be made responsive with:
+
 - Collapse to single column on mobile
 - Tab-based navigation for sections
 - Touch-optimized buttons
@@ -267,6 +320,7 @@ The layout is ready to be made responsive with:
 ## 🚀 How to View
 
 ### Local Development
+
 ```bash
 cd /workspace/unioncore-mvp
 npm install  # if not already done
@@ -274,10 +328,12 @@ npm run dev
 ```
 
 Then navigate to:
+
 - `http://localhost:5173/` - Main route (Tom's Dashboard)
 - `http://localhost:5173/tom` - Direct Tom route
 
 ### Production
+
 - Live URL: https://union.hartz.ai/ (if deployed)
 
 ---
@@ -285,6 +341,7 @@ Then navigate to:
 ## 🔄 Future Enhancements
 
 ### Backend Integration (When APIs are Ready)
+
 1. Replace dummy data with API calls
 2. Real-time data updates via WebSocket
 3. User authentication and personalization
@@ -292,6 +349,7 @@ Then navigate to:
 5. Data refresh mechanisms
 
 ### Interactive Features to Add
+
 1. **Quick Lead Form Modal** - Pop-up form for adding leads
 2. **Property Update Modal** - Quick property status changes
 3. **Viewing Scheduler** - Calendar integration
@@ -304,6 +362,7 @@ Then navigate to:
 10. **Mobile Views** - Responsive breakpoints
 
 ### Data Enhancements
+
 1. **Real-time Updates** - Live data refreshing
 2. **Historical Trends** - Charts showing trends over time
 3. **Drill-down** - Click metrics to see details
@@ -315,28 +374,36 @@ Then navigate to:
 ## 📋 User Stories Implemented
 
 ### ✅ Morning Dashboard Check
+
 Tom can now see at a glance:
+
 - Portfolio health and occupancy
 - New leads requiring attention
 - Broker activity
 - Pending approvals
 
 ### ✅ Quick Actions
+
 Tom can quickly:
+
 - Add new leads
 - Update property status
 - Schedule viewings
 - Contact brokers
 
 ### ✅ Performance Monitoring
+
 Tom can monitor:
+
 - Top performing properties
 - Lead source effectiveness
 - Broker performance rankings
 - Pipeline health
 
 ### ✅ Alert Management
+
 Tom is alerted to:
+
 - Low occupancy properties
 - Expiring leases
 - Pending commission approvals
@@ -347,6 +414,7 @@ Tom is alerted to:
 ## 🐛 Known Issues / To-Do
 
 ### Current Limitations
+
 - [ ] All data is dummy/static
 - [ ] No backend API integration
 - [ ] No real-time updates
@@ -357,6 +425,7 @@ Tom is alerted to:
 - [ ] Not responsive for mobile yet
 
 ### Next Steps for Full Functionality
+
 1. **Connect to Backend APIs**
    - GET /api/dashboard/tom/portfolio
    - GET /api/dashboard/tom/leads
@@ -393,6 +462,7 @@ Tom is alerted to:
 When backend is ready, these API endpoints will be needed:
 
 ### Portfolio Data
+
 ```typescript
 GET /api/dashboard/tom/portfolio
 Response: {
@@ -408,6 +478,7 @@ Response: {
 ```
 
 ### Lead Data
+
 ```typescript
 GET /api/dashboard/tom/leads
 Response: {
@@ -424,6 +495,7 @@ Response: {
 ```
 
 ### Broker Data
+
 ```typescript
 GET /api/dashboard/tom/brokers
 Response: {
@@ -441,6 +513,7 @@ Response: {
 ## 🎯 Success Criteria
 
 ### UI/UX Success ✅
+
 - [x] Clean, professional design
 - [x] Clear information hierarchy
 - [x] Intuitive layout
@@ -449,6 +522,7 @@ Response: {
 - [x] Proper spacing and alignment
 
 ### Functionality Success (Pending Backend)
+
 - [ ] Real data from APIs
 - [ ] Working search and filters
 - [ ] Functional quick actions
@@ -457,6 +531,7 @@ Response: {
 - [ ] Mobile responsive
 
 ### Business Value Success
+
 - [ ] 40% reduction in admin time (measure after backend)
 - [ ] Improved lead qualification speed
 - [ ] Better broker relationship tracking
@@ -468,6 +543,7 @@ Response: {
 ## 💡 Tips for Development Team
 
 ### When Adding Backend Integration
+
 1. Create API hooks in `/client/src/hooks/`
 2. Use TanStack Query for data fetching
 3. Implement loading states
@@ -475,6 +551,7 @@ Response: {
 5. Cache data appropriately
 
 ### When Adding Modals
+
 1. Use existing shadcn/ui Dialog components
 2. Keep forms simple and focused
 3. Add validation with Zod
@@ -482,6 +559,7 @@ Response: {
 5. Refresh data after mutations
 
 ### When Making Responsive
+
 1. Start with mobile-first approach
 2. Use Tailwind breakpoints (sm:, md:, lg:, xl:)
 3. Consider tab navigation for mobile
@@ -493,12 +571,14 @@ Response: {
 ## 📞 Questions or Issues?
 
 If you need:
+
 - Clarification on any feature
 - Help integrating with backend
 - Design adjustments
 - Additional functionality
 
 Refer to:
+
 - `TOM_DASHBOARD_REQUIREMENTS.md` - Full requirements spec
 - `UNION_GAP_ANALYSIS.md` - Overall gap analysis
 - UNION Knowledge Base PDF - Source requirements

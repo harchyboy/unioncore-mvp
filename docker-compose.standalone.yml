@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 # UNION Core Plus MVP - Standalone Docker Compose
 # Use this if deploying WITHOUT Dokploy/Traefik
@@ -11,33 +11,33 @@ services:
       dockerfile: Dockerfile
     container_name: unioncore-mvp
     restart: unless-stopped
-    
+
     # Port mappings
     ports:
-      - "80:80"      # HTTP (Nginx)
-      - "443:443"    # HTTPS (if you add SSL certificates)
-      - "5879:5879"  # Vite (optional, for direct access)
-    
+      - "80:80" # HTTP (Nginx)
+      - "443:443" # HTTPS (if you add SSL certificates)
+      - "5879:5879" # Vite (optional, for direct access)
+
     # Environment variables
     environment:
       - NODE_ENV=production
       - PORT=5879
       - VITE_PORT=5879
       - VITE_HOST=0.0.0.0
-    
+
     # Volume mounts
     volumes:
       # Application logs
       - ./logs:/var/log/unioncore
-      
+
       # SSL certificates (if you want to add them manually)
       # Uncomment these lines if you have SSL certs:
       # - ./ssl/fullchain.pem:/etc/nginx/ssl/fullchain.pem:ro
       # - ./ssl/privkey.pem:/etc/nginx/ssl/privkey.pem:ro
-      
+
       # Optional: Mount client files for live editing
       # - ./client:/app/client:ro
-    
+
     # Health check
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
@@ -45,17 +45,17 @@ services:
       timeout: 10s
       retries: 3
       start_period: 40s
-    
+
     # Resource limits (optional)
     deploy:
       resources:
         limits:
-          cpus: '2'
+          cpus: "2"
           memory: 2G
         reservations:
-          cpus: '0.5'
+          cpus: "0.5"
           memory: 512M
-    
+
     # Networks
     networks:
       - unioncore-network

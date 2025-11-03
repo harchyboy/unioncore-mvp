@@ -9,7 +9,7 @@ import {
   type CreateTask,
   type UpdateTask,
   type TaskComment,
-} from "../../../shared/negotiation/tasks";
+} from "../../../shared/negotiation/tasks.js";
 
 const router = Router();
 

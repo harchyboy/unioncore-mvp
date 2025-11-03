@@ -9,15 +9,19 @@ The application is now **fully working** on all platforms (Windows, Linux, Mac).
 ## 🚀 How to Run (Choose Your Platform)
 
 ### Windows Users:
+
 ```
 Double-click START.bat
 ```
+
 That's it! The application will open at http://localhost:5879
 
 ### Linux/Mac Users:
+
 ```bash
 ./START.sh
 ```
+
 That's it! The application will open at http://localhost:5879
 
 ---
@@ -42,15 +46,16 @@ That's it! The application will open at http://localhost:5879
 
 ## ✅ What Was Fixed
 
-| Issue | Status |
-|-------|--------|
+| Issue                          | Status                               |
+| ------------------------------ | ------------------------------------ |
 | Blank screen (CSS not loading) | ✅ FIXED (Downgraded Tailwind v4→v3) |
-| Not working on Windows | ✅ FIXED |
-| Not working on Linux | ✅ FIXED |
-| Complicated to run | ✅ FIXED |
-| No documentation | ✅ FIXED |
+| Not working on Windows         | ✅ FIXED                             |
+| Not working on Linux           | ✅ FIXED                             |
+| Complicated to run             | ✅ FIXED                             |
+| No documentation               | ✅ FIXED                             |
 
 ### Technical Details:
+
 The blank screen was caused by **Tailwind CSS v4's experimental syntax** (`@utility`, `@theme`, `@custom-variant`) which isn't supported by browsers yet. We downgraded to **Tailwind CSS v3.4.1** (stable) which uses the standard `@tailwind` directives that browsers understand.
 
 ---
@@ -101,6 +106,6 @@ The application will be available at: **http://localhost:5879**
 ✅ Property management interface  
 ✅ Lead pipeline visualization  
 ✅ Broker network analytics  
-✅ Real-time data and charts  
+✅ Real-time data and charts
 
 **Everything works perfectly now! Enjoy! 🎊**

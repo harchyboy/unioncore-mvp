@@ -1,6 +1,7 @@
 # 🚀 Dokploy Deployment Guide - UNION Core Plus
 
 ## ✅ Project Status
+
 **All issues fixed!** The application now works perfectly with Tailwind CSS v3 (stable).
 
 ---
@@ -8,6 +9,7 @@
 ## 📦 Quick Deployment Steps
 
 ### 1️⃣ Prepare Your Repository
+
 ```bash
 # Commit all changes
 git add -A
@@ -26,6 +28,7 @@ git push origin main
    - Branch: `main`
 
 2. **Build Configuration:**
+
    ```yaml
    Build Type: Dockerfile
    Dockerfile Path: ./Dockerfile
@@ -33,6 +36,7 @@ git push origin main
    ```
 
 3. **Port Configuration:**
+
    ```
    Container Port: 5879
    Published Port: 80 (or any port you prefer)
@@ -48,9 +52,10 @@ git push origin main
 #### **Option B: Using Docker Compose**
 
 1. **Upload docker-compose.yml:**
+
    ```yaml
-   version: '3.8'
-   
+   version: "3.8"
+
    services:
      unioncore:
        build:
@@ -64,7 +69,15 @@ git push origin main
          - HOST=0.0.0.0
        restart: unless-stopped
        healthcheck:
-         test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:5879/"]
+         test:
+           [
+             "CMD",
+             "wget",
+             "--no-verbose",
+             "--tries=1",
+             "--spider",
+             "http://localhost:5879/",
+           ]
          interval: 30s
          timeout: 10s
          retries: 3
@@ -80,21 +93,23 @@ git push origin main
 
 ### **Which Port to Open in Dokploy:**
 
-| Setting | Value | Description |
-|---------|-------|-------------|
-| **Container Port** | `5879` | Internal application port |
-| **Published/External Port** | `80` or `443` | Public-facing port |
-| **Domain** | `your-domain.com` | Your custom domain (optional) |
+| Setting                     | Value             | Description                   |
+| --------------------------- | ----------------- | ----------------------------- |
+| **Container Port**          | `5879`            | Internal application port     |
+| **Published/External Port** | `80` or `443`     | Public-facing port            |
+| **Domain**                  | `your-domain.com` | Your custom domain (optional) |
 
 ### **Port Mapping Examples:**
 
 1. **Standard HTTP (Port 80):**
+
    ```
    Container: 5879 → External: 80
    Access: http://your-server-ip/
    ```
 
 2. **Custom Port:**
+
    ```
    Container: 5879 → External: 8080
    Access: http://your-server-ip:8080/
@@ -180,12 +195,14 @@ Interval: 30s
 ### **After deployment, check:**
 
 1. **Application Health:**
+
    ```bash
    curl http://your-server-ip/
    # Should return HTML content
    ```
 
 2. **CSS Loading:**
+
    ```bash
    curl -I http://your-server-ip/assets/index-*.css
    # Should return 200 OK
@@ -204,7 +221,9 @@ Interval: 30s
 ## 🐛 Troubleshooting
 
 ### **Issue: Blank screen after deployment**
+
 **Solution:**
+
 1. Check build logs in Dokploy
 2. Verify Tailwind config files are copied:
    ```bash
@@ -213,7 +232,9 @@ Interval: 30s
    ```
 
 ### **Issue: CSS not loading**
+
 **Solution:**
+
 1. Check if CSS file exists in container:
    ```bash
    docker exec <container-id> ls -la /app/dist/public/assets/
@@ -221,7 +242,9 @@ Interval: 30s
 2. Verify build completed successfully in logs
 
 ### **Issue: Port not accessible**
+
 **Solution:**
+
 1. Check Dokploy port mapping: Container `5879` → External `80`
 2. Verify firewall allows traffic on external port
 3. Check Docker container is running:
@@ -234,11 +257,13 @@ Interval: 30s
 ## 📊 Resource Requirements
 
 ### **Minimum:**
+
 - Memory: 256MB
 - CPU: 0.25 cores
 - Disk: 500MB
 
 ### **Recommended:**
+
 - Memory: 512MB
 - CPU: 0.5 cores
 - Disk: 1GB
@@ -250,6 +275,7 @@ Interval: 30s
 ### **To deploy updates:**
 
 1. **Push code to GitHub:**
+
    ```bash
    git add -A
    git commit -m "Update application"
@@ -275,10 +301,11 @@ Interval: 30s
 ## 🎉 Success!
 
 Your application should now be accessible at:
+
 - **HTTP:** `http://your-server-ip/` or `http://your-domain.com/`
 - **HTTPS:** `https://your-domain.com/` (if SSL configured)
 
-**Expected Result:** 
+**Expected Result:**
 Fully styled dashboard with blue buttons, cards, charts, and all CSS working perfectly! 🎊
 
 ---
@@ -286,12 +313,14 @@ Fully styled dashboard with blue buttons, cards, charts, and all CSS working per
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check Dokploy build logs
 2. Verify port configuration (Container: 5879 → External: 80)
 3. Test Docker build locally first
 4. Ensure all config files are committed to Git
 
 **Port Summary:**
+
 - **Open in Dokploy:** External Port `80` (HTTP) or `443` (HTTPS)
 - **Container Port:** `5879` (automatically configured)
 - **Health Check:** Enabled on port `5879`

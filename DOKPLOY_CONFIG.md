@@ -4,9 +4,9 @@
 
 ```yaml
 Application Name: unioncore-mvp
-Container Ports:  5879 (Vite), 80 (Nginx)
-Domain:          union.hartz.ai
-Protocol:        HTTP (SSL handled by Dokploy/Traefik)
+Container Ports: 5879 (Vite), 80 (Nginx)
+Domain: union.hartz.ai
+Protocol: HTTP (SSL handled by Dokploy/Traefik)
 ```
 
 ---
@@ -23,18 +23,18 @@ Navigate to your Dokploy application settings and configure:
 General:
   Name: unioncore-mvp
   Image: <your-image> or Build from source
-  
+
 Network:
   Port: 80
   Protocol: HTTP
-  
+
 Domain:
   Domain: union.hartz.ai
   Path: /
   HTTPS: ✅ Enabled
   Let's Encrypt: ✅ Enabled
   Force HTTPS: ✅ Enabled (recommended)
-  
+
 Environment:
   NODE_ENV: production
   PORT: 5879
@@ -43,6 +43,7 @@ Environment:
 #### 2. Port Mapping
 
 **Option A: Direct to Vite (Current Setup)**
+
 ```
 Container Port: 5879
 External: Managed by Dokploy
@@ -50,6 +51,7 @@ Protocol: HTTP
 ```
 
 **Option B: Through Nginx (Alternative)**
+
 ```
 Container Port: 80
 External: Managed by Dokploy
@@ -75,21 +77,21 @@ If Dokploy uses Docker labels for Traefik routing, add these:
 labels:
   # Enable Traefik
   - "traefik.enable=true"
-  
+
   # HTTP Router
   - "traefik.http.routers.unioncore.rule=Host(`union.hartz.ai`)"
   - "traefik.http.routers.unioncore.entrypoints=web"
-  
+
   # HTTPS Router
   - "traefik.http.routers.unioncore-secure.rule=Host(`union.hartz.ai`)"
   - "traefik.http.routers.unioncore-secure.entrypoints=websecure"
   - "traefik.http.routers.unioncore-secure.tls=true"
   - "traefik.http.routers.unioncore-secure.tls.certresolver=letsencrypt"
-  
+
   # Redirect HTTP to HTTPS
   - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
   - "traefik.http.routers.unioncore.middlewares=redirect-to-https"
-  
+
   # Service (point to correct port)
   - "traefik.http.services.unioncore.loadbalancer.server.port=80"
   # Or if using Vite directly:
@@ -103,49 +105,49 @@ labels:
 If Dokploy uses docker-compose, here's the configuration:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   unioncore-mvp:
     build: .
     container_name: unioncore-mvp
     restart: unless-stopped
-    
+
     ports:
       - "5879:5879"
       - "80:80"
-    
+
     environment:
       - NODE_ENV=production
       - PORT=5879
-    
+
     networks:
       - dokploy-network
       - traefik-network
-    
+
     labels:
       # Traefik configuration
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-network"
-      
+
       # HTTP entrypoint
       - "traefik.http.routers.unioncore.rule=Host(`union.hartz.ai`)"
       - "traefik.http.routers.unioncore.entrypoints=web"
       - "traefik.http.routers.unioncore.middlewares=redirect-to-https@docker"
-      
+
       # HTTPS entrypoint
       - "traefik.http.routers.unioncore-secure.rule=Host(`union.hartz.ai`)"
       - "traefik.http.routers.unioncore-secure.entrypoints=websecure"
       - "traefik.http.routers.unioncore-secure.tls=true"
       - "traefik.http.routers.unioncore-secure.tls.certresolver=letsencrypt"
-      
+
       # Service configuration (Nginx port)
       - "traefik.http.services.unioncore.loadbalancer.server.port=80"
-      
+
       # Middleware for HTTPS redirect
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
       - "traefik.http.middlewares.redirect-to-https.redirectscheme.permanent=true"
-    
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
@@ -175,6 +177,7 @@ union.hartz.ai  →  your-dokploy-server.com
 ```
 
 **Verify DNS:**
+
 ```bash
 dig union.hartz.ai +short
 # Should return: 65.21.77.45 (or your Dokploy server IP)
@@ -202,24 +205,28 @@ After configuring in Dokploy:
 ## 🔍 Testing SSL Setup
 
 ### 1. Check HTTP (should redirect to HTTPS)
+
 ```bash
 curl -I http://union.hartz.ai
 # Expected: 301/302 redirect to https://
 ```
 
 ### 2. Check HTTPS
+
 ```bash
 curl -I https://union.hartz.ai
 # Expected: 200 OK with SSL
 ```
 
 ### 3. Test Certificate
+
 ```bash
 echo | openssl s_client -connect union.hartz.ai:443 -servername union.hartz.ai 2>/dev/null | openssl x509 -noout -text | grep -E "Issuer|Not After"
 # Expected: Issuer: Let's Encrypt, Valid date
 ```
 
 ### 4. Browser Test
+
 ```
 Visit: https://union.hartz.ai
 Check: Green padlock icon
@@ -234,6 +241,7 @@ Verify: Let's Encrypt issuer
 ### Issue: Dokploy not issuing certificate
 
 **Check Dokploy logs:**
+
 ```bash
 # On Dokploy host
 docker logs dokploy
@@ -246,6 +254,7 @@ docker logs traefik
 ```
 
 **Common causes:**
+
 1. Port 80 not accessible from internet
 2. DNS not propagated yet (wait 10-15 minutes)
 3. Let's Encrypt rate limit (5 certs per domain per week)
@@ -254,6 +263,7 @@ docker logs traefik
 ### Issue: 404 on all requests
 
 **Check Dokploy routing:**
+
 ```bash
 # View Traefik configuration
 docker exec traefik cat /etc/traefik/traefik.yml
@@ -263,6 +273,7 @@ docker exec traefik traefik healthcheck
 ```
 
 **Fix:**
+
 - Ensure domain is correctly configured in Dokploy
 - Verify port mapping (80 or 5879)
 - Check Traefik labels are applied
@@ -270,6 +281,7 @@ docker exec traefik traefik healthcheck
 ### Issue: Certificate valid but site not loading
 
 **Check container health:**
+
 ```bash
 # Inside container
 curl http://localhost:80
@@ -283,6 +295,7 @@ ps aux | grep nginx
 ### Issue: Mixed content warnings
 
 **Fix nginx configuration:**
+
 ```nginx
 # Update proxy settings to trust X-Forwarded-Proto
 location / {
@@ -309,6 +322,7 @@ echo | openssl s_client -connect union.hartz.ai:443 2>/dev/null | openssl x509 -
 ### Monitor Auto-Renewal
 
 Dokploy/Traefik checks daily and renews 30 days before expiry:
+
 - **No action needed**
 - Check Dokploy logs weekly to ensure no errors
 
@@ -350,6 +364,7 @@ Dokploy/Traefik checks daily and renews 30 days before expiry:
 **Your container is ready! Just enable SSL in Dokploy dashboard.**
 
 The application is already configured to work behind Dokploy's SSL-terminating proxy. Dokploy will handle:
+
 - ✅ SSL certificate issuance
 - ✅ Certificate renewal
 - ✅ HTTP to HTTPS redirect

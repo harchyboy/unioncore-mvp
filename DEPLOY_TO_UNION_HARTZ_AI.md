@@ -64,6 +64,7 @@ Once build completes:
 If you have SSH access to the server:
 
 ### SSH into Server
+
 ```bash
 ssh user@65.21.77.45
 # or
@@ -71,6 +72,7 @@ ssh user@union.hartz.ai
 ```
 
 ### Navigate to App Directory
+
 ```bash
 cd /path/to/unioncore-mvp
 # Common locations:
@@ -80,17 +82,20 @@ cd /path/to/unioncore-mvp
 ```
 
 ### Pull Latest Code
+
 ```bash
 git pull origin main
 ```
 
 ### Install Dependencies & Build
+
 ```bash
 npm install
 npm run build
 ```
 
 ### Restart Application
+
 ```bash
 # If using PM2:
 pm2 restart unioncore-mvp
@@ -110,16 +115,19 @@ sudo systemctl restart unioncore-mvp
 If deployed via Docker Compose:
 
 ### Connect to Server
+
 ```bash
 ssh user@65.21.77.45
 ```
 
 ### Navigate to Docker Compose Directory
+
 ```bash
 cd /path/to/unioncore-mvp
 ```
 
 ### Pull and Rebuild
+
 ```bash
 # Pull latest code
 git pull origin main
@@ -136,11 +144,13 @@ docker-compose -f docker-compose.production.yml up -d --build
 ## 📊 What You Should See After Deployment
 
 ### Before (Current - Old Dashboard)
+
 - Simple HTML dashboard
 - User switcher with Tom, Max, Dani
 - Basic executive dashboard
 
 ### After (New - Tom's Dashboard)
+
 - **React-based dashboard**
 - **Three-column layout:**
   - Left: Portfolio (42 properties, 90.5% occupancy, £2.4M revenue)
@@ -156,6 +166,7 @@ docker-compose -f docker-compose.production.yml up -d --build
 ### Dashboard Not Updating?
 
 **Check 1: Browser Cache**
+
 ```
 Clear cache: Ctrl+Shift+Delete
 Hard refresh: Ctrl+Shift+R
@@ -163,15 +174,18 @@ Try incognito mode
 ```
 
 **Check 2: Deployment Status**
+
 - Check Dokploy logs for errors
 - Verify build completed successfully
 - Check container/process is running
 
 **Check 3: Correct Branch**
+
 - Verify Dokploy is deploying from **main** branch
 - Check git branch in deployment settings
 
 **Check 4: Build Output**
+
 - Verify `/dist/public/` directory was created
 - Check for build errors in logs
 
@@ -217,14 +231,18 @@ After deployment, visiting **https://union.hartz.ai/** should show:
 ## 🚨 If Still Having Issues
 
 ### Option 1: Check Current Branch
+
 The deployment might be pulling from a different branch. In Dokploy:
+
 1. Go to application settings
 2. Check "Git Branch" setting
 3. Ensure it's set to **main**
 4. Save and redeploy
 
 ### Option 2: Manual Build
+
 SSH into server and manually build:
+
 ```bash
 cd /path/to/unioncore-mvp
 git checkout main
@@ -235,7 +253,9 @@ npm run build
 ```
 
 ### Option 3: Check Dockerfile
+
 Verify Dockerfile is building the React app:
+
 ```bash
 cat Dockerfile
 # Should include:
@@ -264,8 +284,9 @@ find / -name "TomDashboard.tsx" 2>/dev/null
 ## ✅ Success Indicators
 
 Deployment successful when:
+
 - [x] Build completes with no errors
-- [x] Application restarts successfully  
+- [x] Application restarts successfully
 - [x] union.hartz.ai loads without errors
 - [x] Tom's dashboard shows (not old HTML version)
 - [x] Three-column layout is visible
@@ -279,12 +300,14 @@ Deployment successful when:
 If you're unable to access Dokploy or need assistance:
 
 1. **Check Dokploy is running:**
+
    ```bash
    ssh user@65.21.77.45
    docker ps | grep dokploy
    ```
 
 2. **Check application logs:**
+
    ```bash
    docker logs unioncore-mvp
    # or
@@ -300,7 +323,8 @@ If you're unable to access Dokploy or need assistance:
 
 **Summary:** The code is merged to main on GitHub. You just need to trigger a rebuild in Dokploy (or manually on the server) to see Tom's dashboard at union.hartz.ai.
 
-**Fastest Path:** 
+**Fastest Path:**
+
 1. Open Dokploy dashboard
 2. Click "Redeploy" on unioncore app
 3. Wait 3-5 minutes

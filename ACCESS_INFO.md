@@ -1,22 +1,27 @@
 # UnionCore MVP - Access Information
 
 ## Application Status
+
 ✅ Application is running and accessible via Traefik reverse proxy
 ✅ Publicly accessible via Cloudflare Tunnel
 
 ## Access URLs
 
 ### 🌐 Public Access (Cloudflare Tunnel)
+
 **Your application is live at:**
+
 ## 🚀 https://parental-trustee-span-php.trycloudflare.com
 
 This URL is accessible from anywhere in the world!
 
 ### Local Access (via Traefik)
+
 - **Application**: http://localhost:50910
 - **Traefik Dashboard**: http://localhost:50910/dashboard/
 
 ### Direct Access
+
 - **Application (Direct)**: http://localhost:5879
 
 ## Services Running
@@ -40,12 +45,14 @@ This URL is accessible from anywhere in the world!
 ## Configuration Details
 
 ### Traefik Setup
+
 - **Entry Point**: Port 50910
 - **Backend**: http://localhost:5879 (Vite Dev Server)
 - **Dashboard**: Enabled at `/dashboard/`
 - **CORS**: Enabled for iframe support
 
 ### Application Settings
+
 - **Host**: 0.0.0.0 (accessible from any interface)
 - **Port**: 5879
 - **Framework**: React + TypeScript + Vite
@@ -54,6 +61,7 @@ This URL is accessible from anywhere in the world!
 ## Managing Services
 
 ### Stop Services
+
 ```bash
 # Stop Vite dev server
 pkill -f "vite --host"
@@ -66,6 +74,7 @@ pkill -f "cloudflared tunnel"
 ```
 
 ### Start Services
+
 ```bash
 # Start application
 cd /workspace/unioncore-mvp
@@ -81,6 +90,7 @@ nohup cloudflared tunnel --url http://localhost:50910 > cloudflared.log 2>&1 &
 ```
 
 ### View Logs
+
 ```bash
 # Application logs
 tail -f /workspace/unioncore-mvp/app.log
@@ -95,6 +105,7 @@ tail -f /workspace/unioncore-mvp/cloudflared.log
 ## Network Configuration
 
 The application is configured to accept connections from:
+
 - localhost
 - 0.0.0.0 (all interfaces)
 - iframe embedding is enabled

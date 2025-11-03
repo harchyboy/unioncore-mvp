@@ -16,7 +16,7 @@ Since this application is running on **Dokploy**, SSL/TLS certificates should be
 
 ### Step 2: Configure Domain with SSL
 
-1. **Add Domain**: 
+1. **Add Domain**:
    - Enter `union.hartz.ai` as your domain
    - Click "Add Domain" or "Save"
 
@@ -37,11 +37,13 @@ Since this application is running on **Dokploy**, SSL/TLS certificates should be
 ### Step 4: Verify SSL
 
 Visit your site:
+
 ```
 https://union.hartz.ai
 ```
 
 Check the certificate:
+
 - Click the padlock icon in your browser
 - Verify it shows "Let's Encrypt" as the issuer
 
@@ -69,6 +71,7 @@ Dokploy Traefik Proxy (Port 443)
 ```
 
 **Key Points:**
+
 - SSL termination happens at Dokploy's Traefik proxy
 - Your container only needs to serve HTTP (port 80/5879)
 - Traefik automatically handles HTTPS and certificate renewal
@@ -81,6 +84,7 @@ Dokploy Traefik Proxy (Port 443)
 ### Method 1: Using Dokploy UI (Easiest)
 
 1. **Login to Dokploy**
+
    ```
    https://your-dokploy-instance.com
    ```
@@ -94,6 +98,7 @@ Dokploy Traefik Proxy (Port 443)
    - You should see domain configuration options
 
 4. **Add/Edit Domain**
+
    ```
    Domain:     union.hartz.ai
    Port:       5879 (or 80 if using nginx proxy)
@@ -132,11 +137,13 @@ services:
 Your container is **already correctly configured** to work behind Dokploy's SSL proxy:
 
 ### Current Setup ✅
+
 - Vite running on port **5879** (HTTP)
 - Nginx proxying on port **80** (HTTP inside container)
 - Dokploy maps external 443 → internal 80/5879
 
 ### Nginx Headers (Already Configured) ✅
+
 ```nginx
 proxy_set_header X-Forwarded-Proto $scheme;
 proxy_set_header X-Forwarded-Host $host;
@@ -144,6 +151,7 @@ proxy_set_header X-Real-IP $remote_addr;
 ```
 
 These headers ensure your app knows:
+
 - The original protocol was HTTPS
 - The original host was union.hartz.ai
 - The real client IP address
@@ -155,6 +163,7 @@ These headers ensure your app knows:
 Make sure Dokploy is configured to route to the correct port:
 
 ### Option 1: Direct to Vite (Recommended)
+
 ```
 Container Port:  5879
 Protocol:        HTTP
@@ -162,6 +171,7 @@ External Port:   80 (HTTP) and 443 (HTTPS via Traefik)
 ```
 
 ### Option 2: Through Nginx
+
 ```
 Container Port:  80
 Protocol:        HTTP
@@ -175,11 +185,13 @@ External Port:   80 (HTTP) and 443 (HTTPS via Traefik)
 ### Issue: Domain Shows "Not Secure"
 
 **Check:**
+
 1. Is SSL enabled in Dokploy dashboard?
 2. Has the certificate been issued? (Check Dokploy logs)
 3. Is DNS properly pointing to the server?
 
 **Solution:**
+
 ```bash
 # From Dokploy host (not container), check Traefik logs
 docker logs traefik
@@ -191,11 +203,13 @@ grep -i "letsencrypt\|acme" /var/log/traefik/traefik.log
 ### Issue: Certificate Not Issued
 
 **Reasons:**
+
 1. **DNS not propagated**: Wait 5-10 minutes
 2. **Port 80 not accessible**: Traefik needs port 80 for HTTP-01 challenge
 3. **Rate limit**: Let's Encrypt has rate limits (5 certs per domain per week)
 
 **Check DNS:**
+
 ```bash
 nslookup union.hartz.ai
 dig union.hartz.ai
@@ -204,6 +218,7 @@ dig union.hartz.ai
 ```
 
 **Check Port 80:**
+
 ```bash
 curl -I http://union.hartz.ai
 # Should return 200 or 301/302 redirect to HTTPS
@@ -252,12 +267,14 @@ curl -I https://union.hartz.ai
 ### Check SSL Grade
 
 Use online tools:
+
 - **SSL Labs**: https://www.ssllabs.com/ssltest/analyze.html?d=union.hartz.ai
 - **Why No Padlock**: https://www.whynopadlock.com/
 
 ### Verify Certificate Details
 
 In browser:
+
 1. Visit https://union.hartz.ai
 2. Click padlock icon → "Certificate"
 3. Check:
@@ -278,6 +295,7 @@ In browser:
 - Zero downtime during renewal
 
 **Monitor Renewal:**
+
 ```bash
 # Check Traefik logs for renewal events
 docker logs traefik | grep -i renew
@@ -290,6 +308,7 @@ docker logs traefik | grep -i renew
 ### 1. Force HTTPS
 
 Enable in Dokploy to redirect all HTTP → HTTPS:
+
 ```yaml
 forceHttps: true
 ```
@@ -297,6 +316,7 @@ forceHttps: true
 ### 2. HSTS (HTTP Strict Transport Security)
 
 Already configured in nginx:
+
 ```nginx
 add_header Strict-Transport-Security "max-age=31536000" always;
 ```
@@ -304,6 +324,7 @@ add_header Strict-Transport-Security "max-age=31536000" always;
 ### 3. Security Headers
 
 Already configured:
+
 ```nginx
 add_header X-Frame-Options "SAMEORIGIN" always;
 add_header X-Content-Type-Options "nosniff" always;
@@ -313,6 +334,7 @@ add_header X-XSS-Protection "1; mode=block" always;
 ### 4. Update Dependencies
 
 Keep Dokploy and Traefik updated:
+
 ```bash
 # On Dokploy host
 dokploy update
@@ -325,12 +347,14 @@ dokploy update
 If for some reason you **cannot use Dokploy's built-in SSL**, you could:
 
 1. **Get certificate outside container**:
+
    ```bash
    # On Dokploy host (not in container)
    certbot certonly --standalone -d union.hartz.ai
    ```
 
 2. **Mount certificate into container**:
+
    ```yaml
    volumes:
      - /etc/letsencrypt:/etc/letsencrypt:ro
@@ -391,7 +415,7 @@ dokploy ssl status union.hartz.ai
 dokploy ssl renew union.hartz.ai
 ```
 
-*(Note: Actual commands may vary based on Dokploy version)*
+_(Note: Actual commands may vary based on Dokploy version)_
 
 ---
 

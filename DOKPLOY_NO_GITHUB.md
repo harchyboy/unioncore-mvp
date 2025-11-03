@@ -31,6 +31,7 @@ This is the EASIEST method if your repo is public!
 ### Step 1: Download the Docker Compose File
 
 Download this file from your repository:
+
 ```
 docker-compose.github-public.yml
 ```
@@ -38,7 +39,7 @@ docker-compose.github-public.yml
 Or create a new file with this content:
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   unioncore-app:
@@ -46,30 +47,30 @@ services:
     build:
       context: https://github.com/harchyboy/unioncore-mvp.git#unzip-application
       dockerfile: Dockerfile
-    
+
     image: unioncore-mvp:latest
     container_name: unioncore-mvp
     restart: unless-stopped
-    
+
     ports:
       - "80:80"
       - "5879:5879"
-    
+
     environment:
       - NODE_ENV=production
       - PORT=5879
       - VITE_HOST=0.0.0.0
-    
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:80"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
-    
+
     networks:
       - traefik-public
-    
+
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
@@ -98,6 +99,7 @@ networks:
 ### Step 3: Wait for Build
 
 Docker will:
+
 1. ✅ Clone from https://github.com/harchyboy/unioncore-mvp.git
 2. ✅ Checkout branch: unzip-application
 3. ✅ Build the Dockerfile
@@ -196,28 +198,28 @@ CMD ["/app/start.sh"]
 ### Step 2: Create docker-compose.yml
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   unioncore:
     build:
       context: .
       dockerfile: Dockerfile
-    
+
     container_name: unioncore-mvp
     restart: unless-stopped
-    
+
     ports:
       - "80:80"
       - "5879:5879"
-    
+
     environment:
       - NODE_ENV=production
       - PORT=5879
-    
+
     networks:
       - traefik-public
-    
+
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
@@ -237,6 +239,7 @@ networks:
 ### Step 3: Upload Both Files to Dokploy
 
 1. Create a folder with both files:
+
    ```
    unioncore-deploy/
    ├── Dockerfile
@@ -277,26 +280,26 @@ docker push yourusername/unioncore-mvp:latest
 ### Step 2: Simple docker-compose for Dokploy
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   unioncore:
     # Use pre-built image from Docker Hub
     image: yourusername/unioncore-mvp:latest
-    
+
     container_name: unioncore-mvp
     restart: unless-stopped
-    
+
     ports:
       - "80:80"
       - "5879:5879"
-    
+
     environment:
       - NODE_ENV=production
-    
+
     networks:
       - traefik-public
-    
+
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik-public"
@@ -324,17 +327,20 @@ Upload this docker-compose.yml to Dokploy and deploy!
 ## ✅ Which Method to Use?
 
 ### Use Method 2 (GitHub URL) if:
+
 - ✅ Your repository is public
 - ✅ You want automatic updates from GitHub
 - ✅ You don't have Docker Hub access
 - ⭐ **RECOMMENDED for most users**
 
 ### Use Method 3 (All-in-One) if:
+
 - ✅ Method 2 doesn't work
 - ✅ You want everything self-contained
 - ✅ You can upload files to Dokploy
 
 ### Use Method 1 (Docker Hub) if:
+
 - ✅ You want fastest deploys
 - ✅ You have CI/CD pipeline
 - ✅ You want versioning
@@ -355,11 +361,13 @@ RUN apk add --no-cache git curl bash
 ### Issue: "repository not found" when cloning
 
 **Possible causes:**
+
 1. Repository is private (make it public)
 2. Branch name wrong (check it's "unzip-application")
 3. URL typo
 
 **Test if repository is public:**
+
 ```bash
 git clone https://github.com/harchyboy/unioncore-mvp.git
 # Should work without authentication
@@ -370,11 +378,13 @@ git clone https://github.com/harchyboy/unioncore-mvp.git
 **Normal build time:** 3-5 minutes
 
 **If longer:**
+
 - Check Dokploy logs for errors
 - Network issues
 - Large dependencies (node_modules is big)
 
 **Speed up builds:**
+
 - Use Method 1 (Docker Hub)
 - Enable BuildKit: `DOCKER_BUILDKIT=1`
 
@@ -383,6 +393,7 @@ git clone https://github.com/harchyboy/unioncore-mvp.git
 **This means domain not configured!**
 
 Follow these steps:
+
 1. Go to Dokploy application settings
 2. Find "Domains" tab
 3. Add domain: union.hartz.ai → Port 80
@@ -435,12 +446,14 @@ Follow these steps:
 ## 📋 Quick Start Checklist
 
 ### Before You Start:
+
 - [ ] Repository is public on GitHub
 - [ ] Branch "unzip-application" exists
 - [ ] Dockerfile exists in repository
 - [ ] Dokploy dashboard accessible
 
 ### Deploy Steps:
+
 - [ ] Download docker-compose.github-public.yml
 - [ ] Access Dokploy dashboard
 - [ ] Create project "unioncore"
@@ -451,6 +464,7 @@ Follow these steps:
 - [ ] Check deployment logs for errors
 
 ### After Deploy:
+
 - [ ] Container status: Running
 - [ ] Visit http://union.hartz.ai (should work)
 - [ ] Configure domain for HTTPS (see domains tab)
@@ -465,9 +479,11 @@ Follow these steps:
 ### Exact Steps:
 
 1. **Download file from your repository:**
+
    ```
    https://github.com/harchyboy/unioncore-mvp/blob/unzip-application/docker-compose.github-public.yml
    ```
+
    Right-click → Save As → `docker-compose.yml`
 
 2. **Access Dokploy:**
@@ -520,6 +536,7 @@ Follow these steps:
 ## 📞 Need More Help?
 
 If you're still stuck, provide:
+
 - Screenshot of Dokploy interface
 - Build logs from Dokploy
 - Error messages

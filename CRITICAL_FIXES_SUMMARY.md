@@ -11,6 +11,7 @@ All 3 critical gaps identified in the Deals Overview page have been successfully
 **Before:** Search box and filter button visible, but no actual filter functionality.
 
 **After:** Comprehensive filter panel with 6 filter types:
+
 - **Landlord Filter** (Multi-select): Canary Wharf Group, British Land, Land Securities, Derwent London, Great Portland Estates
 - **Tenant Filter** (Multi-select): Tech Corp Ltd, Financial Services Inc, Retail Solutions, Creative Agency, Professional Services
 - **Deal Stage Filter** (Multi-select): Lead, Viewing, Proposal, HoTs, Contract, Onboarding, Live
@@ -27,6 +28,7 @@ All 3 critical gaps identified in the Deals Overview page have been successfully
 **Before:** Only "Active Deals" visible, no way to view closed/won or closed/lost deals.
 
 **After:** Complete historical view with 4 tabs:
+
 - **Active Deals** (3 deals) - Currently ongoing negotiations
 - **Closed/Won** (1 deal) - Successfully completed deals
 - **Closed/Lost** (1 deal) - Lost opportunities for analysis
@@ -43,11 +45,13 @@ All 3 critical gaps identified in the Deals Overview page have been successfully
 **After:** Multiple velocity tracking features:
 
 #### Velocity Indicators
+
 - **🟢 Green** = Fast (Deal moving quickly through pipeline)
 - **🟡 Yellow** = Normal (Standard pace)
 - **🔴 Red** = Stuck (Needs attention - too long in stage)
 
 #### New Table Columns
+
 - **Days in Stage** - Shows how long deal has been in current stage (color-coded by velocity)
 - **Last Activity** - Timestamp of last activity (e.g., "2 hours ago", "5 days ago")
 - **Landlord/Tenant** - Key contact information in single column
@@ -58,24 +62,25 @@ All 3 critical gaps identified in the Deals Overview page have been successfully
 
 The deals table now includes 10 columns (previously 8):
 
-| Column | Content | Purpose |
-|--------|---------|---------|
-| 1 | 🟢🟡🔴 + Deal Name | Velocity indicator + deal identification |
-| 2 | Property Details | Location + type + size |
-| 3 | Stage Badge | Color-coded pipeline stage |
-| 4 | Deal Value | £ amount |
-| 5 | Probability | % + visual progress bar |
-| 6 | Risk Badge | Low/Medium/High color-coded |
-| 7 | Next Milestone | Action + due date |
-| 8 | **Days in Stage** (NEW) | Duration + last activity |
-| 9 | **Landlord/Tenant** (NEW) | Key contacts |
-| 10 | Owner | Assigned team member |
+| Column | Content                   | Purpose                                  |
+| ------ | ------------------------- | ---------------------------------------- |
+| 1      | 🟢🟡🔴 + Deal Name        | Velocity indicator + deal identification |
+| 2      | Property Details          | Location + type + size                   |
+| 3      | Stage Badge               | Color-coded pipeline stage               |
+| 4      | Deal Value                | £ amount                                 |
+| 5      | Probability               | % + visual progress bar                  |
+| 6      | Risk Badge                | Low/Medium/High color-coded              |
+| 7      | Next Milestone            | Action + due date                        |
+| 8      | **Days in Stage** (NEW)   | Duration + last activity                 |
+| 9      | **Landlord/Tenant** (NEW) | Key contacts                             |
+| 10     | Owner                     | Assigned team member                     |
 
 ---
 
 ## 🔧 Technical Implementation
 
 ### Files Modified/Created
+
 1. **`client/deals-overview-fixes.js`** (NEW) - 550+ lines
    - Dynamic tab generation
    - Filter panel creation
@@ -94,6 +99,7 @@ The deals table now includes 10 columns (previously 8):
    - Service management instructions
 
 ### How It Works
+
 - JavaScript watches for Deals Overview page visibility
 - Dynamically adds tabs, filter panel, and extra columns
 - Updates table data with enhanced information
@@ -105,6 +111,7 @@ The deals table now includes 10 columns (previously 8):
 ## 🧪 Testing Instructions
 
 ### Access the Page
+
 **Public URL:** https://parental-trustee-span-php.trycloudflare.com/#/deals-overview
 
 ### Test Features
@@ -143,6 +150,7 @@ The deals table now includes 10 columns (previously 8):
 - **Pull Request:** #1 (https://github.com/harchyboy/unioncore-mvp/pull/1)
 
 ### Commit Message
+
 ```
 Add critical fixes for Deals Overview: Historical tabs, filter panel, velocity indicators, and landlord/tenant columns
 
@@ -162,11 +170,13 @@ Co-authored-by: openhands <openhands@all-hands.dev>
 ## 🚀 Deployment Status
 
 ### Services Running
+
 - ✅ **Vite Dev Server** (Port 5879) - PID: 4748
 - ✅ **Traefik Proxy** (Port 50910) - PID: 7988
 - ✅ **Cloudflare Tunnel** - PID: 9585
 
 ### Public Access
+
 - **URL:** https://parental-trustee-span-php.trycloudflare.com
 - **Architecture:** Internet → Cloudflare CDN → Traefik (50910) → Vite (5879)
 - **Status:** ✅ All services operational and publicly accessible
@@ -190,21 +200,25 @@ The fixes include 5 sample deals demonstrating all features:
 ### Max (Founder) Can Now:
 
 ✅ **Filter Instantly**
+
 - "Show all deals with British Land"
 - "Show HoTs stage deals only"
 - "Show high-risk deals over £1M"
 
 ✅ **Review History**
+
 - Analyze past performance
 - Learn from closed/lost deals
 - Reference completed deals
 
 ✅ **Identify Stuck Deals**
+
 - See at a glance which deals need attention (🔴)
 - Know how long deals have been in each stage
 - See when someone last worked on each deal
 
 ✅ **Quick Contact Access**
+
 - Landlord and tenant info directly in table
 - No need to open deal details for basic info
 
@@ -252,6 +266,7 @@ Before marking as complete, verify:
 ## 📞 Support
 
 For questions or issues:
+
 - Check the console for debug logs (🔧, ✅, ⚠️ emoji indicators)
 - Verify all services are running: `ps aux | grep -E "vite|traefik|cloudflared"`
 - Check application logs: `tail -f /workspace/unioncore-mvp/app.log`

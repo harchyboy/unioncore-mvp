@@ -11,6 +11,7 @@
 ## 🌐 Access Information
 
 ### Primary Access
+
 ```
 🌍 Domain:    http://union.hartz.ai
 🔗 Direct:    http://localhost:5879
@@ -18,6 +19,7 @@
 ```
 
 ### Server Details
+
 ```
 📦 Container ID:  2e36eaa785a4
 📂 Location:      /workspace/unioncore-mvp
@@ -70,6 +72,7 @@
 ## 📊 Current Status
 
 ### Application Status
+
 ```bash
 PM2 Process:        ONLINE ✅
 Process ID:         8810
@@ -80,6 +83,7 @@ Status:             Healthy
 ```
 
 ### Web Server Status
+
 ```bash
 Nginx:              RUNNING ✅
 Master Process:     9593
@@ -89,6 +93,7 @@ Configuration:      VALID ✅
 ```
 
 ### Port Status
+
 ```bash
 Port 5879:          OPEN (Vite)
 Port 80:            OPEN (Nginx)
@@ -99,6 +104,7 @@ Port 80:            OPEN (Nginx)
 ## 📁 Deployment Files
 
 ### Configuration Files
+
 1. **ecosystem.config.cjs** - PM2 process configuration
 2. **Dockerfile** - Docker container definition
 3. **docker-compose.yml** - Container orchestration
@@ -106,6 +112,7 @@ Port 80:            OPEN (Nginx)
 5. **DEPLOYMENT.md** - Complete deployment documentation
 
 ### Nginx Configuration
+
 ```
 Location: /etc/nginx/sites-available/union.hartz.ai
 Enabled:  /etc/nginx/sites-enabled/union.hartz.ai
@@ -113,6 +120,7 @@ Logs:     /var/log/nginx/union.hartz.ai.*.log
 ```
 
 ### Application Logs
+
 ```
 Standard Output: /var/log/unioncore/app.log
 Error Output:    /var/log/unioncore/error.log
@@ -123,6 +131,7 @@ Error Output:    /var/log/unioncore/error.log
 ## 🔧 Essential Commands
 
 ### View Application Status
+
 ```bash
 pm2 status
 pm2 logs unioncore-mvp
@@ -130,6 +139,7 @@ pm2 monit
 ```
 
 ### Manage Application
+
 ```bash
 # Restart
 pm2 restart unioncore-mvp
@@ -145,6 +155,7 @@ pm2 logs unioncore-mvp --lines 50
 ```
 
 ### Manage Nginx
+
 ```bash
 # Reload configuration
 nginx -s reload
@@ -160,6 +171,7 @@ nginx
 ```
 
 ### Quick Restart Everything
+
 ```bash
 cd /workspace/unioncore-mvp
 ./start-unioncore.sh
@@ -193,6 +205,7 @@ netstat -tlnp | grep -E ':(5879|80)'
 ## 📝 What Was Deployed
 
 ### Features Implemented
+
 1. ✅ Approval Requests Page with Interactive Buttons
 2. ✅ Approval Timeline Trends Chart (Highcharts)
 3. ✅ Approval by Role Distribution Chart (Highcharts)
@@ -204,6 +217,7 @@ netstat -tlnp | grep -E ':(5879|80)'
 9. ✅ UNION Core Plus Branding
 
 ### Production Infrastructure
+
 1. ✅ PM2 Process Manager (auto-restart)
 2. ✅ Nginx Reverse Proxy
 3. ✅ Domain Configuration (union.hartz.ai)
@@ -218,16 +232,19 @@ netstat -tlnp | grep -E ':(5879|80)'
 ## 🎯 Key Features
 
 ### Persistent Operation
+
 - **PM2 Auto-Restart**: Application automatically restarts on crashes
 - **Background Process**: Runs independently of terminal sessions
 - **Survived Deployment**: Currently running for 2+ minutes without issues
 
 ### Monitoring
+
 - **PM2 Dashboard**: Real-time CPU and memory monitoring
 - **Log Files**: All output captured to `/var/log/unioncore/`
 - **Nginx Logs**: Access and error logs in `/var/log/nginx/`
 
 ### Security
+
 - **Security Headers**: X-Frame-Options, XSS Protection, Content-Type-Options
 - **HTTPS Ready**: Configuration prepared for SSL (commented)
 - **Proxy Headers**: X-Real-IP, X-Forwarded-For configured
@@ -237,12 +254,14 @@ netstat -tlnp | grep -E ':(5879|80)'
 ## 📚 Documentation
 
 ### Available Documentation Files
+
 1. **DEPLOYMENT.md** - Complete deployment guide (810 lines)
 2. **DEPLOYMENT_SUMMARY.md** - This file (quick reference)
 3. **APPROVAL_ANALYTICS_DOCUMENTATION.md** - Charts documentation
 4. **APPROVAL_REQUESTS_PAGE_EXPORT.md** - Full code export
 
 ### Topics Covered in DEPLOYMENT.md
+
 - ✅ System Architecture
 - ✅ Installation Steps
 - ✅ Configuration Details
@@ -259,6 +278,7 @@ netstat -tlnp | grep -E ':(5879|80)'
 ## 🔄 Auto-Restart Configuration
 
 PM2 is configured to automatically restart the application:
+
 - On crashes
 - On errors
 - On memory threshold (1GB)
@@ -271,21 +291,25 @@ Current restart count: **0** (stable)
 ## 🌟 Next Steps (Optional Future Enhancements)
 
 ### Security
+
 - [ ] Enable HTTPS with Let's Encrypt
 - [ ] Configure firewall rules
 - [ ] Set up fail2ban for SSH protection
 
 ### Performance
+
 - [ ] Enable gzip compression in Nginx
 - [ ] Configure Nginx caching for static assets
 - [ ] Use PM2 cluster mode for load balancing
 
 ### Monitoring
+
 - [ ] Set up PM2 Plus for remote monitoring
 - [ ] Configure log aggregation
 - [ ] Set up alerting for downtime
 
 ### Scalability
+
 - [ ] Deploy with Docker Compose
 - [ ] Set up load balancer
 - [ ] Configure CDN for static assets
@@ -295,11 +319,13 @@ Current restart count: **0** (stable)
 ## 🐛 Troubleshooting
 
 ### Application Not Responding
+
 ```bash
 pm2 restart unioncore-mvp
 ```
 
 ### Nginx 502 Error
+
 ```bash
 # Check if backend is running
 curl http://localhost:5879
@@ -309,6 +335,7 @@ nginx -s reload
 ```
 
 ### Port Conflict
+
 ```bash
 # Find process on port
 lsof -i :5879
@@ -319,6 +346,7 @@ pm2 restart unioncore-mvp
 ```
 
 ### High Memory Usage
+
 ```bash
 pm2 restart unioncore-mvp
 ```
@@ -327,18 +355,18 @@ pm2 restart unioncore-mvp
 
 ## 📞 Quick Reference
 
-| Component | Value |
-|-----------|-------|
-| **Domain** | union.hartz.ai |
-| **Application Port** | 5879 |
-| **Proxy Port** | 80 |
-| **Process Manager** | PM2 |
-| **Web Server** | Nginx 1.22.1 |
-| **Node Version** | 20+ |
-| **Container ID** | 2e36eaa785a4 |
+| Component            | Value                    |
+| -------------------- | ------------------------ |
+| **Domain**           | union.hartz.ai           |
+| **Application Port** | 5879                     |
+| **Proxy Port**       | 80                       |
+| **Process Manager**  | PM2                      |
+| **Web Server**       | Nginx 1.22.1             |
+| **Node Version**     | 20+                      |
+| **Container ID**     | 2e36eaa785a4             |
 | **Application Path** | /workspace/unioncore-mvp |
-| **Logs Path** | /var/log/unioncore |
-| **PM2 Process Name** | unioncore-mvp |
+| **Logs Path**        | /var/log/unioncore       |
+| **PM2 Process Name** | unioncore-mvp            |
 
 ---
 
@@ -378,6 +406,7 @@ PM2 ensures the application stays online and automatically restarts on any failu
 ## 📧 Support
 
 For issues or questions:
+
 1. Check the logs: `pm2 logs unioncore-mvp`
 2. Review DEPLOYMENT.md for troubleshooting
 3. Check process status: `pm2 status`

@@ -7,7 +7,7 @@
 **Domain**: union.hartz.ai  
 **Port**: 5879 (internal), 80 (nginx proxy)  
 **Server**: 2e36eaa785a4  
-**Date Deployed**: 2025-10-22  
+**Date Deployed**: 2025-10-22
 
 ---
 
@@ -96,7 +96,7 @@ npm install
 server {
     listen 80;
     server_name union.hartz.ai;
-    
+
     location / {
         proxy_pass http://127.0.0.1:5879;
         proxy_http_version 1.1;
@@ -110,6 +110,7 @@ server {
 ```
 
 **Enable site**:
+
 ```bash
 ln -sf /etc/nginx/sites-available/union.hartz.ai /etc/nginx/sites-enabled/
 rm -f /etc/nginx/sites-enabled/default
@@ -122,21 +123,23 @@ nginx -t
 
 ```javascript
 module.exports = {
-  apps: [{
-    name: 'unioncore-mvp',
-    script: 'npx',
-    args: 'vite --host 0.0.0.0 --port 5879 client',
-    cwd: '/workspace/unioncore-mvp',
-    instances: 1,
-    autorestart: true,
-    max_memory_restart: '1G',
-    env: {
-      NODE_ENV: 'production',
-      PORT: 5879,
+  apps: [
+    {
+      name: "unioncore-mvp",
+      script: "npx",
+      args: "vite --host 0.0.0.0 --port 5879 client",
+      cwd: "/workspace/unioncore-mvp",
+      instances: 1,
+      autorestart: true,
+      max_memory_restart: "1G",
+      env: {
+        NODE_ENV: "production",
+        PORT: 5879,
+      },
+      error_file: "/var/log/unioncore/error.log",
+      out_file: "/var/log/unioncore/app.log",
     },
-    error_file: '/var/log/unioncore/error.log',
-    out_file: '/var/log/unioncore/app.log',
-  }]
+  ],
 };
 ```
 
@@ -561,16 +564,16 @@ add_header X-XSS-Protection "1; mode=block" always;
 
 ### Quick Reference
 
-| Item | Value |
-|------|-------|
-| **Domain** | union.hartz.ai |
-| **Application Port** | 5879 |
-| **Proxy Port** | 80 (HTTP), 443 (HTTPS planned) |
-| **Process Manager** | PM2 |
-| **Web Server** | Nginx |
-| **Application Path** | /workspace/unioncore-mvp |
-| **Logs Path** | /var/log/unioncore |
-| **Nginx Config** | /etc/nginx/sites-available/union.hartz.ai |
+| Item                 | Value                                     |
+| -------------------- | ----------------------------------------- |
+| **Domain**           | union.hartz.ai                            |
+| **Application Port** | 5879                                      |
+| **Proxy Port**       | 80 (HTTP), 443 (HTTPS planned)            |
+| **Process Manager**  | PM2                                       |
+| **Web Server**       | Nginx                                     |
+| **Application Path** | /workspace/unioncore-mvp                  |
+| **Logs Path**        | /var/log/unioncore                        |
+| **Nginx Config**     | /etc/nginx/sites-available/union.hartz.ai |
 
 ### Useful Commands Reference
 
@@ -605,18 +608,19 @@ netstat -tlnp
 
 ## 📝 Change Log
 
-| Date | Change | By |
-|------|--------|-----|
-| 2025-10-22 | Initial deployment with PM2 and Nginx | OpenHands AI |
-| 2025-10-22 | Configured union.hartz.ai domain | OpenHands AI |
+| Date       | Change                                      | By           |
+| ---------- | ------------------------------------------- | ------------ |
+| 2025-10-22 | Initial deployment with PM2 and Nginx       | OpenHands AI |
+| 2025-10-22 | Configured union.hartz.ai domain            | OpenHands AI |
 | 2025-10-22 | Added analytics charts to Approval Requests | OpenHands AI |
-| 2025-10-22 | Fixed Add Property button navigation | OpenHands AI |
+| 2025-10-22 | Fixed Add Property button navigation        | OpenHands AI |
 
 ---
 
 ## 🎉 Deployment Complete!
 
 The UNION Core Plus MVP is now running permanently on:
+
 - **URL**: http://union.hartz.ai
 - **Server**: 2e36eaa785a4 (Container ID: 2e36eaa785a4)
 - **Process Manager**: PM2 (auto-restart enabled)

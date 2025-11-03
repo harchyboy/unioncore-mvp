@@ -6,10 +6,10 @@
 ❌ Current Issue:
    union.hartz.ai → Server (65.21.77.45) ✅ DNS works
    → Traefik responds with "404 page not found" ❌
-   
+
 ✅ Root Cause:
    Domain mapping NOT configured in Dokploy yet!
-   
+
 ✅ Solution:
    Configure domain in Dokploy dashboard (5 minutes)
 ```
@@ -44,6 +44,7 @@ Option 4: http://65.21.77.45:3000
 ### Step 3: Find Your Application
 
 Look for your application. It might be named:
+
 - `unioncore-mvp`
 - `unioncore`
 - `union-core-plus`
@@ -54,8 +55,9 @@ Look for your application. It might be named:
 ### Step 4: Configure Domain Mapping
 
 Once in your application settings, look for one of these sections:
+
 - **"Domains"** tab
-- **"Routing"** section  
+- **"Routing"** section
 - **"Network"** settings
 - **"Ports & Domains"**
 
@@ -140,6 +142,7 @@ If you can't find the dashboard, let's check what Dokploy sees:
 ### Check Environment Variables in Dokploy
 
 Look for these environment variables in your application settings:
+
 ```
 VIRTUAL_HOST=union.hartz.ai
 LETSENCRYPT_HOST=union.hartz.ai
@@ -159,6 +162,7 @@ If Dokploy uses Docker Compose, you might need to add labels to your container.
 **Check if there's a dokploy.yaml or docker-compose.yml file in Dokploy:**
 
 Add these labels:
+
 ```yaml
 labels:
   - "traefik.enable=true"
@@ -182,18 +186,21 @@ dokploy domain add unioncore-mvp union.hartz.ai --port 80 --https
 ## 🧪 Test After Configuration
 
 ### Test 1: Check HTTP
+
 ```bash
 curl -I http://union.hartz.ai
 # Expected: 200 OK (or 301 redirect to HTTPS)
 ```
 
 ### Test 2: Check HTTPS (after enabling SSL)
+
 ```bash
 curl -I https://union.hartz.ai
 # Expected: 200 OK with SSL
 ```
 
 ### Test 3: Browser Test
+
 ```
 Visit: http://union.hartz.ai
 Expected: Your application loads!
@@ -204,11 +211,13 @@ Expected: Your application loads!
 ## 📊 What Should Happen
 
 ### Before Configuration:
+
 ```
 union.hartz.ai → Traefik → 404 page not found ❌
 ```
 
 ### After Configuration:
+
 ```
 union.hartz.ai → Traefik → Your Container (Port 80) → Application ✅
 ```
@@ -220,6 +229,7 @@ union.hartz.ai → Traefik → Your Container (Port 80) → Application ✅
 ### Issue 1: Can't Find Dokploy Dashboard
 
 **Try these URLs:**
+
 ```bash
 # Common Dokploy dashboard URLs
 curl -I http://65.21.77.45:3000
@@ -232,6 +242,7 @@ curl http://65.21.77.45:3000
 ```
 
 **Or SSH into your server:**
+
 ```bash
 ssh user@65.21.77.45
 docker ps | grep dokploy
@@ -241,6 +252,7 @@ docker ps | grep dokploy
 ### Issue 2: Domain Still Shows 404 After Adding
 
 **Check Traefik configuration:**
+
 ```bash
 # SSH into server
 ssh user@65.21.77.45
@@ -258,6 +270,7 @@ docker restart traefik
 ### Issue 3: Can't Access Dokploy Dashboard
 
 **Reset Dokploy password:**
+
 ```bash
 # SSH into server
 ssh user@65.21.77.45
@@ -311,6 +324,7 @@ Before the domain will work, you need:
 If you're still stuck, you can:
 
 1. **Check Dokploy Documentation**
+
    ```
    https://docs.dokploy.com
    ```
@@ -363,6 +377,7 @@ If you're still stuck, you can:
 ## 🆘 Need More Help?
 
 If you can provide:
+
 - Screenshot of your Dokploy dashboard
 - The Dokploy dashboard URL
 - Your Dokploy version

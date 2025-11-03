@@ -9,11 +9,13 @@ Your application is running on **Dokploy**, which means SSL/HTTPS should be conf
 ## 🎯 Quick Fix (3 Steps)
 
 ### Step 1: Access Dokploy Dashboard
+
 ```
 Login to your Dokploy instance dashboard
 ```
 
 ### Step 2: Configure SSL for Your App
+
 1. Find your **unioncore-mvp** application
 2. Go to **Domains** or **Settings** section
 3. Add domain: `union.hartz.ai`
@@ -22,6 +24,7 @@ Login to your Dokploy instance dashboard
 6. Click **Save**
 
 ### Step 3: Wait & Test
+
 ```bash
 # Wait 30-60 seconds for certificate
 # Then visit:
@@ -44,12 +47,14 @@ NOT inside your container!
 ```
 
 **What's happening:**
+
 1. ✅ Dokploy's Traefik proxy intercepts ACME challenge requests
 2. ✅ Traefik handles Let's Encrypt verification
 3. ✅ Your container never sees these requests
 4. ✅ This is the CORRECT behavior!
 
 **Don't worry about:**
+
 - ❌ Installing certbot inside container
 - ❌ Configuring nginx for ACME challenges
 - ❌ The 404 errors on .well-known paths
@@ -59,6 +64,7 @@ NOT inside your container!
 ## ✅ Your Container is Ready!
 
 **Current Status:**
+
 ```
 ✅ Vite running on port 5879
 ✅ Nginx running on port 80
@@ -109,6 +115,7 @@ Domain Settings:
 ```
 
 ### Common locations in Dokploy UI:
+
 - "Domains" tab
 - "Network" settings
 - "SSL/TLS" section
@@ -143,6 +150,7 @@ echo | openssl s_client -connect union.hartz.ai:443 2>/dev/null | grep "Issuer"
 **Check these:**
 
 1. **DNS pointing to Dokploy server?**
+
    ```bash
    dig union.hartz.ai +short
    # Should return: 65.21.77.45 (your server IP)
@@ -153,6 +161,7 @@ echo | openssl s_client -connect union.hartz.ai:443 2>/dev/null | grep "Issuer"
    - Certificate issuance needs ~60 seconds
 
 3. **Check Dokploy logs**
+
    ```bash
    # On Dokploy host
    docker logs dokploy
@@ -160,6 +169,7 @@ echo | openssl s_client -connect union.hartz.ai:443 2>/dev/null | grep "Issuer"
    ```
 
 4. **Port 80 accessible?**
+
    ```bash
    curl -I http://union.hartz.ai
    # Should return 200 or 301 redirect
@@ -210,6 +220,7 @@ Once SSL is enabled in Dokploy:
 ## ℹ️ Why This Approach?
 
 **Dokploy Benefits:**
+
 - ✅ Automatic certificate management
 - ✅ Auto-renewal every 90 days
 - ✅ Zero downtime renewals
@@ -218,6 +229,7 @@ Once SSL is enabled in Dokploy:
 - ✅ Easier maintenance
 
 **Container Benefits:**
+
 - ✅ Simpler configuration
 - ✅ No SSL cert files to manage
 - ✅ Portable across environments
@@ -228,10 +240,12 @@ Once SSL is enabled in Dokploy:
 ## 📞 Need Help?
 
 **Check your Dokploy documentation:**
+
 - Dokploy docs: https://docs.dokploy.com
 - Traefik SSL docs: https://doc.traefik.io/traefik/https/acme/
 
 **Or check these files:**
+
 - `SSL_SETUP_DOKPLOY.md` - Detailed SSL guide
 - `DOKPLOY_CONFIG.md` - Full Dokploy config
 

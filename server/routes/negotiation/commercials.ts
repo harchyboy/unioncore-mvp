@@ -7,7 +7,7 @@ import {
   type CommercialTerms,
   type CreateCommercialTerms,
   type UpdateCommercialTerms,
-} from "../../../shared/negotiation/commercials";
+} from "../../../shared/negotiation/commercials.js";
 
 const router = Router();
 

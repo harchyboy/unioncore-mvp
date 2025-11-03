@@ -11,6 +11,7 @@
 Tom's personal dashboard has been successfully deployed and is now live!
 
 ### What Was Deployed
+
 - **Tom's Dashboard** - Complete three-column layout
 - **Portfolio Management** - Property summary, top performers, alerts
 - **Lead Management** - Pipeline funnel, recent activity, source performance
@@ -22,11 +23,13 @@ Tom's personal dashboard has been successfully deployed and is now live!
 ## 🌐 Access Information
 
 ### Local Development
+
 **URL:** http://localhost:51666/  
 **Port:** 51666  
 **Status:** ✅ Running
 
 ### Routes Available
+
 - `/` - Tom's Dashboard (default)
 - `/tom` - Tom's Dashboard (direct route)
 - `/home` - Original example page
@@ -36,6 +39,7 @@ Tom's personal dashboard has been successfully deployed and is now live!
 ## 🚀 Current Status
 
 ### Server Status
+
 ```bash
 ✅ Vite Dev Server: Running
 ✅ Port: 51666
@@ -45,6 +49,7 @@ Tom's personal dashboard has been successfully deployed and is now live!
 ```
 
 ### Features Live
+
 ✅ **Header with Search** - Global search bar (UI only)
 ✅ **Quick Actions Bar** - 4 main action buttons
 ✅ **Portfolio Summary** - Occupancy, revenue, metrics
@@ -62,17 +67,21 @@ Tom's personal dashboard has been successfully deployed and is now live!
 ## 📱 How to Access
 
 ### Option 1: Direct Browser
+
 Simply open your browser and navigate to:
+
 ```
 http://localhost:51666/
 ```
 
 ### Option 2: Command Line Check
+
 ```bash
 curl http://localhost:51666/
 ```
 
 ### Option 3: Check Server Status
+
 ```bash
 ps aux | grep vite
 # Should show: vite --host running on port 51666
@@ -89,12 +98,13 @@ Currently, Tom's dashboard loads by default at the root route (`/`).
 When you implement user authentication and role-based dashboards:
 
 #### 1. Add User Context
+
 ```typescript
 // client/src/contexts/UserContext.tsx
 interface User {
   id: string;
   name: string;
-  role: 'tom' | 'max' | 'dani' | 'executive';
+  role: "tom" | "max" | "dani" | "executive";
   permissions: string[];
 }
 
@@ -102,18 +112,19 @@ const UserContext = createContext<User | null>(null);
 ```
 
 #### 2. Update Router for Role-Based Routing
+
 ```typescript
 // client/src/App.tsx
 function Router() {
   const user = useUser();
-  
+
   return (
     <Switch>
       <Route path="/login" component={Login} />
       <Route path="/" component={() => {
         // Route based on user role
         if (!user) return <Redirect to="/login" />;
-        
+
         switch(user.role) {
           case 'tom':
             return <TomDashboard />;
@@ -133,6 +144,7 @@ function Router() {
 ```
 
 #### 3. Add User Selector (Dev Mode)
+
 ```typescript
 // For development/testing without auth
 <Select onValueChange={(role) => setMockUser(role)}>
@@ -149,6 +161,7 @@ function Router() {
 ```
 
 #### 4. Backend API for User
+
 ```typescript
 // When backend is ready
 GET /api/auth/me
@@ -166,22 +179,26 @@ Response: {
 ## 🛠️ Development Commands
 
 ### Start Development Server
+
 ```bash
 cd /workspace/unioncore-mvp
 npm run dev
 ```
 
 ### Build for Production
+
 ```bash
 npm run build
 ```
 
 ### Check Logs
+
 ```bash
 cat /tmp/vite-dev.log
 ```
 
 ### Restart Server
+
 ```bash
 pkill -f "vite --host"
 cd /workspace/unioncore-mvp
@@ -193,6 +210,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## 📊 What's Working
 
 ### Interactive Elements (UI Only)
+
 - ✅ Search bar (visual)
 - ✅ Notification bell (shows badge)
 - ✅ Settings button
@@ -209,6 +227,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 - ✅ Badges and indicators
 
 ### Data Display (Dummy Data)
+
 - ✅ Portfolio metrics
 - ✅ Occupancy rates
 - ✅ Revenue figures
@@ -224,6 +243,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## ⚠️ Current Limitations
 
 ### Not Yet Functional (Require Backend)
+
 - ❌ Actual search functionality
 - ❌ Real data from database
 - ❌ Form submissions (Add Lead, Update Property, etc.)
@@ -242,6 +262,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## 🎨 Design Features
 
 ### Color Coding
+
 - **Green** - Positive metrics, high performance, occupied
 - **Blue** - Standard metrics, active items, information
 - **Amber** - Warnings, pending items, medium priority
@@ -249,12 +270,14 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 - **Gray** - Neutral, inactive, secondary information
 
 ### Layout
+
 - **3-Column Grid** (3-6-3 ratio)
   - Left: Property focus
   - Center: Lead focus (widest)
   - Right: Broker focus
 
 ### Responsive Elements
+
 - Scrollable areas with max heights
 - Progress bars for visual metrics
 - Badge indicators for status
@@ -266,12 +289,14 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## 📈 Performance
 
 ### Current Metrics
+
 - **Build Time:** ~670ms
 - **Server Start:** ~543ms
 - **Hot Reload:** Instant
 - **Page Load:** Fast (dummy data)
 
 ### Production Ready
+
 - Code is production-ready
 - Needs backend API integration
 - Optimized bundle size
@@ -282,6 +307,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## 🔧 Technical Stack
 
 ### Frontend
+
 - **React** 18.x - UI framework
 - **TypeScript** - Type safety
 - **Vite** 7.1.9 - Build tool & dev server
@@ -291,6 +317,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 - **Wouter** - Routing
 
 ### Development
+
 - **Hot Module Replacement** - Instant updates
 - **TypeScript Checking** - Type safety
 - **ESLint** - Code quality
@@ -301,12 +328,14 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## 📋 Next Steps
 
 ### Immediate (Ready Now)
+
 1. ✅ Access dashboard at http://localhost:51666/
 2. ✅ Test all UI interactions
 3. ✅ Verify responsive behavior
 4. ✅ Check all visual elements
 
 ### Short Term (1-2 weeks)
+
 1. **Backend API Integration**
    - Connect to real data endpoints
    - Implement authentication
@@ -324,6 +353,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
    - Push notifications
 
 ### Medium Term (2-4 weeks)
+
 1. **Mobile Responsiveness**
    - Breakpoint styling
    - Touch interactions
@@ -344,6 +374,7 @@ nohup npm run dev > /tmp/vite-dev.log 2>&1 &
 ## 🐛 Troubleshooting
 
 ### Server Not Starting
+
 ```bash
 # Check if port is in use
 lsof -i :51666
@@ -357,11 +388,13 @@ npm run dev
 ```
 
 ### Page Not Loading
+
 1. Check server logs: `cat /tmp/vite-dev.log`
 2. Verify server is running: `ps aux | grep vite`
 3. Check port: `curl http://localhost:51666/`
 
 ### Hot Reload Not Working
+
 1. Save files in `/workspace/unioncore-mvp/client/src/`
 2. Check terminal for errors
 3. Restart server if needed
@@ -371,11 +404,13 @@ npm run dev
 ## 📞 Support
 
 ### Files to Reference
+
 - **TOM_DASHBOARD_IMPLEMENTATION.md** - Full implementation details
 - **TOM_DASHBOARD_REQUIREMENTS.md** - Original requirements
 - **UNION_GAP_ANALYSIS.md** - Overall system analysis
 
 ### Key Directories
+
 - `/workspace/unioncore-mvp/client/src/pages/TomDashboard.tsx` - Main component
 - `/workspace/unioncore-mvp/client/src/App.tsx` - Routing
 - `/workspace/unioncore-mvp/vite.config.ts` - Server config
@@ -400,6 +435,7 @@ npm run dev
 ## 🎯 Success Criteria
 
 ### UI/UX ✅
+
 - [x] Clean, professional design
 - [x] Clear information hierarchy
 - [x] Intuitive navigation
@@ -408,6 +444,7 @@ npm run dev
 - [x] Accessible colors
 
 ### Functionality (Pending Backend)
+
 - [ ] Real data from APIs
 - [ ] Working authentication
 - [ ] Role-based routing
@@ -429,6 +466,7 @@ npm run dev
 - ✅ **Next:** Backend integration for real functionality
 
 **The dashboard is ready for:**
+
 1. User testing and feedback
 2. Backend API integration
 3. Real data connection

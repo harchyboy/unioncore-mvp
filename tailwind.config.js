@@ -1,9 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
-  content: [
-    "./client/**/*.{ts,tsx}",
-  ],
+  content: ["./client/**/*.{ts,tsx}"],
   theme: {
     container: {
       center: true,
@@ -58,12 +56,20 @@ export default {
           ring: "hsl(var(--sidebar-ring))",
         },
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
         },
+        // UnionCore custom colors
+        stone: "var(--stone)",
+        slate: "var(--slate)",
+        concrete: "var(--concrete)",
+        success: "var(--success)",
+        warning: "var(--warning)",
+        danger: "var(--danger)",
+        info: "var(--info)",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -87,4 +93,4 @@ export default {
     },
   },
   plugins: [require("tailwindcss-animate")],
-}
+};

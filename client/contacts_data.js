@@ -17,21 +17,21 @@ const companiesData = [
       street: "25 Old Broad Street",
       city: "London",
       postcode: "EC2N 1HQ",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Sarah Mitchell",
       email: "sarah.mitchell@techvision.co.uk",
-      phone: "+44 20 7946 0958"
+      phone: "+44 20 7946 0958",
     },
     metrics: {
       propertiesOccupied: 2,
       totalUnits: 8,
       annualRent: 320000,
       contractValue: 960000,
-      tenantSince: new Date('2022-03-15')
+      tenantSince: new Date("2022-03-15"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-002",
@@ -48,21 +48,21 @@ const companiesData = [
       street: "1 Poultry",
       city: "London",
       postcode: "EC2R 8EJ",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "James Patterson",
       email: "james.patterson@sterlingfp.co.uk",
-      phone: "+44 20 7946 0959"
+      phone: "+44 20 7946 0959",
     },
     metrics: {
       propertiesOccupied: 1,
       totalUnits: 4,
       annualRent: 180000,
       contractValue: 540000,
-      tenantSince: new Date('2023-01-10')
+      tenantSince: new Date("2023-01-10"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-003",
@@ -79,21 +79,21 @@ const companiesData = [
       street: "10 King's Cross Boulevard",
       city: "London",
       postcode: "N1C 4AX",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Dr. Emily Chen",
       email: "emily.chen@healthtechinnovations.co.uk",
-      phone: "+44 20 7946 0960"
+      phone: "+44 20 7946 0960",
     },
     metrics: {
       propertiesOccupied: 3,
       totalUnits: 15,
       annualRent: 580000,
       contractValue: 1740000,
-      tenantSince: new Date('2021-06-01')
+      tenantSince: new Date("2021-06-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-004",
@@ -110,21 +110,21 @@ const companiesData = [
       street: "15 Shoreditch High Street",
       city: "London",
       postcode: "E1 6JE",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Marcus Thompson",
       email: "marcus.thompson@creativedigital.co.uk",
-      phone: "+44 20 7946 0961"
+      phone: "+44 20 7946 0961",
     },
     metrics: {
       propertiesOccupied: 1,
       totalUnits: 3,
       annualRent: 120000,
       contractValue: 360000,
-      tenantSince: new Date('2023-09-01')
+      tenantSince: new Date("2023-09-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-005",
@@ -141,21 +141,21 @@ const companiesData = [
       street: "40 Bank Street",
       city: "London",
       postcode: "E14 5NR",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Priya Sharma",
       email: "priya.sharma@datastream.co.uk",
-      phone: "+44 20 7946 0962"
+      phone: "+44 20 7946 0962",
     },
     metrics: {
       propertiesOccupied: 2,
       totalUnits: 10,
       annualRent: 420000,
       contractValue: 1260000,
-      tenantSince: new Date('2022-11-15')
+      tenantSince: new Date("2022-11-15"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-006",
@@ -172,21 +172,21 @@ const companiesData = [
       street: "5 Fleet Street",
       city: "London",
       postcode: "EC4Y 1AA",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Richard Blackwood",
       email: "richard.blackwood@legalpartners.co.uk",
-      phone: "+44 20 7946 0963"
+      phone: "+44 20 7946 0963",
     },
     metrics: {
       propertiesOccupied: 1,
       totalUnits: 6,
       annualRent: 240000,
       contractValue: 720000,
-      tenantSince: new Date('2021-03-01')
+      tenantSince: new Date("2021-03-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-007",
@@ -203,21 +203,21 @@ const companiesData = [
       street: "20 Fenchurch Street",
       city: "London",
       postcode: "EC3M 3BY",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Sophie Williams",
       email: "sophie.williams@greenenergy.co.uk",
-      phone: "+44 20 7946 0964"
+      phone: "+44 20 7946 0964",
     },
     metrics: {
       propertiesOccupied: 2,
       totalUnits: 7,
       annualRent: 280000,
       contractValue: 840000,
-      tenantSince: new Date('2023-02-01')
+      tenantSince: new Date("2023-02-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-008",
@@ -234,21 +234,21 @@ const companiesData = [
       street: "12 Gresham Street",
       city: "London",
       postcode: "EC2V 7JE",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "David Foster",
       email: "david.foster@quantumconsulting.co.uk",
-      phone: "+44 20 7946 0965"
+      phone: "+44 20 7946 0965",
     },
     metrics: {
       propertiesOccupied: 1,
       totalUnits: 5,
       annualRent: 200000,
       contractValue: 600000,
-      tenantSince: new Date('2022-08-01')
+      tenantSince: new Date("2022-08-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-009",
@@ -265,21 +265,21 @@ const companiesData = [
       street: "30 St Mary Axe",
       city: "London",
       postcode: "EC3A 8BF",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Amanda Clarke",
       email: "amanda.clarke@urbanproperty.co.uk",
-      phone: "+44 20 7946 0966"
+      phone: "+44 20 7946 0966",
     },
     metrics: {
       propertiesOccupied: 2,
       totalUnits: 9,
       annualRent: 360000,
       contractValue: 1080000,
-      tenantSince: new Date('2021-10-01')
+      tenantSince: new Date("2021-10-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-010",
@@ -296,21 +296,21 @@ const companiesData = [
       street: "8 Bishopsgate",
       city: "London",
       postcode: "EC2N 4BQ",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Oliver Martinez",
       email: "oliver.martinez@nexusretail.co.uk",
-      phone: "+44 20 7946 0967"
+      phone: "+44 20 7946 0967",
     },
     metrics: {
       propertiesOccupied: 1,
       totalUnits: 6,
       annualRent: 220000,
       contractValue: 660000,
-      tenantSince: new Date('2023-05-01')
+      tenantSince: new Date("2023-05-01"),
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-011",
@@ -327,21 +327,21 @@ const companiesData = [
       street: "45 Moorgate",
       city: "London",
       postcode: "EC2R 6BL",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Jessica Taylor",
       email: "jessica.taylor@futurespace.co.uk",
-      phone: "+44 20 7946 0968"
+      phone: "+44 20 7946 0968",
     },
     metrics: {
       propertiesOccupied: 0,
       totalUnits: 0,
       annualRent: 0,
       contractValue: 0,
-      tenantSince: null
+      tenantSince: null,
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-012",
@@ -358,21 +358,21 @@ const companiesData = [
       street: "18 Monument Street",
       city: "London",
       postcode: "EC3R 8AJ",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Dr. Michael Roberts",
       email: "michael.roberts@horizonbiotech.co.uk",
-      phone: "+44 20 7946 0969"
+      phone: "+44 20 7946 0969",
     },
     metrics: {
       propertiesOccupied: 0,
       totalUnits: 0,
       annualRent: 0,
       contractValue: 0,
-      tenantSince: null
+      tenantSince: null,
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-013",
@@ -389,21 +389,21 @@ const companiesData = [
       street: "22 Cannon Street",
       city: "London",
       postcode: "EC4M 6XH",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Thomas Anderson",
       email: "thomas.anderson@apexmanufacturing.co.uk",
-      phone: "+44 20 7946 0970"
+      phone: "+44 20 7946 0970",
     },
     metrics: {
       propertiesOccupied: 0,
       totalUnits: 0,
       annualRent: 0,
       contractValue: 0,
-      tenantSince: null
+      tenantSince: null,
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-014",
@@ -420,21 +420,21 @@ const companiesData = [
       street: "50 Liverpool Street",
       city: "London",
       postcode: "EC2M 7PY",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Victoria Hughes",
       email: "victoria.hughes@primepropertyadvisors.co.uk",
-      phone: "+44 20 7946 0971"
+      phone: "+44 20 7946 0971",
     },
     metrics: {
       propertiesOccupied: 0,
       totalUnits: 0,
       annualRent: 0,
       contractValue: 0,
-      tenantSince: null
+      tenantSince: null,
     },
-    logo: null
+    logo: null,
   },
   {
     id: "COMP-015",
@@ -451,22 +451,22 @@ const companiesData = [
       street: "35 Leadenhall Street",
       city: "London",
       postcode: "EC3A 1AR",
-      country: "United Kingdom"
+      country: "United Kingdom",
     },
     primaryContact: {
       name: "Robert Davies",
       email: "robert.davies@elitefm.co.uk",
-      phone: "+44 20 7946 0972"
+      phone: "+44 20 7946 0972",
     },
     metrics: {
       propertiesOccupied: 0,
       totalUnits: 0,
       annualRent: 0,
       contractValue: 0,
-      tenantSince: null
+      tenantSince: null,
     },
-    logo: null
-  }
+    logo: null,
+  },
 ];
 
 const contactsData = [
@@ -487,31 +487,33 @@ const contactsData = [
     address: {
       street: "25 Old Broad Street",
       city: "London",
-      postcode: "EC2N 1HQ"
+      postcode: "EC2N 1HQ",
     },
     photo: null,
-    lastContact: new Date('2025-01-20'),
+    lastContact: new Date("2025-01-20"),
     preferredContact: "Email",
-    notes: "Prefers morning meetings. Very responsive to emails. Interested in expanding to additional floors.",
+    notes:
+      "Prefers morning meetings. Very responsive to emails. Interested in expanding to additional floors.",
     timeline: [
       {
         type: "email",
         action: "Sent lease renewal proposal",
-        date: new Date('2025-01-20'),
-        details: "Proposal for 3-year extension at current rates with option for floor expansion"
+        date: new Date("2025-01-20"),
+        details:
+          "Proposal for 3-year extension at current rates with option for floor expansion",
       },
       {
         type: "meeting",
         action: "Quarterly business review",
-        date: new Date('2025-01-15'),
-        details: "Discussed company growth plans and future space requirements"
+        date: new Date("2025-01-15"),
+        details: "Discussed company growth plans and future space requirements",
       },
       {
         type: "call",
         action: "Phone call regarding maintenance",
-        date: new Date('2025-01-10'),
-        details: "Discussed HVAC upgrade timeline"
-      }
+        date: new Date("2025-01-10"),
+        details: "Discussed HVAC upgrade timeline",
+      },
     ],
     properties: [
       {
@@ -519,8 +521,8 @@ const contactsData = [
         propertyName: "Canary Wharf Tower",
         unit: "Floor 12",
         status: "Occupied",
-        moveInDate: new Date('2022-03-15'),
-        leaseEnd: new Date('2025-03-14')
+        moveInDate: new Date("2022-03-15"),
+        leaseEnd: new Date("2025-03-14"),
       },
       {
         propertyId: "PROP-002",
@@ -528,47 +530,47 @@ const contactsData = [
         unit: "Units 5A-5C",
         status: "Interested",
         moveInDate: null,
-        leaseEnd: null
-      }
+        leaseEnd: null,
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "sent",
         subject: "Lease Renewal Discussion",
-        date: new Date('2025-01-20'),
-        preview: "Following up on our conversation about the lease renewal..."
+        date: new Date("2025-01-20"),
+        preview: "Following up on our conversation about the lease renewal...",
       },
       {
         type: "email",
         direction: "received",
         subject: "Re: Quarterly Business Review",
-        date: new Date('2025-01-16'),
-        preview: "Thank you for the productive meeting yesterday..."
+        date: new Date("2025-01-16"),
+        preview: "Thank you for the productive meeting yesterday...",
       },
       {
         type: "call",
         direction: "outbound",
         subject: "HVAC Upgrade Timeline",
-        date: new Date('2025-01-10'),
+        date: new Date("2025-01-10"),
         duration: "15 mins",
-        notes: "Confirmed upgrade will be completed by end of January"
-      }
+        notes: "Confirmed upgrade will be completed by end of January",
+      },
     ],
     documents: [
       {
         name: "Signed Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2022-03-10'),
-        size: "2.4 MB"
+        uploadDate: new Date("2022-03-10"),
+        size: "2.4 MB",
       },
       {
         name: "Company Registration Certificate.pdf",
         type: "ID Document",
-        uploadDate: new Date('2022-03-05'),
-        size: "1.1 MB"
-      }
-    ]
+        uploadDate: new Date("2022-03-05"),
+        size: "1.1 MB",
+      },
+    ],
   },
   {
     id: "CONT-002",
@@ -586,25 +588,25 @@ const contactsData = [
     address: {
       street: "25 Old Broad Street",
       city: "London",
-      postcode: "EC2N 1HQ"
+      postcode: "EC2N 1HQ",
     },
     photo: null,
-    lastContact: new Date('2025-01-18'),
+    lastContact: new Date("2025-01-18"),
     preferredContact: "Email",
     notes: "Technical liaison for building systems and IT infrastructure.",
     timeline: [
       {
         type: "email",
         action: "Discussed internet connectivity upgrade",
-        date: new Date('2025-01-18'),
-        details: "Requested fiber upgrade to 10Gbps"
+        date: new Date("2025-01-18"),
+        details: "Requested fiber upgrade to 10Gbps",
       },
       {
         type: "meeting",
         action: "IT infrastructure review",
-        date: new Date('2025-01-12'),
-        details: "Reviewed current setup and future requirements"
-      }
+        date: new Date("2025-01-12"),
+        details: "Reviewed current setup and future requirements",
+      },
     ],
     properties: [
       {
@@ -612,30 +614,30 @@ const contactsData = [
         propertyName: "Canary Wharf Tower",
         unit: "Floor 12",
         status: "Occupied",
-        moveInDate: new Date('2022-03-15'),
-        leaseEnd: new Date('2025-03-14')
-      }
+        moveInDate: new Date("2022-03-15"),
+        leaseEnd: new Date("2025-03-14"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Internet Connectivity Upgrade Request",
-        date: new Date('2025-01-18'),
-        preview: "We're experiencing bandwidth limitations..."
+        date: new Date("2025-01-18"),
+        preview: "We're experiencing bandwidth limitations...",
       },
       {
         type: "meeting",
         direction: "inbound",
         subject: "IT Infrastructure Review",
-        date: new Date('2025-01-12'),
+        date: new Date("2025-01-12"),
         duration: "45 mins",
-        notes: "Discussed current and future IT needs"
-      }
+        notes: "Discussed current and future IT needs",
+      },
     ],
-    documents: []
+    documents: [],
   },
-  
+
   // Sterling Financial Partners - 2 contacts
   {
     id: "CONT-003",
@@ -653,25 +655,25 @@ const contactsData = [
     address: {
       street: "1 Poultry",
       city: "London",
-      postcode: "EC2R 8EJ"
+      postcode: "EC2R 8EJ",
     },
     photo: null,
-    lastContact: new Date('2025-01-22'),
+    lastContact: new Date("2025-01-22"),
     preferredContact: "Phone",
     notes: "Prefers phone calls over email. Available afternoons only.",
     timeline: [
       {
         type: "call",
         action: "Lease extension discussion",
-        date: new Date('2025-01-22'),
-        details: "Interested in extending lease for 2 more years"
+        date: new Date("2025-01-22"),
+        details: "Interested in extending lease for 2 more years",
       },
       {
         type: "meeting",
         action: "Property tour for expansion",
-        date: new Date('2025-01-17'),
-        details: "Viewed adjacent units for potential expansion"
-      }
+        date: new Date("2025-01-17"),
+        details: "Viewed adjacent units for potential expansion",
+      },
     ],
     properties: [
       {
@@ -679,28 +681,28 @@ const contactsData = [
         propertyName: "London Bridge Quarter",
         unit: "Suite 4A",
         status: "Occupied",
-        moveInDate: new Date('2023-01-10'),
-        leaseEnd: new Date('2026-01-09')
-      }
+        moveInDate: new Date("2023-01-10"),
+        leaseEnd: new Date("2026-01-09"),
+      },
     ],
     communications: [
       {
         type: "call",
         direction: "inbound",
         subject: "Lease Extension Inquiry",
-        date: new Date('2025-01-22'),
+        date: new Date("2025-01-22"),
         duration: "20 mins",
-        notes: "Confirmed interest in 2-year extension"
-      }
+        notes: "Confirmed interest in 2-year extension",
+      },
     ],
     documents: [
       {
         name: "Current Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2023-01-05'),
-        size: "1.8 MB"
-      }
-    ]
+        uploadDate: new Date("2023-01-05"),
+        size: "1.8 MB",
+      },
+    ],
   },
   {
     id: "CONT-004",
@@ -718,19 +720,19 @@ const contactsData = [
     address: {
       street: "1 Poultry",
       city: "London",
-      postcode: "EC2R 8EJ"
+      postcode: "EC2R 8EJ",
     },
     photo: null,
-    lastContact: new Date('2025-01-19'),
+    lastContact: new Date("2025-01-19"),
     preferredContact: "Email",
     notes: "Handles all billing and payment matters.",
     timeline: [
       {
         type: "email",
         action: "Invoice payment confirmation",
-        date: new Date('2025-01-19'),
-        details: "Confirmed Q1 rent payment processed"
-      }
+        date: new Date("2025-01-19"),
+        details: "Confirmed Q1 rent payment processed",
+      },
     ],
     properties: [
       {
@@ -738,20 +740,20 @@ const contactsData = [
         propertyName: "London Bridge Quarter",
         unit: "Suite 4A",
         status: "Occupied",
-        moveInDate: new Date('2023-01-10'),
-        leaseEnd: new Date('2026-01-09')
-      }
+        moveInDate: new Date("2023-01-10"),
+        leaseEnd: new Date("2026-01-09"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "sent",
         subject: "Q1 2025 Invoice",
-        date: new Date('2025-01-05'),
-        preview: "Please find attached your Q1 invoice..."
-      }
+        date: new Date("2025-01-05"),
+        preview: "Please find attached your Q1 invoice...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // HealthTech Innovations - 3 contacts
@@ -771,25 +773,26 @@ const contactsData = [
     address: {
       street: "10 King's Cross Boulevard",
       city: "London",
-      postcode: "N1C 4AX"
+      postcode: "N1C 4AX",
     },
     photo: null,
-    lastContact: new Date('2025-01-21'),
+    lastContact: new Date("2025-01-21"),
     preferredContact: "Email",
-    notes: "Long-term tenant. Very satisfied with services. Considering additional space.",
+    notes:
+      "Long-term tenant. Very satisfied with services. Considering additional space.",
     timeline: [
       {
         type: "meeting",
         action: "Annual review meeting",
-        date: new Date('2025-01-21'),
-        details: "Discussed satisfaction and future needs"
+        date: new Date("2025-01-21"),
+        details: "Discussed satisfaction and future needs",
       },
       {
         type: "email",
         action: "Expansion inquiry",
-        date: new Date('2025-01-14'),
-        details: "Inquired about availability in King's Cross properties"
-      }
+        date: new Date("2025-01-14"),
+        details: "Inquired about availability in King's Cross properties",
+      },
     ],
     properties: [
       {
@@ -797,28 +800,28 @@ const contactsData = [
         propertyName: "King's Cross Innovation Centre",
         unit: "Floors 3-5",
         status: "Occupied",
-        moveInDate: new Date('2021-06-01'),
-        leaseEnd: new Date('2026-05-31')
-      }
+        moveInDate: new Date("2021-06-01"),
+        leaseEnd: new Date("2026-05-31"),
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Annual Review",
-        date: new Date('2025-01-21'),
+        date: new Date("2025-01-21"),
         duration: "60 mins",
-        notes: "Very positive feedback. Interested in expansion."
-      }
+        notes: "Very positive feedback. Interested in expansion.",
+      },
     ],
     documents: [
       {
         name: "Master Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2021-05-25'),
-        size: "3.2 MB"
-      }
-    ]
+        uploadDate: new Date("2021-05-25"),
+        size: "3.2 MB",
+      },
+    ],
   },
   {
     id: "CONT-006",
@@ -836,19 +839,19 @@ const contactsData = [
     address: {
       street: "10 King's Cross Boulevard",
       city: "London",
-      postcode: "N1C 4AX"
+      postcode: "N1C 4AX",
     },
     photo: null,
-    lastContact: new Date('2025-01-15'),
+    lastContact: new Date("2025-01-15"),
     preferredContact: "Email",
     notes: "Handles all financial matters and contract negotiations.",
     timeline: [
       {
         type: "email",
         action: "Budget approval for expansion",
-        date: new Date('2025-01-15'),
-        details: "Confirmed budget allocated for additional space"
-      }
+        date: new Date("2025-01-15"),
+        details: "Confirmed budget allocated for additional space",
+      },
     ],
     properties: [
       {
@@ -856,20 +859,20 @@ const contactsData = [
         propertyName: "King's Cross Innovation Centre",
         unit: "Floors 3-5",
         status: "Occupied",
-        moveInDate: new Date('2021-06-01'),
-        leaseEnd: new Date('2026-05-31')
-      }
+        moveInDate: new Date("2021-06-01"),
+        leaseEnd: new Date("2026-05-31"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Expansion Budget Approval",
-        date: new Date('2025-01-15'),
-        preview: "I'm pleased to confirm that the board has approved..."
-      }
+        date: new Date("2025-01-15"),
+        preview: "I'm pleased to confirm that the board has approved...",
+      },
     ],
-    documents: []
+    documents: [],
   },
   {
     id: "CONT-007",
@@ -887,19 +890,19 @@ const contactsData = [
     address: {
       street: "10 King's Cross Boulevard",
       city: "London",
-      postcode: "N1C 4AX"
+      postcode: "N1C 4AX",
     },
     photo: null,
-    lastContact: new Date('2025-01-23'),
+    lastContact: new Date("2025-01-23"),
     preferredContact: "Phone",
     notes: "Day-to-day contact for maintenance and facilities issues.",
     timeline: [
       {
         type: "call",
         action: "Maintenance request follow-up",
-        date: new Date('2025-01-23'),
-        details: "Confirmed completion of HVAC maintenance"
-      }
+        date: new Date("2025-01-23"),
+        details: "Confirmed completion of HVAC maintenance",
+      },
     ],
     properties: [
       {
@@ -907,21 +910,21 @@ const contactsData = [
         propertyName: "King's Cross Innovation Centre",
         unit: "Floors 3-5",
         status: "Occupied",
-        moveInDate: new Date('2021-06-01'),
-        leaseEnd: new Date('2026-05-31')
-      }
+        moveInDate: new Date("2021-06-01"),
+        leaseEnd: new Date("2026-05-31"),
+      },
     ],
     communications: [
       {
         type: "call",
         direction: "outbound",
         subject: "HVAC Maintenance Completion",
-        date: new Date('2025-01-23'),
+        date: new Date("2025-01-23"),
         duration: "10 mins",
-        notes: "Confirmed all systems working properly"
-      }
+        notes: "Confirmed all systems working properly",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Creative Digital Agency - 2 contacts
@@ -941,19 +944,19 @@ const contactsData = [
     address: {
       street: "15 Shoreditch High Street",
       city: "London",
-      postcode: "E1 6JE"
+      postcode: "E1 6JE",
     },
     photo: null,
-    lastContact: new Date('2025-01-19'),
+    lastContact: new Date("2025-01-19"),
     preferredContact: "Email",
     notes: "Creative agency. Values modern, flexible workspace.",
     timeline: [
       {
         type: "email",
         action: "Space customization request",
-        date: new Date('2025-01-19'),
-        details: "Requested permission for interior design changes"
-      }
+        date: new Date("2025-01-19"),
+        details: "Requested permission for interior design changes",
+      },
     ],
     properties: [
       {
@@ -961,27 +964,27 @@ const contactsData = [
         propertyName: "Shoreditch Tech Hub",
         unit: "Unit 2B",
         status: "Occupied",
-        moveInDate: new Date('2023-09-01'),
-        leaseEnd: new Date('2026-08-31')
-      }
+        moveInDate: new Date("2023-09-01"),
+        leaseEnd: new Date("2026-08-31"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Interior Design Approval Request",
-        date: new Date('2025-01-19'),
-        preview: "We'd like to make some aesthetic improvements..."
-      }
+        date: new Date("2025-01-19"),
+        preview: "We'd like to make some aesthetic improvements...",
+      },
     ],
     documents: [
       {
         name: "Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2023-08-25'),
-        size: "1.9 MB"
-      }
-    ]
+        uploadDate: new Date("2023-08-25"),
+        size: "1.9 MB",
+      },
+    ],
   },
   {
     id: "CONT-009",
@@ -999,19 +1002,19 @@ const contactsData = [
     address: {
       street: "15 Shoreditch High Street",
       city: "London",
-      postcode: "E1 6JE"
+      postcode: "E1 6JE",
     },
     photo: null,
-    lastContact: new Date('2025-01-16'),
+    lastContact: new Date("2025-01-16"),
     preferredContact: "Email",
     notes: "Handles day-to-day operations and facilities coordination.",
     timeline: [
       {
         type: "email",
         action: "Parking space request",
-        date: new Date('2025-01-16'),
-        details: "Requested additional parking space for new hire"
-      }
+        date: new Date("2025-01-16"),
+        details: "Requested additional parking space for new hire",
+      },
     ],
     properties: [
       {
@@ -1019,20 +1022,20 @@ const contactsData = [
         propertyName: "Shoreditch Tech Hub",
         unit: "Unit 2B",
         status: "Occupied",
-        moveInDate: new Date('2023-09-01'),
-        leaseEnd: new Date('2026-08-31')
-      }
+        moveInDate: new Date("2023-09-01"),
+        leaseEnd: new Date("2026-08-31"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Additional Parking Space",
-        date: new Date('2025-01-16'),
-        preview: "We're hiring a new senior designer who will need..."
-      }
+        date: new Date("2025-01-16"),
+        preview: "We're hiring a new senior designer who will need...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // DataStream Analytics - 2 contacts
@@ -1052,19 +1055,19 @@ const contactsData = [
     address: {
       street: "40 Bank Street",
       city: "London",
-      postcode: "E14 5NR"
+      postcode: "E14 5NR",
     },
     photo: null,
-    lastContact: new Date('2025-01-20'),
+    lastContact: new Date("2025-01-20"),
     preferredContact: "Email",
     notes: "Fast-growing data analytics company. Excellent tenant.",
     timeline: [
       {
         type: "meeting",
         action: "Growth discussion",
-        date: new Date('2025-01-20'),
-        details: "Discussed company growth and space requirements"
-      }
+        date: new Date("2025-01-20"),
+        details: "Discussed company growth and space requirements",
+      },
     ],
     properties: [
       {
@@ -1072,28 +1075,28 @@ const contactsData = [
         propertyName: "Canary Wharf Tower",
         unit: "Floor 8",
         status: "Occupied",
-        moveInDate: new Date('2022-11-15'),
-        leaseEnd: new Date('2025-11-14')
-      }
+        moveInDate: new Date("2022-11-15"),
+        leaseEnd: new Date("2025-11-14"),
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Growth Planning Session",
-        date: new Date('2025-01-20'),
+        date: new Date("2025-01-20"),
         duration: "45 mins",
-        notes: "Discussed headcount growth and space needs"
-      }
+        notes: "Discussed headcount growth and space needs",
+      },
     ],
     documents: [
       {
         name: "Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2022-11-10'),
-        size: "2.1 MB"
-      }
-    ]
+        uploadDate: new Date("2022-11-10"),
+        size: "2.1 MB",
+      },
+    ],
   },
   {
     id: "CONT-011",
@@ -1111,19 +1114,19 @@ const contactsData = [
     address: {
       street: "40 Bank Street",
       city: "London",
-      postcode: "E14 5NR"
+      postcode: "E14 5NR",
     },
     photo: null,
-    lastContact: new Date('2025-01-18'),
+    lastContact: new Date("2025-01-18"),
     preferredContact: "Email",
     notes: "Handles operational matters and vendor relationships.",
     timeline: [
       {
         type: "email",
         action: "Security access update",
-        date: new Date('2025-01-18'),
-        details: "Requested access cards for 5 new employees"
-      }
+        date: new Date("2025-01-18"),
+        details: "Requested access cards for 5 new employees",
+      },
     ],
     properties: [
       {
@@ -1131,20 +1134,20 @@ const contactsData = [
         propertyName: "Canary Wharf Tower",
         unit: "Floor 8",
         status: "Occupied",
-        moveInDate: new Date('2022-11-15'),
-        leaseEnd: new Date('2025-11-14')
-      }
+        moveInDate: new Date("2022-11-15"),
+        leaseEnd: new Date("2025-11-14"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "New Employee Access Cards",
-        date: new Date('2025-01-18'),
-        preview: "We have 5 new starters next week who will need..."
-      }
+        date: new Date("2025-01-18"),
+        preview: "We have 5 new starters next week who will need...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Legal Partners LLP - 2 contacts
@@ -1164,19 +1167,19 @@ const contactsData = [
     address: {
       street: "5 Fleet Street",
       city: "London",
-      postcode: "EC4Y 1AA"
+      postcode: "EC4Y 1AA",
     },
     photo: null,
-    lastContact: new Date('2025-01-17'),
+    lastContact: new Date("2025-01-17"),
     preferredContact: "Email",
     notes: "Established law firm. Long-term tenant since 2021.",
     timeline: [
       {
         type: "email",
         action: "Lease renewal discussion",
-        date: new Date('2025-01-17'),
-        details: "Initial discussion about 2026 lease renewal"
-      }
+        date: new Date("2025-01-17"),
+        details: "Initial discussion about 2026 lease renewal",
+      },
     ],
     properties: [
       {
@@ -1184,27 +1187,27 @@ const contactsData = [
         propertyName: "Holborn Legal Quarter",
         unit: "Suite 3A-3B",
         status: "Occupied",
-        moveInDate: new Date('2021-03-01'),
-        leaseEnd: new Date('2026-02-28')
-      }
+        moveInDate: new Date("2021-03-01"),
+        leaseEnd: new Date("2026-02-28"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "sent",
         subject: "2026 Lease Renewal",
-        date: new Date('2025-01-17'),
-        preview: "I wanted to reach out early to discuss..."
-      }
+        date: new Date("2025-01-17"),
+        preview: "I wanted to reach out early to discuss...",
+      },
     ],
     documents: [
       {
         name: "Current Lease.pdf",
         type: "Contract",
-        uploadDate: new Date('2021-02-25'),
-        size: "2.8 MB"
-      }
-    ]
+        uploadDate: new Date("2021-02-25"),
+        size: "2.8 MB",
+      },
+    ],
   },
   {
     id: "CONT-013",
@@ -1222,19 +1225,19 @@ const contactsData = [
     address: {
       street: "5 Fleet Street",
       city: "London",
-      postcode: "EC4Y 1AA"
+      postcode: "EC4Y 1AA",
     },
     photo: null,
-    lastContact: new Date('2025-01-22'),
+    lastContact: new Date("2025-01-22"),
     preferredContact: "Email",
     notes: "Primary contact for administrative and facilities matters.",
     timeline: [
       {
         type: "call",
         action: "Conference room booking",
-        date: new Date('2025-01-22'),
-        details: "Booked meeting room for client meetings"
-      }
+        date: new Date("2025-01-22"),
+        details: "Booked meeting room for client meetings",
+      },
     ],
     properties: [
       {
@@ -1242,21 +1245,21 @@ const contactsData = [
         propertyName: "Holborn Legal Quarter",
         unit: "Suite 3A-3B",
         status: "Occupied",
-        moveInDate: new Date('2021-03-01'),
-        leaseEnd: new Date('2026-02-28')
-      }
+        moveInDate: new Date("2021-03-01"),
+        leaseEnd: new Date("2026-02-28"),
+      },
     ],
     communications: [
       {
         type: "call",
         direction: "inbound",
         subject: "Meeting Room Booking",
-        date: new Date('2025-01-22'),
+        date: new Date("2025-01-22"),
         duration: "5 mins",
-        notes: "Booked conference room for next week"
-      }
+        notes: "Booked conference room for next week",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // GreenEnergy Solutions - 2 contacts
@@ -1276,19 +1279,20 @@ const contactsData = [
     address: {
       street: "20 Fenchurch Street",
       city: "London",
-      postcode: "EC3M 3BY"
+      postcode: "EC3M 3BY",
     },
     photo: null,
-    lastContact: new Date('2025-01-21'),
+    lastContact: new Date("2025-01-21"),
     preferredContact: "Email",
-    notes: "Sustainability-focused company. Interested in green building features.",
+    notes:
+      "Sustainability-focused company. Interested in green building features.",
     timeline: [
       {
         type: "meeting",
         action: "Sustainability features discussion",
-        date: new Date('2025-01-21'),
-        details: "Discussed building's green credentials and improvements"
-      }
+        date: new Date("2025-01-21"),
+        details: "Discussed building's green credentials and improvements",
+      },
     ],
     properties: [
       {
@@ -1296,28 +1300,28 @@ const contactsData = [
         propertyName: "Paddington Central",
         unit: "Floor 4",
         status: "Occupied",
-        moveInDate: new Date('2023-02-01'),
-        leaseEnd: new Date('2028-01-31')
-      }
+        moveInDate: new Date("2023-02-01"),
+        leaseEnd: new Date("2028-01-31"),
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Green Building Features",
-        date: new Date('2025-01-21'),
+        date: new Date("2025-01-21"),
         duration: "30 mins",
-        notes: "Very interested in solar panels and EV charging"
-      }
+        notes: "Very interested in solar panels and EV charging",
+      },
     ],
     documents: [
       {
         name: "Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2023-01-25'),
-        size: "2.3 MB"
-      }
-    ]
+        uploadDate: new Date("2023-01-25"),
+        size: "2.3 MB",
+      },
+    ],
   },
   {
     id: "CONT-015",
@@ -1335,19 +1339,19 @@ const contactsData = [
     address: {
       street: "20 Fenchurch Street",
       city: "London",
-      postcode: "EC3M 3BY"
+      postcode: "EC3M 3BY",
     },
     photo: null,
-    lastContact: new Date('2025-01-19'),
+    lastContact: new Date("2025-01-19"),
     preferredContact: "Email",
     notes: "Handles operational and technical matters.",
     timeline: [
       {
         type: "email",
         action: "Energy consumption report request",
-        date: new Date('2025-01-19'),
-        details: "Requested detailed energy usage data"
-      }
+        date: new Date("2025-01-19"),
+        details: "Requested detailed energy usage data",
+      },
     ],
     properties: [
       {
@@ -1355,20 +1359,20 @@ const contactsData = [
         propertyName: "Paddington Central",
         unit: "Floor 4",
         status: "Occupied",
-        moveInDate: new Date('2023-02-01'),
-        leaseEnd: new Date('2028-01-31')
-      }
+        moveInDate: new Date("2023-02-01"),
+        leaseEnd: new Date("2028-01-31"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Energy Usage Data Request",
-        date: new Date('2025-01-19'),
-        preview: "For our sustainability reporting, we need..."
-      }
+        date: new Date("2025-01-19"),
+        preview: "For our sustainability reporting, we need...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Quantum Consulting Group - 2 contacts
@@ -1388,19 +1392,19 @@ const contactsData = [
     address: {
       street: "12 Gresham Street",
       city: "London",
-      postcode: "EC2V 7JE"
+      postcode: "EC2V 7JE",
     },
     photo: null,
-    lastContact: new Date('2025-01-16'),
+    lastContact: new Date("2025-01-16"),
     preferredContact: "Phone",
     notes: "Consulting firm. Professional services sector.",
     timeline: [
       {
         type: "call",
         action: "Quarterly check-in",
-        date: new Date('2025-01-16'),
-        details: "Routine satisfaction check"
-      }
+        date: new Date("2025-01-16"),
+        details: "Routine satisfaction check",
+      },
     ],
     properties: [
       {
@@ -1408,28 +1412,28 @@ const contactsData = [
         propertyName: "Clerkenwell Workspace",
         unit: "Suite 2A",
         status: "Occupied",
-        moveInDate: new Date('2022-08-01'),
-        leaseEnd: new Date('2025-07-31')
-      }
+        moveInDate: new Date("2022-08-01"),
+        leaseEnd: new Date("2025-07-31"),
+      },
     ],
     communications: [
       {
         type: "call",
         direction: "outbound",
         subject: "Quarterly Check-in",
-        date: new Date('2025-01-16'),
+        date: new Date("2025-01-16"),
         duration: "15 mins",
-        notes: "Very satisfied with services"
-      }
+        notes: "Very satisfied with services",
+      },
     ],
     documents: [
       {
         name: "Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2022-07-25'),
-        size: "2.0 MB"
-      }
-    ]
+        uploadDate: new Date("2022-07-25"),
+        size: "2.0 MB",
+      },
+    ],
   },
   {
     id: "CONT-017",
@@ -1447,19 +1451,19 @@ const contactsData = [
     address: {
       street: "12 Gresham Street",
       city: "London",
-      postcode: "EC2V 7JE"
+      postcode: "EC2V 7JE",
     },
     photo: null,
-    lastContact: new Date('2025-01-23'),
+    lastContact: new Date("2025-01-23"),
     preferredContact: "Email",
     notes: "Day-to-day contact for office matters.",
     timeline: [
       {
         type: "email",
         action: "Cleaning schedule adjustment",
-        date: new Date('2025-01-23'),
-        details: "Requested earlier cleaning times"
-      }
+        date: new Date("2025-01-23"),
+        details: "Requested earlier cleaning times",
+      },
     ],
     properties: [
       {
@@ -1467,20 +1471,20 @@ const contactsData = [
         propertyName: "Clerkenwell Workspace",
         unit: "Suite 2A",
         status: "Occupied",
-        moveInDate: new Date('2022-08-01'),
-        leaseEnd: new Date('2025-07-31')
-      }
+        moveInDate: new Date("2022-08-01"),
+        leaseEnd: new Date("2025-07-31"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Cleaning Schedule Change",
-        date: new Date('2025-01-23'),
-        preview: "Could we adjust the cleaning times to..."
-      }
+        date: new Date("2025-01-23"),
+        preview: "Could we adjust the cleaning times to...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Urban Property Developers - 2 contacts
@@ -1500,19 +1504,19 @@ const contactsData = [
     address: {
       street: "30 St Mary Axe",
       city: "London",
-      postcode: "EC3A 8BF"
+      postcode: "EC3A 8BF",
     },
     photo: null,
-    lastContact: new Date('2025-01-20'),
+    lastContact: new Date("2025-01-20"),
     preferredContact: "Email",
     notes: "Property development company. Strategic tenant.",
     timeline: [
       {
         type: "meeting",
         action: "Partnership discussion",
-        date: new Date('2025-01-20'),
-        details: "Discussed potential joint ventures"
-      }
+        date: new Date("2025-01-20"),
+        details: "Discussed potential joint ventures",
+      },
     ],
     properties: [
       {
@@ -1520,28 +1524,28 @@ const contactsData = [
         propertyName: "Greenwich Business Park",
         unit: "Building A",
         status: "Occupied",
-        moveInDate: new Date('2021-10-01'),
-        leaseEnd: new Date('2026-09-30')
-      }
+        moveInDate: new Date("2021-10-01"),
+        leaseEnd: new Date("2026-09-30"),
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Partnership Opportunities",
-        date: new Date('2025-01-20'),
+        date: new Date("2025-01-20"),
         duration: "60 mins",
-        notes: "Exploring co-development opportunities"
-      }
+        notes: "Exploring co-development opportunities",
+      },
     ],
     documents: [
       {
         name: "Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2021-09-25'),
-        size: "2.6 MB"
-      }
-    ]
+        uploadDate: new Date("2021-09-25"),
+        size: "2.6 MB",
+      },
+    ],
   },
   {
     id: "CONT-019",
@@ -1559,19 +1563,19 @@ const contactsData = [
     address: {
       street: "30 St Mary Axe",
       city: "London",
-      postcode: "EC3A 8BF"
+      postcode: "EC3A 8BF",
     },
     photo: null,
-    lastContact: new Date('2025-01-18'),
+    lastContact: new Date("2025-01-18"),
     preferredContact: "Email",
     notes: "Handles project coordination and logistics.",
     timeline: [
       {
         type: "email",
         action: "Storage space request",
-        date: new Date('2025-01-18'),
-        details: "Requested additional storage for project materials"
-      }
+        date: new Date("2025-01-18"),
+        details: "Requested additional storage for project materials",
+      },
     ],
     properties: [
       {
@@ -1579,20 +1583,20 @@ const contactsData = [
         propertyName: "Greenwich Business Park",
         unit: "Building A",
         status: "Occupied",
-        moveInDate: new Date('2021-10-01'),
-        leaseEnd: new Date('2026-09-30')
-      }
+        moveInDate: new Date("2021-10-01"),
+        leaseEnd: new Date("2026-09-30"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Additional Storage Request",
-        date: new Date('2025-01-18'),
-        preview: "We need some temporary storage space for..."
-      }
+        date: new Date("2025-01-18"),
+        preview: "We need some temporary storage space for...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Nexus Retail Group - 2 contacts
@@ -1612,19 +1616,19 @@ const contactsData = [
     address: {
       street: "8 Bishopsgate",
       city: "London",
-      postcode: "EC2N 4BQ"
+      postcode: "EC2N 4BQ",
     },
     photo: null,
-    lastContact: new Date('2025-01-19'),
+    lastContact: new Date("2025-01-19"),
     preferredContact: "Email",
     notes: "Retail group headquarters. Growing company.",
     timeline: [
       {
         type: "email",
         action: "Expansion discussion",
-        date: new Date('2025-01-19'),
-        details: "Interested in additional office space"
-      }
+        date: new Date("2025-01-19"),
+        details: "Interested in additional office space",
+      },
     ],
     properties: [
       {
@@ -1632,27 +1636,27 @@ const contactsData = [
         propertyName: "Stratford Office Quarter",
         unit: "Floor 2",
         status: "Occupied",
-        moveInDate: new Date('2023-05-01'),
-        leaseEnd: new Date('2026-04-30')
-      }
+        moveInDate: new Date("2023-05-01"),
+        leaseEnd: new Date("2026-04-30"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Office Expansion Inquiry",
-        date: new Date('2025-01-19'),
-        preview: "Our team is growing and we're looking for..."
-      }
+        date: new Date("2025-01-19"),
+        preview: "Our team is growing and we're looking for...",
+      },
     ],
     documents: [
       {
         name: "Lease Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2023-04-25'),
-        size: "2.2 MB"
-      }
-    ]
+        uploadDate: new Date("2023-04-25"),
+        size: "2.2 MB",
+      },
+    ],
   },
   {
     id: "CONT-021",
@@ -1670,19 +1674,19 @@ const contactsData = [
     address: {
       street: "8 Bishopsgate",
       city: "London",
-      postcode: "EC2N 4BQ"
+      postcode: "EC2N 4BQ",
     },
     photo: null,
-    lastContact: new Date('2025-01-17'),
+    lastContact: new Date("2025-01-17"),
     preferredContact: "Email",
     notes: "Handles HR and employee facilities matters.",
     timeline: [
       {
         type: "email",
         action: "Parking permit request",
-        date: new Date('2025-01-17'),
-        details: "Requested parking permits for senior staff"
-      }
+        date: new Date("2025-01-17"),
+        details: "Requested parking permits for senior staff",
+      },
     ],
     properties: [
       {
@@ -1690,20 +1694,20 @@ const contactsData = [
         propertyName: "Stratford Office Quarter",
         unit: "Floor 2",
         status: "Occupied",
-        moveInDate: new Date('2023-05-01'),
-        leaseEnd: new Date('2026-04-30')
-      }
+        moveInDate: new Date("2023-05-01"),
+        leaseEnd: new Date("2026-04-30"),
+      },
     ],
     communications: [
       {
         type: "email",
         direction: "received",
         subject: "Parking Permits for Senior Staff",
-        date: new Date('2025-01-17'),
-        preview: "We have three senior hires starting who will need..."
-      }
+        date: new Date("2025-01-17"),
+        preview: "We have three senior hires starting who will need...",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // FutureSpace Ventures (Prospect) - 2 contacts
@@ -1723,25 +1727,25 @@ const contactsData = [
     address: {
       street: "45 Moorgate",
       city: "London",
-      postcode: "EC2R 6BL"
+      postcode: "EC2R 6BL",
     },
     photo: null,
-    lastContact: new Date('2025-01-22'),
+    lastContact: new Date("2025-01-22"),
     preferredContact: "Email",
     notes: "Early-stage startup. Looking for flexible office space.",
     timeline: [
       {
         type: "meeting",
         action: "Property viewing",
-        date: new Date('2025-01-22'),
-        details: "Viewed Shoreditch Tech Hub units"
+        date: new Date("2025-01-22"),
+        details: "Viewed Shoreditch Tech Hub units",
       },
       {
         type: "email",
         action: "Initial inquiry",
-        date: new Date('2025-01-15'),
-        details: "Inquired about flexible workspace options"
-      }
+        date: new Date("2025-01-15"),
+        details: "Inquired about flexible workspace options",
+      },
     ],
     properties: [
       {
@@ -1750,27 +1754,27 @@ const contactsData = [
         unit: "Unit 3A",
         status: "Viewing Scheduled",
         moveInDate: null,
-        leaseEnd: null
-      }
+        leaseEnd: null,
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Property Viewing",
-        date: new Date('2025-01-22'),
+        date: new Date("2025-01-22"),
         duration: "45 mins",
-        notes: "Very interested. Waiting for board approval."
+        notes: "Very interested. Waiting for board approval.",
       },
       {
         type: "email",
         direction: "received",
         subject: "Flexible Workspace Inquiry",
-        date: new Date('2025-01-15'),
-        preview: "We're a growing startup looking for..."
-      }
+        date: new Date("2025-01-15"),
+        preview: "We're a growing startup looking for...",
+      },
     ],
-    documents: []
+    documents: [],
   },
   {
     id: "CONT-023",
@@ -1788,19 +1792,19 @@ const contactsData = [
     address: {
       street: "45 Moorgate",
       city: "London",
-      postcode: "EC2R 6BL"
+      postcode: "EC2R 6BL",
     },
     photo: null,
-    lastContact: new Date('2025-01-22'),
+    lastContact: new Date("2025-01-22"),
     preferredContact: "Email",
     notes: "Handles operational planning and logistics.",
     timeline: [
       {
         type: "meeting",
         action: "Property viewing",
-        date: new Date('2025-01-22'),
-        details: "Attended viewing with CEO"
-      }
+        date: new Date("2025-01-22"),
+        details: "Attended viewing with CEO",
+      },
     ],
     properties: [
       {
@@ -1809,20 +1813,20 @@ const contactsData = [
         unit: "Unit 3A",
         status: "Viewing Scheduled",
         moveInDate: null,
-        leaseEnd: null
-      }
+        leaseEnd: null,
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Property Viewing",
-        date: new Date('2025-01-22'),
+        date: new Date("2025-01-22"),
         duration: "45 mins",
-        notes: "Focused on technical specifications"
-      }
+        notes: "Focused on technical specifications",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Horizon Biotech (Prospect) - 2 contacts
@@ -1842,25 +1846,25 @@ const contactsData = [
     address: {
       street: "18 Monument Street",
       city: "London",
-      postcode: "EC3R 8AJ"
+      postcode: "EC3R 8AJ",
     },
     photo: null,
-    lastContact: new Date('2025-01-21'),
+    lastContact: new Date("2025-01-21"),
     preferredContact: "Email",
     notes: "Biotech company. Requires specialized lab space.",
     timeline: [
       {
         type: "meeting",
         action: "Requirements discussion",
-        date: new Date('2025-01-21'),
-        details: "Discussed lab specifications and requirements"
+        date: new Date("2025-01-21"),
+        details: "Discussed lab specifications and requirements",
       },
       {
         type: "email",
         action: "Initial contact",
-        date: new Date('2025-01-14'),
-        details: "Referred by broker. Looking for lab space."
-      }
+        date: new Date("2025-01-14"),
+        details: "Referred by broker. Looking for lab space.",
+      },
     ],
     properties: [
       {
@@ -1869,20 +1873,20 @@ const contactsData = [
         unit: "Lab Suite 2",
         status: "Interested",
         moveInDate: null,
-        leaseEnd: null
-      }
+        leaseEnd: null,
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Lab Requirements Meeting",
-        date: new Date('2025-01-21'),
+        date: new Date("2025-01-21"),
         duration: "60 mins",
-        notes: "Need specialized ventilation and power"
-      }
+        notes: "Need specialized ventilation and power",
+      },
     ],
-    documents: []
+    documents: [],
   },
   {
     id: "CONT-025",
@@ -1900,19 +1904,19 @@ const contactsData = [
     address: {
       street: "18 Monument Street",
       city: "London",
-      postcode: "EC3R 8AJ"
+      postcode: "EC3R 8AJ",
     },
     photo: null,
-    lastContact: new Date('2025-01-21'),
+    lastContact: new Date("2025-01-21"),
     preferredContact: "Email",
     notes: "Technical specialist for lab requirements.",
     timeline: [
       {
         type: "meeting",
         action: "Technical specifications review",
-        date: new Date('2025-01-21'),
-        details: "Reviewed building systems and capabilities"
-      }
+        date: new Date("2025-01-21"),
+        details: "Reviewed building systems and capabilities",
+      },
     ],
     properties: [
       {
@@ -1921,20 +1925,20 @@ const contactsData = [
         unit: "Lab Suite 2",
         status: "Interested",
         moveInDate: null,
-        leaseEnd: null
-      }
+        leaseEnd: null,
+      },
     ],
     communications: [
       {
         type: "meeting",
         direction: "inbound",
         subject: "Technical Specifications Review",
-        date: new Date('2025-01-21'),
+        date: new Date("2025-01-21"),
         duration: "60 mins",
-        notes: "Very detailed technical requirements"
-      }
+        notes: "Very detailed technical requirements",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Apex Manufacturing (Prospect) - 1 contact
@@ -1954,19 +1958,19 @@ const contactsData = [
     address: {
       street: "22 Cannon Street",
       city: "London",
-      postcode: "EC4M 6XH"
+      postcode: "EC4M 6XH",
     },
     photo: null,
-    lastContact: new Date('2025-01-16'),
+    lastContact: new Date("2025-01-16"),
     preferredContact: "Phone",
     notes: "Manufacturing company. Looking for office + warehouse space.",
     timeline: [
       {
         type: "call",
         action: "Initial consultation",
-        date: new Date('2025-01-16'),
-        details: "Discussed space requirements and timeline"
-      }
+        date: new Date("2025-01-16"),
+        details: "Discussed space requirements and timeline",
+      },
     ],
     properties: [
       {
@@ -1975,20 +1979,20 @@ const contactsData = [
         unit: "Building C",
         status: "Interested",
         moveInDate: null,
-        leaseEnd: null
-      }
+        leaseEnd: null,
+      },
     ],
     communications: [
       {
         type: "call",
         direction: "inbound",
         subject: "Initial Consultation",
-        date: new Date('2025-01-16'),
+        date: new Date("2025-01-16"),
         duration: "30 mins",
-        notes: "Need combined office and warehouse space"
-      }
+        notes: "Need combined office and warehouse space",
+      },
     ],
-    documents: []
+    documents: [],
   },
 
   // Prime Property Advisors (Broker) - 1 contact
@@ -2008,25 +2012,26 @@ const contactsData = [
     address: {
       street: "50 Liverpool Street",
       city: "London",
-      postcode: "EC2M 7PY"
+      postcode: "EC2M 7PY",
     },
     photo: null,
-    lastContact: new Date('2025-01-23'),
+    lastContact: new Date("2025-01-23"),
     preferredContact: "Phone",
-    notes: "Active broker. Has referred multiple clients. Commission rate: 10%.",
+    notes:
+      "Active broker. Has referred multiple clients. Commission rate: 10%.",
     timeline: [
       {
         type: "call",
         action: "New client referral",
-        date: new Date('2025-01-23'),
-        details: "Referred Horizon Biotech for lab space"
+        date: new Date("2025-01-23"),
+        details: "Referred Horizon Biotech for lab space",
       },
       {
         type: "meeting",
         action: "Portfolio review",
-        date: new Date('2025-01-10'),
-        details: "Reviewed available units and pricing"
-      }
+        date: new Date("2025-01-10"),
+        details: "Reviewed available units and pricing",
+      },
     ],
     properties: [],
     communications: [
@@ -2034,19 +2039,19 @@ const contactsData = [
         type: "call",
         direction: "inbound",
         subject: "New Client Referral",
-        date: new Date('2025-01-23'),
+        date: new Date("2025-01-23"),
         duration: "15 mins",
-        notes: "Referred biotech company looking for lab space"
-      }
+        notes: "Referred biotech company looking for lab space",
+      },
     ],
     documents: [
       {
         name: "Broker Agreement.pdf",
         type: "Contract",
-        uploadDate: new Date('2024-01-15'),
-        size: "1.5 MB"
-      }
-    ]
+        uploadDate: new Date("2024-01-15"),
+        size: "1.5 MB",
+      },
+    ],
   },
 
   // Elite Facilities Management (Vendor) - 1 contact
@@ -2066,25 +2071,26 @@ const contactsData = [
     address: {
       street: "35 Leadenhall Street",
       city: "London",
-      postcode: "EC3A 1AR"
+      postcode: "EC3A 1AR",
     },
     photo: null,
-    lastContact: new Date('2025-01-22'),
+    lastContact: new Date("2025-01-22"),
     preferredContact: "Email",
-    notes: "Facilities management vendor. Manages cleaning and maintenance services.",
+    notes:
+      "Facilities management vendor. Manages cleaning and maintenance services.",
     timeline: [
       {
         type: "meeting",
         action: "Service review meeting",
-        date: new Date('2025-01-22'),
-        details: "Quarterly service performance review"
+        date: new Date("2025-01-22"),
+        details: "Quarterly service performance review",
       },
       {
         type: "email",
         action: "Invoice submission",
-        date: new Date('2025-01-15'),
-        details: "Submitted Q1 service invoice"
-      }
+        date: new Date("2025-01-15"),
+        details: "Submitted Q1 service invoice",
+      },
     ],
     properties: [],
     communications: [
@@ -2092,18 +2098,18 @@ const contactsData = [
         type: "meeting",
         direction: "inbound",
         subject: "Quarterly Service Review",
-        date: new Date('2025-01-22'),
+        date: new Date("2025-01-22"),
         duration: "45 mins",
-        notes: "Performance excellent. Renewed contract."
-      }
+        notes: "Performance excellent. Renewed contract.",
+      },
     ],
     documents: [
       {
         name: "Service Contract.pdf",
         type: "Contract",
-        uploadDate: new Date('2024-01-01'),
-        size: "2.7 MB"
-      }
-    ]
-  }
+        uploadDate: new Date("2024-01-01"),
+        size: "2.7 MB",
+      },
+    ],
+  },
 ];

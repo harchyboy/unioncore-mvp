@@ -342,6 +342,7 @@
 ## What Each Setting Does
 
 ### Domain Name Field
+
 ```
 ┌────────────────────────────────────┐
 │  union.hartz.ai                    │
@@ -354,6 +355,7 @@
 ```
 
 ### Target Port Field
+
 ```
 ┌────────────────────────────────────┐
 │  80                                │
@@ -365,6 +367,7 @@
 ```
 
 ### Protocol Selection
+
 ```
 ○ HTTP    ⦿ HTTPS    ○ Auto
           ▲
@@ -374,6 +377,7 @@
 ```
 
 ### SSL Checkboxes
+
 ```
 ☑ Enable HTTPS
 ▲
@@ -489,14 +493,17 @@ Print this and keep it handy!
 If you can share screenshots, take these:
 
 ### Screenshot 1: Main Dashboard
+
 - Shows projects list
 - Helps identify correct UI version
 
 ### Screenshot 2: Application Page
+
 - Shows where the Domains tab is
 - Shows application status
 
 ### Screenshot 3: Domains Configuration
+
 - Shows the domain form
 - Shows what fields to fill
 
@@ -509,6 +516,7 @@ Send these and I can give you exact instructions!
 **The key is finding the "Domains" section in your application settings.**
 
 It might be called:
+
 - "Domains"
 - "Routing"
 - "Network & Domains"
@@ -516,6 +524,7 @@ It might be called:
 - "Public Domains"
 
 But the configuration is always similar:
+
 1. Domain name
 2. Target port
 3. SSL options

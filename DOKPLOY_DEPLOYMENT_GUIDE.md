@@ -50,6 +50,7 @@ Fallback:  https://65.21.77.45:3000
 3. Choose deployment method:
 
 #### Option A: Deploy from GitHub
+
 ```
 Name:           unioncore-mvp
 Source:         GitHub
@@ -59,6 +60,7 @@ Build Method:   Dockerfile
 ```
 
 #### Option B: Deploy from Docker Compose
+
 ```
 Name:           unioncore-mvp
 Source:         Docker Compose
@@ -73,14 +75,14 @@ File:           Upload docker-compose.production.yml
 
 ```yaml
 Build Configuration:
-  ├─ Build Context:     ./
-  ├─ Dockerfile:        Dockerfile
-  └─ Build Args:        (none needed)
+  ├─ Build Context: ./
+  ├─ Dockerfile: Dockerfile
+  └─ Build Args: (none needed)
 
 Container Settings:
-  ├─ Restart Policy:    unless-stopped
-  ├─ Container Name:    unioncore-mvp
-  └─ Network Mode:      bridge
+  ├─ Restart Policy: unless-stopped
+  ├─ Container Name: unioncore-mvp
+  └─ Network Mode: bridge
 ```
 
 ---
@@ -111,7 +113,7 @@ Add these port mappings:
 
 ### Step 6: Configure Domain & SSL (CRITICAL!)
 
-This is where the magic happens! 
+This is where the magic happens!
 
 ```yaml
 Domain Configuration:
@@ -145,6 +147,7 @@ Domain Configuration:
 ```
 
 **Settings breakdown:**
+
 - **Domain Name**: `union.hartz.ai` (your full domain)
 - **Target Port**: `80` (the port your app listens on inside container)
 - **Protocol**: Select HTTPS
@@ -181,6 +184,7 @@ Most apps won't need these as they're already in the Dockerfile.
 ### Step 9: Verify Deployment
 
 #### Check Deployment Status
+
 ```
 Status: Running ✅
 Uptime: X minutes
@@ -189,7 +193,9 @@ Health: Healthy
 ```
 
 #### Check Logs
+
 Click **"Logs"** tab and verify:
+
 ```
 ✅ PM2 process manager started
 ✅ Vite running on port 5879
@@ -198,6 +204,7 @@ Click **"Logs"** tab and verify:
 ```
 
 #### Test Domain
+
 ```bash
 # Test HTTP (should redirect to HTTPS)
 curl -I http://union.hartz.ai
@@ -218,21 +225,25 @@ Expected: ✅ Application loads with green padlock
 If you prefer command line:
 
 ### Step 1: SSH into Server
+
 ```bash
 ssh user@65.21.77.45
 ```
 
 ### Step 2: Navigate to Dokploy
+
 ```bash
 cd /opt/dokploy  # or wherever Dokploy is installed
 ```
 
 ### Step 3: Create Project
+
 ```bash
 dokploy project create unioncore
 ```
 
 ### Step 4: Deploy Application
+
 ```bash
 dokploy app create unioncore-mvp \
   --project unioncore \
@@ -245,6 +256,7 @@ dokploy app deploy unioncore-mvp
 ```
 
 ### Step 5: Add Domain
+
 ```bash
 dokploy domain add unioncore-mvp \
   --domain union.hartz.ai \
@@ -255,6 +267,7 @@ dokploy domain add unioncore-mvp \
 ```
 
 ### Step 6: Verify
+
 ```bash
 dokploy app status unioncore-mvp
 dokploy app logs unioncore-mvp
@@ -271,12 +284,14 @@ Use the provided `docker-compose.production.yml` file from this repository.
 ### Step 2: Upload to Dokploy
 
 In Dokploy dashboard:
+
 1. Click **"New Application"**
 2. Select **"Docker Compose"**
 3. Upload `docker-compose.production.yml`
 4. Click **"Deploy"**
 
 **The docker-compose file already includes:**
+
 - ✅ Traefik labels for routing
 - ✅ Domain configuration (union.hartz.ai)
 - ✅ SSL/Let's Encrypt setup
@@ -287,6 +302,7 @@ In Dokploy dashboard:
 ### Step 3: Verify in Dokploy
 
 Dokploy should automatically:
+
 - ✅ Build the Docker image
 - ✅ Start the container
 - ✅ Configure Traefik routing
@@ -300,6 +316,7 @@ Dokploy should automatically:
 ### Issue 1: Application Shows 404
 
 **Symptoms:**
+
 ```bash
 curl http://union.hartz.ai
 # Returns: 404 page not found
@@ -308,6 +325,7 @@ curl http://union.hartz.ai
 **Cause:** Domain not properly configured in Dokploy/Traefik
 
 **Solution:**
+
 1. Go to application settings in Dokploy
 2. Check **"Domains"** tab
 3. Verify domain is added: `union.hartz.ai`
@@ -318,6 +336,7 @@ curl http://union.hartz.ai
 ### Issue 2: Container Not Starting
 
 **Check logs:**
+
 ```bash
 # In Dokploy dashboard, click "Logs" tab
 # Or via CLI:
@@ -325,11 +344,13 @@ docker logs unioncore-mvp
 ```
 
 **Common issues:**
+
 - Port already in use
 - Build failed
 - Missing environment variables
 
 **Solution:**
+
 ```bash
 # Restart container
 docker restart unioncore-mvp
@@ -341,12 +362,14 @@ docker-compose up -d --build
 ### Issue 3: SSL Certificate Not Issued
 
 **Symptoms:**
+
 - Domain works on HTTP but not HTTPS
 - Certificate error in browser
 
 **Cause:** Let's Encrypt challenge failed
 
 **Check:**
+
 ```bash
 # View Traefik logs
 docker logs traefik | grep -i "union.hartz.ai"
@@ -356,11 +379,13 @@ docker exec traefik cat /acme.json | grep union.hartz.ai
 ```
 
 **Common causes:**
+
 1. **Port 80 not accessible** from internet
 2. **DNS not propagated** yet (wait 10-15 minutes)
 3. **Rate limit** hit (max 5 certs per domain per week)
 
 **Solution:**
+
 ```bash
 # Check if port 80 is accessible
 curl -I http://union.hartz.ai/.well-known/acme-challenge/test
@@ -376,12 +401,14 @@ docker restart traefik
 ### Issue 4: Domain Works But Shows Wrong Content
 
 **Symptoms:**
+
 - Domain loads but shows different application
 - Shows Traefik dashboard instead of your app
 
 **Cause:** Routing conflict or wrong port
 
 **Solution:**
+
 1. Check Traefik labels in docker-compose
 2. Verify target port is `80` (not 5879)
 3. Check for conflicting routes
@@ -390,6 +417,7 @@ docker restart traefik
 ### Issue 5: Can't Access Dokploy Dashboard
 
 **Try these URLs:**
+
 ```bash
 # Common Dokploy dashboard URLs
 http://65.21.77.45:3000
@@ -399,6 +427,7 @@ http://dokploy.hartz.ai
 ```
 
 **If still can't access:**
+
 ```bash
 # SSH into server
 ssh user@65.21.77.45
@@ -472,19 +501,19 @@ Day 0:    Let's Encrypt request
           ├─ HTTP-01 challenge
           ├─ Certificate issued
           └─ Valid for 90 days
-          
+
 Day 30:   First renewal check
           └─ Too early, skipped
-          
+
 Day 60:   Second renewal check
           └─ Certificate renewed automatically
-          
+
 Day 90:   Old certificate expires
           └─ New certificate already active
-          
+
 Day 120:  Third renewal check
           └─ Certificate renewed automatically
-          
+
 ...       (Continues forever)
 ```
 
@@ -495,6 +524,7 @@ Day 120:  Third renewal check
 Use this checklist when deploying:
 
 ### Pre-Deployment
+
 - [ ] Dokploy dashboard accessible
 - [ ] GitHub repository ready (if using GitHub)
 - [ ] Docker Compose file prepared (if using Docker Compose)
@@ -502,6 +532,7 @@ Use this checklist when deploying:
 - [ ] Port 80 and 443 open on server firewall
 
 ### Deployment Steps
+
 - [ ] Create project in Dokploy
 - [ ] Add application to project
 - [ ] Configure build settings
@@ -513,6 +544,7 @@ Use this checklist when deploying:
 - [ ] Click Deploy
 
 ### Post-Deployment Verification
+
 - [ ] Container status: Running
 - [ ] Container logs: No errors
 - [ ] Health check: Passing
@@ -524,6 +556,7 @@ Use this checklist when deploying:
 - [ ] HTTP redirects to HTTPS
 
 ### Optional Checks
+
 - [ ] PM2 status: `docker exec unioncore-mvp pm2 status`
 - [ ] Nginx status: `docker exec unioncore-mvp nginx -t`
 - [ ] View logs: Check Dokploy logs tab
@@ -558,14 +591,14 @@ Dokploy Dashboard
 ### Important Settings
 
 ```yaml
-Application Name:     unioncore-mvp
-Domain:              union.hartz.ai
-Target Port:         80
-Protocol:            HTTPS
-SSL Provider:        Let's Encrypt
-Force HTTPS:         Yes
-Auto-Restart:        Yes
-Health Check:        Enabled
+Application Name: unioncore-mvp
+Domain: union.hartz.ai
+Target Port: 80
+Protocol: HTTPS
+SSL Provider: Let's Encrypt
+Force HTTPS: Yes
+Auto-Restart: Yes
+Health Check: Enabled
 ```
 
 ### Useful Commands

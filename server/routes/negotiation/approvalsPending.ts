@@ -7,7 +7,7 @@ import {
   type ApprovalRequest,
   type CreateApprovalRequest,
   type UpdateApprovalRequest,
-} from "../../../shared/negotiation/approvalsPending";
+} from "../../../shared/negotiation/approvalsPending.js";
 
 const router = Router();
 

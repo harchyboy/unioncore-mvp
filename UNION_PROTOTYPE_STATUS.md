@@ -15,6 +15,7 @@ Building a **UI prototype** (dummy data only) of UNION Core Plus to demonstrate 
 ## ✅ COMPLETED SECTIONS
 
 ### Dashboard & Overview (100% Complete)
+
 - ✅ Executive Dashboard with KPIs
 - ✅ Deal Flow Funnel visualization
 - ✅ Cycle Time Trends chart
@@ -27,6 +28,7 @@ Building a **UI prototype** (dummy data only) of UNION Core Plus to demonstrate 
 - ✅ Announcements section
 
 ### Navigation & Global UI (100% Complete)
+
 - ✅ Full sidebar navigation
 - ✅ Global search bar (visual)
 - ✅ Notifications panel with samples
@@ -34,6 +36,7 @@ Building a **UI prototype** (dummy data only) of UNION Core Plus to demonstrate 
 - ✅ Quick Actions buttons
 
 ### Pipeline Management (NEW - Just Added ✅)
+
 - ✅ **Pipeline Board with Kanban View**
   - 6 stage columns (Lead, Viewing, Proposal, HoT, Signed, Live)
   - Deal cards with key information
@@ -63,6 +66,7 @@ Building a **UI prototype** (dummy data only) of UNION Core Plus to demonstrate 
   - Pipeline health metrics
 
 ### Modal Dialogs
+
 - ✅ Deal Room detail view
 - ✅ Intervention creation form
 - ✅ Intervention detail view
@@ -78,7 +82,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 ### PRIORITY 1: Critical for Demo (Build Next)
 
 #### 1. Property Index (FR-007, FR-008)
+
 **Time Estimate: 3-4 days**
+
 - [ ] Property grid view with photos
 - [ ] Property list view with details
 - [ ] Property filters (location, type, size, availability)
@@ -97,7 +103,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Add/Edit property form
 
 #### 2. Lead Capture & Qualification (FR-001, FR-002)
+
 **Time Estimate: 2 days**
+
 - [ ] Web lead capture form
 - [ ] Manual lead entry form
 - [ ] Lead qualification checklist
@@ -105,7 +113,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Lead assignment interface
 
 #### 3. Deal Detail Page - Enhanced (FR-004)
+
 **Time Estimate: 2-3 days**
+
 - [ ] Overview tab (expand existing)
 - [ ] Commercials tab (pricing, terms, negotiations)
 - [ ] Documents tab
@@ -115,7 +125,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Notes/Comments section
 
 #### 4. Onboarding Board (FR-013)
+
 **Time Estimate: 2 days**
+
 - [ ] Onboarding Kanban by stage
 - [ ] Tenant cards with progress
 - [ ] Checklist view
@@ -125,7 +137,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Welcome pack status
 
 #### 5. Task Management (FR-017)
+
 **Time Estimate: 2 days**
+
 - [ ] Task Kanban board
 - [ ] Task list view
 - [ ] Task filters (status, owner, priority, date)
@@ -135,7 +149,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Comments
 
 #### 6. Ticket Desk (FR-018)
+
 **Time Estimate: 2 days**
+
 - [ ] Ticket dashboard with KPIs
 - [ ] Ticket list (open, in progress, closed)
 - [ ] Ticket filters and search
@@ -146,7 +162,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Satisfaction rating
 
 #### 7. Contact Management (FR-020)
+
 **Time Estimate: 2 days**
+
 - [ ] Contact list with photos
 - [ ] Company associations
 - [ ] Contact filters and search
@@ -161,7 +179,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 ### PRIORITY 2: Important for Complete Picture
 
 #### 8. Viewing Scheduler
+
 **Time Estimate: 2-3 days**
+
 - [ ] Calendar view (month/week/day)
 - [ ] Scheduled viewings display
 - [ ] Available time slots
@@ -171,7 +191,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Feedback forms
 
 #### 9. Document Library (FR-026)
+
 **Time Estimate: 2 days**
+
 - [ ] Folder structure
 - [ ] Document list with thumbnails
 - [ ] Search and filters
@@ -183,7 +205,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Sharing settings
 
 #### 10. Vendor Directory (FR-016)
+
 **Time Estimate: 2 days**
+
 - [ ] Vendor list
 - [ ] Service categories
 - [ ] Performance ratings
@@ -197,7 +221,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Documents (insurance, certifications)
 
 #### 11. Broker Management (FR-010, FR-011, FR-012)
+
 **Time Estimate: 2-3 days**
+
 - [ ] Broker list with performance metrics
 - [ ] Broker detail page
 - [ ] Partnership agreement status
@@ -212,7 +238,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
   - Deal status visibility
 
 #### 12. Financial Dashboard (FR-022)
+
 **Time Estimate: 2-3 days**
+
 - [ ] Revenue charts
 - [ ] Expense tracking
 - [ ] Profit margins
@@ -223,7 +251,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Revenue breakdown
 
 #### 13. Proposal Generator (FR-005)
+
 **Time Estimate: 2 days**
+
 - [ ] Proposal builder interface
 - [ ] Template selection
 - [ ] Pricing calculator
@@ -233,7 +263,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Send/share options
 
 #### 14. Contract Management (FR-006)
+
 **Time Estimate: 2 days**
+
 - [ ] Contract repository
 - [ ] Contract status list
 - [ ] Contract detail view
@@ -249,7 +281,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 ### PRIORITY 3: Nice to Have for Depth
 
 #### 15. Research & Comparables
+
 **Time Estimate: 2 days**
+
 - [ ] Market research dashboard
 - [ ] Recent comparable deals
 - [ ] Market trends
@@ -259,7 +293,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Research library
 
 #### 16. HoT & Redlines
+
 **Time Estimate: 2 days**
+
 - [ ] HoT document viewer
 - [ ] Redline/markup display
 - [ ] Version comparison
@@ -268,7 +304,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] HoT list view
 
 #### 17. Fit-Out & Milestones
+
 **Time Estimate: 2-3 days**
+
 - [ ] Project timeline (Gantt chart)
 - [ ] Milestone markers
 - [ ] Critical path visualization
@@ -280,7 +318,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Photo progress
 
 #### 18. Service Catalogue
+
 **Time Estimate: 1-2 days**
+
 - [ ] Service catalog view
 - [ ] Service categories
 - [ ] Pricing display
@@ -289,7 +329,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Service detail page
 
 #### 19. Risk Management
+
 **Time Estimate: 2 days**
+
 - [ ] Risk dashboard
 - [ ] Risk matrix (likelihood vs impact)
 - [ ] Top risks
@@ -299,7 +341,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Owner assignments
 
 #### 20. Approvals Workflow
+
 **Time Estimate: 2 days**
+
 - [ ] Approvals dashboard
 - [ ] Items requiring approval
 - [ ] Approval workflow status
@@ -310,7 +354,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Comments/feedback
 
 #### 21. Bottleneck Analysis
+
 **Time Estimate: 2 days**
+
 - [ ] Bottleneck identification
 - [ ] Process flow diagram
 - [ ] Time analysis
@@ -320,7 +366,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Root cause analysis
 
 #### 22. SLA Governance
+
 **Time Estimate: 2 days**
+
 - [ ] SLA dashboard
 - [ ] Compliance overview
 - [ ] Breaches by type
@@ -329,7 +377,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] SLA configuration interface
 
 #### 23. Unit Economics
+
 **Time Estimate: 2 days**
+
 - [ ] Unit economics dashboard
 - [ ] Revenue per unit
 - [ ] Cost per unit
@@ -339,7 +389,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Unit comparison tool
 
 #### 24. Projects (PM)
+
 **Time Estimate: 2 days**
+
 - [ ] Project list
 - [ ] Project detail page
 - [ ] Project timeline
@@ -349,7 +401,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Risks and issues
 
 #### 25. Service Hub
+
 **Time Estimate: 2 days**
+
 - [ ] Service requests dashboard
 - [ ] Active requests
 - [ ] Request status tracking
@@ -359,7 +413,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Completion verification
 
 #### 26. Admin & Settings
+
 **Time Estimate: 2-3 days**
+
 - [ ] User management
 - [ ] Role management
 - [ ] Permission matrix
@@ -371,7 +427,9 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - [ ] Branding/customization
 
 #### 27. Audit & Activity Log
+
 **Time Estimate: 1-2 days**
+
 - [ ] Activity log view
 - [ ] Filter by user/action/date
 - [ ] Search functionality
@@ -386,34 +444,37 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 
 ### Overall Completion: ~15-20%
 
-| Category | Status | Progress |
-|----------|--------|----------|
-| **Dashboard** | ✅ Complete | 100% |
-| **Navigation** | ✅ Complete | 100% |
-| **Pipeline (NEW)** | ✅ Complete | 100% |
-| **Properties** | ❌ Not Started | 0% |
-| **Deals Detail** | 🟡 Partial | 30% |
-| **Onboarding** | ❌ Not Started | 0% |
-| **Tasks** | ❌ Not Started | 0% |
-| **Tickets** | ❌ Not Started | 0% |
-| **Contacts/CRM** | ❌ Not Started | 0% |
-| **Documents** | ❌ Not Started | 0% |
-| **Brokers** | ❌ Not Started | 0% |
-| **Vendors** | ❌ Not Started | 0% |
-| **Analytics** | 🟡 Partial | 40% |
-| **Admin** | 🟡 Partial | 20% |
-| **Other Sections** | ❌ Not Started | 0% |
+| Category           | Status         | Progress |
+| ------------------ | -------------- | -------- |
+| **Dashboard**      | ✅ Complete    | 100%     |
+| **Navigation**     | ✅ Complete    | 100%     |
+| **Pipeline (NEW)** | ✅ Complete    | 100%     |
+| **Properties**     | ❌ Not Started | 0%       |
+| **Deals Detail**   | 🟡 Partial     | 30%      |
+| **Onboarding**     | ❌ Not Started | 0%       |
+| **Tasks**          | ❌ Not Started | 0%       |
+| **Tickets**        | ❌ Not Started | 0%       |
+| **Contacts/CRM**   | ❌ Not Started | 0%       |
+| **Documents**      | ❌ Not Started | 0%       |
+| **Brokers**        | ❌ Not Started | 0%       |
+| **Vendors**        | ❌ Not Started | 0%       |
+| **Analytics**      | 🟡 Partial     | 40%      |
+| **Admin**          | 🟡 Partial     | 20%      |
+| **Other Sections** | ❌ Not Started | 0%       |
 
 ---
 
 ## 🗓️ Recommended Build Schedule
 
 ### Current Status: Phase 1 Complete ✅
+
 - Dashboard & Navigation ✅
 - Pipeline Kanban Board ✅
 
 ### Phase 2: Core Operations (Weeks 1-2)
+
 **Build Priority 1 items:**
+
 1. Property Index + Detail
 2. Lead Capture & Qualification
 3. Enhanced Deal Detail
@@ -425,41 +486,25 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 **Est. Time:** 15-20 days
 
 ### Phase 3: Business Logic (Weeks 3-4)
-**Build Priority 2 items:**
-8. Viewing Scheduler
-9. Document Library
-10. Vendor Directory
-11. Broker Management
-12. Financial Dashboard
-13. Proposal Generator
-14. Contract Management
+
+**Build Priority 2 items:** 8. Viewing Scheduler 9. Document Library 10. Vendor Directory 11. Broker Management 12. Financial Dashboard 13. Proposal Generator 14. Contract Management
 
 **Est. Time:** 15-20 days
 
 ### Phase 4: Analytics & Depth (Weeks 5-6)
-**Build Priority 3 items:**
-15. Research & Comps
-16. HoT & Redlines
-17. Fit-Out Tracker
-18. Service Catalogue
-19. Risk Management
-20. Approvals Workflow
+
+**Build Priority 3 items:** 15. Research & Comps 16. HoT & Redlines 17. Fit-Out Tracker 18. Service Catalogue 19. Risk Management 20. Approvals Workflow
 
 **Est. Time:** 10-15 days
 
 ### Phase 5: Advanced Features (Weeks 7-8)
-**Build remaining Priority 3 items:**
-21. Bottleneck Analysis
-22. SLA Governance
-23. Unit Economics
-24. Projects PM
-25. Service Hub
-26. Admin & Settings
-27. Audit Log
+
+**Build remaining Priority 3 items:** 21. Bottleneck Analysis 22. SLA Governance 23. Unit Economics 24. Projects PM 25. Service Hub 26. Admin & Settings 27. Audit Log
 
 **Est. Time:** 12-15 days
 
 ### Phase 6: Polish & QA (Weeks 9-10)
+
 - Fix UI inconsistencies
 - Add missing empty states
 - Improve loading states
@@ -474,12 +519,14 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 ## 🎨 Design System in Use
 
 ### Technology Stack
+
 - **Framework:** Static HTML + Tailwind CSS
 - **Icons:** Font Awesome 6.4.0
 - **Charts:** Highcharts
 - **Fonts:** Inter (Google Fonts)
 
 ### Color Palette
+
 - **Stone:** #F0F0F0 (Background)
 - **Slate:** #252525 (Primary text, dark elements)
 - **Concrete:** #8E8E8E (Secondary text)
@@ -489,6 +536,7 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 - **Danger:** #EF4444 (Red warnings)
 
 ### UI Components
+
 - Cards with consistent border and shadow
 - Tables with sortable headers
 - Kanban boards with drag-and-drop
@@ -505,35 +553,36 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 
 ## 📋 25 Functional Requirements Mapping
 
-| FR Code | Requirement | Status | Priority |
-|---------|-------------|--------|----------|
-| FR-001 | Multi-Channel Lead Capture | ❌ To Build | P1 |
-| FR-002 | Lead Qualification & Scoring | ❌ To Build | P1 |
-| FR-003 | Intelligent Property Matching | 🟡 Partial | P1 |
-| FR-004 | Deal Pipeline Management | ✅ Complete | P1 |
-| FR-005 | Proposal Generation | ❌ To Build | P2 |
-| FR-006 | Contract Generation | ❌ To Build | P2 |
-| FR-007 | Property Portfolio Management | ❌ To Build | P1 |
-| FR-008 | Space Allocation & Capacity | ❌ To Build | P1 |
-| FR-009 | Property Maintenance Scheduling | ❌ To Build | P3 |
-| FR-010 | Broker Onboarding & Management | ❌ To Build | P2 |
-| FR-011 | Commission Calculation | ❌ To Build | P2 |
-| FR-012 | Broker Performance Analytics | ❌ To Build | P2 |
-| FR-013 | Tenant Onboarding Workflow | ❌ To Build | P1 |
-| FR-014 | Access Control & Security | ❌ To Build | P3 |
-| FR-015 | Service Setup Coordination | ❌ To Build | P3 |
-| FR-016 | Service Provider Management | ❌ To Build | P2 |
-| FR-017 | Task Management | ❌ To Build | P1 |
-| FR-018 | Issue Tracking & Resolution | ❌ To Build | P1 |
-| FR-019 | Centralized Communication | 🟡 Partial | P3 |
-| FR-020 | Contact & Relationship Mgmt | ❌ To Build | P1 |
-| FR-021 | Operational Dashboard & KPIs | ✅ Complete | P1 |
-| FR-022 | Financial Reporting & Analysis | 🟡 Partial | P2 |
-| FR-023 | Email System Integration | N/A (Backend) | - |
-| FR-024 | Calendar Integration | ❌ To Build | P2 |
-| FR-025 | Document Management | ❌ To Build | P2 |
+| FR Code | Requirement                     | Status        | Priority |
+| ------- | ------------------------------- | ------------- | -------- |
+| FR-001  | Multi-Channel Lead Capture      | ❌ To Build   | P1       |
+| FR-002  | Lead Qualification & Scoring    | ❌ To Build   | P1       |
+| FR-003  | Intelligent Property Matching   | 🟡 Partial    | P1       |
+| FR-004  | Deal Pipeline Management        | ✅ Complete   | P1       |
+| FR-005  | Proposal Generation             | ❌ To Build   | P2       |
+| FR-006  | Contract Generation             | ❌ To Build   | P2       |
+| FR-007  | Property Portfolio Management   | ❌ To Build   | P1       |
+| FR-008  | Space Allocation & Capacity     | ❌ To Build   | P1       |
+| FR-009  | Property Maintenance Scheduling | ❌ To Build   | P3       |
+| FR-010  | Broker Onboarding & Management  | ❌ To Build   | P2       |
+| FR-011  | Commission Calculation          | ❌ To Build   | P2       |
+| FR-012  | Broker Performance Analytics    | ❌ To Build   | P2       |
+| FR-013  | Tenant Onboarding Workflow      | ❌ To Build   | P1       |
+| FR-014  | Access Control & Security       | ❌ To Build   | P3       |
+| FR-015  | Service Setup Coordination      | ❌ To Build   | P3       |
+| FR-016  | Service Provider Management     | ❌ To Build   | P2       |
+| FR-017  | Task Management                 | ❌ To Build   | P1       |
+| FR-018  | Issue Tracking & Resolution     | ❌ To Build   | P1       |
+| FR-019  | Centralized Communication       | 🟡 Partial    | P3       |
+| FR-020  | Contact & Relationship Mgmt     | ❌ To Build   | P1       |
+| FR-021  | Operational Dashboard & KPIs    | ✅ Complete   | P1       |
+| FR-022  | Financial Reporting & Analysis  | 🟡 Partial    | P2       |
+| FR-023  | Email System Integration        | N/A (Backend) | -        |
+| FR-024  | Calendar Integration            | ❌ To Build   | P2       |
+| FR-025  | Document Management             | ❌ To Build   | P2       |
 
 **Legend:**
+
 - ✅ Complete
 - 🟡 Partially Complete
 - ❌ Not Started
@@ -544,12 +593,14 @@ Based on the UNION Knowledge Base analysis, here are the remaining UI sections o
 ## 🚀 Next Steps
 
 ### Immediate Next Actions:
+
 1. **Test Pipeline Kanban** - Verify drag-and-drop works
 2. **Choose Next Section** - Recommend: Property Index (highest business value)
 3. **Create Property Dummy Data** - 15-20 realistic properties
 4. **Build Property UI** - Grid view, list view, detail page
 
 ### For Client Demo:
+
 - Prepare demo script showing:
   - Dashboard overview
   - Pipeline Kanban with drag-and-drop

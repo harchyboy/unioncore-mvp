@@ -9,18 +9,21 @@
 ## ✅ What's Been Done
 
 ### 1. Dashboard Built ✅
+
 Tom's complete dashboard has been implemented with all features from the UNION Knowledge Base:
 
 - **Portfolio Management** - Property metrics, top performers, alerts
-- **Lead Management** - Pipeline funnel, activity feed, source tracking  
+- **Lead Management** - Pipeline funnel, activity feed, source tracking
 - **Broker Management** - Network summary, rankings, commissions
 - **Quick Actions** - Add Lead, Update Property, Schedule Viewing, Contact Broker
 - **Search & Notifications** - Global search and notification system
 
 ### 2. Code Pushed to GitHub ✅
+
 Branch: `feature/tom-dashboard`
 
 **Files Added/Modified:**
+
 - ✅ `client/src/pages/TomDashboard.tsx` (520 lines - main component)
 - ✅ `client/src/App.tsx` (routing updated)
 - ✅ `vite.config.ts` (port updated to 51666)
@@ -29,6 +32,7 @@ Branch: `feature/tom-dashboard`
 - ✅ `DEPLOYMENT_TOM_DASHBOARD.md` (11KB deployment guide)
 
 ### 3. Pull Request Created ✅
+
 **PR #5:** Add Tom's Dashboard - Portfolio & Marketing Management
 
 **Link:** https://github.com/harchyboy/unioncore-mvp/pull/5
@@ -40,17 +44,21 @@ Branch: `feature/tom-dashboard`
 ## 🚀 Next Steps to See It Live
 
 ### Step 1: Merge the Pull Request
+
 Go to: https://github.com/harchyboy/unioncore-mvp/pull/5
 
 Click the **"Merge pull request"** button
 
 ### Step 2: Deploy to Production
+
 Once merged to `main`, your deployment system (Dokploy or similar) should automatically:
+
 1. Detect the new commit on main
 2. Build the updated application
 3. Deploy to union.hartz.ai
 
 ### Step 3: Access Tom's Dashboard
+
 Navigate to: **https://union.hartz.ai/**
 
 The dashboard will load by default on the root route!
@@ -86,6 +94,7 @@ The dashboard will load by default on the root route!
 ### Key Features You'll See
 
 #### Portfolio Section (Left)
+
 - Total properties: 42
 - Occupancy rate: 90.5% (green with upward trend)
 - Monthly revenue: £2.4M (+8.2%)
@@ -93,6 +102,7 @@ The dashboard will load by default on the root route!
 - Color-coded property alerts
 
 #### Lead Management (Center)
+
 - Pipeline funnel showing 100 leads in various stages
 - Recent lead activity with BANT scores
 - Lead grade badges (A, B, C, D)
@@ -100,6 +110,7 @@ The dashboard will load by default on the root route!
 - Interactive action buttons on each lead
 
 #### Broker Network (Right)
+
 - 24 total partners, 18 active
 - Top 3 performers with medals and scores
 - Commission alerts: £45,250 pending
@@ -110,12 +121,14 @@ The dashboard will load by default on the root route!
 ## 🎨 Design Highlights
 
 ### Professional Color Coding
+
 - **Green** - High performance, occupied, positive metrics
 - **Blue** - Standard info, active items
 - **Amber** - Warnings, pending items
 - **Red** - Critical alerts, urgent items
 
 ### Interactive Elements
+
 - Hover effects on all cards
 - Dropdown menus for quick actions
 - Progress bars showing metrics
@@ -123,6 +136,7 @@ The dashboard will load by default on the root route!
 - Scrollable sections
 
 ### Responsive Layout
+
 - Three-column grid (3-6-3 ratio)
 - Optimized for desktop viewing
 - Clean spacing and typography
@@ -133,6 +147,7 @@ The dashboard will load by default on the root route!
 ## ⚙️ Technical Details
 
 ### Current Implementation
+
 - **Framework:** React 18 + TypeScript
 - **Styling:** Tailwind CSS + shadcn/ui
 - **Icons:** Lucide Icons
@@ -140,12 +155,15 @@ The dashboard will load by default on the root route!
 - **Build Tool:** Vite 7.1.9
 
 ### Routes Available
+
 - `/` - Tom's Dashboard (default)
 - `/tom` - Tom's Dashboard (direct link)
 - `/home` - Original example page
 
 ### Data Source
+
 Currently using **dummy data** to demonstrate functionality:
+
 - Portfolio: 42 properties with realistic metrics
 - Leads: 3 recent leads with BANT scores
 - Brokers: 3 top performers with stats
@@ -156,6 +174,7 @@ Currently using **dummy data** to demonstrate functionality:
 ## 🔄 Backend Integration (Next Phase)
 
 ### APIs Needed
+
 When you're ready to connect real data:
 
 ```typescript
@@ -176,6 +195,7 @@ PUT /api/properties/:id/status
 ```
 
 ### Real-time Updates
+
 - WebSocket connection for live notifications
 - Auto-refresh data every 30 seconds
 - Push notifications for urgent items
@@ -187,6 +207,7 @@ PUT /api/properties/:id/status
 To make the dashboard show when Tom's user is selected, you'll need to:
 
 ### 1. Add Authentication
+
 ```typescript
 // Check if user is logged in
 const user = useAuth();
@@ -196,6 +217,7 @@ if (!user) return <Navigate to="/login" />;
 ```
 
 ### 2. Add Role-Based Routing
+
 ```typescript
 // Route to correct dashboard based on user role
 switch(user.role) {
@@ -211,7 +233,9 @@ switch(user.role) {
 ```
 
 ### 3. Add User Selector (Dev Mode)
+
 For testing without full auth:
+
 ```typescript
 <Select onValueChange={(role) => setMockUser(role)}>
   <SelectItem value="tom">Tom (Portfolio & Marketing)</SelectItem>
@@ -225,6 +249,7 @@ For testing without full auth:
 ## 🎯 Success Metrics
 
 ### UI/UX Success ✅
+
 - [x] Clean, professional design
 - [x] Clear information hierarchy
 - [x] Intuitive layout
@@ -233,6 +258,7 @@ For testing without full auth:
 - [x] Accessible colors
 
 ### Deployment Success ✅
+
 - [x] Code committed to Git
 - [x] Branch pushed to GitHub
 - [x] Pull request created
@@ -241,6 +267,7 @@ For testing without full auth:
 - [x] No TypeScript errors
 
 ### Business Value (After Backend)
+
 - [ ] 40% reduction in Tom's admin time
 - [ ] Faster lead qualification
 - [ ] Better broker relationship tracking
@@ -259,7 +286,7 @@ Currently, these features are **UI only** (not yet functional):
 ❌ Real-time notifications  
 ❌ Data refresh  
 ❌ User authentication  
-❌ Role-based routing  
+❌ Role-based routing
 
 **Why?** These require backend APIs which are not yet built.
 
@@ -272,20 +299,24 @@ Currently, these features are **UI only** (not yet functional):
 ### Dashboard Not Showing After Merge?
 
 **Check 1: Deployment Status**
+
 - Go to your deployment platform (Dokploy/Vercel/etc.)
 - Verify the build succeeded
 - Check deployment logs for errors
 
 **Check 2: Cache**
+
 - Clear your browser cache
 - Try hard refresh (Ctrl+Shift+R)
 - Try incognito/private mode
 
 **Check 3: Route**
+
 - Verify you're on the root route: `https://union.hartz.ai/`
 - Not `/home` or other routes
 
 **Check 4: Build Logs**
+
 ```bash
 # If self-deploying, check:
 npm run build
@@ -295,12 +326,14 @@ npm run build
 ### Still Showing Old Dashboard?
 
 The old home page might still be cached. Try:
+
 1. Merge the PR
 2. Wait for auto-deployment (5-10 minutes)
 3. Clear browser cache
 4. Navigate to union.hartz.ai
 
 Or manually deploy:
+
 ```bash
 git pull origin main
 npm install
@@ -356,18 +389,21 @@ To see Tom's dashboard live at union.hartz.ai:
 ## 🎉 Summary
 
 ### What's Complete ✅
+
 ✅ Tom's dashboard built (all UI components)  
 ✅ Code pushed to GitHub (feature/tom-dashboard branch)  
 ✅ Pull request created (#5)  
 ✅ Documentation complete  
-✅ Ready to merge and deploy  
+✅ Ready to merge and deploy
 
 ### What You Need to Do
+
 1. ✋ **Merge the PR** at: https://github.com/harchyboy/unioncore-mvp/pull/5
 2. ⏰ **Wait** for auto-deployment
 3. 🌐 **Visit** union.hartz.ai to see Tom's dashboard!
 
 ### What's Next (After Viewing)
+
 1. 🔌 Connect backend APIs for real data
 2. 🔐 Add authentication and user selection
 3. ⚡ Implement real-time updates
